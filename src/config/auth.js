@@ -18,7 +18,7 @@ export const authOptions = {
           formData.append("username", credentials.username);
           formData.append("password", credentials.password);
           const response = await fetch(
-            `${process.env.API_BASE_URL}/authentication/login`,
+            `${process.env.NEXT_PUBLIC_API_BASE_URL}/authentication/login`,
             {
               method: "POST",
               body: formData,
@@ -70,7 +70,6 @@ export const authOptions = {
       return token;
     },
     async session({ session, token }) {
-      console.log(token);
       if (token) {
         session.user.id = token.id;
         session.user.name = token.name;
