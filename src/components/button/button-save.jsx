@@ -2,7 +2,12 @@
 
 import { twMerge } from "tailwind-merge";
 
-export const ButtonSave = ({ className, iconLeft, ...props }) => {
+export const ButtonSave = ({
+  className,
+  iconLeft,
+  text = "Simpan",
+  ...props
+}) => {
   return (
     <button
       className={twMerge(
@@ -13,7 +18,7 @@ export const ButtonSave = ({ className, iconLeft, ...props }) => {
       {...props}
     >
       <p className={twMerge("text-sm font-normal", iconLeft && "order-1")}>
-        Simpan
+        {text}
       </p>
       <svg
         width='24'
