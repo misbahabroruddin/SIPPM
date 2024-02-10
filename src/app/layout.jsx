@@ -1,3 +1,4 @@
+import { getServerSession } from "next-auth";
 import { Poppins } from "next/font/google";
 
 import "./globals.css";
@@ -5,8 +6,9 @@ import { siteConfig } from "@/config/site";
 import { SidebarProvider } from "@/lib/hooks/useSidebar";
 import { MaterializeProvider } from "@/providers/materialize-provider";
 import { AuthProvider } from "@/providers/auth-provider";
-import { getServerSession } from "next-auth";
 import { authOptions } from "@/config/auth";
+import Toast from "@/components/react-toastify";
+import QueryProvider from "@/providers/query-provider";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -32,10 +34,13 @@ export default async function RootLayout({ children }) {
   const session = await getServerSession(authOptions);
   return (
     <html lang='en'>
-      <body className={`${poppins.className} ${poppins.variable}`}>
+      <body className={`${poppins.className}`}>
         <AuthProvider session={session}>
           <SidebarProvider>
-            <MaterializeProvider>{children}</MaterializeProvider>
+            <MaterializeProvider>
+              <QueryProvider>{children}</QueryProvider>
+            </MaterializeProvider>
+            <Toast />
           </SidebarProvider>
         </AuthProvider>
       </body>
