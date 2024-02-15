@@ -5,7 +5,7 @@ import Image from "next/image";
 export const ButtonAdd = ({ onClick, text = "Pengajuan", ...props }) => {
   return (
     <button
-      className='flex gap-2 items-center px-4 py-2 bg-[#23B900] rounded text-white'
+      className='flex gap-2 items-center px-4 py-2 bg-[#23B900] rounded text-white disabled:bg-gray-500 disabled:cursor-not-allowed'
       onClick={onClick}
       {...props}
     >

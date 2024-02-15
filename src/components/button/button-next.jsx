@@ -6,7 +6,7 @@ export const ButtonNext = ({ className, ...props }) => {
   return (
     <button
       className={twMerge(
-        "flex justify-center items-center gap-1 p-2 w-[200px] bg-[#10487A] rounded text-white",
+        "flex justify-center items-center gap-1 p-2 w-[200px] bg-[#10487A] rounded text-white disabled:bg-gray-500 disabled:cursor-not-allowed",
         className
       )}
       type='submit'
