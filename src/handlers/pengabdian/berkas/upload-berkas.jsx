@@ -1,12 +1,16 @@
 "use client";
 
+import { useParams } from "next/navigation";
 import { toast } from "react-toastify";
 
 import { useAxios } from "@/lib/hooks/useAxios";
 import { useMutation } from "@tanstack/react-query";
+import { useStep } from "@/lib/hooks/useStep";
 
 export const useUploadBerkasPKM = (router) => {
+  const { setCurrentStep } = useStep();
   const axios = useAxios();
+  const { id } = useParams();
 
   const onSubmit = async (form) => {
     const formData = new FormData();
@@ -19,7 +23,7 @@ export const useUploadBerkasPKM = (router) => {
     try {
       const pengabdianId = localStorage.getItem("pengabdianId");
       const { data } = await axios.post(
-        `/proposals/dosen/pkms/${pengabdianId}/berkas`,
+        `/proposals/dosen/pkms/${pengabdianId || id}/berkas`,
         formData
       );
       localStorage.removeItem("pengabdianId");
@@ -45,6 +49,9 @@ export const useUploadBerkasPKM = (router) => {
 
   const { mutateAsync: uploadBerkas, isPending } = useMutation({
     mutationFn: onSubmit,
+    onSuccess: () => {
+      setCurrentStep(1);
+    },
   });
 
   return {

@@ -11,7 +11,7 @@ export const ButtonSave = ({
   return (
     <button
       className={twMerge(
-        "flex justify-center items-center gap-1 p-2 w-[200px] bg-primary rounded text-white disabled:bg-gray-500 disabled:text-black disabled:cursor-not-allowed",
+        "flex justify-center items-center gap-1 p-2 w-[200px] bg-primary rounded text-white disabled:bg-gray-500  disabled:cursor-not-allowed",
         className
       )}
       type='submit'

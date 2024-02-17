@@ -2,18 +2,20 @@
 
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-toastify";
+import { useParams } from "next/navigation";
 
 import { useAxios } from "@/lib/hooks/useAxios";
 
 export const useAddEditRincianKegiatanPKM = (
   setStartDate,
   setEndDate,
-  id,
+  anggaranId,
   reset,
   onClose
 ) => {
   const axios = useAxios();
   const queryClient = useQueryClient();
+  const { id } = useParams();
 
   const onSubmit = async (form) => {
     try {
@@ -22,7 +24,7 @@ export const useAddEditRincianKegiatanPKM = (
       formData.append("kegiatan", form.kegiatan);
       formData.append("waktu", form.waktu);
 
-      if (id) {
+      if (anggaranId) {
         let waktu;
         if (Array.isArray(form.waktu)) {
           waktu = `${form.waktu[0]}, ${form.waktu[1]}`;
@@ -31,7 +33,9 @@ export const useAddEditRincianKegiatanPKM = (
         }
 
         const { data } = await axios.put(
-          `/proposals/dosen/pkms/${pengabdianId}/rincian-kegiatans/${id}`,
+          `/proposals/dosen/pkms/${
+            pengabdianId || id
+          }/rincian-kegiatans/${anggaranId}`,
           {
             kegiatan: form.kegiatan,
             waktu,
@@ -46,7 +50,7 @@ export const useAddEditRincianKegiatanPKM = (
         return data;
       } else {
         const { data } = await axios.post(
-          `/proposals/dosen/pkms/${pengabdianId}/rincian-kegiatans`,
+          `/proposals/dosen/pkms/${pengabdianId || id}/rincian-kegiatans`,
           formData
         );
         toast.success("Rincian kegiatan berhasil ditambah");
@@ -63,7 +67,7 @@ export const useAddEditRincianKegiatanPKM = (
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["rincianKegiatanPKM"] });
       queryClient.invalidateQueries({
-        queryKey: ["detailRincianKegiatanPKM", id],
+        queryKey: ["detailRincianKegiatanPKM", anggaranId],
       });
       reset();
       setStartDate();

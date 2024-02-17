@@ -1,16 +1,20 @@
 import { toast } from "react-toastify";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useParams } from "next/navigation";
 
 import { useAxios } from "@/lib/hooks/useAxios";
 
 export const useDeleteRencanaAnggaranPKM = () => {
   const axios = useAxios();
   const queryClient = useQueryClient();
+  const { id } = useParams();
   const handleDelete = async (rencanaAnggaranId) => {
     try {
       const pengabdianId = localStorage.getItem("pengabdianId");
       const { data } = await axios.delete(
-        `/proposals/dosen/pkms/${pengabdianId}/rencana-anggarans/${rencanaAnggaranId}`
+        `/proposals/dosen/pkms/${
+          pengabdianId || id
+        }/rencana-anggarans/${rencanaAnggaranId}`
       );
       toast.success("Rencana anggaran PKM berhasil dihapus");
       return data;

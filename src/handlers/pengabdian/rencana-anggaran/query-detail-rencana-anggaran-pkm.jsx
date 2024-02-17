@@ -1,16 +1,20 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
+import { useParams } from "next/navigation";
 
 import { useAxios } from "@/lib/hooks/useAxios";
 
-export const useQueryDetailRencanaAnggaranPKM = (setValue, id) => {
+export const useQueryDetailRencanaAnggaranPKM = (setValue, anggaranId) => {
   const axios = useAxios();
+  const { id } = useParams();
   const fetchDetailRencanaAnggaranPKM = async () => {
     try {
       const pengabdianId = localStorage.getItem("pengabdianId");
       const { data } = await axios.get(
-        `/proposals/dosen/pkms/${pengabdianId}/rencana-anggarans/${id}`
+        `/proposals/dosen/pkms/${
+          pengabdianId || id
+        }/rencana-anggarans/${anggaranId}`
       );
       const result = data.data;
       setValue("rincian", result.rincian);
@@ -22,8 +26,9 @@ export const useQueryDetailRencanaAnggaranPKM = (setValue, id) => {
   };
 
   const { data, isLoading, refetch } = useQuery({
-    queryKey: ["detailRencanaAnggaranPKM", id],
+    queryKey: ["detailRencanaAnggaranPKM", anggaranId],
     queryFn: fetchDetailRencanaAnggaranPKM,
+    enabled: !!anggaranId,
   });
 
   return { data, isLoading, refetch };

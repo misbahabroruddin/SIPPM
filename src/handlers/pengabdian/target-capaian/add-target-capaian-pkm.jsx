@@ -1,12 +1,16 @@
 "use client";
 
 import { useMutation } from "@tanstack/react-query";
+import { toast } from "react-toastify";
+import { useParams } from "next/navigation";
 
 import { useAxios } from "@/lib/hooks/useAxios";
-import { toast } from "react-toastify";
+import { useStep } from "@/lib/hooks/useStep";
 
-export const useAddTargetCapaianPKM = (setCurrentStep) => {
+export const useAddTargetCapaianPKM = () => {
   const axios = useAxios();
+  const { setCurrentStep } = useStep();
+  const { id } = useParams();
   const onSubmit = async (form) => {
     try {
       const pengabdianId = localStorage.getItem("pengabdianId");
@@ -16,7 +20,7 @@ export const useAddTargetCapaianPKM = (setCurrentStep) => {
       formData.append("status_capaian", form.status_capaian);
       formData.append("nama_jurnal_penerbit", form.nama_jurnal_penerbit);
       const { data } = await axios.post(
-        `/proposals/dosen/pkms/${pengabdianId}/target-capaians`,
+        `/proposals/dosen/pkms/${pengabdianId || id}/target-capaians`,
         formData
       );
       setCurrentStep(4);

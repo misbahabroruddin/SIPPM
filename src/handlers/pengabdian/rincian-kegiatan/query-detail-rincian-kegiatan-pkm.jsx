@@ -3,20 +3,24 @@
 import { useQuery } from "@tanstack/react-query";
 
 import { useAxios } from "@/lib/hooks/useAxios";
+import { useParams } from "next/navigation";
 
 export const useQueryDetailRincianKegiatanPKM = (
   setValue,
   setStartDate,
   setEndDate,
-  id
+  anggaranId
 ) => {
   const axios = useAxios();
+  const { id } = useParams();
 
   const fetchDetailRincianKegiatan = async () => {
     try {
       const pengabdianId = localStorage.getItem("pengabdianId");
       const { data } = await axios.get(
-        `/proposals/dosen/pkms/${pengabdianId}/rincian-kegiatans/${id}`
+        `/proposals/dosen/pkms/${
+          pengabdianId || id
+        }/rincian-kegiatans/${anggaranId}`
       );
       const result = data.data;
       const dateRangeArr = result.waktu.split(",");
@@ -33,8 +37,9 @@ export const useQueryDetailRincianKegiatanPKM = (
   };
 
   const { data, isLoading, refetch } = useQuery({
-    queryKey: ["detailRincianKegiatanPKM", id],
+    queryKey: ["detailRincianKegiatanPKM", anggaranId],
     queryFn: fetchDetailRincianKegiatan,
+    enabled: !!anggaranId,
   });
 
   return { data, isLoading, refetch };

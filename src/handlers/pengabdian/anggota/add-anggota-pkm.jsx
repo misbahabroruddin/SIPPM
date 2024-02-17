@@ -2,20 +2,22 @@
 
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-toastify";
+import { useParams } from "next/navigation";
 
 import { useAxios } from "@/lib/hooks/useAxios";
 
 export const useAddAnggotaPKM = (reset, onClose) => {
   const axios = useAxios();
   const queryClient = useQueryClient();
+  const pengabdianId = localStorage.getItem("pengabdianId");
+  const { id } = useParams();
 
-  const handleAddNewAnggota = async (id) => {
+  const handleAddNewAnggotaPKM = async (anggotaId) => {
     try {
-      const pengabdianId = localStorage.getItem("pengabdianId");
       const formData = new FormData();
-      formData.append("anggota_id", id);
+      formData.append("anggota_id", anggotaId);
       const { data } = await axios.post(
-        `/proposals/dosen/pkms/${pengabdianId}/anggotas`,
+        `/proposals/dosen/pkms/${pengabdianId || id}/anggotas`,
         formData
       );
       toast.success("Anggota berhasil ditambahkan");
@@ -27,11 +29,10 @@ export const useAddAnggotaPKM = (reset, onClose) => {
 
   const onSelectAnggota = async (form) => {
     try {
-      const pengabdianId = localStorage.getItem("pengabdianId");
       const formData = new FormData();
       formData.append("anggota_id", form.anggota_id);
       const { data } = await axios.post(
-        `/proposals/dosen/pkms/${pengabdianId}/anggotas`,
+        `/proposals/dosen/pkms/${pengabdianId || id}/anggotas`,
         formData
       );
       reset();
@@ -51,9 +52,6 @@ export const useAddAnggotaPKM = (reset, onClose) => {
       onClose();
       toast.success("Anggota dosen berhasil ditambahkan");
     },
-    onError: (error) => {
-      toast.error(error.message);
-    },
   });
 
   const {
@@ -66,13 +64,10 @@ export const useAddAnggotaPKM = (reset, onClose) => {
       onClose();
       toast.success("Anggota mahasiswa berhasil ditambahkan");
     },
-    onError: (error) => {
-      toast.error(error.message);
-    },
   });
 
   return {
-    handleAddNewAnggota,
+    handleAddNewAnggotaPKM,
     onSubmitAnggotaDosenPKM,
     isLoadingAnggotaDosenPKM,
     onSubmitAnggotaMahasiswaPKM,

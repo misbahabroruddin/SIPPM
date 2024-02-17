@@ -1,18 +1,21 @@
 "use client";
 
-import { useAxios } from "@/lib/hooks/useAxios";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useParams } from "next/navigation";
 import { toast } from "react-toastify";
+
+import { useAxios } from "@/lib/hooks/useAxios";
 
 export const useDeleteAnggotaPKM = () => {
   const axios = useAxios();
   const queryClient = useQueryClient();
+  const { id } = useParams();
 
   const handleDelete = async (anggotaId) => {
     try {
       const pengabdianId = localStorage.getItem("pengabdianId");
       const { data } = await axios.delete(
-        `/proposals/dosen/pkms/${pengabdianId}/anggotas/${anggotaId}`
+        `/proposals/dosen/pkms/${pengabdianId || id}/anggotas/${anggotaId}`
       );
 
       return data;
