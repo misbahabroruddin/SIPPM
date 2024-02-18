@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import { useParams } from "next/navigation";
 
 import { useAxios } from "@/lib/hooks/useAxios";
+import { checkIsValueDateArr } from "@/lib/utils/checkIsValueDateArr";
 
 export const useAddEditRincianKegiatanPKM = (
   setStartDate,
@@ -25,12 +26,7 @@ export const useAddEditRincianKegiatanPKM = (
       formData.append("waktu", form.waktu);
 
       if (anggaranId) {
-        let waktu;
-        if (Array.isArray(form.waktu)) {
-          waktu = `${form.waktu[0]}, ${form.waktu[1]}`;
-        } else {
-          waktu = form.waktu;
-        }
+        const waktu = checkIsValueDateArr(form.waktu);
 
         const { data } = await axios.put(
           `/proposals/dosen/pkms/${
