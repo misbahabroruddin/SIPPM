@@ -5,7 +5,10 @@ import { twMerge } from "tailwind-merge";
 export const ButtonUpdate = ({ className, iconLeft, ...props }) => {
   return (
     <button
-      className={twMerge("w-24 py-2 bg-green rounded-lg text-white", className)}
+      className={twMerge(
+        "w-24 py-2 bg-green rounded-lg text-white disabled:opacity-60 disabled:cursor-not-allowed",
+        className
+      )}
       {...props}
     >
       Update
