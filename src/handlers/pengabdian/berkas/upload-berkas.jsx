@@ -55,6 +55,12 @@ export const useUploadBerkasPKM = (router) => {
       queryClient.invalidateQueries({
         queryKey: ["listPengabdian"],
       });
+      queryClient.resetQueries({
+        queryKey: ["anggotaDosenPKM"],
+      });
+      queryClient.resetQueries({
+        queryKey: ["anggotaMahasiswaPKM"],
+      });
     },
   });
 
