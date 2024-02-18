@@ -4,13 +4,14 @@ import { useParams } from "next/navigation";
 import { toast } from "react-toastify";
 
 import { useAxios } from "@/lib/hooks/useAxios";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useStep } from "@/lib/hooks/useStep";
 
 export const useUploadBerkasPKM = (router) => {
   const { setCurrentStep } = useStep();
   const axios = useAxios();
   const { id } = useParams();
+  const queryClient = useQueryClient();
 
   const onSubmit = async (form) => {
     const formData = new FormData();
@@ -51,6 +52,9 @@ export const useUploadBerkasPKM = (router) => {
     mutationFn: onSubmit,
     onSuccess: () => {
       setCurrentStep(1);
+      queryClient.invalidateQueries({
+        queryKey: ["listPengabdian"],
+      });
     },
   });
 
