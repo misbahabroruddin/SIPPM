@@ -4,12 +4,10 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 
 import { useAxios } from "@/lib/hooks/useAxios";
-import { useAddAnggotaPKM } from "../pengabdian/anggota/add-anggota-pkm";
 
-export const useCreateAnggotaMahasiswa = (reset, onClose) => {
+export const useCreateAnggotaMahasiswa = (reset, onClose, funcAddAnggota) => {
   const queryClient = useQueryClient();
   const axios = useAxios();
-  const { handleAddNewAnggota } = useAddAnggotaPKM();
 
   const onSubmit = async (form) => {
     try {
@@ -38,12 +36,15 @@ export const useCreateAnggotaMahasiswa = (reset, onClose) => {
   const { mutateAsync: onCreateAnggotaMahasiswa, isPending } = useMutation({
     mutationFn: onSubmit,
     onSuccess: async (data) => {
-      await handleAddNewAnggota(data.data?.id);
+      await funcAddAnggota(data?.data?.id);
       queryClient.invalidateQueries({
         queryKey: ["listMahasiswa"],
       });
       queryClient.invalidateQueries({
         queryKey: ["anggotaMahasiswaPKM"],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ["anggotaMahasiswa"],
       });
       onClose();
     },
