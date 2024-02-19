@@ -1,35 +1,39 @@
 "use client";
 
-import { signIn, signOut, useSession } from "next-auth/react";
-import Image from "next/image";
-import { redirect, useRouter } from "next/navigation";
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 import { twMerge } from "tailwind-merge";
 
 export default function Login() {
   const {
     register,
     handleSubmit,
-    reset,
+    resetField,
     formState: { errors },
   } = useForm();
 
-  const { push } = useRouter();
+  const { replace } = useRouter();
 
   const onSubmit = async (data) => {
     const response = await signIn("credentials", {
       username: data.username,
       password: data.password,
       redirect: false,
-      callbackUrl: "/",
+      callbackUrl: `${window.location.origin}/dashboard`,
     });
 
-    if (response.error) {
-      alert("Username atau password salah");
+    if (response.ok) {
+      toast.success("Login berhasil");
+      replace("/dashboard");
     }
-    reset();
 
-    push("/dashboard");
+    if (response.error) {
+      toast.error("Username atau Password salah");
+    }
+
+    resetField("password");
   };
   return (
     <div className='flex h-screen items-center'>
