@@ -1,5 +1,6 @@
 import { getServerSession } from "next-auth";
 import { Poppins } from "next/font/google";
+import "react-datepicker/dist/react-datepicker.css";
 
 import "./globals.css";
 import { siteConfig } from "@/config/site";
@@ -9,6 +10,7 @@ import { AuthProvider } from "@/providers/auth-provider";
 import { authOptions } from "@/config/auth";
 import Toast from "@/components/react-toastify";
 import QueryProvider from "@/providers/query-provider";
+import { StepProvider } from "@/lib/hooks/useStep";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -37,10 +39,12 @@ export default async function RootLayout({ children }) {
       <body className={`${poppins.className}`}>
         <AuthProvider session={session}>
           <SidebarProvider>
-            <MaterializeProvider>
-              <QueryProvider>{children}</QueryProvider>
-            </MaterializeProvider>
-            <Toast />
+            <StepProvider>
+              <MaterializeProvider>
+                <QueryProvider>{children}</QueryProvider>
+              </MaterializeProvider>
+              <Toast />
+            </StepProvider>
           </SidebarProvider>
         </AuthProvider>
       </body>
