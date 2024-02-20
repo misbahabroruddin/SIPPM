@@ -25,11 +25,6 @@ export const MENU_SIDEBAR_ADMIN = [
         link: "/data-referesi/bidang-ilmu",
       },
       {
-        label: "Kabupaten",
-        icon: "/icons/sub-menu.svg",
-        link: "/data-referesi/kabupaten",
-      },
-      {
         label: "Jabatan Fungsional",
         icon: "/icons/sub-menu.svg",
         link: "/data-referesi/jabatan-fungsional",
