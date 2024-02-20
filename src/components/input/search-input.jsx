@@ -5,7 +5,7 @@ import { twMerge } from "tailwind-merge";
 
 export const SearchInput = ({ onChange, className, ...props }) => {
   return (
-    <div className='w-[400px]'>
+    <div className='w-52 lg:w-64 xl:w-[400px]'>
       <div className='relative w-full min-w-[200px] h-9'>
         <div className='grid place-items-center absolute text-blue-gray-500 top-2/4 right-3 -translate-y-2/4 w-5 h-5'>
           <Image src='/icons/search.svg' height={24} width={24} alt='search' />
