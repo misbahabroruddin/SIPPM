@@ -4,7 +4,14 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { twMerge } from "tailwind-merge";
 
-export const InputFile = ({ watch, register, name, errors, resetField }) => {
+export const InputFile = ({
+  watch,
+  register,
+  name,
+  errors,
+  resetField,
+  accept = "application/msword, application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+}) => {
   const [preview, setPreview] = useState();
   useEffect(() => {
     const file = watch(name);
@@ -42,7 +49,7 @@ export const InputFile = ({ watch, register, name, errors, resetField }) => {
         id={name}
         className='hidden'
         {...register}
-        accept='application/msword, application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+        accept={accept}
       />
       {preview && (
         <button
