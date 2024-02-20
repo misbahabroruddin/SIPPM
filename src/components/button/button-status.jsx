@@ -2,14 +2,17 @@
 
 import { twMerge } from "tailwind-merge";
 
-export const ButtonStatus = ({ data }) => {
+export const ButtonStatus = ({ status, className }) => {
   let buttonClass = "bg-[#D5FACC] text-[#23B900]";
   let buttonText = "Disetujui";
 
-  if (data === "approve") {
+  if (status === "Disetujui") {
     buttonClass = "bg-[#D5FACC] text-[#23B900]";
     buttonText = "Disetujui";
-  } else if (data === "pending") {
+  } else if (status === "Pending") {
+    buttonClass = "bg-[#DAEDFF] text-[#44A7FF]";
+    buttonText = "Pending";
+  } else if (status === "Revisi") {
     buttonClass = "bg-[#FFF7CC] text-[#998200]";
     buttonText = "Pending";
   } else {
@@ -17,7 +20,10 @@ export const ButtonStatus = ({ data }) => {
     buttonText = "Not Yet";
   }
   return (
-    <button className={twMerge("px-4 py-1 rounded-lg", buttonClass)} disabled>
+    <button
+      className={twMerge(`px-4 py-1 rounded-lg ${buttonClass}`, className)}
+      disabled
+    >
       {buttonText}
     </button>
   );
