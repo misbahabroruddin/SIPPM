@@ -32,6 +32,13 @@ export const metadata = {
   ],
 };
 
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+};
+
 export default async function RootLayout({ children }) {
   const session = await getServerSession(authOptions);
   return (
