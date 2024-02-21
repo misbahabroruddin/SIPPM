@@ -1,17 +1,20 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
-
-import { useAxios } from "@/lib/hooks/useAxios";
 import { toast } from "react-toastify";
 import { useParams } from "next/navigation";
+
+import { useAxios } from "@/lib/hooks/useAxios";
+import { useStep } from "@/lib/hooks/useStep";
 
 export const useQueryIdentitasUsulanOnUpdate = (setValue) => {
   const axios = useAxios();
   const params = useParams();
+  const { setCurrentStep } = useStep();
 
   const fetchIdentitasUsulanById = async () => {
     try {
+      const step = localStorage.getItem("step");
       const { data } = await axios.get(
         `proposals/dosen/pkms/${params.id}/identitas-usulans`
       );
@@ -24,6 +27,7 @@ export const useQueryIdentitasUsulanOnUpdate = (setValue) => {
       setValue("jangka_waktu_pkm", data?.data.jangka_waktu_pkm);
       setValue("ringkasan_pkm", data?.data.ringkasan_pkm);
       localStorage.setItem("step", data?.data.step);
+      if (!step) setCurrentStep(data?.data?.step);
       return data.data;
     } catch (error) {
       toast.error(error.message);

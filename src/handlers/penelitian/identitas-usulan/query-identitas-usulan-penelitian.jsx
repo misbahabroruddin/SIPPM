@@ -5,14 +5,17 @@ import { toast } from "react-toastify";
 import { useParams } from "next/navigation";
 
 import { useAxios } from "@/lib/hooks/useAxios";
+import { useStep } from "@/lib/hooks/useStep";
 
 export const useQueryIdentitasUsulanPenelitian = (setValue) => {
   const axios = useAxios();
   const { id } = useParams();
+  const { setCurrentStep } = useStep();
 
   const fetchIdentitasUsulanPenelitian = async () => {
     try {
       const penelitianId = localStorage.getItem("penelitianId");
+      const step = localStorage.getItem("step");
       const { data } = await axios.get(
         `proposals/dosen/penelitians/${penelitianId || id}/identitas-usulans`
       );
@@ -28,6 +31,7 @@ export const useQueryIdentitasUsulanPenelitian = (setValue) => {
       setValue("jangka_waktu_penelitian", data?.data.jangka_waktu_penelitian);
       setValue("ringkasan_penelitian", data?.data.ringkasan_penelitian);
       localStorage.setItem("step", data?.data.step);
+      if (!step) setCurrentStep(data?.data?.step);
       return data.data;
     } catch (error) {
       toast.error(error.message);
