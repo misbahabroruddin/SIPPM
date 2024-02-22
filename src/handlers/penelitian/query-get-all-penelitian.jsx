@@ -5,13 +5,21 @@ import { toast } from "react-toastify";
 
 import { useAxios } from "@/lib/hooks/useAxios";
 
-export const useQueryGetAllPenelitian = () => {
+export const useQueryGetAllPenelitian = (search) => {
   const axios = useAxios();
   const query = useQuery({
-    queryKey: ["listPenelitian"],
+    queryKey: ["listPenelitian", search],
     queryFn: async () => {
+      let params;
+      if (search) {
+        params = {
+          judul_penelitian: search,
+        };
+      }
       try {
-        const { data } = await axios.get("/proposals/dosen/penelitians");
+        const { data } = await axios.get(`/proposals/dosen/penelitians`, {
+          params: params,
+        });
         return data.data.data;
       } catch (error) {
         toast.error(error.message);
