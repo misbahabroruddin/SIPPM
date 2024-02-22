@@ -1,4 +1,4 @@
-export const convertDate = (data) => {
+export const convertDate = (data, separator = "-") => {
   const date = new Date(data);
   const formattedDate = date.toLocaleDateString("id-ID", {
     day: "2-digit",
@@ -6,7 +6,6 @@ export const convertDate = (data) => {
     year: "numeric",
   });
 
-  const separator = "-";
   const parts = formattedDate.split(" ");
   const result = `${parts[0]}${separator}${parts[1]}${separator}${parts[2]}`;
   return result;
@@ -30,5 +29,33 @@ export const converDateRange = (data) => {
 
   const result = `${formattedDateStart} - ${formattedDateEnd}`;
 
+  return result;
+};
+
+export const convertToTime = (data) => {
+  const date = new Date(data);
+  const formattedDate = date.toLocaleTimeString("id-ID", {
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+
+  const separator = ":";
+  const parts = formattedDate.split(".");
+  const result = `${parts[0]}${separator}${parts[1]}`;
+
+  return result;
+};
+
+export const convertToDateNumeric = (data) => {
+  const date = new Date(data);
+  const formattedDate = date.toLocaleString("id-ID", {
+    day: "2-digit",
+    month: "numeric",
+    year: "numeric",
+  });
+
+  const separator = "-";
+  const parts = formattedDate.split("/");
+  const result = `${parts[0]}${separator}${parts[1]}${separator}${parts[2]}`;
   return result;
 };
