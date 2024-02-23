@@ -1,22 +1,23 @@
-"use client";
-import { twMerge } from "tailwind-merge";
+import dynamic from "next/dynamic";
+import { getServerSession } from "next-auth";
 
 import { BasePageTitle } from "@/components/base-page-title";
-import { useSidebar } from "@/lib/hooks/useSidebar";
+import { LPPM } from "@/lib/constants/role";
+import { ContainerPage } from "@/components/container-page";
+import { authOptions } from "@/config/auth";
 
-export default function HomePage() {
-  const { isOpen } = useSidebar();
+const DashboardLppm = dynamic(
+  () => import("./components/views/dashboard-lppm"),
+);
+
+export default async function HomePage() {
+  const { user } = await getServerSession(authOptions);
+  const role = user.roles[0].name;
 
   return (
-    <div
-      className={twMerge(
-        "pt-4 pr-[35px] pl-4 grow ml-0 lg:ml-[256px]",
-        isOpen
-          ? "ml-0 lg:ml-[256px] transition-all duration-300"
-          : "!ml-0 transition-all duration-300"
-      )}
-    >
+    <ContainerPage>
       <BasePageTitle />
-    </div>
+      {role === LPPM && <DashboardLppm />}
+    </ContainerPage>
   );
 }
