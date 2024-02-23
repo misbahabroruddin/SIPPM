@@ -19,14 +19,14 @@ export const ListPengabdian = ({
 }) => {
   if (isLoading)
     return (
-      <div className='flex flex-col gap-4'>
+      <div className="flex flex-col gap-4">
         {Array.from({ length: 5 }).map((_, index) => (
           <Skeleton key={index} />
         ))}
       </div>
     );
   return (
-    <div className='flex flex-col gap-4'>
+    <div className="flex flex-col gap-4">
       {pengabdian?.length ? (
         pengabdian?.map((proposal) => (
           <ListItem
@@ -37,8 +37,8 @@ export const ListPengabdian = ({
           />
         ))
       ) : (
-        <div className='flex flex-col gap-4 justify-center w-full h-40'>
-          <div className='text-center'>Tidak ada data</div>
+        <div className="flex h-40 w-full flex-col justify-center gap-4">
+          <div className="text-center">Tidak ada data</div>
         </div>
       )}
     </div>
@@ -52,56 +52,56 @@ const ListItem = ({ data, currentTab, tabActive }) => {
 
   return (
     <div
-      className={`px-6 py-4 shadow rounded-lg ${
+      className={`rounded-lg px-6 py-4 shadow-custom ${
         data.status === "Draft" ? "bg-draft" : "inherit"
       }`}
       key={data?.id}
     >
-      <div className='flex items-center justify-between'>
-        <div className='flex flex-col gap-1 max-w-[631px]'>
-          <h2 className='text-lg'>{data?.judul_pkm}</h2>
-          <div className='flex gap-4'>
-            <div className='flex gap-[2px] items-center'>
+      <div className="flex items-center justify-between">
+        <div className="flex max-w-[631px] flex-col gap-1">
+          <h2 className="text-lg">{data?.judul_pkm}</h2>
+          <div className="flex gap-4">
+            <div className="flex items-center gap-[2px]">
               <Image
-                src='/icons/User.svg'
+                src="/icons/User.svg"
                 height={24}
                 width={24}
-                alt='author'
+                alt="author"
               />
-              <p className='text-sm text-[#999999]'>{data?.user.name}</p>
+              <p className="text-sm text-[#999999]">{data?.user.name}</p>
             </div>
-            <div className='flex gap-[2px] items-center'>
+            <div className="flex items-center gap-[2px]">
               <Image
-                src='/icons/Book.svg'
+                src="/icons/Book.svg"
                 height={24}
                 width={24}
-                alt='mata kuliah'
+                alt="mata kuliah"
               />
-              <p className='text-sm text-[#999999]'>
+              <p className="text-sm text-[#999999]">
                 {data?.user.biodata.program_studi.nama}
               </p>
             </div>
-            <div className='flex gap-[2px] items-center'>
+            <div className="flex items-center gap-[2px]">
               <Image
-                src='/icons/Clock.svg'
+                src="/icons/Clock.svg"
                 height={24}
                 width={24}
-                alt='tanggal'
+                alt="tanggal"
               />
-              <p className='text-sm text-[#999999]'>
+              <p className="text-sm text-[#999999]">
                 {convertDate(data?.created_at)}
               </p>
             </div>
           </div>
         </div>
-        <div className='flex items-end gap-4'>
+        <div className="flex items-end gap-4">
           {data.status === "Terkirim" ? (
             <>
-              <div className='flex flex-col items-center gap-1'>
+              <div className="flex flex-col items-center gap-1">
                 <p>LPPM</p>
                 <ButtonStatus status={data?.status_lppm || "not-yet"} />
               </div>
-              <div className='flex flex-col items-center gap-1'>
+              <div className="flex flex-col items-center gap-1">
                 <p>Review</p>
                 <ButtonStatus status={data?.status_reviewer || "not-yet"} />
               </div>
@@ -109,7 +109,7 @@ const ListItem = ({ data, currentTab, tabActive }) => {
                 href={`/proposal/${currentTab || tabActive}/track/${data?.id}`}
               >
                 <button
-                  className='px-7 py-2 bg-primary text-white rounded-lg disabled:bg-gray-500 disabled:cursor-not-allowed'
+                  className="rounded-lg bg-primary px-7 py-2 text-white disabled:cursor-not-allowed disabled:bg-gray-500"
                   disabled={data?.status_lppm === "Pending"}
                 >
                   Track
@@ -117,7 +117,7 @@ const ListItem = ({ data, currentTab, tabActive }) => {
               </Link>
             </>
           ) : (
-            <div className='flex gap-4'>
+            <div className="flex gap-4">
               <ButtonDelete
                 onClick={() => {
                   Swal.fire({
@@ -159,12 +159,12 @@ const ListItem = ({ data, currentTab, tabActive }) => {
 
 const Skeleton = () => {
   return (
-    <div className='px-6 py-4 shadow rounded-lg'>
-      <div className='flex items-center justify-between'>
-        <div className='flex flex-col gap-2 w-full max-w-[631px]'>
-          <span className='text-lg animate-pulse h-6 w-1/2 bg-gray-200 rounded'></span>
-          <div className='flex gap-4'>
-            <span className='text-lg animate-pulse h-6 w-3/4 bg-gray-200 rounded'></span>
+    <div className="rounded-lg px-6 py-4 shadow">
+      <div className="flex items-center justify-between">
+        <div className="flex w-full max-w-[631px] flex-col gap-2">
+          <span className="h-6 w-1/2 animate-pulse rounded bg-gray-200 text-lg"></span>
+          <div className="flex gap-4">
+            <span className="h-6 w-3/4 animate-pulse rounded bg-gray-200 text-lg"></span>
           </div>
         </div>
       </div>

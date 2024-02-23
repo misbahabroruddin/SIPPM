@@ -52,7 +52,7 @@ const ListItem = ({ data, currentTab, tabActive }) => {
 
   return (
     <div
-      className={`rounded-lg px-6 py-4 shadow ${
+      className={`rounded-lg px-6 py-4 shadow-custom ${
         data.status === "Draft" ? "bg-draft" : "inherit"
       }`}
       key={data?.id}
