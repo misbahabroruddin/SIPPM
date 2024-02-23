@@ -10,7 +10,6 @@
 
 .react-select__control {
   border-color: #eee !important;
-  /* border-radius: 8px !important; */
   padding: 2px !important;
 }
 
@@ -56,6 +55,24 @@ input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
+}
+
+::-webkit-scrollbar {
+  width: 2px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #10487a;
+  border-radius: 8px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }
 
 /* Firefox */
