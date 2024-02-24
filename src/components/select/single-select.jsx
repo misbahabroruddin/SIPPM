@@ -20,10 +20,10 @@ export const SingleSelect = ({
   props,
 }) => {
   return (
-    <div className='flex flex-col'>
-      <div className='flex items-center'>
+    <div className="flex flex-col">
+      <div className="flex items-center">
         <Label htmlFor={name} text={label} required={required} />
-        <div className='flex flex-col w-full'>
+        <div className="flex w-full flex-col">
           <Controller
             name={name}
             control={control}
@@ -42,8 +42,14 @@ export const SingleSelect = ({
                     primary: "#333333",
                   },
                 })}
+                styles={{
+                  control: (base) => ({
+                    ...base,
+                    paddingInline: "2px",
+                  }),
+                }}
                 className={`w-full ${errors ? "required" : ""}`}
-                classNamePrefix='react-select'
+                classNamePrefix="react-select"
                 instanceId={id}
                 isLoading={isLoading}
                 isDisabled={isLoading}
@@ -55,9 +61,9 @@ export const SingleSelect = ({
         </div>
       </div>
       {errors && (
-        <div className='flex'>
-          <span className='w-1/2'></span>
-          <span className='w-full text-red-600 text-sm'>
+        <div className="flex">
+          <span className="w-1/2"></span>
+          <span className="w-full text-sm text-red-600">
             * {errors?.message}
           </span>
         </div>
