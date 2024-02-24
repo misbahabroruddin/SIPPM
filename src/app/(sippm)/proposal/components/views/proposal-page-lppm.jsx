@@ -7,7 +7,8 @@ import { ContainerPage } from "@/components/container-page";
 import { Tabs } from "../tabs";
 import { SearchInput } from "@/components/input/search-input";
 import { useDebouncedCallback } from "use-debounce";
-import { CardDashboard } from "@/components/card/card-dashboard";
+import { ListPenelitianProposalLPPM } from "../list-penelitian-lppm";
+import { ListPengabdianProposalLPPM } from "../list-pengabdian-lppm";
 
 export default function ProposalPageLPPM() {
   const [tabActive] = useState("penelitian");
@@ -39,11 +40,11 @@ export default function ProposalPageLPPM() {
             />
           </div>
         </div>
-        <div className="flex gap-4">
-          <CardDashboard />
-          <CardDashboard status="Revisi" />
-          <CardDashboard status="Ditolak" />
-        </div>
+        {currentTab === "penelitian" || !currentTab ? (
+          <ListPenelitianProposalLPPM />
+        ) : (
+          <ListPengabdianProposalLPPM />
+        )}
       </div>
     </ContainerPage>
   );
