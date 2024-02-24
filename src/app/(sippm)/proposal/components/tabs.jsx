@@ -5,7 +5,7 @@ import { useCallback } from "react";
 
 import { Tab } from "@/components/tab";
 
-export const Tabs = ({ tabActive, setSearch }) => {
+export const Tabs = ({ tabActive }) => {
   const pathname = usePathname();
   const tabParams = useSearchParams();
   const router = useRouter();
@@ -37,16 +37,15 @@ export const Tabs = ({ tabActive, setSearch }) => {
       params.set(name, value);
       return params.toString();
     },
-    [tabParams]
+    [tabParams],
   );
 
   const handleTabClick = (tabName) => {
     router.push(`${pathname}?${createQueryTab("tab", tabName)}`);
-    setSearch("");
   };
 
   return (
-    <div className='flex gap-1 lg:gap-2 w-fit'>
+    <div className="flex w-fit gap-1 lg:gap-2">
       {tabs.map(({ id, name, icon, func }) => {
         return (
           <Tab
