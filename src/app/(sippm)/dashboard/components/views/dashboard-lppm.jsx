@@ -5,6 +5,8 @@ import { useState } from "react";
 
 import { CardDashboard } from "@/components/card/card-dashboard";
 import { Tabs } from "../tabs";
+import { ListPenelitianDashboardLPPM } from "../list-penelitian-dashboard-lppm";
+import { ListPengabdianDashboardLPPM } from "../list-pengabdian-dashboard-lppm";
 
 export default function DashboardLppm() {
   const [tabActive] = useState("penelitian");
@@ -24,11 +26,11 @@ export default function DashboardLppm() {
           <Tabs tabActive={currentTab || tabActive} />
         </div>
       </div>
-      <div className="h-[700px] overflow-auto">
+      <div className="h-[700px] overflow-auto p-[2px]">
         {currentTab === "penelitian" || !currentTab ? (
-          <div>penelitian</div>
+          <ListPenelitianDashboardLPPM />
         ) : (
-          <div>pengabdian</div>
+          <ListPengabdianDashboardLPPM />
         )}
       </div>
     </div>
