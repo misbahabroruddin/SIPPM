@@ -15,16 +15,19 @@ module.exports = withMT({
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
       boxShadow: {
-        custom: "0 2px 8px 0 rgba(102,102,102,0.1)",
+        custom: "0 1px 8px 0 rgba(102,102,102,0.1)",
       },
       backgroundColor: {
         primary: "#10487A",
         secondary: "#406D95",
         "dark-metallic": "#ACBCCF",
         sky: "#DAEDFF",
+        "sky-06": "#69B9FF",
         draft: "#FFCCCC",
         "red-06": "#FF3333",
         green: "#23B900",
+        "green-09": "#D5FACC",
+        "green-06": "#56EC33",
       },
       colors: {
         primary: "#333333",
@@ -32,6 +35,9 @@ module.exports = withMT({
         "secondary-200": "#eee",
         "red-09": "#CC0000",
         "dark-09": "#444F5C",
+        "dark-80": "#65768B",
+        "black-07": "#666666",
+        "blue-primary": "#10487A",
       },
       outline: {
         primary: "1px solid #10487A",
