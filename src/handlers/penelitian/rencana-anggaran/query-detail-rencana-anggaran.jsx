@@ -8,7 +8,7 @@ import { useAxios } from "@/lib/hooks/useAxios";
 
 export const useQueryDetailRencanaAnggaranPenelitian = (
   setValue,
-  anggaranId
+  anggaranId,
 ) => {
   const { id } = useParams();
   const axios = useAxios();
@@ -17,9 +17,9 @@ export const useQueryDetailRencanaAnggaranPenelitian = (
     try {
       const penelitianId = localStorage.getItem("penelitianId");
       const { data } = await axios.get(
-        `/proposals/dosen/penelitians/${
+        `/proposals/dosens/penelitians/${
           penelitianId || id
-        }/rencana-anggarans/${anggaranId}`
+        }/rencana-anggarans/${anggaranId}`,
       );
       const result = data.data;
       setValue("rincian", result.rincian);

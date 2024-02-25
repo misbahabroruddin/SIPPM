@@ -12,15 +12,15 @@ export const useQueryIdentitasUsulanPKM = (setValue) => {
     try {
       const pengabdianId = localStorage.getItem("pengabdianId");
       const { data } = await axios.get(
-        `proposals/dosen/pkms/${pengabdianId}/identitas-usulans`
+        `proposals/dosens/pkms/${pengabdianId}/identitas-usulan`,
       );
       setValue("rumpun_ilmu_id", data?.data.rumpun_ilmu.id, {
         shouldValidate: true,
       });
-      setValue("judul_pkm", data?.data.judul_pkm);
+      setValue("judul", data?.data.judul);
       setValue("tahun_usulan", data?.data.tahun_usulan);
-      setValue("jangka_waktu_pkm", data?.data.jangka_waktu_pkm);
-      setValue("ringkasan_pkm", data?.data.ringkasan_pkm);
+      setValue("jangka_waktu", data?.data.jangka_waktu);
+      setValue("ringkasan", data?.data.ringkasan);
 
       return data.data;
     } catch (error) {

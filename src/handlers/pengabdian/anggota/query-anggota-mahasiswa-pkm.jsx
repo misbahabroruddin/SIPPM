@@ -14,9 +14,9 @@ export const useQueryAnggotaMahasiswaPKM = () => {
     try {
       const pengabdianId = localStorage.getItem("pengabdianId");
       const { data } = await axios.get(
-        `/proposals/dosen/pkms/${
+        `/proposals/dosens/pkms/${
           pengabdianId || id
-        }/anggotas?jenis_anggota=Mahasiswa`
+        }/anggotas?jenis_anggota=Mahasiswa`,
       );
       return data.data;
     } catch (error) {

@@ -30,13 +30,13 @@ export const BerkasPKM = () => {
   };
 
   return (
-    <ContainerContent className='relative'>
+    <ContainerContent className="relative">
       <form
-        className='flex flex-col gap-4'
+        className="flex flex-col gap-4"
         onSubmit={handleSubmit(uploadBerkas)}
       >
-        <div className='flex flex-col gap-4'>
-          <h1 className='text-primary font-semibold text-lg'>File Proposal</h1>
+        <div className="flex flex-col gap-4">
+          <h1 className="text-lg font-semibold text-primary">File Proposal</h1>
           <InputFile
             register={register("file_proposal", {
               required: "Wajib diisi",
@@ -45,39 +45,39 @@ export const BerkasPKM = () => {
                   if (!file || !file[0]) {
                     return "File tidak ditemukan";
                   }
-                  const acceptedFormats = ["doc", "docx"];
+                  const acceptedFormats = ["pdf"];
                   const fileExtension = file[0]?.name
                     .split(".")
                     .pop()
                     .toLowerCase();
                   if (!acceptedFormats.includes(fileExtension)) {
-                    return "File harus berupa doc atau docx";
+                    return "File harus berupa pdf";
                   }
                   return true;
                 },
               },
             })}
-            name='file_proposal'
+            name="file_proposal"
             watch={watch}
             resetField={resetField}
             errors={errors.file_proposal}
           />
         </div>
-        <div className='flex flex-col gap-4'>
-          <h1 className='text-primary font-semibold text-lg'>
+        <div className="flex flex-col gap-4">
+          <h1 className="text-lg font-semibold text-primary">
             Pernyataan Mitra
           </h1>
           <InputFile
             register={register("file_pernyataan_mitra")}
-            name='file_pernyataan_mitra'
+            name="file_pernyataan_mitra"
             watch={watch}
             resetField={resetField}
             errors={errors.file_pernyataan_mitra}
-            accept='application/msword, application/vnd.openxmlformats-officedocument.wordprocessingml.document, application/pdf'
+            accept="application/pdf"
           />
         </div>
-        <div className='flex flex-col gap-4'>
-          <h1 className='text-primary font-semibold text-lg'>CV</h1>
+        <div className="flex flex-col gap-4">
+          <h1 className="text-lg font-semibold text-primary">CV</h1>
           <InputFile
             register={register("file_cv", {
               required: "Wajib diisi",
@@ -86,26 +86,25 @@ export const BerkasPKM = () => {
                   if (!file || !file[0]) {
                     return "File tidak ditemukan";
                   }
-                  const acceptedFormats = ["doc", "docx"];
+                  const acceptedFormats = ["pdf"];
                   const fileExtension = file[0]?.name
                     .split(".")
                     .pop()
                     .toLowerCase();
                   if (!acceptedFormats.includes(fileExtension)) {
-                    return "File harus berupa doc atau docx";
+                    return "File harus berupa pdf";
                   }
                   return true;
                 },
               },
             })}
-            name='file_cv'
+            name="file_cv"
             watch={watch}
             resetField={resetField}
             errors={errors.file_cv}
-            accept='application/msword, application/vnd.openxmlformats-officedocument.wordprocessingml.document, application/pdf'
           />
         </div>
-        <div className='flex justify-between'>
+        <div className="flex justify-between">
           <ButtonPrev onClick={handlePrevStep} />
           <ButtonSave disabled={isPending} />
         </div>

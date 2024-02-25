@@ -15,9 +15,9 @@ export const useDeleteRincianKegiatanPKM = (router) => {
     try {
       const pengabdianId = localStorage.getItem("pengabdianId");
       const { data } = await axios.delete(
-        `/proposals/dosen/pkms/${
+        `/proposals/dosens/pkms/${
           pengabdianId || id
-        }/rincian-kegiatans/${rincianKegiatanId}`
+        }/rincian-kegiatans/${rincianKegiatanId}`,
       );
       toast.success("Rincian kegiatan berhasil dihapus");
       router.refresh();

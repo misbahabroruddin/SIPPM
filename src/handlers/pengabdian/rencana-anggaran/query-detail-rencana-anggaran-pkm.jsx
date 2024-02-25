@@ -12,9 +12,9 @@ export const useQueryDetailRencanaAnggaranPKM = (setValue, anggaranId) => {
     try {
       const pengabdianId = localStorage.getItem("pengabdianId");
       const { data } = await axios.get(
-        `/proposals/dosen/pkms/${
+        `/proposals/dosens/pkms/${
           pengabdianId || id
-        }/rencana-anggarans/${anggaranId}`
+        }/rencana-anggarans/${anggaranId}`,
       );
       const result = data.data;
       setValue("rincian", result.rincian);

@@ -14,9 +14,9 @@ export const useQueryAnggotaDosenPKM = () => {
     try {
       const pengabdianId = localStorage.getItem("pengabdianId");
       const { data } = await axios.get(
-        `/proposals/dosen/pkms/${
+        `/proposals/dosens/pkms/${
           pengabdianId || id
-        }/anggotas?jenis_anggota=Dosen`
+        }/anggotas?jenis_anggota=Dosen`,
       );
       return data.data;
     } catch (error) {

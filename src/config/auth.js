@@ -22,19 +22,18 @@ export const authOptions = {
             {
               method: "POST",
               body: formData,
-            }
+            },
           );
-
           const { data } = await response.json();
 
           const user = {
-            id: data?.user.id,
-            name: data?.user.name,
-            username: data?.user.username,
-            email: data?.user.email,
-            emailVerifiedAt: data?.user.email_verified_at,
-            biodataId: data?.user.biodata_id,
-            avatar: data?.user.avatar,
+            id: data?.id,
+            name: data?.name,
+            username: data?.username,
+            email: data?.email,
+            emailVerifiedAt: data?.email_verified_at,
+            biodataId: data?.biodata_id,
+            avatar: data?.avatar,
             roles: data?.roles,
             accessToken: data?.token,
           };

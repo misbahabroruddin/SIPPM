@@ -13,7 +13,9 @@ export const useDeletePenelitianDosen = () => {
 
   const handleDelete = async (id) => {
     try {
-      const { data } = await axios.delete(`/proposals/dosen/penelitians/${id}`);
+      const { data } = await axios.delete(
+        `/proposals/dosens/penelitians/${id}`,
+      );
       localStorage.removeItem("penelitianId");
       localStorage.removeItem("step");
       localStorage.removeItem("isEdit");

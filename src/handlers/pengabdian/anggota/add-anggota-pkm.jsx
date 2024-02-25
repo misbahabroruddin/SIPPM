@@ -17,8 +17,8 @@ export const useAddAnggotaPKM = (reset, onClose) => {
       const formData = new FormData();
       formData.append("anggota_id", anggotaId);
       const { data } = await axios.post(
-        `/proposals/dosen/pkms/${pengabdianId || id}/anggotas`,
-        formData
+        `/proposals/dosens/pkms/${pengabdianId || id}/anggotas`,
+        formData,
       );
       toast.success("Anggota berhasil ditambahkan");
       return data;
@@ -32,8 +32,8 @@ export const useAddAnggotaPKM = (reset, onClose) => {
       const formData = new FormData();
       formData.append("anggota_id", form.anggota_id);
       const { data } = await axios.post(
-        `/proposals/dosen/pkms/${pengabdianId || id}/anggotas`,
-        formData
+        `/proposals/dosens/pkms/${pengabdianId || id}/anggotas`,
+        formData,
       );
       reset();
       return data;

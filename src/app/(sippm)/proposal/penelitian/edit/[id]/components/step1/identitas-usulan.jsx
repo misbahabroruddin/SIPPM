@@ -51,12 +51,12 @@ export const IdentitasUsulan = () => {
           <div className="flex grow flex-col gap-4">
             <Input
               label="Judul Penelitian"
-              name="judul_penelitian"
+              name="judul"
               placeholder="Judul Penelitian"
-              register={register("judul_penelitian", {
+              register={register("judul", {
                 required: "Wajib diisi",
               })}
-              errors={errors.judul_penelitian}
+              errors={errors.judul}
               required
               disabled={isLoadingIdentitasUsulanPenelitian}
             />
@@ -95,12 +95,12 @@ export const IdentitasUsulan = () => {
             />
             <Input
               label="Bidang Fokus Penelitian"
-              name="bidang_fokus_penelitian"
+              name="bidang_fokus"
               placeholder="Bidang Fokus Penelitian"
-              register={register("bidang_fokus_penelitian", {
+              register={register("bidang_fokus", {
                 required: "Wajib diisi",
               })}
-              errors={errors.bidang_fokus_penelitian}
+              errors={errors.bidang_fokus}
               required
               disabled={isLoadingIdentitasUsulanPenelitian}
             />
@@ -124,22 +124,22 @@ export const IdentitasUsulan = () => {
             />
             <Input
               label="Jangka Waktu Penelitian"
-              name="jangka_waktu_penelitian"
+              name="jangka_waktu"
               placeholder="Jangka Waktu Penelitian"
-              register={register("jangka_waktu_penelitian", {
+              register={register("jangka_waktu", {
                 required: "Wajib diisi",
               })}
-              errors={errors.jangka_waktu_penelitian}
+              errors={errors.jangka_waktu}
               required
             />
             <Input
               label="Ringkasan Penelitian"
-              name="ringkasan_penelitian"
+              name="ringkasan"
               placeholder="Ringkasan Penelitian"
-              register={register("ringkasan_penelitian", {
+              register={register("ringkasan", {
                 required: "Wajib diisi",
               })}
-              errors={errors.ringkasan_penelitian}
+              errors={errors.ringkasan}
               required
               disabled={isLoadingIdentitasUsulanPenelitian}
             />

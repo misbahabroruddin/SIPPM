@@ -14,9 +14,9 @@ export const useQueryAnggotaDosenPenelitian = () => {
     try {
       const penelitianId = localStorage.getItem("penelitianId");
       const { data } = await axios.get(
-        `proposals/dosen/penelitians/${
+        `proposals/dosens/penelitians/${
           penelitianId || id
-        }/anggotas?jenis_anggota=Dosen`
+        }/anggotas?jenis_anggota=Dosen`,
       );
       return data.data;
     } catch (error) {

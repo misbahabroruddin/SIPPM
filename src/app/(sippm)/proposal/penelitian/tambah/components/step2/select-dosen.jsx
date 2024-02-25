@@ -7,6 +7,7 @@ import { ButtonSave } from "@/components/button/button-save";
 import { useQueryAnggotaDosen } from "@/handlers/anggota/query-anggota-dosen";
 import { useAddAnggotaPenelitian } from "@/handlers/penelitian/anggota/add-anggota-penelitian";
 import { SingleSelect } from "@/components/select/single-select";
+import { useQueryAnggotaDosenPenelitian } from "@/handlers/penelitian/anggota/query-anggota-dosen-penelitian";
 
 export const SelectDosen = ({ onClose }) => {
   const {
@@ -19,24 +20,30 @@ export const SelectDosen = ({ onClose }) => {
   const { data, isLoading } = useQueryAnggotaDosen();
   const { onSubmitAnggotaDosenPenelitian, isLoadingAnggotaDosenPenelitian } =
     useAddAnggotaPenelitian(reset, onClose);
+  const { listAnggotaDosenPenelitian } = useQueryAnggotaDosenPenelitian();
   return (
     <form
-      className='flex flex-col gap-6'
+      className="flex flex-col gap-6"
       onSubmit={handleSubmit(onSubmitAnggotaDosenPenelitian)}
     >
       <SingleSelect
         label={"Nama Dosen"}
         Controller={Controller}
         control={control}
-        options={data}
+        options={data?.filter(
+          (anggota) =>
+            !listAnggotaDosenPenelitian?.data.find(
+              (a) => a.anggota_id === anggota.value,
+            ),
+        )}
         placeholder={"Nama Dosen"}
-        name='anggota_id'
+        name="anggota_id"
         errors={errors.anggota_id}
         rules={{ required: "Wajib diisi" }}
         id={id}
         isLoading={isLoading}
       />
-      <div className='flex justify-center gap-6'>
+      <div className="flex justify-center gap-6">
         <ButtonCancel iconLeft onClick={onClose} />
         <ButtonSave iconLeft disabled={isLoadingAnggotaDosenPenelitian} />
       </div>

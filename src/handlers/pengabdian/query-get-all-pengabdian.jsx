@@ -13,11 +13,11 @@ export const useQueryGetAllPengabdian = (search) => {
       let params;
       if (search) {
         params = {
-          judul_pkm: search,
+          judul: search,
         };
       }
       try {
-        const { data } = await axios.get("/proposals/dosen/pkms", {
+        const { data } = await axios.get("/proposals/dosens/pkms", {
           params: params,
         });
         return data.data.data;

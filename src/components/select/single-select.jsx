@@ -17,6 +17,7 @@ export const SingleSelect = ({
   id,
   isLoading,
   defaultValue,
+  hideSelectedOptions,
   props,
 }) => {
   return (
@@ -54,6 +55,8 @@ export const SingleSelect = ({
                 isLoading={isLoading}
                 isDisabled={isLoading}
                 defaultValue={defaultValue}
+                hideSelectedOptions={hideSelectedOptions}
+                {...props}
               />
             )}
             rules={rules}

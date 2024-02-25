@@ -14,7 +14,7 @@ export const useQueryDetailAnggotaMahasiswaPKM = (anggotaId) => {
   const fetchDetailAnggotaMahasiswa = async () => {
     try {
       const { data } = await axios.get(
-        `/proposals/dosen/pkms/${pengabdianId || id}/anggotas/${anggotaId}`
+        `/proposals/dosens/pkms/${pengabdianId || id}/anggotas/${anggotaId}`,
       );
       return data.data;
     } catch (error) {

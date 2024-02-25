@@ -12,7 +12,7 @@ export const useAddEditRincianKegiatanPKM = (
   setEndDate,
   anggaranId,
   reset,
-  onClose
+  onClose,
 ) => {
   const axios = useAxios();
   const queryClient = useQueryClient();
@@ -29,7 +29,7 @@ export const useAddEditRincianKegiatanPKM = (
         const waktu = checkIsValueDateArr(form.waktu);
 
         const { data } = await axios.put(
-          `/proposals/dosen/pkms/${
+          `/proposals/dosens/pkms/${
             pengabdianId || id
           }/rincian-kegiatans/${anggaranId}`,
           {
@@ -40,14 +40,14 @@ export const useAddEditRincianKegiatanPKM = (
             headers: {
               "Content-Type": "application/x-www-form-urlencoded",
             },
-          }
+          },
         );
         toast.success("Rincian kegiatan berhasil diubah");
         return data;
       } else {
         const { data } = await axios.post(
-          `/proposals/dosen/pkms/${pengabdianId || id}/rincian-kegiatans`,
-          formData
+          `/proposals/dosens/pkms/${pengabdianId || id}/rincian-kegiatans`,
+          formData,
         );
         toast.success("Rincian kegiatan berhasil ditambah");
         reset();

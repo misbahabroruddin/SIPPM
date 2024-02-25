@@ -17,9 +17,10 @@ export const useQueryGetAllPenelitian = (search) => {
         };
       }
       try {
-        const { data } = await axios.get(`/proposals/dosen/penelitians`, {
+        const { data } = await axios.get(`/proposals/dosens/penelitians`, {
           params: params,
         });
+
         return data.data.data;
       } catch (error) {
         toast.error(error.message);

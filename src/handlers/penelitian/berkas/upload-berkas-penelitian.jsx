@@ -5,12 +5,14 @@ import { toast } from "react-toastify";
 import { useAxios } from "@/lib/hooks/useAxios";
 import { useStep } from "@/lib/hooks/useStep";
 import { useParams } from "next/navigation";
+import { useKirimUsulanPenelitian } from "../kirim-usulan/kirim-usulan-penelitian";
 
 export const useUploadBerkasPenelitian = (router) => {
   const axios = useAxios();
   const { setCurrentStep } = useStep();
   const { id } = useParams();
   const queryClient = useQueryClient();
+  const { kirimUsulan } = useKirimUsulanPenelitian();
 
   const onSubmit = async (form) => {
     const formData = new FormData();
@@ -21,12 +23,13 @@ export const useUploadBerkasPenelitian = (router) => {
     try {
       const penelitianId = localStorage.getItem("penelitianId");
       const { data } = await axios.post(
-        `/proposals/dosen/penelitians/${penelitianId || id}/berkas`,
-        formData
+        `/proposals/dosens/penelitians/${penelitianId || id}/berkas`,
+        formData,
       );
       localStorage.removeItem("penelitianId");
       localStorage.removeItem("step");
       localStorage.removeItem("isEdit");
+      await kirimUsulan();
       router.push("/proposal");
       setCurrentStep(1);
       toast.success("Penelitian berhasil diajukan");
@@ -50,7 +53,7 @@ export const useUploadBerkasPenelitian = (router) => {
           queryKey: ["anggotaDosen"],
         });
       },
-    }
+    },
   );
 
   return {

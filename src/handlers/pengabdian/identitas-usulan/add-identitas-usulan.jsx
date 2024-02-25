@@ -17,16 +17,16 @@ export const useAddIdentitasUsulanPKM = (reset) => {
       const pengabdianId = localStorage.getItem("pengabdianId");
 
       const formData = new FormData();
-      formData.append("judul_pkm", data.judul_pkm);
+      formData.append("judul", data.judul);
       formData.append("rumpun_ilmu_id", data.rumpun_ilmu_id);
       formData.append("tahun_usulan", data.tahun_usulan);
-      formData.append("jangka_waktu_pkm", data.jangka_waktu_pkm);
-      formData.append("ringkasan_pkm", data.ringkasan_pkm);
+      formData.append("jangka_waktu", data.jangka_waktu);
+      formData.append("ringkasan", data.ringkasan);
 
       if (isEdit && currentStep === 1) {
         const response = await axios.post(
           `proposals/dosen/pkms/${pengabdianId}/identitas-usulans`,
-          formData
+          formData,
         );
         if (response.data.data) {
           setCurrentStep(2);
@@ -35,15 +35,15 @@ export const useAddIdentitasUsulanPKM = (reset) => {
           } else {
             localStorage.setItem("isEdit", false);
           }
-          localStorage.setItem("step", response.data.data.step);
+          localStorage.setItem("step", 2);
           localStorage.setItem("pengabdianId", response.data.data.id);
           reset();
         }
       } else {
-        const response = await axios.post("/proposals/dosen/pkms", formData);
+        const response = await axios.post("/proposals/dosens/pkms", formData);
         if (response.data.data) {
           setCurrentStep(2);
-          localStorage.setItem("step", response.data.data.step);
+          localStorage.setItem("step", 2);
           if (isEdit === true) {
             localStorage.setItem("isEdit", true);
           } else {

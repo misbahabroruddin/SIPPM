@@ -47,20 +47,20 @@ export const IdentitasUsulanPKM = () => {
   }, []);
 
   return (
-    <ContainerContent className='relative'>
-      <h1 className='text-primary font-semibold text-lg'>Identitas Usulan</h1>
+    <ContainerContent className="relative">
+      <h1 className="text-lg font-semibold text-primary">Identitas Usulan</h1>
       <form onSubmit={handleSubmit(onSubmitIdentitasUsulan)}>
-        <div className='flex gap-4 '>
-          <div className='flex flex-col gap-4 grow'>
+        <div className="flex gap-4 ">
+          <div className="flex grow flex-col gap-4">
             <Input
-              label='Judul PKM'
-              name='judul_pkm'
-              placeholder='Judul PKM'
-              defaultValue={identitasUsulan?.judul_pkm}
-              register={register("judul_pkm", {
+              label="Judul PKM"
+              name="judul"
+              placeholder="Judul PKM"
+              defaultValue={identitasUsulan?.judul}
+              register={register("judul", {
                 required: "Wajib diisi",
               })}
-              errors={errors.judul_pkm}
+              errors={errors.judul}
               required
               disabled={isLoadingIdentitasUsulan}
             />
@@ -71,20 +71,20 @@ export const IdentitasUsulanPKM = () => {
               options={rumpunIlmuOptions}
               placeholder={
                 rumpunIlmuOptions?.find(
-                  (c) => c.value === identitasUsulan?.rumpun_ilmu_id
+                  (c) => c.value === identitasUsulan?.rumpun_ilmu_id,
                 )?.label || "Rumpun Ilmu"
               }
-              name='rumpun_ilmu_id'
+              name="rumpun_ilmu_id"
               errors={errors.rumpun_ilmu_id}
               rules={{ required: "Wajib diisi" }}
               id={id}
               isLoading={isLoadingRumpunIlmu}
             />
             <Input
-              label='Tahun Usulan'
-              type='number'
-              name='tahun_usulan'
-              placeholder='Tahun Usulan'
+              label="Tahun Usulan"
+              type="number"
+              name="tahun_usulan"
+              placeholder="Tahun Usulan"
               defaultValue={identitasUsulan?.tahun_usulan}
               register={register("tahun_usulan", {
                 required: "Wajib diisi",
@@ -98,33 +98,33 @@ export const IdentitasUsulanPKM = () => {
               disabled={isLoadingIdentitasUsulan}
             />
           </div>
-          <div className='flex flex-col gap-4 grow'>
+          <div className="flex grow flex-col gap-4">
             <Input
-              label='Jangka Waktu PKM'
-              name='jangka_waktu_pkm'
-              placeholder='Jangka Waktu PKM'
-              defaultValue={identitasUsulan?.jangka_waktu_pkm}
-              register={register("jangka_waktu_pkm", {
+              label="Jangka Waktu PKM"
+              name="jangka_waktu"
+              placeholder="Jangka Waktu PKM"
+              defaultValue={identitasUsulan?.jangka_waktu}
+              register={register("jangka_waktu", {
                 required: "Wajib diisi",
               })}
-              errors={errors.jangka_waktu_pkm}
+              errors={errors.jangka_waktu}
               required
             />
             <Input
-              label='Ringkasan PKM'
-              name='ringkasan_pkm'
-              placeholder='Ringkasan PKM'
-              defaultValue={identitasUsulan?.ringkasan_pkm}
-              register={register("ringkasan_pkm", {
+              label="Ringkasan PKM"
+              name="ringkasan"
+              placeholder="Ringkasan PKM"
+              defaultValue={identitasUsulan?.ringkasan}
+              register={register("ringkasan", {
                 required: "Wajib diisi",
               })}
-              errors={errors.ringkasan_pkm}
+              errors={errors.ringkasan}
               required
               disabled={isLoadingIdentitasUsulan}
             />
           </div>
         </div>
-        <div className='flex w-full justify-end absolute -bottom-16 left-0'>
+        <div className="absolute -bottom-16 left-0 flex w-full justify-end">
           <ButtonNext disabled={isLoadingSubmit} />
         </div>
       </form>

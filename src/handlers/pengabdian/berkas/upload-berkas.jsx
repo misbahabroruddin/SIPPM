@@ -6,11 +6,13 @@ import { toast } from "react-toastify";
 import { useAxios } from "@/lib/hooks/useAxios";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useStep } from "@/lib/hooks/useStep";
+import { useKirimUsulanPKM } from "../kirim-usulan/kirim-usulan-pkm";
 
 export const useUploadBerkasPKM = (router) => {
   const { setCurrentStep } = useStep();
   const axios = useAxios();
   const { id } = useParams();
+  const { kirimUsulan } = useKirimUsulanPKM();
   const queryClient = useQueryClient();
 
   const onSubmit = async (form) => {
@@ -24,9 +26,10 @@ export const useUploadBerkasPKM = (router) => {
     try {
       const pengabdianId = localStorage.getItem("pengabdianId");
       const { data } = await axios.post(
-        `/proposals/dosen/pkms/${pengabdianId || id}/berkas`,
-        formData
+        `/proposals/dosens/pkms/${pengabdianId || id}/berkas`,
+        formData,
       );
+      await kirimUsulan();
       localStorage.removeItem("pengabdianId");
       localStorage.removeItem("step");
       localStorage.removeItem("isEdit");
@@ -40,7 +43,7 @@ export const useUploadBerkasPKM = (router) => {
         return toast.error(error.response.data.message.file_proposal[0]);
       } else if (error.response?.data.message.file_pernyataan_mitra) {
         return toast.error(
-          error.response.data.message.file_pernyataan_mitra[0]
+          error.response.data.message.file_pernyataan_mitra[0],
         );
       } else {
         toast.error(error.message);

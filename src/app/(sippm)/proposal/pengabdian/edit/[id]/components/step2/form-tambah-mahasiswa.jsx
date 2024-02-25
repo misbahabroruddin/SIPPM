@@ -27,46 +27,46 @@ export const FormTambahMahasiswa = ({ onClose }) => {
 
   const { onCreateAnggotaMahasiswa, isPending } = useCreateAnggotaMahasiswa(
     reset,
-    onClose
+    onClose,
   );
   return (
     <form
-      className='flex flex-col gap-2'
+      className="flex flex-col gap-2"
       onSubmit={handleSubmit(onCreateAnggotaMahasiswa)}
     >
       <Input
-        type='number'
-        label='NIK'
-        name='nik'
+        type="number"
+        label="NIK"
+        name="nik"
         register={register("nik", { required: "Wajib diisi" })}
         errors={errors.nik}
-        placeholder='NIK'
+        placeholder="NIK"
         required
       />
       <Input
-        label='Nama Lengkap'
+        label="Nama Lengkap"
         name={"nama_lengkap"}
         register={register("nama_lengkap", {
           required: "Wajib diisi",
         })}
         errors={errors.nama_lengkap}
-        placeholder='Nama Lengkap'
+        placeholder="Nama Lengkap"
         required
       />
       <Input
-        label='Perguruan Tinggi'
+        label="Perguruan Tinggi"
         name={"perguruan_tinggi"}
         register={register("perguruan_tinggi", { required: "Wajib diisi" })}
         errors={errors.perguruan_tinggi}
-        placeholder='Perguruan Tinggi'
+        placeholder="Perguruan Tinggi"
         required
       />
       <Input
-        label='NIM'
-        name={"nidn_or_nidk_nim"}
-        placeholder='NIM'
-        register={register("nidn_or_nidk_nim", { required: "Wajib diisi" })}
-        errors={errors.nidn_or_nidk_nim}
+        label="NIM"
+        name={"nidn_or_nidk_or_nim"}
+        placeholder="NIM"
+        register={register("nidn_or_nidk_or_nim", { required: "Wajib diisi" })}
+        errors={errors.nidn_or_nidk_or_nim}
         required
       />
       <SingleSelect
@@ -75,17 +75,17 @@ export const FormTambahMahasiswa = ({ onClose }) => {
         control={control}
         options={programStudiOptions}
         placeholder={"Program Studi"}
-        name='program_studi_id'
+        name="program_studi_id"
         errors={errors.program_studi_id}
         rules={{ required: "Wajib diisi" }}
         id={id}
         isLoading={isLoadingProgramStudiOptions}
       />
       <Input
-        label='Email'
-        type='email'
+        label="Email"
+        type="email"
         name={"email"}
-        placeholder='Email'
+        placeholder="Email"
         register={register("email", {
           required: "Wajib diisi",
           pattern: {
@@ -97,28 +97,28 @@ export const FormTambahMahasiswa = ({ onClose }) => {
         required
       />
       <Input
-        label='Nomor hp'
+        label="Nomor hp"
         name={"nomor_hp"}
-        placeholder='Nomor hp'
+        placeholder="Nomor hp"
         register={register("nomor_hp")}
         errors={errors.nomor_hp}
         required
       />
       <Input
-        label='ID Sinta'
+        label="ID Sinta"
         name={"sinta_id"}
-        placeholder='ID Sinta'
+        placeholder="ID Sinta"
         register={register("sinta_id")}
         errors={errors.sinta_id}
       />
       <Input
-        label='ID Goggle Scholar'
+        label="ID Goggle Scholar"
         name={"google_scholar_id"}
-        placeholder='ID Goggle Scholar'
+        placeholder="ID Goggle Scholar"
         register={register("google_scholar_id")}
         errors={errors.google_scholar_id}
       />
-      <div className='flex justify-center gap-6 mt-6'>
+      <div className="mt-6 flex justify-center gap-6">
         <ButtonCancel iconLeft onClick={onClose} />
         <ButtonSave iconLeft disabled={isPending} />
       </div>

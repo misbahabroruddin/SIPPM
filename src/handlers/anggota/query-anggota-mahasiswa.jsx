@@ -11,11 +11,11 @@ export const useQueryAnggotaMahasiswa = () => {
   const fetchListMahasiswa = async () => {
     try {
       const { data } = await axios.get(
-        "/anggotas/search?jenis_anggota=Mahasiswa"
+        "/anggotas/search?jenis_anggota=Mahasiswa",
       );
       const result = data?.data.map((opt) => ({
         value: opt.id,
-        label: `${opt.nama_lengkap} (${opt.nidn_or_nidk_nim})`,
+        label: `${opt.nama_lengkap} (${opt.nidn_or_nidk_or_nim})`,
       }));
       return result;
     } catch (error) {

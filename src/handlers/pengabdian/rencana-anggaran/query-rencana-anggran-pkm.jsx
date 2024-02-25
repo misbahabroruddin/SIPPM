@@ -13,7 +13,7 @@ export const useQueryRencanaAnggranPKM = () => {
     try {
       const pengabdianId = localStorage.getItem("pengabdianId");
       const { data } = await axios.get(
-        `/proposals/dosen/pkms/${pengabdianId || id}/rencana-anggarans`
+        `/proposals/dosens/pkms/${pengabdianId || id}/rencana-anggarans`,
       );
       return data.data;
     } catch (error) {

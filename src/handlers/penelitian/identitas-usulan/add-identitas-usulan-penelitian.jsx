@@ -21,20 +21,20 @@ export const useAddIdentitasUsulanPenelitian = (reset) => {
       const formData = new FormData();
       formData.append("jenis_penelitian_id", data.jenis_penelitian_id);
       formData.append("rumpun_ilmu_id", data.rumpun_ilmu_id);
-      formData.append("judul_penelitian", data.judul_penelitian);
-      formData.append("bidang_fokus_penelitian", data.bidang_fokus_penelitian);
+      formData.append("judul", data.judul);
+      formData.append("bidang_fokus", data.bidang_fokus);
       formData.append("tahun_usulan", data.tahun_usulan);
-      formData.append("jangka_waktu_penelitian", data.jangka_waktu_penelitian);
-      formData.append("ringkasan_penelitian", data.ringkasan_penelitian);
+      formData.append("jangka_waktu", data.jangka_waktu);
+      formData.append("ringkasan", data.ringkasan);
 
       if (isEdit && currentStep === 1) {
         const response = await axios.post(
-          `proposals/dosen/penelitians/${penelitianId || id}/identitas-usulans`,
-          formData
+          `proposals/dosens/penelitians/${penelitianId || id}/identitas-usulan`,
+          formData,
         );
         if (response.data.data) {
           setCurrentStep(2);
-          localStorage.setItem("step", response.data.data.step);
+          localStorage.setItem("step", 2);
           if (isEdit === true) {
             localStorage.setItem("isEdit", true);
           } else {
@@ -45,12 +45,12 @@ export const useAddIdentitasUsulanPenelitian = (reset) => {
         }
       } else {
         const response = await axios.post(
-          "/proposals/dosen/penelitians",
-          formData
+          "/proposals/dosens/penelitians",
+          formData,
         );
         if (response.data.data) {
           setCurrentStep(2);
-          localStorage.setItem("step", response.data.data.step);
+          localStorage.setItem("step", 2);
           localStorage.setItem("isEdit", false);
           localStorage.setItem("penelitianId", response.data.data.id);
           reset();

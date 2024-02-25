@@ -24,8 +24,8 @@ export const useAddTargetCapaianPKM = () => {
       }
       formData.append("nama_jurnal_penerbit", form.nama_jurnal_penerbit);
       const { data } = await axios.post(
-        `/proposals/dosen/pkms/${pengabdianId || id}/target-capaians`,
-        formData
+        `/proposals/dosens/pkms/${pengabdianId || id}/target-capaian`,
+        formData,
       );
       setCurrentStep(4);
       localStorage.setItem("step", 4);

@@ -17,28 +17,28 @@ export const useEditIdentitasUsulanPKM = (reset) => {
       const isEdit = JSON.parse(localStorage.getItem("isEdit"));
 
       const formData = new FormData();
-      formData.append("judul_pkm", data.judul_pkm);
+      formData.append("judul", data.judul);
       formData.append("rumpun_ilmu_id", data.rumpun_ilmu_id);
       formData.append("tahun_usulan", data.tahun_usulan);
-      formData.append("jangka_waktu_pkm", data.jangka_waktu_pkm);
-      formData.append("ringkasan_pkm", data.ringkasan_pkm);
+      formData.append("jangka_waktu", data.jangka_waktu);
+      formData.append("ringkasan", data.ringkasan);
 
       if (isEdit && currentStep === 1) {
         const response = await axios.post(
-          `proposals/dosen/pkms/${id}/identitas-usulans`,
-          formData
+          `proposals/dosens/pkms/${id}/identitas-usulan`,
+          formData,
         );
         if (response.data.data) {
           setCurrentStep(2);
-          localStorage.setItem("step", response.data.data.step);
+          localStorage.setItem("step", 2);
           localStorage.setItem("isEdit", false);
           reset();
         }
       } else {
-        const response = await axios.post("/proposals/dosen/pkms", formData);
+        const response = await axios.post("/proposals/dosens/pkms", formData);
         if (response.data.data) {
           setCurrentStep(2);
-          localStorage.setItem("step", response.data.data.step);
+          localStorage.setItem("step", 2);
           localStorage.setItem("isEdit", false);
           reset();
         }

@@ -14,9 +14,9 @@ export const useDeleteRincianKegiatanPenelitian = () => {
     try {
       const penelitianId = localStorage.getItem("penelitianId");
       const { data } = await axios.delete(
-        `/proposals/dosen/penelitians/${
+        `/proposals/dosens/penelitians/${
           penelitianId || id
-        }/rincian-kegiatans/${rencanaAnggaranId}`
+        }/rincian-kegiatans/${rencanaAnggaranId}`,
       );
       toast.success("Rincian Kegiatan berhasil dihapus");
       return data;

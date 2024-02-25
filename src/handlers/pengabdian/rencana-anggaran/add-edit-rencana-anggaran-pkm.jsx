@@ -19,7 +19,7 @@ export const useAddEditRencanaAnggaranPKM = (anggaranId, reset, onClose) => {
       formData.append("biaya", form.biaya);
       if (anggaranId) {
         const { data } = await axios.put(
-          `/proposals/dosen/pkms/${
+          `/proposals/dosens/pkms/${
             pengabdianId || id
           }/rencana-anggarans/${anggaranId}`,
           {
@@ -30,14 +30,14 @@ export const useAddEditRencanaAnggaranPKM = (anggaranId, reset, onClose) => {
             headers: {
               "Content-Type": "application/x-www-form-urlencoded",
             },
-          }
+          },
         );
         toast.success("Rencana anggaran PKM berhasil diubah");
         return data;
       } else {
         const { data } = await axios.post(
-          `/proposals/dosen/pkms/${pengabdianId || id}/rencana-anggarans`,
-          formData
+          `/proposals/dosens/pkms/${pengabdianId || id}/rencana-anggarans`,
+          formData,
         );
         reset();
         toast.success("Rencana anggaran PKM berhasil ditambah");

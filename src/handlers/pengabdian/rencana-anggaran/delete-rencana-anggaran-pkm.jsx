@@ -14,9 +14,9 @@ export const useDeleteRencanaAnggaranPKM = () => {
     try {
       const pengabdianId = localStorage.getItem("pengabdianId");
       const { data } = await axios.delete(
-        `/proposals/dosen/pkms/${
+        `/proposals/dosens/pkms/${
           pengabdianId || id
-        }/rencana-anggarans/${rencanaAnggaranId}`
+        }/rencana-anggarans/${rencanaAnggaranId}`,
       );
       toast.success("Rencana anggaran PKM berhasil dihapus");
       return data;

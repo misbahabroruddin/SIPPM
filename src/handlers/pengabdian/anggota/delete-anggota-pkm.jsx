@@ -15,7 +15,7 @@ export const useDeleteAnggotaPKM = () => {
     try {
       const pengabdianId = localStorage.getItem("pengabdianId");
       const { data } = await axios.delete(
-        `/proposals/dosen/pkms/${pengabdianId || id}/anggotas/${anggotaId}`
+        `/proposals/dosens/pkms/${pengabdianId || id}/anggotas/${anggotaId}`,
       );
 
       return data;

@@ -13,7 +13,7 @@ export const useDeletePengabdianDosen = () => {
 
   const handleDelete = async (id) => {
     try {
-      const { data } = await axios.delete(`/proposals/dosen/pkms/${id}`);
+      const { data } = await axios.delete(`/proposals/dosens/pkms/${id}`);
       localStorage.removeItem("pengabdianId");
       localStorage.removeItem("step");
       localStorage.removeItem("isEdit");

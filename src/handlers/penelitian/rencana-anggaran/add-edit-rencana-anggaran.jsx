@@ -9,7 +9,7 @@ import { useAxios } from "@/lib/hooks/useAxios";
 export const useAddEditRencanaAnggaranPenelitian = (
   anggaranId,
   reset,
-  onClose
+  onClose,
 ) => {
   const axios = useAxios();
   const queryClient = useQueryClient();
@@ -22,7 +22,7 @@ export const useAddEditRencanaAnggaranPenelitian = (
       formData.append("biaya", form.biaya);
       if (anggaranId) {
         const { data } = await axios.put(
-          `/proposals/dosen/penelitians/${
+          `/proposals/dosens/penelitians/${
             penelitianId || id
           }/rencana-anggarans/${anggaranId}`,
           {
@@ -33,16 +33,16 @@ export const useAddEditRencanaAnggaranPenelitian = (
             headers: {
               "Content-Type": "application/x-www-form-urlencoded",
             },
-          }
+          },
         );
         toast.success("Rencana anggaran penelitian berhasil diubah");
         return data;
       } else {
         const { data } = await axios.post(
-          `/proposals/dosen/penelitians/${
+          `/proposals/dosens/penelitians/${
             penelitianId || id
           }/rencana-anggarans`,
-          formData
+          formData,
         );
         reset();
         toast.success("Rencana anggaran penelitian berhasil ditambahkan");

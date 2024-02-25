@@ -10,7 +10,7 @@ export const useQueryDetailRincianKegiatanPenelitian = (
   kegiatanId,
   setStartDate,
   setEndDate,
-  setValue
+  setValue,
 ) => {
   const axios = useAxios();
   const { id } = useParams();
@@ -18,9 +18,9 @@ export const useQueryDetailRincianKegiatanPenelitian = (
     try {
       const penelitianId = localStorage.getItem("penelitianId");
       const { data } = await axios.get(
-        `/proposals/dosen/penelitians/${
+        `/proposals/dosens/penelitians/${
           penelitianId || id
-        }/rincian-kegiatans/${kegiatanId}`
+        }/rincian-kegiatans/${kegiatanId}`,
       );
       const result = data.data;
       const dateRangeArr = result.waktu.split(",");

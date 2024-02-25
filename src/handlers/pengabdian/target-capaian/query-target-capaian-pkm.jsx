@@ -14,13 +14,13 @@ export const useQueryTargetCapaianPKM = (setValue) => {
     try {
       const pengabdianId = localStorage.getItem("pengabdianId");
       const { data } = await axios.get(
-        `/proposals/dosen/pkms/${pengabdianId || id}/target-capaians`
+        `/proposals/dosens/pkms/${pengabdianId || id}/target-capaian`,
       );
       setValue("luaran_wajib_id", data?.data?.luaran_wajib_id);
       setValue("tahun_capaian", data?.data?.tahun_capaian);
       setValue(
         "status_capaian",
-        data?.data?.status_capaian === "null" ? "" : data?.data?.status_capaian
+        data?.data?.status_capaian === "null" ? "" : data?.data?.status_capaian,
       );
       setValue("nama_jurnal_penerbit", data?.data?.nama_jurnal_penerbit);
       return data;

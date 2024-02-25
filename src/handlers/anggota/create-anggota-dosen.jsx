@@ -15,7 +15,7 @@ export const useCreateAnggotaDosen = (reset, onClose, funcAddAnggota) => {
       formData.append("nik", form.nik);
       formData.append("nama_lengkap", form.nama_lengkap);
       formData.append("perguruan_tinggi", form.perguruan_tinggi);
-      formData.append("nidn_or_nidk_nim", form.nidn_or_nidk_nim);
+      formData.append("nidn_or_nidk_or_nim", form.nidn_or_nidk_or_nim);
       formData.append("jabatan_fungsional_id", form.jabatan_fungsional_id);
       formData.append("program_studi_id", form.program_studi_id);
       formData.append("email", form.email);
@@ -24,7 +24,9 @@ export const useCreateAnggotaDosen = (reset, onClose, funcAddAnggota) => {
       formData.append("google_scholar_id", form.google_scholar_id);
       formData.append("jenis_anggota", "Dosen");
       const { data } = await axios.post(`/anggotas`, formData);
+      await funcAddAnggota(data.data?.id);
       reset();
+      onClose();
       return data;
     } catch (error) {
       if (error.response?.data.message.nik) {
@@ -37,7 +39,6 @@ export const useCreateAnggotaDosen = (reset, onClose, funcAddAnggota) => {
   const { mutateAsync: onCreateAnggotaDosen, isPending } = useMutation({
     mutationFn: createAnggotaDosen,
     onSuccess: async (data) => {
-      await funcAddAnggota(data.data?.id);
       queryClient.invalidateQueries({
         queryKey: ["anggotaDosenPKM"],
       });
@@ -47,7 +48,6 @@ export const useCreateAnggotaDosen = (reset, onClose, funcAddAnggota) => {
       queryClient.invalidateQueries({
         queryKey: ["anggotaDosen"],
       });
-      onClose();
     },
   });
 

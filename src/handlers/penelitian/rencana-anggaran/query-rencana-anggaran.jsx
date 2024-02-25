@@ -14,7 +14,7 @@ export const useQueryRencanaAnggaranPenelitian = () => {
     try {
       const penelitianId = localStorage.getItem("penelitianId");
       const { data } = await axios.get(
-        `/proposals/dosen/penelitians/${penelitianId || id}/rencana-anggarans`
+        `/proposals/dosens/penelitians/${penelitianId || id}/rencana-anggarans`,
       );
       return data.data;
     } catch (error) {

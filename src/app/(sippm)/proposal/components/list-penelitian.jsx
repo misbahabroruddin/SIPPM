@@ -59,7 +59,7 @@ const ListItem = ({ data, currentTab, tabActive }) => {
     >
       <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between">
         <div className="flex w-fit flex-col gap-1 lg:max-w-[631px]">
-          <h2 className="text-lg">{data?.judul_penelitian}</h2>
+          <h2 className="text-lg">{data?.judul}</h2>
           <div className="flex gap-4">
             <div className="flex items-center gap-[2px]">
               <Image
@@ -78,7 +78,7 @@ const ListItem = ({ data, currentTab, tabActive }) => {
                 alt="mata kuliah"
               />
               <p className="text-sm text-[#999999]">
-                {data?.user.biodata.program_studi.nama}
+                {data?.user.biodata.program_studi?.nama || "-"}
               </p>
             </div>
             <div className="flex items-center gap-[2px]">

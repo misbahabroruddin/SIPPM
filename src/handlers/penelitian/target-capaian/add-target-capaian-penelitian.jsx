@@ -24,8 +24,8 @@ export const useAddTargetCapaianPenelitian = () => {
       }
       formData.append("nama_jurnal_penerbit", form.nama_jurnal_penerbit);
       const { data } = await axios.post(
-        `/proposals/dosen/penelitians/${penelitianId || id}/target-capaians`,
-        formData
+        `/proposals/dosens/penelitians/${penelitianId || id}/target-capaian`,
+        formData,
       );
       setCurrentStep(4);
       localStorage.setItem("step", 4);

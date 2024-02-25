@@ -11,7 +11,7 @@ export const useGetProfile = () => {
     queryKey: ["biodata"],
     queryFn: async () => {
       try {
-        const { data } = await axios.get("/users/profile");
+        const { data } = await axios.get("/biodata");
         return data.data;
       } catch (error) {
         toast.error(error.message);

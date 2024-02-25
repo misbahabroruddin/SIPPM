@@ -15,7 +15,7 @@ export const useCreateAnggotaMahasiswa = (reset, onClose, funcAddAnggota) => {
       formData.append("nik", form.nik);
       formData.append("nama_lengkap", form.nama_lengkap);
       formData.append("perguruan_tinggi", form.perguruan_tinggi);
-      formData.append("nidn_or_nidk_nim", form.nidn_or_nidk_nim);
+      formData.append("nidn_or_nidk_or_nim", form.nidn_or_nidk_or_nim);
       formData.append("program_studi_id", form.program_studi_id);
       formData.append("email", form.email);
       formData.append("nomor_hp", form.nomor_hp);
@@ -23,7 +23,9 @@ export const useCreateAnggotaMahasiswa = (reset, onClose, funcAddAnggota) => {
       formData.append("google_scholar_id", form.google_scholar_id);
       formData.append("jenis_anggota", "Mahasiswa");
       const { data } = await axios.post(`/anggotas`, formData);
+      await funcAddAnggota(data?.data?.id);
       reset();
+      onClose();
       return data;
     } catch (error) {
       if (error.response?.data.message.nik) {
@@ -36,17 +38,17 @@ export const useCreateAnggotaMahasiswa = (reset, onClose, funcAddAnggota) => {
   const { mutateAsync: onCreateAnggotaMahasiswa, isPending } = useMutation({
     mutationFn: onSubmit,
     onSuccess: async (data) => {
-      await funcAddAnggota(data?.data?.id);
-      queryClient.invalidateQueries({
-        queryKey: ["listMahasiswa"],
-      });
-      queryClient.invalidateQueries({
-        queryKey: ["anggotaMahasiswaPKM"],
-      });
-      queryClient.invalidateQueries({
-        queryKey: ["anggotaMahasiswa"],
-      });
-      onClose();
+      if (data) {
+        queryClient.invalidateQueries({
+          queryKey: ["listMahasiswa"],
+        });
+        queryClient.invalidateQueries({
+          queryKey: ["anggotaMahasiswaPKM"],
+        });
+        queryClient.invalidateQueries({
+          queryKey: ["anggotaMahasiswa"],
+        });
+      }
     },
   });
 
