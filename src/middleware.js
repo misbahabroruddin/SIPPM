@@ -14,7 +14,7 @@ const middleware = async (request) => {
 
     const token = await getToken({
       req: request,
-      secret: process.env.AUTH_SECRET,
+      secret: process.env.NEXT_PUBLIC_AUTH_SECRET,
     });
 
     const role = token?.roles[0].name;
