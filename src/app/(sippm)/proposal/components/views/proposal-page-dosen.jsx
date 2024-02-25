@@ -27,6 +27,9 @@ export default function ProposalPageDosen() {
   const debounced = useDebouncedCallback((value) => {
     setSearchPenelitian(value);
   }, 1000);
+  const debouncedSearchPengabdian = useDebouncedCallback((value) => {
+    setSearchPengabdian(value);
+  }, 1000);
 
   const { data: penelitian, isLoading: isLoadingPenelitian } =
     useQueryGetAllPenelitian(searchPenelitian);
@@ -49,7 +52,7 @@ export default function ProposalPageDosen() {
             <SearchInput
               onChange={(e) => {
                 currentTab === "pengabdian"
-                  ? setSearchPengabdian(e.target.value)
+                  ? debouncedSearchPengabdian(e.target.value)
                   : debounced(e.target.value);
               }}
               defaultValue={

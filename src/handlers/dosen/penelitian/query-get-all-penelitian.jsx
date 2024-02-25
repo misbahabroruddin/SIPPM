@@ -13,7 +13,7 @@ export const useQueryGetAllPenelitian = (search) => {
       let params;
       if (search) {
         params = {
-          judul_penelitian: search,
+          judul: search,
         };
       }
       try {
