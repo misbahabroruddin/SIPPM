@@ -18,6 +18,7 @@ export const Profile = () => {
           width={280}
           height={280}
           alt="Profile"
+          unoptimized
         />
         <p className="mb-1 text-center text-2xl text-[#666666]">
           {profile?.name}
