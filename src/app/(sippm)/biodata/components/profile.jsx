@@ -9,12 +9,16 @@ export const Profile = () => {
   const { data: profile } = useGetProfile();
   const { data: session } = useSession();
 
+  const avatar = () => {
+    return session?.user.avatar;
+  };
+
   return (
     <div className="flex h-fit basis-[318.87px] flex-col rounded-lg shadow-custom">
       <div className="flex flex-col items-center justify-center gap-2 border-b-[0.5px] border-[#CCCCCC] p-4">
         <Image
           className="inline-block rounded-full"
-          src={session?.user.avatar}
+          src={avatar}
           width={280}
           height={280}
           alt="Profile"
