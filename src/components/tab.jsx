@@ -1,13 +1,21 @@
 import { capitalFirtsLatter } from "@/lib/utils/capitalizeFirstLetter";
 import Image from "next/image";
+import { twMerge } from "tailwind-merge";
 
-export const Tab = ({ tabName, tabActive, iconSrc, onClick }) => {
+export const Tab = ({
+  tabName,
+  tabActive,
+  iconSrc,
+  onClick,
+  className = "",
+  tabActiveClass,
+}) => {
   return (
     <button
-      className={`flex gap-2 items-center px-2 lg:px-4 py-2 ${
+      className={`flex items-center gap-2 px-2 py-2 lg:px-4 ${
         tabActive === tabName
-          ? "bg-[#10487A] rounded text-white transition-colors"
-          : ""
+          ? twMerge("rounded bg-[#10487A] text-white", tabActiveClass)
+          : className
       }`}
       onClick={onClick}
     >
@@ -16,8 +24,8 @@ export const Tab = ({ tabName, tabActive, iconSrc, onClick }) => {
           src={iconSrc[tabActive === tabName ? "white" : "black"]}
           width={24}
           height={24}
-          alt='tab'
-          className='hidden lg:block'
+          alt="tab"
+          className="hidden lg:block"
         />
       )}
       <p>{capitalFirtsLatter(tabName)}</p>

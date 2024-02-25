@@ -78,7 +78,7 @@ export default function ProposalPageDosen() {
             />
           </Link>
         </div>
-        <div className="h-[700px] overflow-auto p-[2px]">
+        <div className="max-h-[700px] overflow-auto p-[2px]">
           {currentTab === "penelitian" || !currentTab ? (
             <ListPenelitian
               penelitian={penelitian}

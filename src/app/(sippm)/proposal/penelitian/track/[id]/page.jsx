@@ -1,29 +1,27 @@
-"use client";
+import { getServerSession } from "next-auth";
+import dynamic from "next/dynamic";
 
-import { usePathname } from "next/navigation";
-
-import { BasePageTitle } from "@/components/base-page-title";
 import { ContainerPage } from "@/components/container-page";
-import { capitalFirtsLatter } from "@/lib/utils/capitalizeFirstLetter";
-import { Timeline } from "@/components/timeline";
-import { RiwayatPenelitianLPPM } from "@/components/riwayat/penelitian/lppm/riwayat-penelitian-lppm";
-import { RiwayatPenelitianReviewer } from "@/components/riwayat/penelitian/reviewer/riwayat-penelitian-reviewer";
+import { authOptions } from "@/config/auth";
+import { DOSEN, LPPM, REVIEWER } from "@/lib/constants/role";
 
-export default function TrackPenelitianPage() {
-  const path = usePathname();
-  const pathArr = path.split("/");
+const TrackPenelitianDosenPage = dynamic(
+  () => import("./components/views/track-penelitian-dosen"),
+);
+
+const TrackPenelitianLPPMPage = dynamic(
+  () => import("./components/views/track-penelitian-lppm"),
+);
+
+export default async function TrackPenelitianPage() {
+  const session = await getServerSession(authOptions);
+  const role = session?.user?.roles[0]?.name;
+
   return (
     <ContainerPage>
-      <div className='flex flex-col gap-4'>
-        <BasePageTitle
-          iconSrc='/icons/search-black.svg'
-          title={capitalFirtsLatter(pathArr[2])}
-        />
-        <Timeline>
-          <RiwayatPenelitianLPPM />
-          <RiwayatPenelitianReviewer />
-        </Timeline>
-      </div>
+      {role === DOSEN && <TrackPenelitianDosenPage />}
+      {role === LPPM && <TrackPenelitianLPPMPage />}
+      {role === REVIEWER && <>Reviewer</>}
     </ContainerPage>
   );
 }
