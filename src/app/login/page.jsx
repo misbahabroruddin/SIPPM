@@ -39,7 +39,7 @@ export default function Login() {
   };
   return (
     <div className="flex h-screen items-center">
-      <div className="image hidden h-full lg:flex lg:w-1/2 lg:items-center lg:justify-center"></div>
+      <div className="image hidden h-full lg:flex lg:w-4/6 lg:items-center lg:justify-center"></div>
       <div className="flex w-full items-center justify-center p-4 lg:w-1/2">
         <div className="flex w-full flex-col justify-center gap-4 lg:w-1/2">
           <h1 className="mb-5 text-center text-xl">Login to SIPPM UNSIA</h1>
