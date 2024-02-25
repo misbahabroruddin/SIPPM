@@ -1,5 +1,17 @@
 /** @type {import('next').NextConfig} */
+
+const getHost = () => {
+  if (process.env.NODE_ENV === "production") {
+    return "https://sippm.dev-unsia.id";
+  }
+  return process.env.NODE_ENV === "production"
+    ? "https://sippm.dev-unsia.id"
+    : "http://localhost:3000";
+};
 const nextConfig = {
+  env: {
+    BASE_URL: getHost(),
+  },
   async redirects() {
     return [
       {
