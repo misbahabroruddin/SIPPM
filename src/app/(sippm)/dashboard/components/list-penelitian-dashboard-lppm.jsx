@@ -3,22 +3,42 @@
 import Image from "next/image";
 import Link from "next/link";
 
-export const ListPenelitianDashboardLPPM = () => {
+import { SkeletonListingProposal } from "@/components/skeleton/skeleton-listing-proposal";
+import { convertDate } from "@/lib/utils/convertDate";
+
+export const ListPenelitianDashboardLPPM = ({
+  penelitian,
+  currentTab,
+  tabActive,
+  isLoading,
+}) => {
+  if (isLoading) return <SkeletonListingProposal />;
   return (
     <div className="flex flex-col gap-4">
-      {Array.from({ length: 5 }).map((_, index) => (
-        <ListItem key={index} />
-      ))}
+      {penelitian?.length ? (
+        penelitian?.map((proposal) => (
+          <ListItem
+            data={proposal}
+            currentTab={currentTab}
+            key={proposal?.id}
+            tabActive={tabActive}
+          />
+        ))
+      ) : (
+        <div className="flex h-40 w-full flex-col justify-center gap-4">
+          <div className="text-center">Tidak ada data</div>
+        </div>
+      )}
     </div>
   );
 };
 
-const ListItem = () => {
+const ListItem = ({ data, currentTab, tabActive }) => {
   return (
     <div className="rounded-lg px-6 py-4 shadow-custom">
       <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between">
         <div className="flex w-fit flex-col gap-1 lg:max-w-[631px]">
-          <h2 className="text-lg">Judul Penelitian</h2>
+          <h2 className="text-lg">{data?.judul}</h2>
           <div className="flex gap-4">
             <div className="flex items-center gap-[2px]">
               <Image
@@ -28,8 +48,7 @@ const ListItem = () => {
                 alt="author"
               />
               <p className="text-sm text-[#999999]">
-                {/* {data?.user.name || "Author"} */}
-                Author
+                {data?.user?.biodata?.nama_lengkap || data?.user?.name}
               </p>
             </div>
             <div className="flex items-center gap-[2px]">
@@ -40,8 +59,7 @@ const ListItem = () => {
                 alt="mata kuliah"
               />
               <p className="text-sm text-[#999999]">
-                {/* {data?.user.biodata.program_studi.nama} */}
-                prodi
+                {data?.user.biodata?.program_studi.nama}
               </p>
             </div>
             <div className="flex items-center gap-[2px]">
@@ -52,8 +70,7 @@ const ListItem = () => {
                 alt="tanggal"
               />
               <p className="text-sm text-[#999999]">
-                {/* {convertDate(data?.created_at)} */}
-                tanggal
+                {convertDate(data?.created_at)}
               </p>
             </div>
           </div>
