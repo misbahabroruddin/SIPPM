@@ -76,14 +76,8 @@ const ListItem = ({ data, currentTab, tabActive }) => {
           </div>
         </div>
         <div className="flex items-end gap-4">
-          <Link
-            // href={`/proposal/${currentTab || tabActive}/track/${data?.id}`}
-            href={"#"}
-          >
-            <button
-              className="rounded-lg bg-primary px-7 py-2 text-white disabled:cursor-not-allowed disabled:bg-gray-500"
-              // disabled={data?.status_lppm === "Pending"}
-            >
+          <Link href={`/proposal/${currentTab || tabActive}/track/${data?.id}`}>
+            <button className="rounded-lg bg-primary px-7 py-2 text-white disabled:cursor-not-allowed disabled:bg-gray-500">
               Detail
             </button>
           </Link>
