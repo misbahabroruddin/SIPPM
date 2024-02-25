@@ -8,7 +8,7 @@ import { ButtonStatus } from "@/components/button/button-status";
 import { convertDate } from "@/lib/utils/convertDate";
 import { ButtonDelete } from "@/components/button/button-delete";
 import { ButtonUpdate } from "@/components/button/button-update";
-import { useDeletePengabdianDosen } from "@/handlers/pengabdian/delete-pengabdian-dosen";
+import { useDeletePengabdianDosen } from "@/handlers/dosen/pengabdian/delete-pengabdian-dosen";
 import { useStep } from "@/lib/hooks/useStep";
 
 export const ListPengabdian = ({

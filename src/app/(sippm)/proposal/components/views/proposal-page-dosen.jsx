@@ -13,8 +13,8 @@ import { ListPengabdian } from "../list-pengabdian";
 import { ListPenelitian } from "../list-penelitian";
 import { ButtonAdd } from "@/components/button/button-add";
 import { ContainerPage } from "@/components/container-page";
-import { useQueryGetAllPenelitian } from "@/handlers/penelitian/query-get-all-penelitian";
-import { useQueryGetAllPengabdian } from "@/handlers/pengabdian/query-get-all-pengabdian";
+import { useQueryGetAllPenelitian } from "@/handlers/dosen/penelitian/query-get-all-penelitian";
+import { useQueryGetAllPengabdian } from "@/handlers/dosen/pengabdian/query-get-all-pengabdian";
 import { useStep } from "@/lib/hooks/useStep";
 
 export default function ProposalPageDosen() {
