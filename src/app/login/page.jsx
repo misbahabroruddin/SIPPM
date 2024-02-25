@@ -21,17 +21,18 @@ export default function Login() {
       username: data.username,
       password: data.password,
       redirect: false,
-      callbackUrl: `${window.location.origin}/dashboard`,
     });
-
-    if (response.ok) {
-      toast.success("Login berhasil");
-      replace("/dashboard");
-    }
 
     if (response.error) {
       toast.error("Username atau Password salah");
+      return;
     }
+
+    if (response.ok) {
+      toast.success("Login berhasil");
+    }
+
+    replace("/dashboard");
 
     resetField("password");
   };
