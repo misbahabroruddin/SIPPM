@@ -10,6 +10,7 @@ import { ButtonDelete } from "@/components/button/button-delete";
 import { ButtonUpdate } from "@/components/button/button-update";
 import { useDeletePenelitianDosen } from "@/handlers/dosen/penelitian/delete-penelitian-dosen";
 import { useStep } from "@/lib/hooks/useStep";
+import { SkeletonListingProposal } from "@/components/skeleton/skeleton-listing-proposal";
 
 export const ListPenelitian = ({
   penelitian,
@@ -17,14 +18,7 @@ export const ListPenelitian = ({
   tabActive,
   isLoading,
 }) => {
-  if (isLoading)
-    return (
-      <div className="flex flex-col gap-4">
-        {Array.from({ length: 5 }).map((_, index) => (
-          <Skeleton key={index} />
-        ))}
-      </div>
-    );
+  if (isLoading) return <SkeletonListingProposal />;
   return (
     <div className="flex flex-col gap-4">
       {penelitian?.length ? (
@@ -151,21 +145,6 @@ const ListItem = ({ data, currentTab, tabActive }) => {
               </Link>
             </div>
           )}
-        </div>
-      </div>
-    </div>
-  );
-};
-
-const Skeleton = () => {
-  return (
-    <div className="rounded-lg px-6 py-4 shadow">
-      <div className="flex items-center justify-between">
-        <div className="flex w-full max-w-[631px] flex-col gap-2">
-          <span className="h-6 w-1/2 animate-pulse rounded bg-gray-200 text-lg"></span>
-          <div className="flex gap-4">
-            <span className="h-6 w-3/4 animate-pulse rounded bg-gray-200 text-lg"></span>
-          </div>
         </div>
       </div>
     </div>

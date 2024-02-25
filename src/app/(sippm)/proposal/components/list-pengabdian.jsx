@@ -10,6 +10,7 @@ import { ButtonDelete } from "@/components/button/button-delete";
 import { ButtonUpdate } from "@/components/button/button-update";
 import { useDeletePengabdianDosen } from "@/handlers/dosen/pengabdian/delete-pengabdian-dosen";
 import { useStep } from "@/lib/hooks/useStep";
+import { SkeletonListingProposal } from "@/components/skeleton/skeleton-listing-proposal";
 
 export const ListPengabdian = ({
   pengabdian,
@@ -17,14 +18,7 @@ export const ListPengabdian = ({
   tabActive,
   isLoading,
 }) => {
-  if (isLoading)
-    return (
-      <div className="flex flex-col gap-4">
-        {Array.from({ length: 5 }).map((_, index) => (
-          <Skeleton key={index} />
-        ))}
-      </div>
-    );
+  if (isLoading) return <SkeletonListingProposal />;
   return (
     <div className="flex flex-col gap-4">
       {pengabdian?.length ? (
