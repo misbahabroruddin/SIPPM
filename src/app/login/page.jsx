@@ -21,6 +21,7 @@ export default function Login() {
       username: data.username,
       password: data.password,
       redirect: false,
+      callbackUrl: `${window.location.origin}/dashboard`,
     });
 
     if (response.error) {
