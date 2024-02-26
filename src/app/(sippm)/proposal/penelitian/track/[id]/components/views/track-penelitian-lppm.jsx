@@ -8,6 +8,14 @@ import { SectionHeaderDetailProposal } from "../section-header-detail-proposal";
 import { Tabs } from "../tabs";
 import { useState } from "react";
 import { InnerTabs } from "../inner-tabs";
+import { useQueryDetailPenelitian } from "@/handlers/lppm/penelitian/query-get-detail-penelitian";
+import { DetailIdentitasUsulan } from "../detail-identitas-usulan";
+import { DetailAnggota } from "../detail-anggota";
+import { DetailTargetCapaian } from "../detail-target-capaian";
+import { DetailRencanaAnggaran } from "../detail-rencana-anggaran";
+import { DetailRincianKegiatan } from "../detail-rincian-kegiatan";
+import { DetailBerkas } from "../detail-berkas";
+import { FormVerifikasiUsulan } from "../form-verifikasi-usulan";
 
 export default function TrackPenelitianLPPMPage() {
   const [tabActive] = useState("dokumen");
@@ -18,26 +26,38 @@ export default function TrackPenelitianLPPMPage() {
   const path = usePathname();
   const pathArr = path.split("/");
 
+  const { data } = useQueryDetailPenelitian();
+
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-3">
       <BasePageTitle
         iconSrc="/icons/search-black.svg"
         title={capitalFirtsLatter(pathArr[2])}
       />
-      <SectionHeaderDetailProposal />
+      <SectionHeaderDetailProposal data={data?.data} />
       <Tabs tabActive={currentTab || tabActive} />
-      <div className="custom flex flex-col gap-4 rounded-lg p-4 shadow-custom">
-        <InnerTabs tabActive={innerTab || innerTabActive} />
-        <div className="flex flex-col gap-4">
-          {(innerTab === "Identitas Usulan" || !innerTab) && (
-            <>Identitas usulan</>
-          )}
-          {innerTab === "anggota" && <>anggota</>}
-          {innerTab === "Luaran dan Target Capaian" && <>dokumen</>}
-          {innerTab === "Rencana Anggaran" && <>Rencana Anggaran</>}
-          {innerTab === "Jadwal" && <>Jadwal</>}
-          {innerTab === "Berkas" && <>Berkas</>}
-        </div>
+      <div className="custom mb-14 flex flex-col gap-3 rounded-lg p-4 shadow-custom">
+        {currentTab === "dokumen" || !currentTab ? (
+          <>
+            <InnerTabs tabActive={innerTab || innerTabActive} />
+            <div className="flex flex-col gap-4">
+              {(innerTab === "Identitas Usulan" || !innerTab) && (
+                <DetailIdentitasUsulan data={data} />
+              )}
+              {innerTab === "anggota" && <DetailAnggota data={data} />}
+              {innerTab === "Luaran dan Target Capaian" && (
+                <DetailTargetCapaian data={data} />
+              )}
+              {innerTab === "Rencana Anggaran" && (
+                <DetailRencanaAnggaran data={data} />
+              )}
+              {innerTab === "Jadwal" && <DetailRincianKegiatan data={data} />}
+              {innerTab === "Berkas" && <DetailBerkas data={data} />}
+            </div>
+          </>
+        ) : (
+          <>riwayat</>
+        )}
       </div>
     </div>
   );
