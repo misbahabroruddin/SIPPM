@@ -3,6 +3,7 @@
 import { useId } from "react";
 import ReactSelect from "react-select";
 import { Label } from "../label";
+import { twMerge } from "tailwind-merge";
 
 export const SingleSelect = ({
   Controller,
@@ -18,12 +19,13 @@ export const SingleSelect = ({
   isLoading,
   defaultValue,
   hideSelectedOptions,
+  spanEmptyClass,
   props,
 }) => {
   return (
     <div className="flex flex-col">
       <div className="flex items-center">
-        <Label htmlFor={name} text={label} required={required} />
+        {label && <Label htmlFor={name} text={label} required={required} />}
         <div className="flex w-full flex-col">
           <Controller
             name={name}
@@ -65,7 +67,7 @@ export const SingleSelect = ({
       </div>
       {errors && (
         <div className="flex">
-          <span className="w-1/2"></span>
+          <span className={twMerge("w-1/2", spanEmptyClass)}></span>
           <span className="w-full text-sm text-red-600">
             * {errors?.message}
           </span>
