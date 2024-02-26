@@ -24,7 +24,7 @@ export default function DashboardLppm() {
   );
 
   const penelitianDisetujui = penelitian?.data.filter(
-    (item) => item.status_lppm === "Disetujui",
+    (item) => item.status_lppm === "Diterima",
   );
 
   const penelitianDitolak = penelitian?.data.filter(
@@ -40,7 +40,7 @@ export default function DashboardLppm() {
   );
 
   const pengabdianDisetujui = pengabdian?.data.filter(
-    (item) => item.status_lppm === "Disetujui",
+    (item) => item.status_lppm === "Diterima",
   );
 
   const pengabdianDitolak = pengabdian?.data.filter(
