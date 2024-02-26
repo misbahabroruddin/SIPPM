@@ -35,7 +35,7 @@ export const TableDetailAnggotaDosen = ({ data }) => {
             ?.filter((anggota) => anggota.jenis_anggota === "Dosen")
             .map((row, index) => {
               return (
-                <tr className="text-base even:bg-sky">
+                <tr key={row.id} className="text-base even:bg-sky">
                   <td className="p-3">
                     <Typography
                       color="blue-gray"
