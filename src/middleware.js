@@ -7,7 +7,10 @@ import { DOSEN_PATHS } from "./lib/datas/dosen-path";
 const middleware = async (request) => {
   try {
     const path = request.nextUrl.pathname;
-    const nextAuthToken = request.cookies.get("next-auth.session-token");
+    const nextAuthToken =
+      process.env.NODE_ENV === "production"
+        ? request.cookies.get("next-auth.session-token")
+        : request.cookies.get("next-auth.session-token");
 
     const token = await getToken({
       req: request,
