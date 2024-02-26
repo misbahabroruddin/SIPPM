@@ -21,6 +21,9 @@ export const authOptions = {
             `${process.env.NEXT_PUBLIC_API_BASE_URL}/authentication/login`,
             {
               method: "POST",
+              headers: {
+                "content-type": "multipart/form-data; boundary=XXX",
+              },
               body: formData,
             },
           );
