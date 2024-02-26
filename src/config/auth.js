@@ -22,7 +22,7 @@ export const authOptions = {
             {
               method: "POST",
               headers: {
-                "content-type": "multipart/form-data; boundary=XXX",
+                "Content-Type": "multipart/form-data; boundary=XXX",
               },
               body: formData,
             },
