@@ -122,7 +122,7 @@ export const Navbar = () => {
         <div className="mr-[7px] block">
           <div className="flex items-center justify-between p-2">
             <button
-              onClick={() => signOut()}
+              onClick={() => signOut({ callbackUrl: "/login" })}
               className="rounded border border-primary px-4 py-1 text-black hover:bg-primary hover:text-white"
             >
               Sign out
