@@ -58,7 +58,7 @@ const ListItem = ({ data, currentTab, tabActive }) => {
                 alt="mata kuliah"
               />
               <p className="text-sm text-[#999999]">
-                {data?.user.biodata?.program_studi.nama}
+                {data?.user?.biodata?.program_studi.nama}
               </p>
             </div>
             <div className="flex items-center gap-[2px]">

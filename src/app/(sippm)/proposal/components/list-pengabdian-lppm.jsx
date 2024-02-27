@@ -5,7 +5,12 @@ import { CardDashboard } from "@/components/card/card-dashboard";
 import Image from "next/image";
 import Link from "next/link";
 
-export const ListPengabdianProposalLPPM = () => {
+export const ListPengabdianProposalLPPM = ({
+  pengabdian,
+  currentTab,
+  tabActive,
+  isLoading,
+}) => {
   return (
     <div className="flex flex-col gap-2">
       <div className="flex gap-4">
@@ -15,14 +20,19 @@ export const ListPengabdianProposalLPPM = () => {
       </div>
       <div className="flex flex-col gap-4">
         {Array.from({ length: 5 }).map((_, index) => (
-          <ListItem key={index} />
+          <ListItem
+            key={index}
+            data={pengabdian}
+            currentTab={currentTab}
+            tabActive={tabActive}
+          />
         ))}
       </div>
     </div>
   );
 };
 
-const ListItem = () => {
+const ListItem = ({ data, currentTab, tabActive }) => {
   return (
     <div className="rounded-lg px-6 py-4 shadow-custom">
       <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between">
@@ -73,10 +83,7 @@ const ListItem = () => {
             <ButtonStatus status="Diterima" />
             {/* <ButtonStatus status={data?.status_lppm} /> */}
           </div>
-          <Link
-            // href={`/proposal/${currentTab || tabActive}/track/${data?.id}`}
-            href={"#"}
-          >
+          <Link href={`/proposal/${currentTab || tabActive}/track/${data?.id}`}>
             <button
               className="rounded-lg bg-primary px-7 py-2 text-white disabled:cursor-not-allowed disabled:bg-gray-500"
               // disabled={data?.status_lppm === "Pending"}
