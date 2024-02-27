@@ -4,16 +4,19 @@ import dynamic from "next/dynamic";
 
 import { DOSEN, LPPM, REVIEWER } from "@/lib/constants/role";
 
-const ProposalPageDosen = dynamic(() =>
-  import("./components/views/proposal-page-dosen")
+const ProposalPageDosen = dynamic(
+  () =>
+    import("./components/views/proposal-page-dosen", {
+      ssr: false,
+    }),
 );
 
-const ProposalPageLPPM = dynamic(() =>
-  import("./components/views/proposal-page-lppm")
+const ProposalPageLPPM = dynamic(
+  () => import("./components/views/proposal-page-lppm", { ssr: false }),
 );
 
-const ProposalPageReviewer = dynamic(() =>
-  import("./components/views/proposal-page-reviewer")
+const ProposalPageReviewer = dynamic(
+  () => import("./components/views/proposal-page-reviewer", { ssr: false }),
 );
 
 export default async function ProposalPage() {
