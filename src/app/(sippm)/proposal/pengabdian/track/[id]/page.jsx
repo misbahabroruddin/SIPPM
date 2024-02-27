@@ -1,29 +1,26 @@
-"use client";
-import { usePathname } from "next/navigation";
+import dynamic from "next/dynamic";
+import { getServerSession } from "next-auth";
 
-import { BasePageTitle } from "@/components/base-page-title";
 import { ContainerPage } from "@/components/container-page";
-import { capitalFirtsLatter } from "@/lib/utils/capitalizeFirstLetter";
-import { Timeline } from "@/components/timeline";
-import { RiwayatPengabdianLPPM } from "@/components/riwayat/pengabdian/lppm/riwayat-pengabdian-lppm";
-import { RiwayatPengabdianReviewer } from "@/components/riwayat/pengabdian/reviewer/riwayat-pengabdian-reviewer";
+import { authOptions } from "@/config/auth";
+import { DOSEN, LPPM } from "@/lib/constants/role";
 
-export default function PageTrackProposal({ params }) {
-  const path = usePathname();
-  const pathArr = path.split("/");
+const TrackPengabdianDosenPage = dynamic(
+  () => import("./components/views/track-pengabdian-dosen"),
+);
+
+const TrackPengabdianLPPMPage = dynamic(
+  () => import("./components/views/track-pengabdian-lppm"),
+);
+
+export default async function PageTrackProposal() {
+  const session = await getServerSession(authOptions);
+  const role = session?.user?.roles[0]?.name;
 
   return (
     <ContainerPage>
-      <div className='flex flex-col gap-4'>
-        <BasePageTitle
-          iconSrc='/icons/search-black.svg'
-          title={capitalFirtsLatter(pathArr[2])}
-        />
-        <Timeline>
-          <RiwayatPengabdianLPPM />
-          <RiwayatPengabdianReviewer />
-        </Timeline>
-      </div>
+      {role === DOSEN && <TrackPengabdianDosenPage />}
+      {role === LPPM && <TrackPengabdianLPPMPage />}
     </ContainerPage>
   );
 }
