@@ -11,6 +11,7 @@ import { ButtonUpdate } from "@/components/button/button-update";
 import { useDeletePengabdianDosen } from "@/handlers/dosen/pengabdian/delete-pengabdian-dosen";
 import { useStep } from "@/lib/hooks/useStep";
 import { SkeletonListingProposal } from "@/components/skeleton/skeleton-listing-proposal";
+import { EmptyState } from "@/components/empty-state";
 
 export const ListPengabdian = ({
   pengabdian,
@@ -31,9 +32,7 @@ export const ListPengabdian = ({
           />
         ))
       ) : (
-        <div className="flex h-40 w-full flex-col justify-center gap-4">
-          <div className="text-center">Tidak ada data</div>
-        </div>
+        <EmptyState />
       )}
     </div>
   );

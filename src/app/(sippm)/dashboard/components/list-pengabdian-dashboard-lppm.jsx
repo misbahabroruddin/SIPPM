@@ -5,6 +5,7 @@ import Link from "next/link";
 
 import { SkeletonListingProposal } from "@/components/skeleton/skeleton-listing-proposal";
 import { convertDate } from "@/lib/utils/convertDate";
+import { EmptyState } from "@/components/empty-state";
 
 export const ListPengabdianDashboardLPPM = ({
   pengabdian,
@@ -25,9 +26,7 @@ export const ListPengabdianDashboardLPPM = ({
           />
         ))
       ) : (
-        <div className="flex h-40 w-full flex-col justify-center gap-4">
-          <div className="text-center">Tidak ada data</div>
-        </div>
+        <EmptyState />
       )}
     </div>
   );
