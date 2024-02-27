@@ -4,7 +4,6 @@ import { useSidebar } from "@/lib/hooks/useSidebar";
 import { signOut } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { twMerge } from "tailwind-merge";
 
 const Path = (props) => (
@@ -67,7 +66,6 @@ const Chevron = ({ onClick, ...props }) => {
 
 export const Navbar = () => {
   const { isOpen, toggleSidebar } = useSidebar();
-  const router = useRouter();
   return (
     <nav className="r-0  fixed top-0 z-[999] w-full bg-white shadow">
       <div className="flex items-center justify-between px-7 py-4">
@@ -126,7 +124,7 @@ export const Navbar = () => {
             <button
               onClick={() =>
                 signOut({ redirect: false }).then(() => {
-                  router.push("/login");
+                  window.location.href = "/login";
                 })
               }
               className="rounded border border-primary px-4 py-1 text-black hover:bg-primary hover:text-white"
