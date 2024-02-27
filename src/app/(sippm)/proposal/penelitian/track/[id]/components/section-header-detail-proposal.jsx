@@ -26,19 +26,19 @@ export const SectionHeaderDetailProposal = ({ data }) => {
               </div>
               <div className="flex gap-4">
                 <span>:</span>
-                <p>{data?.user?.biodata.nidn_or_nidk_or_nim}</p>
+                <p>{data?.user?.biodata?.nidn_or_nidk_or_nim}</p>
               </div>
               <div className="flex gap-4">
                 <span>:</span>
-                <p>{data?.user?.biodata.pangkat_golongan || "-"}</p>
+                <p>{data?.user?.biodata?.pangkat_golongan || "-"}</p>
               </div>
               <div className="flex gap-4">
                 <span>:</span>
-                <p>{data?.user?.biodata.jabatan_fungsional?.nama || "-"}</p>
+                <p>{data?.user?.biodata?.jabatan_fungsional?.nama || "-"}</p>
               </div>
               <div className="flex gap-4">
                 <span>:</span>
-                <p>{data?.user?.biodata.program_studi?.nama || "-"}</p>
+                <p>{data?.user?.biodata?.program_studi?.nama || "-"}</p>
               </div>
             </div>
           </div>
