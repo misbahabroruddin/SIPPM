@@ -17,14 +17,16 @@ export const ListPengabdianDashboardLPPM = ({
   return (
     <div className="flex flex-col gap-4">
       {pengabdian?.data?.length ? (
-        pengabdian?.data?.map((proposal) => (
-          <ListItem
-            data={proposal}
-            currentTab={currentTab}
-            key={proposal?.id}
-            tabActive={tabActive}
-          />
-        ))
+        pengabdian?.data
+          ?.filter((item) => item.status === "Terkirim")
+          .map((proposal) => (
+            <ListItem
+              data={proposal}
+              currentTab={currentTab}
+              key={proposal?.id}
+              tabActive={tabActive}
+            />
+          ))
       ) : (
         <EmptyState />
       )}

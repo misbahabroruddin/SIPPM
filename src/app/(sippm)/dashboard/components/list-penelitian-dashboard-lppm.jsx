@@ -17,14 +17,16 @@ export const ListPenelitianDashboardLPPM = ({
   return (
     <div className="flex flex-col gap-4">
       {penelitian?.data?.length ? (
-        penelitian?.data?.map((proposal) => (
-          <ListItem
-            data={proposal}
-            currentTab={currentTab}
-            key={proposal?.id}
-            tabActive={tabActive}
-          />
-        ))
+        penelitian?.data
+          ?.filter((item) => item.status === "Terkirim")
+          .map((proposal) => (
+            <ListItem
+              data={proposal}
+              currentTab={currentTab}
+              key={proposal?.id}
+              tabActive={tabActive}
+            />
+          ))
       ) : (
         <EmptyState />
       )}
