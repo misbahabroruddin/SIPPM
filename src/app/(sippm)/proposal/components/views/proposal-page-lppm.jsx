@@ -18,14 +18,17 @@ export default function ProposalPageLPPM() {
   const [searchPengabdian, setSearchPengabdian] = useState("");
   const tabParams = useSearchParams();
   const currentTab = tabParams.get("tab");
-  const debounced = useDebouncedCallback((value) => {
+  const handleSearchPenelitian = useDebouncedCallback((value) => {
     setSearchPenelitian(value);
+  }, 1000);
+  const handleSearchPengabdian = useDebouncedCallback((value) => {
+    setSearchPengabdian(value);
   }, 1000);
 
   const { data: penelitian, isLoading: isLoadingPenelitian } =
-    useQueryGetPenelitianLPPM();
+    useQueryGetPenelitianLPPM(searchPenelitian);
   const { data: pengabdian, isLoading: isLoadingPengabdian } =
-    useQueryGetPengabdianLPPM();
+    useQueryGetPengabdianLPPM(searchPengabdian);
 
   const penelitianData = penelitian?.data.filter(
     (item) => item.status !== "Draft",
@@ -68,8 +71,8 @@ export default function ProposalPageLPPM() {
             <SearchInput
               onChange={(e) => {
                 currentTab === "pengabdian"
-                  ? setSearchPengabdian(e.target.value)
-                  : debounced(e.target.value);
+                  ? handleSearchPengabdian(e.target.value)
+                  : handleSearchPenelitian(e.target.value);
               }}
               defaultValue={
                 currentTab === "pengabdian"
