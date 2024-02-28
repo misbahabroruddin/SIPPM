@@ -20,7 +20,7 @@ export const SingleSelect = ({
   defaultValue,
   hideSelectedOptions,
   spanEmptyClass,
-  props,
+  ...props
 }) => {
   return (
     <div className="flex flex-col">
@@ -36,6 +36,7 @@ export const SingleSelect = ({
                 options={options}
                 onChange={(val) => onChange(val?.value)}
                 placeholder={placeholder}
+                isSearchable
                 theme={(theme) => ({
                   ...theme,
                   borderRadius: 7,
