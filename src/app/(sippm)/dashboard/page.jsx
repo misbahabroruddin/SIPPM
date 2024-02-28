@@ -2,12 +2,18 @@ import dynamic from "next/dynamic";
 import { getServerSession } from "next-auth";
 
 import { BasePageTitle } from "@/components/base-page-title";
-import { LPPM } from "@/lib/constants/role";
+import { DOSEN, LPPM } from "@/lib/constants/role";
 import { ContainerPage } from "@/components/container-page";
 import { authOptions } from "@/config/auth";
 
 const DashboardLppm = dynamic(
   () => import("./components/views/dashboard-lppm"),
+  { ssr: false },
+);
+
+const DashboardDosen = dynamic(
+  () => import("./components/views/dashboard-dosen"),
+  { ssr: false },
 );
 
 export default async function HomePage() {
@@ -18,6 +24,7 @@ export default async function HomePage() {
     <ContainerPage>
       <BasePageTitle />
       {role === LPPM && <DashboardLppm />}
+      {role === DOSEN && <DashboardDosen />}
     </ContainerPage>
   );
 }
