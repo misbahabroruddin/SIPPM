@@ -20,15 +20,6 @@ export const Tabs = ({ tabActive }) => {
       },
       func: () => handleTabClick("profile"),
     },
-    {
-      id: 2,
-      name: "security",
-      icon: {
-        white: "/icons/security.svg",
-        black: "/icons/security.svg",
-      },
-      func: () => handleTabClick("security"),
-    },
   ];
 
   const createQueryTab = useCallback(
@@ -37,7 +28,7 @@ export const Tabs = ({ tabActive }) => {
       params.set(name, value);
       return params.toString();
     },
-    [tabParams]
+    [tabParams],
   );
 
   const handleTabClick = (tabName) => {
@@ -45,7 +36,7 @@ export const Tabs = ({ tabActive }) => {
   };
 
   return (
-    <div className='flex gap-2'>
+    <div className="flex gap-2">
       {tabs.map(({ id, name, icon, func }) => {
         return (
           <Tab
