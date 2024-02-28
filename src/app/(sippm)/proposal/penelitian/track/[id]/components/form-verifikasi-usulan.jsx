@@ -5,6 +5,7 @@ import { Input } from "@/components/input/input";
 import { Label } from "@/components/label";
 import { SingleSelect } from "@/components/select/single-select";
 import { useUpdateProposalPenelitian } from "@/handlers/lppm/penelitian/update-proposal-penelitian-lppm";
+import { useRouter } from "next/navigation";
 import { useId } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { twMerge } from "tailwind-merge";
@@ -20,6 +21,7 @@ export const FormVerifikasiUsulan = () => {
     setValue,
   } = useForm();
   const id = useId();
+  const router = useRouter();
 
   const status = watch("status");
 
@@ -27,7 +29,7 @@ export const FormVerifikasiUsulan = () => {
     setValue("catatan", "");
   }
   const { mutateAsync: onSubmit, isPending: isLoading } =
-    useUpdateProposalPenelitian(reset);
+    useUpdateProposalPenelitian(reset, router);
 
   const statusOptions = [
     {
