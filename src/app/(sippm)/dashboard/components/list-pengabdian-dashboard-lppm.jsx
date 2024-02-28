@@ -16,8 +16,8 @@ export const ListPengabdianDashboardLPPM = ({
   if (isLoading) return <SkeletonListingProposal />;
   return (
     <div className="flex flex-col gap-4">
-      {pengabdian?.length ? (
-        pengabdian?.map((proposal) => (
+      {pengabdian?.data?.length ? (
+        pengabdian?.data?.map((proposal) => (
           <ListItem
             data={proposal}
             currentTab={currentTab}
