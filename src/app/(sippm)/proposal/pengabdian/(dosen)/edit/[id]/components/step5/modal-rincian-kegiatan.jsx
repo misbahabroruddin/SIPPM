@@ -13,10 +13,10 @@ export const ModalRincianKegiatan = () => {
 
   return (
     <>
-      <ButtonAdd text='Tambah' onClick={openModal} />
+      <ButtonAdd text="Tambah" onClick={openModal} />
       <Modal onClose={() => setOpen(false)} open={open}>
-        <h2 className='text-primary text-[20px] font-[500] text-center mb-7'>
-          Rencana Anggaran
+        <h2 className="mb-7 text-center text-[20px] font-[500] text-primary">
+          Rincian Kegiatan
         </h2>
         <FormRincianKegiatanPKM onClose={() => setOpen(false)} />
       </Modal>
