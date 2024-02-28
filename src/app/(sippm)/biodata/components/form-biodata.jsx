@@ -57,7 +57,7 @@ const FormBiodata = () => {
 
   useEffect(() => {
     refetch();
-  }, []);
+  }, [profile]);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="px-2">
