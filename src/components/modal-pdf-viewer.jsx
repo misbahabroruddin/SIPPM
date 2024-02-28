@@ -1,6 +1,7 @@
 "use client";
 
 import { Modal } from "@/components/modal";
+import Link from "next/link";
 import { useState } from "react";
 
 const ModalViewerPDF = ({ data }) => {
@@ -8,20 +9,21 @@ const ModalViewerPDF = ({ data }) => {
   const handleOpenModal = () => setOpen(true);
   return (
     <>
-      <button
+      {/* <button
         onClick={data && handleOpenModal}
         className={`text-black-07 ${data ? "cursor-pointer hover:underline" : "cursor-default"}`}
       >
         {data ? "Klik untuk lebih detail" : "Tidak ada berkas"}
-      </button>
-      <Modal
+      </button> */}
+      {/* <Modal
         onClose={() => setOpen(false)}
         open={open}
         containerClassName={
           "w-[300px] md:w-[550px] lg:w-[700px] xl:w-[900px] flex flex-col items-end p-2"
         }
-      >
-        <i className="w-fit " onClick={() => setOpen(false)} role="button">
+      > */}
+      <div className="flex gap-2">
+        {/* <i className="w-fit " onClick={() => setOpen(false)} role="button">
           <svg
             width="24"
             height="24"
@@ -34,14 +36,29 @@ const ModalViewerPDF = ({ data }) => {
               fill="#666666"
             />
           </svg>
-        </i>
-        <iframe
+        </i> */}
+        {/* <embed
           src={data}
           width={"100%"}
           height={"500px"}
           className="mt-2 rounded"
-        />
-      </Modal>
+          type="application/pdf"
+        /> */}
+
+        <Link
+          href={data ? data : "#"}
+          target={data ? "_blank" : ""}
+          className="disabled:cursor-default"
+        >
+          <button
+            disabled={data ? false : true}
+            className="hover:underline disabled:cursor-default hover:disabled:no-underline"
+          >
+            {data ? "Klik untuk lebih detail" : "Tidak ada berkas"}
+          </button>
+        </Link>
+      </div>
+      {/* </Modal> */}
     </>
   );
 };
