@@ -100,6 +100,7 @@ const ListItem = ({ data, currentTab, tabActive }) => {
               </div>
               <Link
                 href={`/proposal/${currentTab || tabActive}/track/${data?.id}`}
+                className="hidden"
               >
                 <button
                   className="rounded-lg bg-primary px-7 py-2 text-white disabled:cursor-not-allowed disabled:bg-gray-500"
