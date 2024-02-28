@@ -12,7 +12,7 @@ export const DetailAnggota = ({ data }) => {
       </div>
       <div className="flex flex-col gap-2">
         <h4 className="text-lg font-[500]">Identitas Anggota Mahasiswa</h4>
-        <TableDetailAnggotaMahasiswa />
+        <TableDetailAnggotaMahasiswa data={data} />
       </div>
     </div>
   );
