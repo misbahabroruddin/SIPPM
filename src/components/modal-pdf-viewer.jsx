@@ -3,7 +3,7 @@
 import { Modal } from "@/components/modal";
 import { useState } from "react";
 
-export const ModalViewerPDF = ({ data }) => {
+const ModalViewerPDF = ({ data }) => {
   const [open, setOpen] = useState(false);
   const handleOpenModal = () => setOpen(true);
   return (
@@ -45,3 +45,5 @@ export const ModalViewerPDF = ({ data }) => {
     </>
   );
 };
+
+export default ModalViewerPDF;

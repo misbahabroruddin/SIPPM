@@ -1,8 +1,12 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import Image from "next/image";
 
-import { ModalViewerPDF } from "@/components/modal-pdf-viewer";
+const ModalViewerPDF = dynamic(
+  () => import("./../../../../../../../components/modal-pdf-viewer"),
+  { ssr: false },
+);
 
 export const DetailListBerkas = ({ data }) => {
   return (
