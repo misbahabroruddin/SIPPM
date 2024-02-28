@@ -53,10 +53,7 @@ export const AnggotaPKM = () => {
       <TableAnggotaMahasiswaPKM data={listAnggotaMahasiswaPKM} />
       <div className="absolute -bottom-16 left-0 mt-4 flex w-full items-center justify-between">
         <ButtonPrev onClick={handlePrevStep} />
-        <ButtonNext
-          onClick={handleNextStepPKM}
-          disabled={listAnggotaDosenPKM?.data.length === 0}
-        />
+        <ButtonNext onClick={handleNextStepPKM} />
       </div>
     </ContainerContent>
   );
