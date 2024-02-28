@@ -85,14 +85,14 @@ export default function DashboardLppm() {
       <div className="max-h-[600px] overflow-auto p-1">
         {currentTab === "penelitian" || !currentTab ? (
           <ListPenelitianDashboardLPPM
-            penelitian={penelitianPending}
+            penelitian={penelitian}
             isLoading={isLoadingPenelitian}
             currentTab={currentTab}
             tabActive={tabActive}
           />
         ) : (
           <ListPengabdianDashboardLPPM
-            pengabdian={pengabdianPending}
+            pengabdian={pengabdian}
             isLoading={isLoadingPenelitian}
             currentTab={currentTab}
             tabActive={tabActive}
