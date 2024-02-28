@@ -59,11 +59,11 @@ export const MENU_SIDEBAR_DOSEN = [
     icon: "/icons/dashboard.svg",
     link: "/dashboard",
   },
-  // {
-  //   label: "Biodata",
-  //   icon: "/icons/biodata.svg",
-  //   link: "/biodata",
-  // },
+  {
+    label: "Biodata",
+    icon: "/icons/biodata.svg",
+    link: "/biodata",
+  },
   {
     label: "Proposal",
     icon: "/icons/proposal.svg",
