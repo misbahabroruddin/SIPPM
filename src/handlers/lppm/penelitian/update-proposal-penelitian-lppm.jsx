@@ -5,7 +5,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useParams } from "next/navigation";
 import { toast } from "react-toastify";
 
-export const useUpdateProposalPenelitian = (reset) => {
+export const useUpdateProposalPenelitian = (reset, router) => {
   const axios = useAxios();
   const queryClient = useQueryClient();
   const { id } = useParams();
@@ -25,7 +25,9 @@ export const useUpdateProposalPenelitian = (reset) => {
           },
         },
       );
+      toast.success("Proposal berhasil diupdate");
       reset();
+      router.push("/proposal");
       return data;
     } catch (error) {
       toast.error(error.message);

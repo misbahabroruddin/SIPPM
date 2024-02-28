@@ -25,6 +25,7 @@ export const useUpdateProposalPengabdian = (reset, router) => {
           },
         },
       );
+      toast.success("Proposal berhasil diupdate");
       reset();
       router.push("/proposal");
       return data;
