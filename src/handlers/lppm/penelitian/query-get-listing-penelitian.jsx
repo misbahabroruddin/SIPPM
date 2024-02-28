@@ -8,7 +8,7 @@ export const useQueryGetPenelitianLPPM = (search) => {
   const axios = useAxios();
 
   const query = useQuery({
-    queryKey: ["listingPenelitianLPPM"],
+    queryKey: ["listingPenelitianLPPM", search],
     queryFn: async () => {
       let params;
       if (search) {

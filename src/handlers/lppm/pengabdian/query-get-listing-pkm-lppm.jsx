@@ -8,7 +8,7 @@ export const useQueryGetPengabdianLPPM = (search) => {
   const axios = useAxios();
 
   const query = useQuery({
-    queryKey: ["listingPengabdianLPPM"],
+    queryKey: ["listingPengabdianLPPM", search],
     queryFn: async () => {
       let params;
       if (search) {
