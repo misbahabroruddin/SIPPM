@@ -115,8 +115,8 @@ const ListItem = ({ data, currentTab, tabActive }) => {
               <ButtonDelete
                 onClick={() => {
                   Swal.fire({
-                    title: "Are you sure?",
-                    text: "You won't be able to revert this!",
+                    title: "Anda yakin?",
+                    text: "  Anda tidak akan dapat mengembalikan ini!",
                     icon: "warning",
                     dangerMode: true,
                     showCancelButton: true,
