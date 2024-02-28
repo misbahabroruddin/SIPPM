@@ -2,11 +2,13 @@
 
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { twMerge } from "tailwind-merge";
 
 export default function Login() {
+  const [isLoading, setIsLoading] = useState(false);
   const {
     register,
     handleSubmit,
@@ -17,6 +19,7 @@ export default function Login() {
   const { replace } = useRouter();
 
   const onSubmit = async (data) => {
+    setIsLoading(true);
     const response = await signIn("credentials", {
       username: data.username,
       password: data.password,
@@ -26,12 +29,12 @@ export default function Login() {
 
     if (response.error) {
       toast.error("Username atau Password salah");
-      return;
     }
 
     if (response.ok) {
       toast.success("Login berhasil");
     }
+    setIsLoading(false);
 
     replace("/dashboard");
 
@@ -81,7 +84,10 @@ export default function Login() {
                 <p className="text-red-500">{errors.password.message}</p>
               )}
             </div>
-            <button className="mt-4 rounded-lg bg-[#10487A] px-3 py-2 text-white">
+            <button
+              className="mt-4 rounded-lg bg-[#10487A] px-3 py-2 text-white disabled:cursor-not-allowed disabled:bg-gray-400"
+              disabled={isLoading}
+            >
               Login
             </button>
           </form>
