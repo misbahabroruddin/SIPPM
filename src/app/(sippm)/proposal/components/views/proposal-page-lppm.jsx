@@ -14,10 +14,18 @@ import { useQueryGetPengabdianLPPM } from "@/handlers/lppm/pengabdian/query-get-
 
 export default function ProposalPageLPPM() {
   const [tabActive] = useState("penelitian");
+  const [pagePenelitian, setPagePenelitian] = useState(1);
+  const [pagePengabdian, setPagePengabdian] = useState(1);
   const [searchPenelitian, setSearchPenelitian] = useState("");
   const [searchPengabdian, setSearchPengabdian] = useState("");
   const tabParams = useSearchParams();
   const currentTab = tabParams.get("tab");
+  const handlePageChangePenelitian = (event) => {
+    setPagePenelitian(event.selected + 1);
+  };
+  const handlePageChangePengabdian = (event) => {
+    setPagePengabdian(event.selected + 1);
+  };
   const handleSearchPenelitian = useDebouncedCallback((value) => {
     setSearchPenelitian(value);
   }, 1000);
@@ -26,13 +34,9 @@ export default function ProposalPageLPPM() {
   }, 1000);
 
   const { data: penelitian, isLoading: isLoadingPenelitian } =
-    useQueryGetPenelitianLPPM(searchPenelitian);
+    useQueryGetPenelitianLPPM(searchPenelitian, pagePenelitian);
   const { data: pengabdian, isLoading: isLoadingPengabdian } =
-    useQueryGetPengabdianLPPM(searchPengabdian);
-
-  const penelitianData = penelitian?.data.filter(
-    (item) => item.status !== "Draft",
-  );
+    useQueryGetPengabdianLPPM(searchPengabdian, pagePengabdian);
 
   const penelitianRevisi = penelitian?.data.filter(
     (item) => item.status_lppm === "Revisi",
@@ -44,10 +48,6 @@ export default function ProposalPageLPPM() {
 
   const penelitianDitolak = penelitian?.data.filter(
     (item) => item.status_lppm === "Ditolak",
-  );
-
-  const pengabdianData = pengabdian?.data.filter(
-    (item) => item.status !== "Draft",
   );
 
   const pengabdianRevisi = pengabdian?.data.filter(
@@ -84,23 +84,25 @@ export default function ProposalPageLPPM() {
         </div>
         {currentTab === "penelitian" || !currentTab ? (
           <ListPenelitianProposalLPPM
-            penelitian={penelitianData}
+            penelitian={penelitian}
             isLoading={isLoadingPenelitian}
             currentTab={currentTab}
             tabActive={tabActive}
             jumlahPenelitianDisetujui={penelitianDisetujui}
             jumlahPenelitianDitolak={penelitianDitolak}
             jumlahPenelitianRevisi={penelitianRevisi}
+            handlePageChange={handlePageChangePenelitian}
           />
         ) : (
           <ListPengabdianProposalLPPM
-            pengabdian={pengabdianData}
+            pengabdian={pengabdian}
             isLoading={isLoadingPengabdian}
             currentTab={currentTab}
             tabActive={tabActive}
             jumlahPengabdianDisetujui={pengabdianDisetujui}
             jumlahPengabdianRevisi={pengabdianRevisi}
             jumlahPengabdianDitolak={pengabdianDitolak}
+            handlePagePengabdianChange={handlePageChangePengabdian}
           />
         )}
       </div>
