@@ -38,6 +38,8 @@ module.exports = withMT({
         "dark-80": "#65768B",
         "black-07": "#666666",
         "blue-primary": "#10487A",
+        "blue-09": "#CFDAE4",
+        "blue-04": "#0D3A62",
       },
       outline: {
         primary: "1px solid #10487A",

@@ -3,10 +3,11 @@
 @tailwind utilities;
 
 .image {
-  background-image: url("/unsia.jpg");
+  background-image: url("/unsia-login.png");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
+  backdrop-filter: blur(5px);
 }
 
 .react-select__control {
@@ -78,4 +79,9 @@ input::-webkit-inner-spin-button {
 /* Firefox */
 input[type="number"] {
   -moz-appearance: textfield;
+}
+
+.disabled {
+  opacity: 0.5;
+  pointer-events: none;
 }
