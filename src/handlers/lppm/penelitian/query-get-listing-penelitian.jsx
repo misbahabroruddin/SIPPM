@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 
 import { useAxios } from "@/lib/hooks/useAxios";
 
-export const useQueryGetPenelitianLPPM = (search, page, setPage) => {
+export const useQueryGetPenelitianLPPM = (search, page) => {
   const axios = useAxios();
 
   const query = useQuery({

@@ -4,16 +4,22 @@ import { toast } from "react-toastify";
 
 import { useAxios } from "@/lib/hooks/useAxios";
 
-export const useQueryGetPengabdianLPPM = (search) => {
+export const useQueryGetPengabdianLPPM = (search, page) => {
   const axios = useAxios();
 
   const query = useQuery({
-    queryKey: ["listingPengabdianLPPM", search],
+    queryKey: ["listingPengabdianLPPM", search, page],
     queryFn: async () => {
       let params;
       if (search) {
         params = {
           judul: search,
+        };
+      }
+      if (page) {
+        params = {
+          ...params,
+          page: page,
         };
       }
       try {
