@@ -6,31 +6,41 @@ import Link from "next/link";
 import { SkeletonListingProposal } from "@/components/skeleton/skeleton-listing-proposal";
 import { convertDate } from "@/lib/utils/convertDate";
 import { EmptyState } from "@/components/empty-state";
+import { Pagination } from "@/components/pagination";
 
 export const ListPengabdianDashboardLPPM = ({
   pengabdian,
   currentTab,
   tabActive,
   isLoading,
+  handlePageChange,
 }) => {
   if (isLoading) return <SkeletonListingProposal />;
   return (
-    <div className="flex flex-col gap-4">
-      {pengabdian?.data?.length ? (
-        pengabdian?.data
-          ?.filter((item) => item.status === "Terkirim")
-          .map((proposal) => (
-            <ListItem
-              data={proposal}
-              currentTab={currentTab}
-              key={proposal?.id}
-              tabActive={tabActive}
-            />
-          ))
-      ) : (
-        <EmptyState />
-      )}
-    </div>
+    <>
+      <div className="flex h-[550px] flex-col gap-4 overflow-auto p-1">
+        {pengabdian?.data?.length ? (
+          pengabdian?.data
+            ?.filter((item) => item.status === "Terkirim")
+            .map((proposal) => (
+              <ListItem
+                data={proposal}
+                currentTab={currentTab}
+                key={proposal?.id}
+                tabActive={tabActive}
+              />
+            ))
+        ) : (
+          <EmptyState />
+        )}
+      </div>
+      <Pagination
+        perPage={pengabdian?.per_page}
+        onPageChange={handlePageChange}
+        pageCount={pengabdian?.last_page}
+        pageOffset={pengabdian?.current_page - 1}
+      />
+    </>
   );
 };
 

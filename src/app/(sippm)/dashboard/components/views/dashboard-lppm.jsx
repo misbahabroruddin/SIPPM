@@ -11,17 +11,22 @@ import { useQueryGetPenelitianLPPM } from "@/handlers/lppm/penelitian/query-get-
 import { useQueryGetPengabdianLPPM } from "@/handlers/lppm/pengabdian/query-get-listing-pkm-lppm";
 
 export default function DashboardLppm() {
+  const [pagePenelitian, setPagePenelitian] = useState(1);
+  const [pagePengabdian, setPagePengabdian] = useState(1);
   const [tabActive] = useState("penelitian");
   const tabParams = useSearchParams();
   const currentTab = tabParams.get("tab");
   const { data: penelitian, isLoading: isLoadingPenelitian } =
-    useQueryGetPenelitianLPPM();
+    useQueryGetPenelitianLPPM("", pagePenelitian);
   const { data: pengabdian, isLoading: isLoadingPengabdian } =
-    useQueryGetPengabdianLPPM();
+    useQueryGetPengabdianLPPM("", pagePengabdian);
 
-  const penelitianPending = penelitian?.data.filter(
-    (item) => item.status_lppm === "Pending",
-  );
+  const handlePageChangePenelitian = (event) => {
+    setPagePenelitian(event.selected + 1);
+  };
+  const handlePageChangePengabdian = (event) => {
+    setPagePengabdian(event.selected + 1);
+  };
 
   const penelitianDisetujui = penelitian?.data.filter(
     (item) => item.status_lppm === "Diterima",
@@ -33,10 +38,6 @@ export default function DashboardLppm() {
 
   const penelitianRevisi = penelitian?.data.filter(
     (item) => item.status_lppm === "Revisi",
-  );
-
-  const pengabdianPending = pengabdian?.data.filter(
-    (item) => item.status_lppm === "Pending",
   );
 
   const pengabdianDisetujui = pengabdian?.data.filter(
@@ -82,23 +83,23 @@ export default function DashboardLppm() {
           <Tabs tabActive={currentTab || tabActive} />
         </div>
       </div>
-      <div className="max-h-[600px] overflow-auto p-1">
-        {currentTab === "penelitian" || !currentTab ? (
-          <ListPenelitianDashboardLPPM
-            penelitian={penelitian}
-            isLoading={isLoadingPenelitian}
-            currentTab={currentTab}
-            tabActive={tabActive}
-          />
-        ) : (
-          <ListPengabdianDashboardLPPM
-            pengabdian={pengabdian}
-            isLoading={isLoadingPenelitian}
-            currentTab={currentTab}
-            tabActive={tabActive}
-          />
-        )}
-      </div>
+      {currentTab === "penelitian" || !currentTab ? (
+        <ListPenelitianDashboardLPPM
+          penelitian={penelitian}
+          isLoading={isLoadingPenelitian}
+          currentTab={currentTab}
+          tabActive={tabActive}
+          handlePageChange={handlePageChangePenelitian}
+        />
+      ) : (
+        <ListPengabdianDashboardLPPM
+          pengabdian={pengabdian}
+          isLoading={isLoadingPenelitian}
+          currentTab={currentTab}
+          tabActive={tabActive}
+          handlePageChange={handlePageChangePengabdian}
+        />
+      )}
     </div>
   );
 }
