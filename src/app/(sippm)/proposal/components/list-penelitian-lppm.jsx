@@ -1,12 +1,13 @@
 "use client";
+import Image from "next/image";
+import Link from "next/link";
 
 import { ButtonStatus } from "@/components/button/button-status";
 import { CardDashboard } from "@/components/card/card-dashboard";
 import { EmptyState } from "@/components/empty-state";
+import { Pagination } from "@/components/pagination";
 import { SkeletonListingProposal } from "@/components/skeleton/skeleton-listing-proposal";
 import { convertDate } from "@/lib/utils/convertDate";
-import Image from "next/image";
-import Link from "next/link";
 
 export const ListPenelitianProposalLPPM = ({
   penelitian,
@@ -16,6 +17,7 @@ export const ListPenelitianProposalLPPM = ({
   jumlahPenelitianDisetujui,
   jumlahPenelitianRevisi,
   jumlahPenelitianDitolak,
+  handlePageChange,
 }) => {
   if (isLoading) return <SkeletonListingProposal />;
   return (
@@ -31,20 +33,28 @@ export const ListPenelitianProposalLPPM = ({
           jumlah={jumlahPenelitianDitolak?.length}
         />
       </div>
-      <div className="flex flex-col gap-4">
-        {penelitian?.length ? (
-          penelitian?.map((proposal) => (
-            <ListItem
-              data={proposal}
-              currentTab={currentTab}
-              key={proposal?.id}
-              tabActive={tabActive}
-            />
-          ))
+      <div className="flex h-[570px] flex-col gap-4 overflow-auto p-1 pb-8">
+        {penelitian?.data.length ? (
+          penelitian?.data
+            .filter((item) => item.status !== "Draft")
+            .map((proposal) => (
+              <ListItem
+                data={proposal}
+                currentTab={currentTab}
+                key={proposal?.id}
+                tabActive={tabActive}
+              />
+            ))
         ) : (
           <EmptyState />
         )}
       </div>
+      <Pagination
+        perPage={penelitian?.per_page}
+        onPageChange={handlePageChange}
+        pageCount={penelitian?.last_page}
+        pageOffset={penelitian?.current_page - 1}
+      />
     </div>
   );
 };
