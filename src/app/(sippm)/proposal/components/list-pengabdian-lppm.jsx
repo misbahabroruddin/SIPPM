@@ -3,6 +3,7 @@
 import { ButtonStatus } from "@/components/button/button-status";
 import { CardDashboard } from "@/components/card/card-dashboard";
 import { EmptyState } from "@/components/empty-state";
+import { Pagination } from "@/components/pagination";
 import { SkeletonListingProposal } from "@/components/skeleton/skeleton-listing-proposal";
 import { convertDate } from "@/lib/utils/convertDate";
 import Image from "next/image";
@@ -16,6 +17,7 @@ export const ListPengabdianProposalLPPM = ({
   jumlahPengabdianDisetujui,
   jumlahPengabdianRevisi,
   jumlahPengabdianDitolak,
+  handlePagePengabdianChange,
 }) => {
   if (isLoading) return <SkeletonListingProposal />;
   return (
@@ -31,20 +33,28 @@ export const ListPengabdianProposalLPPM = ({
           jumlah={jumlahPengabdianDitolak?.length}
         />
       </div>
-      <div className="flex flex-col gap-4">
-        {pengabdian?.length ? (
-          pengabdian?.map((proposal) => (
-            <ListItem
-              data={proposal}
-              currentTab={currentTab}
-              key={proposal?.id}
-              tabActive={tabActive}
-            />
-          ))
+      <div className="flex h-[570px] flex-col gap-4 overflow-auto p-1 pb-8">
+        {pengabdian?.data?.length ? (
+          pengabdian?.data
+            ?.filter((item) => item.status !== "Draft")
+            .map((proposal) => (
+              <ListItem
+                data={proposal}
+                currentTab={currentTab}
+                key={proposal?.id}
+                tabActive={tabActive}
+              />
+            ))
         ) : (
           <EmptyState />
         )}
       </div>
+      <Pagination
+        perPage={pengabdian?.per_page}
+        onPageChange={handlePagePengabdianChange}
+        pageCount={pengabdian?.last_page}
+        pageOffset={pengabdian?.current_page - 1}
+      />
     </div>
   );
 };
