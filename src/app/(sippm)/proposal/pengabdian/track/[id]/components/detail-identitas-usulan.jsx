@@ -2,10 +2,10 @@
 
 export const DetailIdentitasUsulan = ({ data }) => {
   return (
-    <div className="flex flex-col gap-4">
+    <div className="mb-5 flex flex-col gap-4">
       <h4 className="text-lg font-[500]">Identitas Usulan</h4>
-      <div className="flex justify-between text-black-07">
-        <div className="flex w-2/5 justify-between">
+      <div className="flex gap-7 text-black-07">
+        <div className="flex w-1/2 gap-4">
           <div className="flex flex-col gap-4">
             <p className="font-[500]">Rumpun Ilmu</p>
             <p className="font-[500]">Tahun Usulan</p>
@@ -21,19 +21,22 @@ export const DetailIdentitasUsulan = ({ data }) => {
             </div>
           </div>
         </div>
-        <div className="flex w-2/5 justify-between">
-          <div className="flex flex-col gap-4">
-            <p className="font-[500]">Jangka Waktu Pengabdian</p>
-            <p className="font-[500]">Ringkasan Pengabdian</p>
-          </div>
-          <div className="flex flex-col gap-4">
-            <div className="flex gap-3">
+        <div className="flex w-1/2 gap-4">
+          <div className="flex w-fit flex-col gap-4">
+            <div className="flex gap-2">
+              <p className="min-w-[280px] font-[500]">
+                Jangka Waktu Pengabdian
+              </p>
               <span>:</span>
-              <p>{data?.data?.jangka_waktu}</p>
+              <p className="flex w-[450px]">{data?.data?.jangka_waktu}</p>
             </div>
-            <div className="flex gap-3">
+            <div className="flex gap-2">
+              <p className="min-w-[280px] font-[500]">Ringkasan Pengabdian</p>
               <span>:</span>
-              <p>{data?.data?.ringkasan}</p>
+
+              <p className="max-h-[300px] w-[450px] gap-3 overflow-auto px-1">
+                {data?.data?.ringkasan}
+              </p>
             </div>
           </div>
         </div>
