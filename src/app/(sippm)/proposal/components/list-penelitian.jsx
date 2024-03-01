@@ -95,12 +95,11 @@ const ListItem = ({ data, currentTab, tabActive }) => {
                 <ButtonStatus status={data?.status_lppm} />
               </div>
               <div className="flex flex-col items-center gap-1">
-                <p>Review</p>
+                <p>Reviewer</p>
                 <ButtonStatus status={data?.status_reviewer} />
               </div>
               <Link
                 href={`/proposal/${currentTab || tabActive}/track/${data?.id}`}
-                className="hidden"
               >
                 <button
                   className="rounded-lg bg-primary px-7 py-2 text-white disabled:cursor-not-allowed disabled:bg-gray-500"

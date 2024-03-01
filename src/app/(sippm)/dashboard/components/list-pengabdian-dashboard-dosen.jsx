@@ -95,7 +95,7 @@ const ListItem = ({ data, currentTab, tabActive }) => {
                 <ButtonStatus status={data?.status_lppm || "not-yet"} />
               </div>
               <div className="flex flex-col items-center gap-1">
-                <p>Review</p>
+                <p>Reviewer</p>
                 <ButtonStatus status={data?.status_reviewer || "not-yet"} />
               </div>
               <Link
