@@ -54,11 +54,11 @@ export default function DashboardLppm() {
   return (
     <div className="flex flex-col gap-4">
       <div className="flex gap-4">
-        <CardDashboard title="Pengabdian" jumlah={9} />
-        <CardDashboard status="Ditolak" title="Pengabdian" jumlah={0} />
-        <CardDashboard status="Revisi" title="Semua" jumlah={9} />
-        <CardDashboard title="Penelitian" jumlah={13} />
+        <CardDashboard title="Penelitian" jumlah={32} />
         <CardDashboard status="Ditolak" title="Penelitian" jumlah={0} />
+        <CardDashboard status="Revisi" title="Semua" jumlah={0} />
+        <CardDashboard title="Pengabdian" jumlah={30} />
+        <CardDashboard status="Ditolak" title="Pengabdian" jumlah={0} />
       </div>
       <div className="flex justify-between">
         <div className="flex items-center gap-2 lg:gap-4">

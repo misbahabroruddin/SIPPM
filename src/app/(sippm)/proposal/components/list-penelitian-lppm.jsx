@@ -23,8 +23,8 @@ export const ListPenelitianProposalLPPM = ({
   return (
     <div className="flex flex-col gap-2">
       <div className="flex gap-4">
-        <CardDashboard jumlah={13} />
-        <CardDashboard status="Revisi" jumlah={5} />
+        <CardDashboard jumlah={32} />
+        <CardDashboard status="Revisi" jumlah={0} />
         <CardDashboard status="Ditolak" jumlah={0} />
       </div>
       <div className="flex h-[570px] flex-col gap-4 overflow-auto p-1 pb-8">
