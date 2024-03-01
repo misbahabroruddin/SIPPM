@@ -48,13 +48,13 @@ export const FormVerifikasiUsulanReviewer = () => {
   ];
   return (
     <form className="flex flex-col gap-4" onSubmit={handleSubmit(onSubmit)}>
-      <div className="flex flex-col gap-2">
+      {/* <div className="flex flex-col gap-2">
         <Label
           htmlFor={"dana_yang_disetujui"}
           text={"Dana yang disetujui"}
           required
         />
-        {/* <Input
+        <Input
           containerClass="items-start"
           placeholder="Dana yang disetujui"
           type="number"
@@ -63,8 +63,8 @@ export const FormVerifikasiUsulanReviewer = () => {
           })}
           errors={errors.dana_yang_disetujui}
           spanEmptyClass="hidden"
-        /> */}
-      </div>
+        />
+      </div> */}
       <SingleSelect
         Controller={Controller}
         control={control}
