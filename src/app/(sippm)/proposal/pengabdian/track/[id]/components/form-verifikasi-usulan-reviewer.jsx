@@ -11,7 +11,7 @@ import { SingleSelect } from "@/components/select/single-select";
 import { useRouter } from "next/navigation";
 import { useUpdateProposalPengabdianReviewer } from "@/handlers/lppm/pengabdian/update-proposal-pengabdian-reviewer";
 
-export const FormVerifikasiUsulan = () => {
+export const FormVerifikasiUsulanReviewer = () => {
   const {
     register,
     handleSubmit,
