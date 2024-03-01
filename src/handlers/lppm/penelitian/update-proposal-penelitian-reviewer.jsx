@@ -15,7 +15,7 @@ export const useUpdateProposalPenelitianReviewer = (reset, router) => {
       const { data } = await axios.put(
         `/proposals/reviewers/penelitians/${id}`,
         {
-          dana_yang_disetujui: form.dana_yang_disetujui,
+          dana_yang_disetujui: 0,
           status: form.status,
           catatan: form.catatan,
         },

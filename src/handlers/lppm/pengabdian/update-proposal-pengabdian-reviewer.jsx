@@ -15,7 +15,7 @@ export const useUpdateProposalPengabdianReviewer = (reset, router) => {
       const { data } = await axios.put(
         `/proposals/reviewers/pkms/${id}`,
         {
-          dana_yang_disetujui: form.dana_yang_disetujui,
+          dana_yang_disetujui: 0,
           status: form.status,
           catatan: form.catatan,
         },

@@ -54,7 +54,7 @@ export const FormVerifikasiUsulanReviewer = () => {
           text={"Dana yang disetujui"}
           required
         />
-        <Input
+        {/* <Input
           containerClass="items-start"
           placeholder="Dana yang disetujui"
           type="number"
@@ -63,7 +63,7 @@ export const FormVerifikasiUsulanReviewer = () => {
           })}
           errors={errors.dana_yang_disetujui}
           spanEmptyClass="hidden"
-        />
+        /> */}
       </div>
       <SingleSelect
         Controller={Controller}
