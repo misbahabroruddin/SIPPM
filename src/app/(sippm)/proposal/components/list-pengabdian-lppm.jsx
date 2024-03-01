@@ -23,7 +23,7 @@ export const ListPengabdianProposalLPPM = ({
   return (
     <div className="flex flex-col gap-2">
       <div className="flex gap-4">
-        <CardDashboard jumlah={6} />
+        <CardDashboard jumlah={9} />
         <CardDashboard status="Revisi" jumlah={3} />
         <CardDashboard status="Ditolak" jumlah={0} />
       </div>
