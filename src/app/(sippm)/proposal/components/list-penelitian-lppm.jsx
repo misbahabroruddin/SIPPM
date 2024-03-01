@@ -23,14 +23,14 @@ export const ListPenelitianProposalLPPM = ({
   return (
     <div className="flex flex-col gap-2">
       <div className="flex gap-4">
-        <CardDashboard jumlah={32} />
-        <CardDashboard status="Revisi" jumlah={0} />
-        <CardDashboard status="Ditolak" jumlah={0} />
+        <CardDashboard jumlah={jumlahPenelitianDisetujui || 0} />
+        <CardDashboard status="Revisi" jumlah={jumlahPenelitianRevisi || 0} />
+        <CardDashboard status="Ditolak" jumlah={jumlahPenelitianDitolak || 0} />
       </div>
       <div className="flex h-[570px] flex-col gap-4 overflow-auto p-1 pb-8">
-        {penelitian?.data.length ? (
+        {penelitian?.data?.length ? (
           penelitian?.data
-            .filter((item) => item.status !== "Draft")
+            ?.filter((item) => item.status !== "Draft")
             .map((proposal) => (
               <ListItem
                 data={proposal}

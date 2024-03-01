@@ -9,6 +9,7 @@ import { ListPenelitianDashboardLPPM } from "../list-penelitian-dashboard-lppm";
 import { ListPengabdianDashboardLPPM } from "../list-pengabdian-dashboard-lppm";
 import { useQueryGetPenelitianLPPM } from "@/handlers/lppm/penelitian/query-get-listing-penelitian";
 import { useQueryGetPengabdianLPPM } from "@/handlers/lppm/pengabdian/query-get-listing-pkm-lppm";
+import { useQueryTotalProposalLPPM } from "@/handlers/lppm/query-total-proposal";
 
 export default function DashboardLppm() {
   const [pagePenelitian, setPagePenelitian] = useState(1);
@@ -28,37 +29,34 @@ export default function DashboardLppm() {
     setPagePengabdian(event.selected + 1);
   };
 
-  const penelitianDisetujui = penelitian?.data.filter(
-    (item) => item.status_lppm === "Diterima",
-  );
+  const { data: totalProposal } = useQueryTotalProposalLPPM();
 
-  const penelitianDitolak = penelitian?.data.filter(
-    (item) => item.status_lppm === "Ditolak",
-  );
-
-  const penelitianRevisi = penelitian?.data.filter(
-    (item) => item.status_lppm === "Revisi",
-  );
-
-  const pengabdianDisetujui = pengabdian?.data.filter(
-    (item) => item.status_lppm === "Diterima",
-  );
-
-  const pengabdianDitolak = pengabdian?.data.filter(
-    (item) => item.status_lppm === "Ditolak",
-  );
-
-  const pengabdianRevisi = pengabdian?.data.filter(
-    (item) => item.status_lppm === "Revisi",
-  );
   return (
     <div className="flex flex-col gap-4">
       <div className="flex gap-4">
-        <CardDashboard title="Penelitian" jumlah={32} />
-        <CardDashboard status="Ditolak" title="Penelitian" jumlah={0} />
-        <CardDashboard status="Revisi" title="Semua" jumlah={0} />
-        <CardDashboard title="Pengabdian" jumlah={30} />
-        <CardDashboard status="Ditolak" title="Pengabdian" jumlah={0} />
+        <CardDashboard
+          title="Penelitian"
+          jumlah={totalProposal?.data?.penelitian_disetujui}
+        />
+        <CardDashboard
+          status="Ditolak"
+          title="Penelitian"
+          jumlah={totalProposal?.data?.penelitian_ditolak}
+        />
+        <CardDashboard
+          status="Revisi"
+          title="Semua"
+          jumlah={totalProposal?.data?.revisi}
+        />
+        <CardDashboard
+          title="Pengabdian"
+          jumlah={totalProposal?.data?.pengabdian_disetujui}
+        />
+        <CardDashboard
+          status="Ditolak"
+          title="Pengabdian"
+          jumlah={totalProposal?.data?.pengabdian_ditolak}
+        />
       </div>
       <div className="flex justify-between">
         <div className="flex items-center gap-2 lg:gap-4">
