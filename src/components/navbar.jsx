@@ -81,7 +81,7 @@ export const Navbar = () => {
                 <div className="flex items-center gap-3">
                   <Image
                     src="/unsia.png"
-                    className="hidden w-auto lg:block"
+                    className="hidden w-[92px] lg:block"
                     width={92}
                     height={100}
                     alt="UNSIA"
