@@ -3,7 +3,8 @@ import { getServerSession } from "next-auth";
 
 import { ContainerPage } from "@/components/container-page";
 import { authOptions } from "@/config/auth";
-import { DOSEN, LPPM } from "@/lib/constants/role";
+import { DOSEN, LPPM, REVIEWER } from "@/lib/constants/role";
+import TrackPengabdianReviewerPage from "./components/views/track-pengabdian-reviewer";
 
 const TrackPengabdianDosenPage = dynamic(
   () => import("./components/views/track-pengabdian-dosen"),
@@ -21,6 +22,7 @@ export default async function PageTrackProposal() {
     <ContainerPage>
       {role === DOSEN && <TrackPengabdianDosenPage />}
       {role === LPPM && <TrackPengabdianLPPMPage />}
+      {role === REVIEWER && <TrackPengabdianReviewerPage />}
     </ContainerPage>
   );
 }

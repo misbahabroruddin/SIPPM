@@ -13,6 +13,10 @@ const TrackPenelitianLPPMPage = dynamic(
   () => import("./components/views/track-penelitian-lppm"),
 );
 
+const TrackPenelitianReviewerPage = dynamic(
+  () => import("./components/views/track-penelitian-reviewer"),
+);
+
 export default async function TrackPenelitianPage() {
   const session = await getServerSession(authOptions);
   const role = session?.user?.roles[0]?.name;
@@ -21,7 +25,7 @@ export default async function TrackPenelitianPage() {
     <ContainerPage>
       {role === DOSEN && <TrackPenelitianDosenPage />}
       {role === LPPM && <TrackPenelitianLPPMPage />}
-      {role === REVIEWER && <>Reviewer</>}
+      {role === REVIEWER && <TrackPenelitianReviewerPage />}
     </ContainerPage>
   );
 }
