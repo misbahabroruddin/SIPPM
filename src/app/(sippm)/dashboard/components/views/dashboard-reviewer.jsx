@@ -58,7 +58,7 @@ export default function DashboardReviewer() {
         <CardDashboard
           status="Ditolak"
           title="Pengabdian"
-          jumlah={pengabdianDitolak?.length}
+          jumlah={totalProposal?.data?.pengabdian_ditolak}
         />
       </div>
       <div className="flex justify-between">
@@ -66,7 +66,6 @@ export default function DashboardReviewer() {
           <Tabs tabActive={currentTab || tabActive} />
         </div>
       </div>
-      {/* <div className="max-h-[600px] overflow-auto p-1"> */}
       {currentTab === "penelitian" || !currentTab ? (
         <ListPenelitianDashboardReviewer
           penelitian={penelitian}
@@ -84,7 +83,6 @@ export default function DashboardReviewer() {
           handlePageChange={handlePageChangePengabdian}
         />
       )}
-      {/* </div> */}
     </div>
   );
 }
