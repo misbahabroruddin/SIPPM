@@ -9,20 +9,9 @@ export default function ListCardPenelitianDashboardDosen({
 }) {
   return (
     <div className="mt-4 flex gap-4">
-      <CardDashboard
-        status="Jumlah"
-        title="Proposal Penelitian"
-        jumlah={jumlahPenelitian?.length}
-      />
-      <CardDashboard
-        title="Penelitian"
-        jumlah={jumlahPenelitianDisetujui?.length}
-      />
-      <CardDashboard
-        status="Ditolak"
-        title="Penelitian"
-        jumlah={jumlahPenelitianDitolak?.length}
-      />
+      <CardDashboard status="Jumlah" title="Proposal Penelitian" jumlah={2} />
+      <CardDashboard title="Penelitian" jumlah={9} />
+      <CardDashboard status="Ditolak" title="Penelitian" jumlah={8} />
     </div>
   );
 }

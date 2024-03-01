@@ -9,20 +9,9 @@ export default function ListCardPengabdianDashboardDosen({
 }) {
   return (
     <div className="mt-4 flex gap-4">
-      <CardDashboard
-        status="Jumlah"
-        title="Proposal PKM"
-        jumlah={jumlahPengabdian?.length}
-      />
-      <CardDashboard
-        title="Pengabdian"
-        jumlah={jumlahPengabdianDisetujui?.length}
-      />
-      <CardDashboard
-        status="Ditolak"
-        title="Pengabdian"
-        jumlah={jumlahPengabdianDitolak?.length}
-      />
+      <CardDashboard status="Jumlah" title="Proposal PKM" jumlah={1} />
+      <CardDashboard title="Pengabdian" jumlah={2} />
+      <CardDashboard status="Ditolak" title="Pengabdian" jumlah={2} />
     </div>
   );
 }

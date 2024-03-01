@@ -23,15 +23,9 @@ export const ListPenelitianProposalLPPM = ({
   return (
     <div className="flex flex-col gap-2">
       <div className="flex gap-4">
-        <CardDashboard jumlah={jumlahPenelitianDisetujui?.length} />
-        <CardDashboard
-          status="Revisi"
-          jumlah={jumlahPenelitianRevisi?.length}
-        />
-        <CardDashboard
-          status="Ditolak"
-          jumlah={jumlahPenelitianDitolak?.length}
-        />
+        <CardDashboard jumlah={4} />
+        <CardDashboard status="Revisi" jumlah={5} />
+        <CardDashboard status="Ditolak" jumlah={2} />
       </div>
       <div className="flex h-[570px] flex-col gap-4 overflow-auto p-1 pb-8">
         {penelitian?.data.length ? (
