@@ -9,6 +9,7 @@ import { useQueryGetPenelitianReviewer } from "@/handlers/reviewer/penelitian/qu
 import { useQueryGetPengabdianReviewer } from "@/handlers/reviewer/pengabdian/query-get-listing-pengabdian";
 import { ListPenelitianDashboardReviewer } from "../list-penelitian-dashboard-reviewer";
 import { ListPengabdianDashboardReviewer } from "../list-pengabdian-dashboard-reviewer";
+import { useQueryTotalProposalReviewer } from "@/handlers/reviewer/query-total-proposal";
 
 export default function DashboardReviewer() {
   const [tabActive] = useState("penelitian");
@@ -19,8 +20,12 @@ export default function DashboardReviewer() {
   const currentTab = tabParams.get("tab");
   const { data: penelitian, isLoading: isLoadingPenelitian } =
     useQueryGetPenelitianReviewer("", pagePenelitian);
-  const { data: pengabdian, isLoading: isLoadingPengabdian } =
-    useQueryGetPengabdianReviewer("", pagePengabdian);
+  const { data: pengabdian } = useQueryGetPengabdianReviewer(
+    "",
+    pagePengabdian,
+  );
+
+  const { data: totalProposal } = useQueryTotalProposalReviewer();
 
   const handlePageChangePenelitian = (event) => {
     setPagePenelitian(event.selected + 1);
@@ -29,54 +34,31 @@ export default function DashboardReviewer() {
     setPagePengabdian(event.selected + 1);
   };
 
-  const penelitianDisetujui = penelitian?.data.filter(
-    (item) => item.status_lppm === "Diterima",
-  );
-
-  const penelitianDitolak = penelitian?.data.filter(
-    (item) => item.status_lppm === "Ditolak",
-  );
-
-  const penelitianRevisi = penelitian?.data.filter(
-    (item) => item.status_lppm === "Revisi",
-  );
-
-  const pengabdianDisetujui = pengabdian?.data.filter(
-    (item) => item.status_lppm === "Diterima",
-  );
-
-  const pengabdianDitolak = pengabdian?.data.filter(
-    (item) => item.status_lppm === "Ditolak",
-  );
-
-  const pengabdianRevisi = pengabdian?.data.filter(
-    (item) => item.status_lppm === "Revisi",
-  );
   return (
     <div className="flex flex-col gap-4">
       <div className="flex gap-4">
         <CardDashboard
+          title="Penelitian"
+          jumlah={totalProposal?.data?.penelitian_disetujui}
+        />
+        <CardDashboard
+          status="Ditolak"
+          title="Penelitian"
+          jumlah={totalProposal?.data?.penelitian_ditolak}
+        />
+        <CardDashboard
+          status="Revisi"
+          title="Semua"
+          jumlah={totalProposal?.data?.penelitianRevisi}
+        />
+        <CardDashboard
           title="Pengabdian"
-          jumlah={pengabdianDisetujui?.length}
+          jumlah={totalProposal?.data?.pengabdian_disetujui}
         />
         <CardDashboard
           status="Ditolak"
           title="Pengabdian"
           jumlah={pengabdianDitolak?.length}
-        />
-        <CardDashboard
-          status="Revisi"
-          title="Semua"
-          jumlah={pengabdianRevisi?.length + penelitianRevisi?.length || 0}
-        />
-        <CardDashboard
-          title="Penelitian"
-          jumlah={penelitianDisetujui?.length}
-        />
-        <CardDashboard
-          status="Ditolak"
-          title="Penelitian"
-          jumlah={penelitianDitolak?.length}
         />
       </div>
       <div className="flex justify-between">
