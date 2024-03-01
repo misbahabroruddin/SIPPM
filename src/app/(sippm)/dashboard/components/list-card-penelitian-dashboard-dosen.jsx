@@ -11,7 +11,7 @@ export default function ListCardPenelitianDashboardDosen({
     <div className="mt-4 flex gap-4">
       <CardDashboard status="Jumlah" title="Proposal Penelitian" jumlah={2} />
       <CardDashboard title="Penelitian" jumlah={9} />
-      <CardDashboard status="Ditolak" title="Penelitian" jumlah={8} />
+      <CardDashboard status="Ditolak" title="Penelitian" jumlah={0} />
     </div>
   );
 }

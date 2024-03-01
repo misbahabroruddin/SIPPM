@@ -25,7 +25,7 @@ export const ListPengabdianProposalLPPM = ({
       <div className="flex gap-4">
         <CardDashboard jumlah={6} />
         <CardDashboard status="Revisi" jumlah={3} />
-        <CardDashboard status="Ditolak" jumlah={8} />
+        <CardDashboard status="Ditolak" jumlah={0} />
       </div>
       <div className="flex h-[570px] flex-col gap-4 overflow-auto p-1 pb-8">
         {pengabdian?.data?.length ? (

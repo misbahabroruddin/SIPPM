@@ -25,7 +25,7 @@ export const ListPenelitianProposalLPPM = ({
       <div className="flex gap-4">
         <CardDashboard jumlah={4} />
         <CardDashboard status="Revisi" jumlah={5} />
-        <CardDashboard status="Ditolak" jumlah={2} />
+        <CardDashboard status="Ditolak" jumlah={0} />
       </div>
       <div className="flex h-[570px] flex-col gap-4 overflow-auto p-1 pb-8">
         {penelitian?.data.length ? (
