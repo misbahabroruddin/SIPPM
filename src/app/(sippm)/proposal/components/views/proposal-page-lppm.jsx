@@ -11,6 +11,7 @@ import { ListPenelitianProposalLPPM } from "../list-penelitian-lppm";
 import { ListPengabdianProposalLPPM } from "../list-pengabdian-lppm";
 import { useQueryGetPenelitianLPPM } from "@/handlers/lppm/penelitian/query-get-listing-penelitian";
 import { useQueryGetPengabdianLPPM } from "@/handlers/lppm/pengabdian/query-get-listing-pkm-lppm";
+import { useQueryTotalProposalLPPM } from "@/handlers/lppm/query-total-proposal";
 
 export default function ProposalPageLPPM() {
   const [tabActive] = useState("penelitian");
@@ -37,6 +38,8 @@ export default function ProposalPageLPPM() {
     useQueryGetPenelitianLPPM(searchPenelitian, pagePenelitian);
   const { data: pengabdian, isLoading: isLoadingPengabdian } =
     useQueryGetPengabdianLPPM(searchPengabdian, pagePengabdian);
+
+  const { data: totalProposal } = useQueryTotalProposalLPPM();
 
   const penelitianRevisi = penelitian?.data.filter(
     (item) => item.status_lppm === "Revisi",
@@ -88,9 +91,11 @@ export default function ProposalPageLPPM() {
             isLoading={isLoadingPenelitian}
             currentTab={currentTab}
             tabActive={tabActive}
-            jumlahPenelitianDisetujui={penelitianDisetujui}
-            jumlahPenelitianDitolak={penelitianDitolak}
-            jumlahPenelitianRevisi={penelitianRevisi}
+            jumlahPenelitianDisetujui={
+              totalProposal?.data?.penelitian_disetujui
+            }
+            jumlahPenelitianDitolak={totalProposal?.data?.penelitian_ditolak}
+            jumlahPenelitianRevisi={totalProposal?.data?.penelitian_revisi}
             handlePageChange={handlePageChangePenelitian}
           />
         ) : (
@@ -99,9 +104,11 @@ export default function ProposalPageLPPM() {
             isLoading={isLoadingPengabdian}
             currentTab={currentTab}
             tabActive={tabActive}
-            jumlahPengabdianDisetujui={pengabdianDisetujui}
-            jumlahPengabdianRevisi={pengabdianRevisi}
-            jumlahPengabdianDitolak={pengabdianDitolak}
+            jumlahPengabdianDisetujui={
+              totalProposal?.data?.pengabdian_disetujui
+            }
+            jumlahPengabdianRevisi={totalProposal?.data?.pengabdian_revisi}
+            jumlahPengabdianDitolak={totalProposal?.data?.pengabdian_ditolak}
             handlePagePengabdianChange={handlePageChangePengabdian}
           />
         )}

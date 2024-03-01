@@ -1,4 +1,6 @@
 "use client";
+import Image from "next/image";
+import Link from "next/link";
 
 import { ButtonStatus } from "@/components/button/button-status";
 import { CardDashboard } from "@/components/card/card-dashboard";
@@ -6,30 +8,28 @@ import { EmptyState } from "@/components/empty-state";
 import { Pagination } from "@/components/pagination";
 import { SkeletonListingProposal } from "@/components/skeleton/skeleton-listing-proposal";
 import { convertDate } from "@/lib/utils/convertDate";
-import Image from "next/image";
-import Link from "next/link";
 
-export const ListPengabdianProposalReviewer = ({
-  pengabdian,
+export const ListPenelitianProposalReviewer = ({
+  penelitian,
   currentTab,
   tabActive,
   isLoading,
-  jumlahPengabdianDisetujui,
-  jumlahPengabdianRevisi,
-  jumlahPengabdianDitolak,
-  handlePagePengabdianChange,
+  jumlahPenelitianDisetujui,
+  jumlahPenelitianRevisi,
+  jumlahPenelitianDitolak,
+  handlePageChange,
 }) => {
   if (isLoading) return <SkeletonListingProposal />;
   return (
     <div className="flex flex-col gap-2">
       <div className="flex gap-4">
-        <CardDashboard jumlah={jumlahPengabdianDisetujui} />
-        <CardDashboard status="Revisi" jumlah={jumlahPengabdianRevisi} />
-        <CardDashboard status="Ditolak" jumlah={jumlahPengabdianDitolak} />
+        <CardDashboard jumlah={jumlahPenelitianDisetujui || 0} />
+        <CardDashboard status="Revisi" jumlah={jumlahPenelitianRevisi || 0} />
+        <CardDashboard status="Ditolak" jumlah={jumlahPenelitianDitolak || 0} />
       </div>
       <div className="flex h-[570px] flex-col gap-4 overflow-auto p-1 pb-8">
-        {pengabdian?.data?.length ? (
-          pengabdian?.data
+        {penelitian?.data?.length ? (
+          penelitian?.data
             ?.filter((item) => item.status !== "Draft")
             .map((proposal) => (
               <ListItem
@@ -44,10 +44,10 @@ export const ListPengabdianProposalReviewer = ({
         )}
       </div>
       <Pagination
-        perPage={pengabdian?.per_page}
-        onPageChange={handlePagePengabdianChange}
-        pageCount={pengabdian?.last_page}
-        pageOffset={pengabdian?.current_page - 1}
+        perPage={penelitian?.per_page}
+        onPageChange={handlePageChange}
+        pageCount={penelitian?.last_page}
+        pageOffset={penelitian?.current_page - 1}
       />
     </div>
   );

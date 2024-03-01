@@ -1,4 +1,5 @@
 "use client";
+
 import { useState } from "react";
 import { useSearchParams } from "next/navigation";
 
@@ -7,10 +8,11 @@ import { ContainerPage } from "@/components/container-page";
 import { Tabs } from "../tabs";
 import { SearchInput } from "@/components/input/search-input";
 import { useDebouncedCallback } from "use-debounce";
-import { ListPenelitianProposalLPPM } from "../list-penelitian-lppm";
 import { ListPengabdianProposalReviewer } from "../list-pengabdian-reviewer";
 import { useQueryGetPengabdianReviewer } from "@/handlers/reviewer/pengabdian/query-get-listing-pengabdian";
 import { useQueryGetPenelitianReviewer } from "@/handlers/reviewer/penelitian/query-get-listing-penelitian";
+import { ListPenelitianProposalReviewer } from "../list-penelitian-reviewer";
+import { useQueryTotalProposalReviewer } from "@/handlers/reviewer/query-total-proposal";
 
 export default function ProposalPageReviewer() {
   const [tabActive] = useState("penelitian");
@@ -20,6 +22,13 @@ export default function ProposalPageReviewer() {
   const [searchPengabdian, setSearchPengabdian] = useState("");
   const tabParams = useSearchParams();
   const currentTab = tabParams.get("tab");
+
+  const { data: penelitian, isLoading: isLoadingPenelitian } =
+    useQueryGetPenelitianReviewer(searchPenelitian, pagePenelitian);
+  const { data: pengabdian, isLoading: isLoadingPengabdian } =
+    useQueryGetPengabdianReviewer(searchPengabdian, pagePengabdian);
+
+  const { data: totalProposal } = useQueryTotalProposalReviewer();
   const handlePageChangePenelitian = (event) => {
     setPagePenelitian(event.selected + 1);
   };
@@ -33,10 +42,7 @@ export default function ProposalPageReviewer() {
     setSearchPengabdian(value);
   }, 1000);
 
-  const { data: penelitian, isLoading: isLoadingPenelitian } =
-    useQueryGetPenelitianReviewer(searchPenelitian, pagePenelitian);
-  const { data: pengabdian, isLoading: isLoadingPengabdian } =
-    useQueryGetPengabdianReviewer(searchPengabdian, pagePengabdian);
+  console.log(penelitian);
 
   const penelitianRevisi = penelitian?.data.filter(
     (item) => item.status_lppm === "Revisi",
@@ -83,14 +89,16 @@ export default function ProposalPageReviewer() {
           </div>
         </div>
         {currentTab === "penelitian" || !currentTab ? (
-          <ListPenelitianProposalLPPM
+          <ListPenelitianProposalReviewer
             penelitian={penelitian}
             isLoading={isLoadingPenelitian}
             currentTab={currentTab}
             tabActive={tabActive}
-            jumlahPenelitianDisetujui={penelitianDisetujui}
-            jumlahPenelitianDitolak={penelitianDitolak}
-            jumlahPenelitianRevisi={penelitianRevisi}
+            jumlahPenelitianDisetujui={
+              totalProposal?.data?.penelitian_disetujui
+            }
+            jumlahPenelitianDitolak={totalProposal?.data?.penelitian_ditolak}
+            jumlahPenelitianRevisi={totalProposal?.data?.penelitian_revisi}
             handlePageChange={handlePageChangePenelitian}
           />
         ) : (
@@ -99,9 +107,11 @@ export default function ProposalPageReviewer() {
             isLoading={isLoadingPengabdian}
             currentTab={currentTab}
             tabActive={tabActive}
-            jumlahPengabdianDisetujui={pengabdianDisetujui}
-            jumlahPengabdianRevisi={pengabdianRevisi}
-            jumlahPengabdianDitolak={pengabdianDitolak}
+            jumlahPengabdianDisetujui={
+              totalProposal?.data?.pengabdian_disetujui
+            }
+            jumlahPengabdianRevisi={totalProposal?.data?.pengabdian_revisi || 0}
+            jumlahPengabdianDitolak={totalProposal?.data?.pengabdian_ditolak}
             handlePagePengabdianChange={handlePageChangePengabdian}
           />
         )}
