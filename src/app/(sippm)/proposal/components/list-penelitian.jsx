@@ -51,9 +51,9 @@ const ListItem = ({ data, currentTab, tabActive }) => {
       key={data?.id}
     >
       <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between">
-        <div className="flex w-fit flex-col gap-1 lg:max-w-[631px]">
+        <div className="flex w-fit flex-col gap-1 lg:max-w-[731px]">
           <h2 className="text-lg">{data?.judul}</h2>
-          <div className="flex gap-4">
+          <div className="flex flex-wrap gap-x-4 gap-y-2">
             <div className="flex items-center gap-[2px]">
               <Image
                 src="/icons/User.svg"
