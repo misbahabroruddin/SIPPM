@@ -18,8 +18,8 @@ export default function TrackPenelitianDosenPage() {
         title={capitalFirtsLatter(pathArr[2])}
       />
       <Timeline>
-        <RiwayatPenelitianLPPM />
         <RiwayatPenelitianReviewer />
+        <RiwayatPenelitianLPPM />
       </Timeline>
     </div>
   );
