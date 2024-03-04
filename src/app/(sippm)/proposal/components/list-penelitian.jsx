@@ -102,7 +102,7 @@ const ListItem = ({ data, currentTab, tabActive }) => {
                 href={`/proposal/${currentTab || tabActive}/track/${data?.id}`}
               >
                 <button
-                  className="hidden rounded-lg bg-primary px-7 py-2 text-white disabled:cursor-not-allowed disabled:bg-gray-500"
+                  className="rounded-lg bg-primary px-7 py-2 text-white disabled:cursor-not-allowed disabled:bg-gray-500"
                   disabled={data?.status_lppm === "Pending"}
                 >
                   Track
@@ -115,7 +115,7 @@ const ListItem = ({ data, currentTab, tabActive }) => {
                 onClick={() => {
                   Swal.fire({
                     title: "Anda yakin?",
-                    text: "  Anda tidak akan dapat mengembalikan ini!",
+                    text: "Anda tidak akan dapat mengembalikan ini!",
                     icon: "warning",
                     dangerMode: true,
                     showCancelButton: true,
