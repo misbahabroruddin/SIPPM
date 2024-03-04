@@ -3,11 +3,20 @@
 import { usePathname } from "next/navigation";
 
 import { BasePageTitle } from "@/components/base-page-title";
-import { RiwayatPengabdianLPPM } from "@/components/riwayat/pengabdian/lppm/riwayat-pengabdian-lppm";
-import { RiwayatPengabdianReviewer } from "@/components/riwayat/pengabdian/reviewer/riwayat-pengabdian-reviewer";
+import { RiwayatPenelitianLPPM } from "@/components/riwayat/lppm/riwayat-penelitian-lppm";
+import { RiwayatPenelitianReviewer } from "@/components/riwayat/reviewer/riwayat-penelitian-reviewer";
 import { Timeline } from "@/components/timeline";
+import { capitalFirtsLatter } from "@/lib/utils/capitalizeFirstLetter";
+import { useQueryGetRiwayatTrackDosenLPPM } from "@/handlers/lppm/query-get-riwayat-track";
+import { useQueryGetRiwayatTrackDosenReviewer } from "@/handlers/reviewer/query-get-riwayat-track";
 
 export default function TrackPengabdianDosenPage() {
+  const { data: dataTrackDosenLPPM, isLoading: isLoadingTrackDosenLPPM } =
+    useQueryGetRiwayatTrackDosenLPPM();
+  const {
+    data: dataTrackDosenReviewer,
+    isLoading: isLoadingTrackDosenReviewer,
+  } = useQueryGetRiwayatTrackDosenReviewer();
   const path = usePathname();
   const pathArr = path.split("/");
   return (
@@ -17,8 +26,14 @@ export default function TrackPengabdianDosenPage() {
         title={capitalFirtsLatter(pathArr[2])}
       />
       <Timeline>
-        <RiwayatPengabdianLPPM />
-        <RiwayatPengabdianReviewer />
+        <RiwayatPenelitianReviewer
+          data={dataTrackDosenReviewer}
+          isLoading={isLoadingTrackDosenReviewer}
+        />
+        <RiwayatPenelitianLPPM
+          data={dataTrackDosenLPPM}
+          isLoading={isLoadingTrackDosenLPPM}
+        />
       </Timeline>
     </div>
   );
