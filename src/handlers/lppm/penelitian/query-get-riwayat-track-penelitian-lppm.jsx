@@ -13,7 +13,7 @@ export const useQueryGetRiwayatTrackPenelitianLPPM = () => {
     queryKey: ["riwayatPenelitianLPPM", id],
     queryFn: async () => {
       try {
-        const { data } = await axios.get(`/lppms/penelitians/${id}`);
+        const { data } = await axios.get(`/proposals/riwayats/${id}/lppms`);
         return data.data;
       } catch (error) {
         toast.error("Error: " + error.message);
