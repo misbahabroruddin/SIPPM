@@ -36,19 +36,6 @@ export default function DashboardDosen() {
 
   return (
     <div className="flex flex-col gap-4">
-      {currentTab === "penelitian" || !currentTab ? (
-        <ListCardPenelitianDashboardDosen
-          jumlahPenelitian={totalProposal?.data.penelitian_disetujui}
-          jumlahPenelitianDisetujui={totalProposal?.data.penelitian_disetujui}
-          jumlahPenelitianDitolak={totalProposal?.data.penelitian_ditolak}
-        />
-      ) : (
-        <ListCardPengabdianDashboardDosen
-          jumlahPengabdian={totalProposal?.data.pengabdian_ditolak}
-          jumlahPengabdianDisetujui={totalProposal?.data.pengabdian_disetujui}
-          jumlahPengabdianDitolak={totalProposal?.data.pengabdian_ditolak}
-        />
-      )}
       <div className="flex justify-between">
         <div className="flex items-center gap-2 lg:gap-4">
           <Tabs
@@ -74,6 +61,7 @@ export default function DashboardDosen() {
             currentTab={currentTab}
             tabActive={tabActive}
             isLoading={isLoadingPenelitian}
+            totalProposal={totalProposal}
           />
         ) : (
           <ListPengabdian
@@ -81,6 +69,7 @@ export default function DashboardDosen() {
             currentTab={currentTab}
             tabActive={tabActive}
             isLoading={isLoadingPengabdian}
+            totalProposal={totalProposal}
           />
         )}
       </div>
