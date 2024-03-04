@@ -12,25 +12,34 @@ import { useDeletePenelitianDosen } from "@/handlers/dosen/penelitian/delete-pen
 import { useStep } from "@/lib/hooks/useStep";
 import { SkeletonListingProposal } from "@/components/skeleton/skeleton-listing-proposal";
 import { EmptyState } from "@/components/empty-state";
+import ListCardPenelitianDashboardDosen from "./list-card-penelitian-dashboard-dosen";
 
 export const ListPenelitian = ({
   penelitian,
   currentTab,
   tabActive,
   isLoading,
+  totalProposal,
 }) => {
   if (isLoading) return <SkeletonListingProposal />;
   return (
     <div className="flex flex-col gap-4">
       {penelitian?.length ? (
-        penelitian?.map((proposal) => (
-          <ListItem
-            key={proposal.id}
-            data={proposal}
-            currentTab={currentTab}
-            tabActive={tabActive}
+        <>
+          <ListCardPenelitianDashboardDosen
+            jumlahPenelitian={totalProposal?.data?.total || 0}
+            jumlahPenelitianDisetujui={totalProposal?.data.penelitian_disetujui}
+            jumlahPenelitianDitolak={totalProposal?.data.penelitian_ditolak}
           />
-        ))
+          {penelitian?.map((proposal) => (
+            <ListItem
+              key={proposal.id}
+              data={proposal}
+              currentTab={currentTab}
+              tabActive={tabActive}
+            />
+          ))}
+        </>
       ) : (
         <EmptyState />
       )}

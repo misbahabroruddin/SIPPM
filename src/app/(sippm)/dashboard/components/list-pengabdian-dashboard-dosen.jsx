@@ -12,25 +12,34 @@ import { useDeletePengabdianDosen } from "@/handlers/dosen/pengabdian/delete-pen
 import { useStep } from "@/lib/hooks/useStep";
 import { SkeletonListingProposal } from "@/components/skeleton/skeleton-listing-proposal";
 import { EmptyState } from "@/components/empty-state";
+import ListCardPengabdianDashboardDosen from "./list-card-pengabdian-dashboard-dosen";
 
 export const ListPengabdian = ({
   pengabdian,
   currentTab,
   tabActive,
   isLoading,
+  totalProposal,
 }) => {
   if (isLoading) return <SkeletonListingProposal />;
   return (
     <div className="flex flex-col gap-4">
       {pengabdian?.length ? (
-        pengabdian?.map((proposal) => (
-          <ListItem
-            key={proposal.id}
-            data={proposal}
-            currentTab={currentTab}
-            tabActive={tabActive}
+        <>
+          <ListCardPengabdianDashboardDosen
+            jumlahPengabdian={totalProposal?.data.total || 0}
+            jumlahPengabdianDisetujui={totalProposal?.data.pengabdian_disetujui}
+            jumlahPengabdianDitolak={totalProposal?.data.pengabdian_ditolak}
           />
-        ))
+          {pengabdian?.map((proposal) => (
+            <ListItem
+              key={proposal.id}
+              data={proposal}
+              currentTab={currentTab}
+              tabActive={tabActive}
+            />
+          ))}
+        </>
       ) : (
         <EmptyState />
       )}
