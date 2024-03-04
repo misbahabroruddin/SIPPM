@@ -26,9 +26,6 @@ export default function BiodataPageDosen() {
             <div className="flex flex-col gap-3 rounded-2xl border border-gray-200 shadow-custom">
               <div className="relative flex flex-col gap-2 border-b border-gray-200 px-8 pt-4">
                 <h2 className="text-lg font-[500] text-primary">Biodata</h2>
-                {/* <p className="z-20 w-fit rounded-lg rounded-bl-none rounded-br-none border border-b-0 border-gray-200 px-2 py-1">
-                  Biodata
-                </p> */}
               </div>
               <FormBiodata />
             </div>
