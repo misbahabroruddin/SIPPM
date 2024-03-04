@@ -41,7 +41,7 @@ export default function ProposalPageDosen() {
       <div className="flex flex-col gap-4">
         <BasePageTitle
           iconSrc="/icons/search-black.svg"
-          title={capitalFirtsLatter(currentTab || tabActive)}
+          title={`Proposal - ${capitalFirtsLatter(currentTab || tabActive)}`}
         />
         <div className="flex justify-between">
           <div className="flex items-center gap-2 lg:gap-4">
