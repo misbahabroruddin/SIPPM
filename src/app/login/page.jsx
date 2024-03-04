@@ -6,7 +6,6 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
-import { twMerge } from "tailwind-merge";
 
 export default function Login() {
   const [isLoading, setIsLoading] = useState(false);
@@ -76,6 +75,7 @@ export default function Login() {
               errors={errors.password}
               name="password"
               required
+              type="password"
               placeholder="Masukkan password"
               spanEmptyClass="hidden"
             />
