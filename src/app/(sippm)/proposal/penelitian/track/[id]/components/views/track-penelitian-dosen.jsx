@@ -5,8 +5,8 @@ import { usePathname } from "next/navigation";
 import { BasePageTitle } from "@/components/base-page-title";
 import { capitalFirtsLatter } from "@/lib/utils/capitalizeFirstLetter";
 import { Timeline } from "@/components/timeline";
-import { RiwayatPenelitianLPPM } from "@/components/riwayat/lppm/riwayat-penelitian-lppm";
-import { RiwayatPenelitianReviewer } from "@/components/riwayat/reviewer/riwayat-penelitian-reviewer";
+import { TrackRiwayatLPPM } from "@/components/riwayat/lppm/riwayat-lppm";
+import { RiwayatPenelitianReviewer } from "@/components/riwayat/reviewer/riwayat-reviewer";
 import { useQueryGetRiwayatTrackDosenLPPM } from "@/handlers/lppm/query-get-riwayat-track";
 import { useQueryGetRiwayatTrackDosenReviewer } from "@/handlers/reviewer/query-get-riwayat-track";
 
@@ -30,7 +30,7 @@ export default function TrackPenelitianDosenPage() {
           data={dataTrackDosenReviewer}
           isLoading={isLoadingTrackDosenReviewer}
         />
-        <RiwayatPenelitianLPPM
+        <TrackRiwayatLPPM
           data={dataTrackDosenLPPM}
           isLoading={isLoadingTrackDosenLPPM}
         />

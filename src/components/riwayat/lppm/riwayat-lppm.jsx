@@ -9,7 +9,6 @@ import Link from "next/link";
 import { ButtonStatus } from "@/components/button/button-status";
 import { ContainerContent } from "@/components/container-content";
 import {
-  TimelineConnector,
   TimelineContent,
   TimelineHeader,
   TimelineItem,
@@ -19,13 +18,13 @@ import {
   convertToDateNumeric,
   convertToTime,
 } from "@/lib/utils/convertDate";
-import { RiwayatPesanPenelitianLPPM } from "./riwayat-pesan-penelitian-lppm";
+import { RiwayatPesanLPPM } from "./riwayat-pesan-lppm";
 import { ButtonUpdate } from "@/components/button/button-update";
 import { convertToRupiah } from "@/lib/utils/convertToRupiah";
 import { useStep } from "@/lib/hooks/useStep";
 import { SkeletonRiwayat } from "@/components/skeleton/skeleton-riwayat";
 
-export const RiwayatPenelitianLPPM = ({ data, isLoading }) => {
+export const TrackRiwayatLPPM = ({ data, isLoading }) => {
   const [isOpen, setIsOpen] = useState();
   const { id } = useParams();
   const { setCurrentStep } = useStep();
@@ -132,7 +131,7 @@ export const RiwayatPenelitianLPPM = ({ data, isLoading }) => {
                       isOpen === item.id && "h-fit",
                     )}
                   >
-                    <RiwayatPesanPenelitianLPPM
+                    <RiwayatPesanLPPM
                       riwayatId={item?.id}
                       status={item?.status}
                       catatan={item?.catatan}

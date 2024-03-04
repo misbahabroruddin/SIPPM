@@ -3,8 +3,8 @@
 import { usePathname } from "next/navigation";
 
 import { BasePageTitle } from "@/components/base-page-title";
-import { RiwayatPenelitianLPPM } from "@/components/riwayat/lppm/riwayat-penelitian-lppm";
-import { RiwayatPenelitianReviewer } from "@/components/riwayat/reviewer/riwayat-penelitian-reviewer";
+import { TrackRiwayatLPPM } from "@/components/riwayat/lppm/riwayat-lppm";
+import { RiwayatPenelitianReviewer } from "@/components/riwayat/reviewer/riwayat-reviewer";
 import { Timeline } from "@/components/timeline";
 import { capitalFirtsLatter } from "@/lib/utils/capitalizeFirstLetter";
 import { useQueryGetRiwayatTrackDosenLPPM } from "@/handlers/lppm/query-get-riwayat-track";
@@ -30,7 +30,7 @@ export default function TrackPengabdianDosenPage() {
           data={dataTrackDosenReviewer}
           isLoading={isLoadingTrackDosenReviewer}
         />
-        <RiwayatPenelitianLPPM
+        <TrackRiwayatLPPM
           data={dataTrackDosenLPPM}
           isLoading={isLoadingTrackDosenLPPM}
         />
