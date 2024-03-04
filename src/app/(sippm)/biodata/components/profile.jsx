@@ -40,7 +40,7 @@ export const Profile = () => {
             ))}
           </div>
           <div className="flex flex-col gap-2 text-sm font-[500] text-[#666666]">
-            <p>{session?.user.roles[0].name}</p>
+            <p>{session?.user.roles[0].description}</p>
             <p>{profile?.nama_lengkap}</p>
             <p>{profile?.nidn_or_nidk_or_nim || session?.user.username}</p>
             <p>{profile?.nomor_hp || "-"}</p>
