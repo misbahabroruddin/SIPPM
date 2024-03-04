@@ -9,9 +9,7 @@ export const useQueryGetRiwayatPesanLPPMPenelitian = (riwayatId) => {
 
   const fetchRiwayatPesanLPPMPenelitian = async () => {
     try {
-      const { data } = await axios.get(
-        `/lppms/penelitians/riwayats/${riwayatId}/chats`
-      );
+      const { data } = await axios.get(`/proposals/chats/${riwayatId}/lppms`);
 
       return data.data;
     } catch (error) {

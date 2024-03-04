@@ -32,10 +32,10 @@ export const RiwayatPesanPenelitianLPPM = ({ riwayatId, status, catatan }) => {
       </div>
       <div
         className={`border-black-09 rounded-lg border p-2 ${
-          data?.data.length > 0 ? "" : "hidden"
+          data?.length > 0 ? "" : "hidden"
         }`}
       >
-        {data?.data.map((riwayat) => (
+        {data?.map((riwayat) => (
           <div className="mt-4 flex flex-col gap-1" key={riwayat?.id}>
             <div
               className={`flex ${
@@ -66,7 +66,7 @@ export const RiwayatPesanPenelitianLPPM = ({ riwayatId, status, catatan }) => {
                 (
                 {riwayat?.user_id === session?.user?.id
                   ? "Saya"
-                  : riwayat?.name || "NAMA REVIEWER"}
+                  : riwayat?.user?.name || "NAMA REVIEWER"}
                 )
               </p>
             </div>

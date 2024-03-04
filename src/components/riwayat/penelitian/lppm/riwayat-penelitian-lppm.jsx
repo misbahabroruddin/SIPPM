@@ -32,6 +32,8 @@ export const RiwayatPenelitianLPPM = () => {
   const { data, isLoading } = useQueryGetRiwayatTrackPenelitianLPPM();
   const { setCurrentStep } = useStep();
 
+  const updatedData = data ? data[data.length - 1] : null;
+
   if (isLoading) {
     return (
       <div className="flex flex-col gap-4">
@@ -41,11 +43,8 @@ export const RiwayatPenelitianLPPM = () => {
   }
 
   return (
-    <TimelineItem
-      date={convertDate(data?.riwayat_lppm_penelitians[0]?.updated_at, " ")}
-    >
-      <TimelineConnector />
-      <TimelineHeader status={data?.status_lppm} />
+    <TimelineItem date={convertDate(updatedData?.updated_at, " " || "")}>
+      <TimelineHeader status={updatedData?.proposal?.status_lppm} />
       <TimelineContent isLoading={isLoading}>
         <ContainerContent className="p-4">
           <div className="flex w-full flex-col  justify-between gap-2">
@@ -56,18 +55,16 @@ export const RiwayatPenelitianLPPM = () => {
               <div className="flex grow items-center justify-between">
                 <p className="text-dark-09">Nama reviewer</p>
                 <ButtonStatus
-                  status={data?.status_lppm}
+                  status={updatedData?.proposal?.status_lppm}
                   className="px-2 py-1 text-xs font-[500]"
                 />
               </div>
               <p className="text-end font-semibold text-primary">
-                {convertToRupiah(
-                  data?.riwayat_lppm_penelitians[0]?.dana_yang_disetujui,
-                )}
+                {convertToRupiah(updatedData?.dana_yang_disetujui)}
               </p>
             </div>
             <div className="mt-8 flex flex-col gap-2">
-              {data?.riwayat_lppm_penelitians.map((item, index) => (
+              {data?.toReversed()?.map((item) => (
                 <div
                   className="overflow-hidden rounded-lg px-4 py-3 shadow-custom transition-all"
                   key={item.id}
@@ -82,11 +79,11 @@ export const RiwayatPenelitianLPPM = () => {
                       />
                       <Link
                         target="_blank"
-                        href={item.file_proposal.path.pdf || ""}
+                        href={item.file_proposal || ""}
                         className="hover:underline"
                       >
                         <p className="text-dark-09">
-                          {item.file_proposal.name}.pdf
+                          {item.file_proposal.name || "Klik untuk lebih detail"}
                         </p>
                       </Link>
                     </div>
@@ -138,15 +135,18 @@ export const RiwayatPenelitianLPPM = () => {
                     )}
                   >
                     <RiwayatPesanPenelitianLPPM
-                      riwayatId={item.id}
-                      status={data?.status_lppm}
-                      catatan={item.catatan}
+                      riwayatId={item?.id}
+                      status={item?.status}
+                      catatan={item?.catatan}
                     />
                   </div>
                 </div>
               ))}
             </div>
-            <Link href={`/proposal/penelitian/edit/${id}`}>
+            <Link
+              href={`/proposal/penelitian/edit/${id}`}
+              className={updatedData?.status === "Diterima" ? "hidden" : ""}
+            >
               <ButtonUpdate
                 text="Perbarui"
                 className="mt-3 flex w-full justify-center bg-primary disabled:bg-gray-500 disabled:opacity-100"
@@ -156,7 +156,6 @@ export const RiwayatPenelitianLPPM = () => {
                   localStorage.setItem("step", 1);
                   setCurrentStep(1);
                 }}
-                disabled={data?.status_lppm === "Diterima"}
               />
             </Link>
           </div>
