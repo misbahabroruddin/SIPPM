@@ -13,8 +13,8 @@ export const useCreatePesanPenelitianLPPM = (riwayatId, reset) => {
       const formData = new FormData();
       formData.append("chat", form.chat);
       const { data } = await axios.post(
-        `lppms/penelitians/riwayats/${riwayatId}/chats`,
-        formData
+        `/proposals/chats/${riwayatId}/lppms`,
+        formData,
       );
       reset();
       return data;
