@@ -26,7 +26,7 @@ const FormBiodata = () => {
 
   const { data: profile, refetch } = useGetProfile(setValue);
   const [tanggalLahir, setTanggalLahir] = useState(
-    profile?.tanggal_lahir ? new Date(profile?.tanggal_lahir) : "",
+    profile ? new Date(profile?.tanggal_lahir) : null,
   );
 
   const { mutateAsync: onSubmit, isPending: isLoading } =
