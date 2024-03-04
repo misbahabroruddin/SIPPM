@@ -66,7 +66,7 @@ export const RiwayatPesanPenelitianLPPM = ({ riwayatId, status, catatan }) => {
                 (
                 {riwayat?.user_id === session?.user?.id
                   ? "Saya"
-                  : riwayat?.name || "NAMA REVIEWER"}
+                  : riwayat?.user?.name || "NAMA REVIEWER"}
                 )
               </p>
             </div>
