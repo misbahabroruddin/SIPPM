@@ -1,5 +1,6 @@
 "use client";
 
+import { Input } from "@/components/input/input";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -44,48 +45,42 @@ export default function Login() {
     <div className="flex h-screen items-center">
       <div className="image hidden h-full lg:flex lg:w-4/6 lg:items-center lg:justify-center"></div>
       <div className="flex w-full items-center justify-center p-4 lg:w-1/2">
-        <div className="flex w-full flex-col justify-center gap-4 lg:w-1/2">
+        <div className="flex w-full flex-col justify-center gap-4 rounded-xl px-6 py-10 shadow-custom lg:w-3/5">
           <h1 className="mb-5 text-center text-xl">Login to SIPPM UNSIA</h1>
           <form
             onSubmit={handleSubmit(onSubmit)}
             className="flex flex-col gap-2"
           >
-            <div className="flex flex-col gap-1">
-              <label htmlFor="username">Username</label>
-              <input
-                type="text"
-                name="username"
-                id="username"
-                className={twMerge(
-                  "rounded-lg border border-gray-500 px-3 py-2",
-                  errors.username ? "border-red-500" : "",
-                )}
-                {...register("username", { required: "Username harus diisi" })}
-                placeholder="Masukkan Username"
-              />
-              {errors.username && (
-                <p className="text-red-500">{errors.username.message}</p>
-              )}
-            </div>
-            <div className="flex flex-col gap-1">
-              <label htmlFor="password">Password</label>
-              <input
-                type="password"
-                name="password"
-                id="password"
-                className={twMerge(
-                  "rounded-lg border border-gray-500 px-3 py-2",
-                  errors.password ? "border-red-500" : "",
-                )}
-                {...register("password", { required: "Password harus diisi" })}
-                placeholder="Masukkan password"
-              />
-              {errors.password && (
-                <p className="text-red-500">{errors.password.message}</p>
-              )}
-            </div>
+            <Input
+              containerClass="flex flex-col items-start gap-1"
+              labelClass="flex items-start gap-1"
+              label="Username"
+              inputClass="rounded-lg border border-gray-500 px-3 py-2"
+              register={register("username", {
+                required: "Username harus diisi",
+              })}
+              errors={errors.username}
+              name="username"
+              required
+              placeholder="Masukkan username"
+              spanEmptyClass="hidden"
+            />
+            <Input
+              containerClass="flex flex-col items-start gap-1"
+              labelClass="flex items-start gap-1"
+              label="Password"
+              inputClass="rounded-lg border border-gray-500 px-3 py-2"
+              register={register("password", {
+                required: "Password harus diisi",
+              })}
+              errors={errors.password}
+              name="password"
+              required
+              placeholder="Masukkan password"
+              spanEmptyClass="hidden"
+            />
             <button
-              className="mt-4 rounded-lg bg-[#10487A] px-3 py-2 text-white disabled:cursor-not-allowed disabled:bg-gray-400"
+              className="mt-4 rounded-lg bg-primary px-3 py-2 text-white disabled:cursor-not-allowed disabled:bg-gray-400"
               disabled={isLoading}
             >
               Login
