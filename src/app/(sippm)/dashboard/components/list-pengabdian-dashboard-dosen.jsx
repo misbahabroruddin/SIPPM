@@ -24,22 +24,20 @@ export const ListPengabdian = ({
   if (isLoading) return <SkeletonListingProposal />;
   return (
     <div className="flex flex-col gap-4">
+      <ListCardPengabdianDashboardDosen
+        jumlahPengabdian={totalProposal?.data.total || 0}
+        jumlahPengabdianDisetujui={totalProposal?.data.pengabdian_disetujui}
+        jumlahPengabdianDitolak={totalProposal?.data.pengabdian_ditolak}
+      />
       {pengabdian?.length ? (
-        <>
-          <ListCardPengabdianDashboardDosen
-            jumlahPengabdian={totalProposal?.data.total || 0}
-            jumlahPengabdianDisetujui={totalProposal?.data.pengabdian_disetujui}
-            jumlahPengabdianDitolak={totalProposal?.data.pengabdian_ditolak}
+        pengabdian?.map((proposal) => (
+          <ListItem
+            key={proposal.id}
+            data={proposal}
+            currentTab={currentTab}
+            tabActive={tabActive}
           />
-          {pengabdian?.map((proposal) => (
-            <ListItem
-              key={proposal.id}
-              data={proposal}
-              currentTab={currentTab}
-              tabActive={tabActive}
-            />
-          ))}
-        </>
+        ))
       ) : (
         <EmptyState />
       )}
@@ -109,7 +107,6 @@ const ListItem = ({ data, currentTab, tabActive }) => {
               </div>
               <Link
                 href={`/proposal/${currentTab || tabActive}/track/${data?.id}`}
-                className="hidden"
               >
                 <button
                   className="rounded-lg bg-primary px-7 py-2 text-white disabled:cursor-not-allowed disabled:bg-gray-500"
