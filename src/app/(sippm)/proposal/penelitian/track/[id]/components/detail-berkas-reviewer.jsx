@@ -8,7 +8,7 @@ export const DetailBerkasReviewer = ({ data }) => {
     <div className="flex flex-col gap-3">
       <h4 className="text-lg font-[500]">Berkas</h4>
       <DetailListBerkas data={data} />
-      {data?.data?.status_lppm === "Diterima" && (
+      {data?.data?.status_reviewer !== "Diterima" && (
         <FormVerifikasiUsulanReviewer />
       )}
     </div>
