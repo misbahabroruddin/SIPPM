@@ -4,12 +4,12 @@ import Image from "next/image";
 import { useForm } from "react-hook-form";
 
 import { convertToDateNumeric, convertToTime } from "@/lib/utils/convertDate";
-import { useQueryGetRiwayatPesanLPPMPenelitian } from "@/handlers/lppm/penelitian/query-get-riwayat-pesan-lppm-penelitian";
+import { useQueryGetRiwayatPesanLPPM } from "@/handlers/lppm/query-get-riwayat-pesan-lppm";
 import { useCreatePesanPenelitianLPPM } from "@/handlers/lppm/penelitian/add-pesan-penelitian-lppm";
 import { FormChat } from "@/components/form/form-chat";
 
 export const RiwayatPesanLPPM = ({ riwayatId, status, catatan, index }) => {
-  const { data } = useQueryGetRiwayatPesanLPPMPenelitian(riwayatId);
+  const { data } = useQueryGetRiwayatPesanLPPM(riwayatId);
   const { data: session } = useSession();
   const {
     register,
