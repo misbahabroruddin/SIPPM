@@ -1,6 +1,6 @@
 "use client";
 
-import { usePathname, useSearchParams } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 import { BasePageTitle } from "@/components/base-page-title";
 import { capitalFirtsLatter } from "@/lib/utils/capitalizeFirstLetter";
@@ -13,9 +13,14 @@ import { DetailAnggota } from "../detail-anggota";
 import { DetailTargetCapaian } from "../detail-target-capaian";
 import { DetailRencanaAnggaran } from "../detail-rencana-anggaran";
 import { DetailRincianKegiatan } from "../detail-rincian-kegiatan";
-import { DetailBerkas } from "../detail-berkas";
 import { useQueryDetailPenelitianReviewer } from "@/handlers/lppm/penelitian/query-get-detail-penelitian-reviewer";
 import { DetailBerkasReviewer } from "../detail-berkas-reviewer";
+import { Timeline } from "@/components/timeline";
+import { TrackRiwayatReviewer } from "@/components/riwayat/reviewer/riwayat-reviewer";
+import { TrackRiwayatLPPM } from "@/components/riwayat/lppm/riwayat-lppm";
+import { useQueryGetRiwayatTrackDosenLPPM } from "@/handlers/lppm/query-get-riwayat-track";
+import { useQueryGetRiwayatTrackDosenReviewer } from "@/handlers/reviewer/query-get-riwayat-track";
+import { ButtonBeranda } from "@/components/button/button-beranda";
 
 export default function TrackPenelitianReviewerPage() {
   const [tabActive] = useState("dokumen");
@@ -25,8 +30,15 @@ export default function TrackPenelitianReviewerPage() {
   const innerTab = tabParams.get("tab2");
   const path = usePathname();
   const pathArr = path.split("/");
+  const router = useRouter();
 
   const { data } = useQueryDetailPenelitianReviewer();
+  const { data: dataTrackDosenLPPM, isLoading: isLoadingTrackDosenLPPM } =
+    useQueryGetRiwayatTrackDosenLPPM();
+  const {
+    data: dataTrackDosenReviewer,
+    isLoading: isLoadingTrackDosenReviewer,
+  } = useQueryGetRiwayatTrackDosenReviewer();
 
   return (
     <div className="flex flex-col gap-3">
@@ -56,7 +68,22 @@ export default function TrackPenelitianReviewerPage() {
             </div>
           </>
         ) : (
-          <>riwayat</>
+          <>
+            <Timeline>
+              <TrackRiwayatReviewer
+                data={dataTrackDosenReviewer}
+                isLoading={isLoadingTrackDosenReviewer}
+              />
+              <TrackRiwayatLPPM
+                data={dataTrackDosenLPPM}
+                isLoading={isLoadingTrackDosenLPPM}
+              />
+            </Timeline>
+            <ButtonBeranda
+              className="ml-auto w-fit px-8"
+              onClick={() => router.push("/dashboard")}
+            />
+          </>
         )}
       </div>
     </div>
