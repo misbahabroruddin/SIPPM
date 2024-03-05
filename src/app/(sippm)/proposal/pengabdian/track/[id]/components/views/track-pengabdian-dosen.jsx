@@ -3,12 +3,12 @@
 import { usePathname } from "next/navigation";
 
 import { BasePageTitle } from "@/components/base-page-title";
-import { TrackRiwayatLPPM } from "@/components/riwayat/lppm/riwayat-lppm";
-import { RiwayatPenelitianReviewer } from "@/components/riwayat/reviewer/riwayat-reviewer";
 import { Timeline } from "@/components/timeline";
 import { capitalFirtsLatter } from "@/lib/utils/capitalizeFirstLetter";
 import { useQueryGetRiwayatTrackDosenLPPM } from "@/handlers/lppm/query-get-riwayat-track";
 import { useQueryGetRiwayatTrackDosenReviewer } from "@/handlers/reviewer/query-get-riwayat-track";
+import { TrackDosenLPPM } from "@/components/riwayat/dosen/track-dosen-lppm";
+import { TrackDosenReviewer } from "@/components/riwayat/dosen/track-dosen-reviewer";
 
 export default function TrackPengabdianDosenPage() {
   const { data: dataTrackDosenLPPM, isLoading: isLoadingTrackDosenLPPM } =
@@ -26,11 +26,11 @@ export default function TrackPengabdianDosenPage() {
         title={capitalFirtsLatter(pathArr[2])}
       />
       <Timeline>
-        <RiwayatPenelitianReviewer
+        <TrackDosenReviewer
           data={dataTrackDosenReviewer}
           isLoading={isLoadingTrackDosenReviewer}
         />
-        <TrackRiwayatLPPM
+        <TrackDosenLPPM
           data={dataTrackDosenLPPM}
           isLoading={isLoadingTrackDosenLPPM}
         />
