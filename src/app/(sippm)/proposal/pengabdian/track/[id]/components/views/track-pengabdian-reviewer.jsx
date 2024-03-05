@@ -1,6 +1,6 @@
 "use client";
 
-import { usePathname, useSearchParams } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 import { BasePageTitle } from "@/components/base-page-title";
 import { capitalFirtsLatter } from "@/lib/utils/capitalizeFirstLetter";
@@ -30,6 +30,7 @@ export default function TrackPengabdianReviewerPage() {
   const innerTab = tabParams.get("tab2");
   const path = usePathname();
   const pathArr = path.split("/");
+  const router = useRouter();
 
   const { data } = useQueryDetailPengabdianReviewer();
   const { data: dataTrackDosenLPPM, isLoading: isLoadingTrackDosenLPPM } =
@@ -78,7 +79,10 @@ export default function TrackPengabdianReviewerPage() {
                 isLoading={isLoadingTrackDosenLPPM}
               />
             </Timeline>
-            <ButtonBeranda className="ml-auto w-fit px-8" />
+            <ButtonBeranda
+              className="ml-auto w-fit px-8"
+              onClick={() => router.push("/dashboard")}
+            />
           </>
         )}
       </div>
