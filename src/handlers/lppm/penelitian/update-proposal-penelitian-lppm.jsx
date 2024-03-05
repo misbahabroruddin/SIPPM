@@ -41,6 +41,11 @@ export const useUpdateProposalPenelitian = (reset, router) => {
       queryClient.invalidateQueries({
         queryKey: ["listingPenelitianLPPM", ""],
       });
+      queryClient.resetQueries({ queryKey: ["trackDosenLPPM", id] });
+      queryClient.resetQueries({ queryKey: ["trackDosenReviewer", id] });
+      queryClient.resetQueries({ queryKey: ["totalProposalReviewer"] });
+      queryClient.resetQueries({ queryKey: ["totalProposalLPPM"] });
+      queryClient.resetQueries({ queryKey: ["totalProposalDosen"] });
     },
   });
 

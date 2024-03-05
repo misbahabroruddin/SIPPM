@@ -43,6 +43,9 @@ export const useUpdateProposalPengabdian = (reset, router) => {
       });
       queryClient.resetQueries({ queryKey: ["trackDosenLPPM", id] });
       queryClient.resetQueries({ queryKey: ["trackDosenReviewer", id] });
+      queryClient.resetQueries({ queryKey: ["totalProposalReviewer"] });
+      queryClient.resetQueries({ queryKey: ["totalProposalLPPM"] });
+      queryClient.resetQueries({ queryKey: ["totalProposalDosen"] });
     },
   });
 

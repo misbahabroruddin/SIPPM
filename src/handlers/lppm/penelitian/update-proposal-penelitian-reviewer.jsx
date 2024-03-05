@@ -44,6 +44,8 @@ export const useUpdateProposalPenelitianReviewer = (reset, router) => {
       queryClient.resetQueries({
         queryKey: ["listingPenelitianReviewer"],
       });
+      queryClient.resetQueries({ queryKey: ["trackDosenLPPM", id] });
+      queryClient.resetQueries({ queryKey: ["trackDosenReviewer", id] });
     },
   });
 
