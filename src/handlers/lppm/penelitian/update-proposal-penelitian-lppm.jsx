@@ -37,8 +37,10 @@ export const useUpdateProposalPenelitian = (reset, router) => {
   const mutate = useMutation({
     mutationFn: onSubmit,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["listPenelitian"] });
-      queryClient.invalidateQueries({ queryKey: ["listingPenelitianLPPM"] });
+      queryClient.resetQueries({ queryKey: ["listPenelitian"] });
+      queryClient.invalidateQueries({
+        queryKey: ["listingPenelitianLPPM", ""],
+      });
     },
   });
 

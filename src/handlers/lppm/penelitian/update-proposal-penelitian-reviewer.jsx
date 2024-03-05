@@ -37,12 +37,12 @@ export const useUpdateProposalPenelitianReviewer = (reset, router) => {
   const mutate = useMutation({
     mutationFn: onSubmit,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["listPenelitian"] });
-      queryClient.invalidateQueries({
-        queryKey: ["listingPenelitianLPPM", "", 1],
+      queryClient.resetQueries({ queryKey: ["listPenelitian"] });
+      queryClient.resetQueries({
+        queryKey: ["listingPenelitianLPPM"],
       });
-      queryClient.invalidateQueries({
-        queryKey: ["listingPenelitianReviewer", "", 1],
+      queryClient.resetQueries({
+        queryKey: ["listingPenelitianReviewer"],
       });
     },
   });

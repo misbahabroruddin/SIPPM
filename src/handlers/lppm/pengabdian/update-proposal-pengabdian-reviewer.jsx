@@ -37,12 +37,12 @@ export const useUpdateProposalPengabdianReviewer = (reset, router) => {
   const mutate = useMutation({
     mutationFn: onSubmit,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["listPengabdian"] });
-      queryClient.invalidateQueries({
-        queryKey: ["listingPengabdianLPPM", "", 1],
+      queryClient.resetQueries({ queryKey: ["listPengabdian"] });
+      queryClient.resetQueries({
+        queryKey: ["listingPengabdianLPPM"],
       });
-      queryClient.invalidateQueries({
-        queryKey: ["listingPengabdianReviewer", "", 1],
+      queryClient.resetQueries({
+        queryKey: ["listingPengabdianReviewer"],
       });
     },
   });
