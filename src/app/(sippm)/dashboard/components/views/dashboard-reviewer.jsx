@@ -47,7 +47,7 @@ export default function DashboardReviewer() {
         <CardDashboard
           status="Revisi"
           title="Semua"
-          jumlah={totalProposal?.data?.penelitianRevisi}
+          jumlah={totalProposal?.data?.revisi}
         />
         <CardDashboard
           title="Pengabdian"

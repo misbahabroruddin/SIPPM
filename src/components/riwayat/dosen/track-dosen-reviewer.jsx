@@ -1,5 +1,5 @@
 "use client";
-import { useParams } from "next/navigation";
+import { useParams, usePathname } from "next/navigation";
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
@@ -14,13 +14,21 @@ import {
 } from "@/components/timeline";
 import { useStep } from "@/lib/hooks/useStep";
 import { SkeletonRiwayat } from "@/components/skeleton/skeleton-riwayat";
-import { convertDate } from "@/lib/utils/convertDate";
+import {
+  convertDate,
+  convertToDateNumeric,
+  convertToTime,
+} from "@/lib/utils/convertDate";
 import { ButtonUpdate } from "@/components/button/button-update";
+import { RiwayatPesanReviewer } from "../reviewer/riwayat-pesan-reviewer";
+import { twMerge } from "tailwind-merge";
 
 export const TrackDosenReviewer = ({ data, isLoading }) => {
   const [isOpen, setIsOpen] = useState();
   const { id } = useParams();
   const { setCurrentStep } = useStep();
+  const pathname = usePathname();
+  const path = pathname.split("/");
   const updatedData = data ? data[data.length - 1] : null;
 
   if (isLoading) {
@@ -115,18 +123,18 @@ export const TrackDosenReviewer = ({ data, isLoading }) => {
                       />
                     </div>
                   </div>
-                  {/* <div
-                                  className={twMerge(
-                                    "flex h-0 flex-col gap-1 transition-all",
-                                    isOpen === item.id && "h-fit",
-                                  )}
-                                >
-                                  <RiwayatPesanLPPM
-                                    riwayatId={item?.id}
-                                    status={item?.status}
-                                    catatan={item?.catatan}
-                                  />
-                                </div> */}
+                  <div
+                    className={twMerge(
+                      "flex h-0 flex-col gap-1 transition-all",
+                      isOpen === item.id && "h-fit",
+                    )}
+                  >
+                    <RiwayatPesanReviewer
+                      riwayatId={item?.id}
+                      status={item?.status}
+                      catatan={item?.catatan}
+                    />
+                  </div>
                 </div>
               ))
             ) : (
@@ -136,7 +144,7 @@ export const TrackDosenReviewer = ({ data, isLoading }) => {
             )}
           </div>
           <Link
-            href={`/proposal/pengabdian/edit/${id}`}
+            href={`/proposal/${path[2]}/edit/${id}`}
             className={
               updatedData?.status === "Diterima" || !updatedData ? "hidden" : ""
             }

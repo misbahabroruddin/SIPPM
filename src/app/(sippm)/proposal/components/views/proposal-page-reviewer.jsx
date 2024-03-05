@@ -74,7 +74,7 @@ export default function ProposalPageReviewer() {
               totalProposal?.data?.penelitian_disetujui
             }
             jumlahPenelitianDitolak={totalProposal?.data?.penelitian_ditolak}
-            jumlahPenelitianRevisi={totalProposal?.data?.penelitian_revisi}
+            jumlahPenelitianRevisi={totalProposal?.data?.revisi}
             handlePageChange={handlePageChangePenelitian}
           />
         ) : (
@@ -86,7 +86,7 @@ export default function ProposalPageReviewer() {
             jumlahPengabdianDisetujui={
               totalProposal?.data?.pengabdian_disetujui
             }
-            jumlahPengabdianRevisi={totalProposal?.data?.pengabdian_revisi}
+            jumlahPengabdianRevisi={totalProposal?.data?.revisi}
             jumlahPengabdianDitolak={totalProposal?.data?.pengabdian_ditolak}
             handlePagePengabdianChange={handlePageChangePengabdian}
           />

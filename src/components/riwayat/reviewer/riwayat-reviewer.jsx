@@ -14,13 +14,16 @@ import {
 } from "@/components/timeline";
 import { useStep } from "@/lib/hooks/useStep";
 import { SkeletonRiwayat } from "@/components/skeleton/skeleton-riwayat";
-import { convertDate } from "@/lib/utils/convertDate";
-import { ButtonUpdate } from "@/components/button/button-update";
+import {
+  convertDate,
+  convertToDateNumeric,
+  convertToTime,
+} from "@/lib/utils/convertDate";
+import { twMerge } from "tailwind-merge";
+import { RiwayatPesanReviewer } from "./riwayat-pesan-reviewer";
 
 export const TrackRiwayatReviewer = ({ data, isLoading }) => {
   const [isOpen, setIsOpen] = useState();
-  const { id } = useParams();
-  const { setCurrentStep } = useStep();
   const updatedData = data ? data[data.length - 1] : null;
 
   if (isLoading) {
@@ -115,18 +118,18 @@ export const TrackRiwayatReviewer = ({ data, isLoading }) => {
                       />
                     </div>
                   </div>
-                  {/* <div
-                                  className={twMerge(
-                                    "flex h-0 flex-col gap-1 transition-all",
-                                    isOpen === item.id && "h-fit",
-                                  )}
-                                >
-                                  <RiwayatPesanLPPM
-                                    riwayatId={item?.id}
-                                    status={item?.status}
-                                    catatan={item?.catatan}
-                                  />
-                                </div> */}
+                  <div
+                    className={twMerge(
+                      "flex h-0 flex-col gap-1 transition-all",
+                      isOpen === item.id && "h-fit",
+                    )}
+                  >
+                    <RiwayatPesanReviewer
+                      riwayatId={item?.id}
+                      status={item?.status}
+                      catatan={item?.catatan}
+                    />
+                  </div>
                 </div>
               ))
             ) : (

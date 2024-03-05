@@ -4,13 +4,13 @@ import { toast } from "react-toastify";
 
 import { useAxios } from "@/lib/hooks/useAxios";
 
-export const useQueryGetRiwayatPesanPengabdian = (riwayatId) => {
+export const useQueryGetRiwayatPesanReviewer = (riwayatId) => {
   const axios = useAxios();
 
-  const fetchGetRiwayatPesanPengabdian = async () => {
+  const fetchRiwayatPesanReviewer = async () => {
     try {
       const { data } = await axios.get(
-        `/lppms/pkms/riwayats/${riwayatId}/chats`
+        `/proposals/chats/${riwayatId}/eviewers`,
       );
 
       return data.data;
@@ -20,8 +20,8 @@ export const useQueryGetRiwayatPesanPengabdian = (riwayatId) => {
   };
 
   const { data, isLoading, refetch } = useQuery({
-    queryKey: ["getRiwayatPesanPengabdian", riwayatId],
-    queryFn: fetchGetRiwayatPesanPengabdian,
+    queryKey: ["getRiwayatPesanReviewer", riwayatId],
+    queryFn: fetchRiwayatPesanReviewer,
     enabled: !!riwayatId,
   });
 
