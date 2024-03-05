@@ -8,7 +8,7 @@ import { useQueryGetRiwayatPesanLPPMPenelitian } from "@/handlers/lppm/penelitia
 import { useCreatePesanPenelitianLPPM } from "@/handlers/lppm/penelitian/add-pesan-penelitian-lppm";
 import { FormChat } from "@/components/form/form-chat";
 
-export const RiwayatPesanLPPM = ({ riwayatId, status, catatan }) => {
+export const RiwayatPesanLPPM = ({ riwayatId, status, catatan, index }) => {
   const { data } = useQueryGetRiwayatPesanLPPMPenelitian(riwayatId);
   const { data: session } = useSession();
   const {
@@ -82,7 +82,7 @@ export const RiwayatPesanLPPM = ({ riwayatId, status, catatan }) => {
           </div>
         ))}
       </div>
-      {status !== "Diterima" && (
+      {status !== "Diterima" && index === 0 && (
         <FormChat
           onSubmit={handleSubmit(onSubmitChat)}
           register={register}

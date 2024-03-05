@@ -16,6 +16,9 @@ import { DetailRencanaAnggaran } from "../detail-rencana-anggaran";
 import { DetailRincianKegiatan } from "../detail-rincian-kegiatan";
 import { DetailBerkas } from "../detail-berkas";
 import { FormVerifikasiUsulan } from "../form-verifikasi-usulan";
+import { Timeline } from "@/components/timeline";
+import { TrackRiwayatLPPM } from "@/components/riwayat/lppm/riwayat-lppm";
+import { useQueryGetRiwayatTrackDosenLPPM } from "@/handlers/lppm/query-get-riwayat-track";
 
 export default function TrackPenelitianLPPMPage() {
   const [tabActive] = useState("dokumen");
@@ -27,6 +30,8 @@ export default function TrackPenelitianLPPMPage() {
   const pathArr = path.split("/");
 
   const { data } = useQueryDetailPenelitian();
+  const { data: dataTrackDosenLPPM, isLoading: isLoadingTrackDosenLPPM } =
+    useQueryGetRiwayatTrackDosenLPPM();
 
   return (
     <div className="flex flex-col gap-3">
@@ -56,7 +61,12 @@ export default function TrackPenelitianLPPMPage() {
             </div>
           </>
         ) : (
-          <>riwayat</>
+          <Timeline>
+            <TrackRiwayatLPPM
+              data={dataTrackDosenLPPM}
+              isLoading={isLoadingTrackDosenLPPM}
+            />
+          </Timeline>
         )}
       </div>
     </div>

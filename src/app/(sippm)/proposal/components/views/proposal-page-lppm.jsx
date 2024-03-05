@@ -41,29 +41,6 @@ export default function ProposalPageLPPM() {
 
   const { data: totalProposal } = useQueryTotalProposalLPPM();
 
-  const penelitianRevisi = penelitian?.data.filter(
-    (item) => item.status_lppm === "Revisi",
-  );
-
-  const penelitianDisetujui = penelitian?.data.filter(
-    (item) => item.status_lppm === "Diterima",
-  );
-
-  const penelitianDitolak = penelitian?.data.filter(
-    (item) => item.status_lppm === "Ditolak",
-  );
-
-  const pengabdianRevisi = pengabdian?.data.filter(
-    (item) => item.status_lppm === "Revisi",
-  );
-
-  const pengabdianDisetujui = pengabdian?.data.filter(
-    (item) => item.status_lppm === "Diterima",
-  );
-
-  const pengabdianDitolak = pengabdian?.data.filter(
-    (item) => item.status_lppm === "Ditolak",
-  );
   return (
     <ContainerPage>
       <div className="flex flex-col gap-4">

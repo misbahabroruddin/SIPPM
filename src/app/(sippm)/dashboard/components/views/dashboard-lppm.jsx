@@ -74,7 +74,7 @@ export default function DashboardLppm() {
       ) : (
         <ListPengabdianDashboardLPPM
           pengabdian={pengabdian}
-          isLoading={isLoadingPenelitian}
+          isLoading={isLoadingPengabdian}
           currentTab={currentTab}
           tabActive={tabActive}
           handlePageChange={handlePageChangePengabdian}

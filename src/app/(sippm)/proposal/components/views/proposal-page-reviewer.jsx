@@ -23,12 +23,6 @@ export default function ProposalPageReviewer() {
   const tabParams = useSearchParams();
   const currentTab = tabParams.get("tab");
 
-  const { data: penelitian, isLoading: isLoadingPenelitian } =
-    useQueryGetPenelitianReviewer(searchPenelitian, pagePenelitian);
-  const { data: pengabdian, isLoading: isLoadingPengabdian } =
-    useQueryGetPengabdianReviewer(searchPengabdian, pagePengabdian);
-
-  const { data: totalProposal } = useQueryTotalProposalReviewer();
   const handlePageChangePenelitian = (event) => {
     setPagePenelitian(event.selected + 1);
   };
@@ -42,31 +36,13 @@ export default function ProposalPageReviewer() {
     setSearchPengabdian(value);
   }, 1000);
 
-  console.log(penelitian);
+  const { data: penelitian, isLoading: isLoadingPenelitian } =
+    useQueryGetPenelitianReviewer(searchPenelitian, pagePenelitian);
+  const { data: pengabdian, isLoading: isLoadingPengabdian } =
+    useQueryGetPengabdianReviewer(searchPengabdian, pagePengabdian);
 
-  const penelitianRevisi = penelitian?.data.filter(
-    (item) => item.status_lppm === "Revisi",
-  );
+  const { data: totalProposal } = useQueryTotalProposalReviewer();
 
-  const penelitianDisetujui = penelitian?.data.filter(
-    (item) => item.status_lppm === "Diterima",
-  );
-
-  const penelitianDitolak = penelitian?.data.filter(
-    (item) => item.status_lppm === "Ditolak",
-  );
-
-  const pengabdianRevisi = pengabdian?.data.filter(
-    (item) => item.status_lppm === "Revisi",
-  );
-
-  const pengabdianDisetujui = pengabdian?.data.filter(
-    (item) => item.status_lppm === "Diterima",
-  );
-
-  const pengabdianDitolak = pengabdian?.data.filter(
-    (item) => item.status_lppm === "Ditolak",
-  );
   return (
     <ContainerPage>
       <div className="flex flex-col gap-4">
@@ -110,7 +86,7 @@ export default function ProposalPageReviewer() {
             jumlahPengabdianDisetujui={
               totalProposal?.data?.pengabdian_disetujui
             }
-            jumlahPengabdianRevisi={totalProposal?.data?.pengabdian_revisi || 0}
+            jumlahPengabdianRevisi={totalProposal?.data?.pengabdian_revisi}
             jumlahPengabdianDitolak={totalProposal?.data?.pengabdian_ditolak}
             handlePagePengabdianChange={handlePageChangePengabdian}
           />

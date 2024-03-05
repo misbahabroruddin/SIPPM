@@ -23,9 +23,9 @@ export const ListPengabdianProposalLPPM = ({
   return (
     <div className="flex flex-col gap-2">
       <div className="flex gap-4">
-        <CardDashboard jumlah={jumlahPengabdianDisetujui || 0} />
-        <CardDashboard status="Revisi" jumlah={jumlahPengabdianRevisi || 0} />
-        <CardDashboard status="Ditolak" jumlah={jumlahPengabdianDitolak || 0} />
+        <CardDashboard jumlah={jumlahPengabdianDisetujui} />
+        <CardDashboard status="Revisi" jumlah={jumlahPengabdianRevisi} />
+        <CardDashboard status="Ditolak" jumlah={jumlahPengabdianDitolak} />
       </div>
       <div className="flex h-[570px] flex-col gap-4 overflow-auto p-1 pb-8">
         {pengabdian?.data?.length ? (
@@ -99,6 +99,10 @@ const ListItem = ({ data, currentTab, tabActive }) => {
           <div className="flex flex-col items-center gap-1">
             <p>LPPM</p>
             <ButtonStatus status={data?.status_lppm} />
+          </div>
+          <div className="flex flex-col items-center gap-1">
+            <p>Reviewer</p>
+            <ButtonStatus status={data?.status_reviewer} />
           </div>
           <Link href={`/proposal/${currentTab || tabActive}/track/${data?.id}`}>
             <button

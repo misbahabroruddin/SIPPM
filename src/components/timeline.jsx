@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { twMerge } from "tailwind-merge";
 
 export const Timeline = ({ children }) => {
   return <ul className="flex w-full flex-col">{children}</ul>;
@@ -83,9 +84,9 @@ export const TimelineItem = ({ date = "3 November 2021", children }) => {
   );
 };
 
-export const TimelineContent = ({ children }) => {
+export const TimelineContent = ({ children, className }) => {
   return (
-    <div className="flex w-full gap-3 pb-8">
+    <div className={twMerge("flex w-full gap-3 pb-8", className)}>
       <span
         className="pointer-events-none invisible h-full flex-shrink-0"
         style={{ width: "24px" }}

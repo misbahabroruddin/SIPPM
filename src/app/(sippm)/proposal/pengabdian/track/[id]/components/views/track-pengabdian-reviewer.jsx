@@ -15,6 +15,12 @@ import { DetailRencanaAnggaran } from "../detail-rencana-anggaran";
 import { DetailRincianKegiatan } from "../detail-rincian-kegiatan";
 import { useQueryDetailPengabdianReviewer } from "@/handlers/lppm/pengabdian/query-get-detail-pengabdian-reviewer";
 import { DetailBerkasReviewer } from "../detail-berkas-reviewer";
+import { useQueryGetRiwayatTrackDosenLPPM } from "@/handlers/lppm/query-get-riwayat-track";
+import { useQueryGetRiwayatTrackDosenReviewer } from "@/handlers/reviewer/query-get-riwayat-track";
+import { Timeline } from "@/components/timeline";
+import { TrackRiwayatReviewer } from "@/components/riwayat/reviewer/riwayat-reviewer";
+import { TrackRiwayatLPPM } from "@/components/riwayat/lppm/riwayat-lppm";
+import { ButtonBeranda } from "@/components/button/button-beranda";
 
 export default function TrackPengabdianReviewerPage() {
   const [tabActive] = useState("dokumen");
@@ -26,6 +32,12 @@ export default function TrackPengabdianReviewerPage() {
   const pathArr = path.split("/");
 
   const { data } = useQueryDetailPengabdianReviewer();
+  const { data: dataTrackDosenLPPM, isLoading: isLoadingTrackDosenLPPM } =
+    useQueryGetRiwayatTrackDosenLPPM();
+  const {
+    data: dataTrackDosenReviewer,
+    isLoading: isLoadingTrackDosenReviewer,
+  } = useQueryGetRiwayatTrackDosenReviewer();
 
   return (
     <div className="flex flex-col gap-3">
@@ -55,7 +67,19 @@ export default function TrackPengabdianReviewerPage() {
             </div>
           </>
         ) : (
-          <>riwayat</>
+          <>
+            <Timeline>
+              <TrackRiwayatReviewer
+                data={dataTrackDosenReviewer}
+                isLoading={isLoadingTrackDosenReviewer}
+              />
+              <TrackRiwayatLPPM
+                data={dataTrackDosenLPPM}
+                isLoading={isLoadingTrackDosenLPPM}
+              />
+            </Timeline>
+            <ButtonBeranda className="ml-auto w-fit px-8" />
+          </>
         )}
       </div>
     </div>

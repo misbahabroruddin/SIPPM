@@ -20,6 +20,15 @@ export const Tabs = ({ tabActive }) => {
       },
       func: () => handleTabClick("dokumen"),
     },
+    {
+      id: 2,
+      name: "riwayat",
+      icon: {
+        white: "/icons/history-white.svg",
+        black: "/icons/history-black.svg",
+      },
+      func: () => handleTabClick("riwayat"),
+    },
   ];
 
   const createQueryTab = useCallback(

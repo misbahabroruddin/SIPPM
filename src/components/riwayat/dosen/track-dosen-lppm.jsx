@@ -63,85 +63,90 @@ export const TrackDosenLPPM = ({ data, isLoading }) => {
               </p>
             </div>
             <div className="mt-8 flex flex-col gap-2">
-              {data?.toReversed()?.map((item, index) => (
-                <div
-                  className="overflow-hidden rounded-lg px-4 py-3 shadow-custom transition-all"
-                  key={item.id}
-                >
-                  <div className="flex justify-between">
-                    <div className="flex items-center">
-                      <Image
-                        src="/icons/file.svg"
-                        width={24}
-                        height={24}
-                        alt="file"
-                      />
-                      <Link
-                        target="_blank"
-                        href={item.file_proposal || ""}
-                        className="hover:underline"
+              {data?.length ? (
+                data?.toReversed()?.map((item, index) => (
+                  <div
+                    className="overflow-hidden rounded-lg px-4 py-3 shadow-custom transition-all"
+                    key={item.id}
+                  >
+                    <div className="flex justify-between">
+                      <div className="flex items-center">
+                        <Image
+                          src="/icons/file.svg"
+                          width={24}
+                          height={24}
+                          alt="file"
+                        />
+                        <Link
+                          target="_blank"
+                          href={item.file_proposal || ""}
+                          className="hover:underline"
+                        >
+                          <p className="text-dark-09">
+                            {item.file_proposal.name ||
+                              "Klik untuk lebih detail"}
+                          </p>
+                        </Link>
+                      </div>
+                      <div
+                        className="flex grow items-center justify-end gap-2 text-dark-09"
+                        role="button"
+                        onClick={() =>
+                          setIsOpen(isOpen === item.id ? null : item.id)
+                        }
                       >
-                        <p className="text-dark-09">
-                          {item.file_proposal.name || "Klik untuk lebih detail"}
-                        </p>
-                      </Link>
+                        {isOpen !== item.id && (
+                          <>
+                            <div className="flex items-center gap-1 text-sm">
+                              <Image
+                                src="/icons/time.svg"
+                                width={15}
+                                height={16}
+                                alt="file"
+                              />
+                              <p>{convertToTime(item.updated_at)}</p>
+                            </div>
+                            <div className="flex items-center gap-1 text-sm">
+                              <Image
+                                src="/icons/date.svg"
+                                width={15}
+                                height={16}
+                                alt="file"
+                              />
+                              <p>{convertToDateNumeric(item.updated_at)}</p>
+                            </div>
+                          </>
+                        )}
+                        <Image
+                          src="/icons/chevron-down.svg"
+                          width={24}
+                          height={24}
+                          alt="chevron"
+                          className={twMerge(
+                            "transition-all",
+                            isOpen === item.id && "rotate-180",
+                          )}
+                        />
+                      </div>
                     </div>
                     <div
-                      className="flex grow items-center justify-end gap-2 text-dark-09"
-                      role="button"
-                      onClick={() =>
-                        setIsOpen(isOpen === item.id ? null : item.id)
-                      }
-                    >
-                      {isOpen !== item.id && (
-                        <>
-                          <div className="flex items-center gap-1 text-sm">
-                            <Image
-                              src="/icons/time.svg"
-                              width={15}
-                              height={16}
-                              alt="file"
-                            />
-                            <p>{convertToTime(item.updated_at)}</p>
-                          </div>
-                          <div className="flex items-center gap-1 text-sm">
-                            <Image
-                              src="/icons/date.svg"
-                              width={15}
-                              height={16}
-                              alt="file"
-                            />
-                            <p>{convertToDateNumeric(item.updated_at)}</p>
-                          </div>
-                        </>
+                      className={twMerge(
+                        "flex h-0 flex-col gap-1 transition-all",
+                        isOpen === item.id && "h-fit",
                       )}
-                      <Image
-                        src="/icons/chevron-down.svg"
-                        width={24}
-                        height={24}
-                        alt="chevron"
-                        className={twMerge(
-                          "transition-all",
-                          isOpen === item.id && "rotate-180",
-                        )}
+                    >
+                      <RiwayatPesanLPPM
+                        riwayatId={item?.id}
+                        status={item?.status}
+                        catatan={item?.catatan}
+                        index={index}
                       />
                     </div>
                   </div>
-                  <div
-                    className={twMerge(
-                      "flex h-0 flex-col gap-1 transition-all",
-                      isOpen === item.id && "h-fit",
-                    )}
-                  >
-                    <RiwayatPesanLPPM
-                      riwayatId={item?.id}
-                      status={item?.status}
-                      catatan={item?.catatan}
-                      index={index}
-                    />
-                  </div>
-                </div>
-              ))}
+                ))
+              ) : (
+                <div className="text-center">Belum ada riwayat</div>
+              )}
             </div>
             <Link
               href={`/proposal/${path[2]}/edit/${id}`}

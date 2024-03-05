@@ -20,10 +20,8 @@ export default function DashboardReviewer() {
   const currentTab = tabParams.get("tab");
   const { data: penelitian, isLoading: isLoadingPenelitian } =
     useQueryGetPenelitianReviewer("", pagePenelitian);
-  const { data: pengabdian } = useQueryGetPengabdianReviewer(
-    "",
-    pagePengabdian,
-  );
+  const { data: pengabdian, isLoading: isLoadingPengabdian } =
+    useQueryGetPengabdianReviewer("", pagePengabdian);
 
   const { data: totalProposal } = useQueryTotalProposalReviewer();
 
@@ -77,7 +75,7 @@ export default function DashboardReviewer() {
       ) : (
         <ListPengabdianDashboardReviewer
           pengabdian={pengabdian}
-          isLoading={isLoadingPenelitian}
+          isLoading={isLoadingPengabdian}
           currentTab={currentTab}
           tabActive={tabActive}
           handlePageChange={handlePageChangePengabdian}
