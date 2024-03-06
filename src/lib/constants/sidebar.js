@@ -17,37 +17,37 @@ export const MENU_SIDEBAR_ADMIN = [
   {
     label: "Data Referensi",
     icon: "/icons/data-referensi.svg",
-    link: "/data-referesi",
+    link: "/data-referensi",
     children: [
       {
         label: "Bidang Ilmu",
         icon: "/icons/sub-menu.svg",
-        link: "/data-referesi/bidang-ilmu",
+        link: "/data-referensi/bidang-ilmu",
       },
       {
         label: "Jabatan Fungsional",
         icon: "/icons/sub-menu.svg",
-        link: "/data-referesi/jabatan-fungsional",
+        link: "/data-referensi/jabatan-fungsional",
       },
       {
         label: "Program Studi",
         icon: "/icons/sub-menu.svg",
-        link: "/data-referesi/program-studi",
+        link: "/data-referensi/program-studi",
       },
       {
         label: "Jenis Penelitian",
         icon: "/icons/sub-menu.svg",
-        link: "/data-referesi/jenis-penelitian",
+        link: "/data-referensi/jenis-penelitian",
       },
       {
         label: "Rumpun Ilmu",
         icon: "/icons/sub-menu.svg",
-        link: "/data-referesi/rumpun-ilmu",
+        link: "/data-referensi/rumpun-ilmu",
       },
       {
         label: "Luaran Wajib",
         icon: "/icons/sub-menu.svg",
-        link: "/data-referesi/luaran-wajib",
+        link: "/data-referensi/luaran-wajib",
       },
     ],
   },
