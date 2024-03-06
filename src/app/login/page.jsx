@@ -1,6 +1,7 @@
 "use client";
 
 import { Input } from "@/components/input/input";
+import { Spinner } from "@material-tailwind/react";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -80,10 +81,11 @@ export default function Login() {
               spanEmptyClass="hidden"
             />
             <button
-              className="mt-4 rounded-lg bg-primary px-3 py-2 text-white disabled:cursor-not-allowed disabled:bg-gray-400"
+              className="mt-4 flex items-center justify-center gap-2 rounded-lg bg-primary px-3 py-2 text-white disabled:cursor-not-allowed disabled:bg-gray-400"
               disabled={isLoading}
             >
-              Login
+              {isLoading && <Spinner className="h-4 w-4" />}
+              <p>Login</p>
             </button>
           </form>
         </div>
