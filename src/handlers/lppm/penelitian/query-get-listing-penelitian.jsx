@@ -27,7 +27,6 @@ export const useQueryGetPenelitianLPPM = (search, page) => {
         const { data } = await axios.get("/proposals/lppms/penelitians", {
           params: params,
         });
-        console.log(data?.data.current_page);
         return data?.data;
       } catch (error) {
         toast.error(error.message);
