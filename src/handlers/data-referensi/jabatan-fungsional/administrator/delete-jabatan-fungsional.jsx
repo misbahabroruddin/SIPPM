@@ -12,17 +12,17 @@ export const useDeleteJabatanFungsional = () => {
   const deleteJabatanFungsional = async (id) => {
     try {
       await axios.delete(`/data-referensis/jabatan-fungsionals/${id}`);
-
-      queryClient.invalidateQueries({
+      queryClient.removeQueries({
+        queryKey: ["jabatan-fungsional", id],
+      });
+      queryClient.resetQueries({
         queryKey: ["jabatan-fungsional"],
       });
       queryClient.invalidateQueries({
         queryKey: ["trash-jabatan-fungsional"],
       });
-      queryClient.removeQueries({
-        queryKey: ["jabatan-fungsional", id],
-      });
-      toast.success("Data jabatan fungsional berhasil di hapus");
+
+      toast.success("Data jabatan fungsional berhasil dihapus");
     } catch (error) {
       toast.error(error.message);
     }
