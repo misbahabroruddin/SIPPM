@@ -18,7 +18,7 @@ export const FormTambahJabatanFungsional = ({ setOpen }) => {
     setOpen(false);
   };
 
-  const { mutateAsync } = useCreateListingJabatanFungsional(onClose);
+  const { mutateAsync, isPending } = useCreateListingJabatanFungsional(onClose);
 
   return (
     <form className="flex flex-col gap-4" onSubmit={handleSubmit(mutateAsync)}>
@@ -52,7 +52,11 @@ export const FormTambahJabatanFungsional = ({ setOpen }) => {
             reset();
           }}
         />
-        <ButtonSave className={"w-full rounded"} iconLeft />
+        <ButtonSave
+          className={"w-full rounded"}
+          iconLeft
+          disabled={isPending}
+        />
       </div>
     </form>
   );
