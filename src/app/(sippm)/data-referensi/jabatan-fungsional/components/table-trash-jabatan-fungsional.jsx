@@ -3,7 +3,6 @@ import { useState } from "react";
 
 import DataTable from "@/components/data-table/table";
 import { SearchInput } from "@/components/input/search-input";
-import { useImportJabatanFungsional } from "@/handlers/data-referensi/jabatan-fungsional/administrator/import-jabatan-fungsional";
 import { useColumnTableTrashJabatanFungsional } from "./column-table";
 import { useDebouncedCallback } from "use-debounce";
 import { useQueryTrashListingJabatanFungsional } from "@/handlers/data-referensi/jabatan-fungsional/administrator/query-get-all-trash-jabatan-fungsional";
@@ -15,12 +14,6 @@ export const TableTrashJabatanFungsional = ({ onClose }) => {
     pageSize: 10,
   });
   const columns = useColumnTableTrashJabatanFungsional(onClose);
-  const { mutateAsync: onImportFile } = useImportJabatanFungsional();
-
-  const handleImport = async (e) => {
-    const file = e.target.files[0];
-    await onImportFile(file);
-  };
 
   const handleSearch = useDebouncedCallback((value) => {
     setSearch(value);
@@ -42,10 +35,6 @@ export const TableTrashJabatanFungsional = ({ onClose }) => {
             defaultValue={search}
           />
         </div>
-        {/* <div className="flex gap-2">
-          <InputFileImport onChange={handleImport} />
-          <ModalTambahJabatanFungsional />
-        </div> */}
       </div>
       <DataTable
         columns={columns}
