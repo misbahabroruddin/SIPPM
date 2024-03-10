@@ -40,7 +40,7 @@ export const TableJabatanFungsional = () => {
   return (
     <div className="flex flex-col gap-4">
       <div className="flex justify-between">
-        <div className="flex w-[512px] gap-4">
+        <div className="flex gap-4">
           <SearchInput
             onChange={(e) => handleSearch(e.target.value)}
             defaultValue={search}

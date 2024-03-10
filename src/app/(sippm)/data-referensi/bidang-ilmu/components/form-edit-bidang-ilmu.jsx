@@ -5,12 +5,14 @@ import { ButtonCancel } from "@/components/button/button-cancel";
 import { ButtonSave } from "@/components/button/button-save";
 import { Input } from "@/components/input/input";
 import { useQueryEditBidangIlmu } from "@/handlers/data-referensi/bidang-ilmu/administrator/edit-bidang-ilmu";
+import { useEffect } from "react";
 
 export const FormEditBidangIlmu = ({ id, setOpen, data, isLoading }) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
+    setValue,
     reset,
   } = useForm();
 
@@ -19,6 +21,11 @@ export const FormEditBidangIlmu = ({ id, setOpen, data, isLoading }) => {
   };
 
   const { mutateAsync, isPending } = useQueryEditBidangIlmu(id);
+
+  useEffect(() => {
+    setValue("nama", data?.nama);
+    setValue("keterangan", data?.keterangan);
+  }, [data]);
 
   return (
     <form className="flex flex-col gap-4" onSubmit={handleSubmit(mutateAsync)}>

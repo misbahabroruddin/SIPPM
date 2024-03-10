@@ -5,12 +5,14 @@ import { ButtonCancel } from "@/components/button/button-cancel";
 import { ButtonSave } from "@/components/button/button-save";
 import { Input } from "@/components/input/input";
 import { useQueryEditJabatanFungsional } from "@/handlers/data-referensi/jabatan-fungsional/administrator/edit-jabatan-fungsional";
+import { useEffect } from "react";
 
 export const FormEditJabatanFungsional = ({ id, setOpen, data, isLoading }) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
+    setValue,
     reset,
   } = useForm();
 
@@ -19,6 +21,11 @@ export const FormEditJabatanFungsional = ({ id, setOpen, data, isLoading }) => {
   };
 
   const { mutateAsync, isPending } = useQueryEditJabatanFungsional(id);
+
+  useEffect(() => {
+    setValue("nama", data?.nama);
+    setValue("keterangan", data?.keterangan);
+  }, [data]);
 
   return (
     <form className="flex flex-col gap-4" onSubmit={handleSubmit(mutateAsync)}>

@@ -1,15 +1,11 @@
 "use client";
 
 import {
-  ColumnDef,
   flexRender,
   getCoreRowModel,
   getPaginationRowModel,
   useReactTable,
-  s,
 } from "@tanstack/react-table";
-import { useState } from "react";
-import { twMerge } from "tailwind-merge";
 import { Pagination } from "../pagination";
 
 const DataTable = ({
@@ -35,12 +31,11 @@ const DataTable = ({
       pagination,
     },
     enableColumnResizing: true,
+    enableResizing: true,
     debugTable: true,
     getRowId: (originalRow, index) => originalRow?.id || index,
     autoResetPageIndex: false,
   });
-
-  const currentPage = table.getState().pagination.pageIndex;
 
   const handlePageChange = (e) => {
     table.setPageIndex(e.selected);
@@ -48,7 +43,7 @@ const DataTable = ({
 
   return (
     <>
-      <table className="w-full table-auto overflow-hidden rounded-t-lg text-left !font-poppins">
+      <table className="w-fit table-auto overflow-hidden rounded-t-lg text-left !font-poppins">
         <thead className="rounded-lg">
           {table?.getHeaderGroups().map((group, index) => {
             return (
@@ -58,8 +53,13 @@ const DataTable = ({
                     <th
                       key={index}
                       scope="col"
-                      className="bg-primary px-6 py-4 last:text-center"
-                      style={{ width: header.getSize() }}
+                      className="w-full bg-primary px-6 py-4 first:!w-20  first:text-center last:!w-36 last:text-center"
+                      style={{
+                        width:
+                          header.index !== 0 &&
+                          header.index !== group.headers.length - 1 &&
+                          "50%",
+                      }}
                     >
                       {header.isPlaceholder ? null : (
                         <div
@@ -87,7 +87,7 @@ const DataTable = ({
             table?.getRowModel()?.rows.map((row) => (
               <tr key={row.id} className="text-base even:bg-sky">
                 {row.getVisibleCells().map((cell, index) => (
-                  <td key={index} className="px-6 py-3">
+                  <td key={index} className="px-6 py-3 first:text-center">
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
                   </td>
                 ))}

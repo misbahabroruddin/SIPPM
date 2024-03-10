@@ -23,13 +23,13 @@ export const useColumnTableBidangIlmu = () => {
     columnHelper.accessor("nama", {
       cell: (info) => info.getValue(),
       header: () => <span>Nama</span>,
-      size: 5,
+      minSize: 10,
     }),
     columnHelper.accessor("keterangan", {
       id: "keterangan",
       cell: (info) => <i>{info.getValue()}</i>,
       header: () => <span>Keterangan</span>,
-      size: 5,
+      size: 15,
     }),
     columnHelper.accessor("id", {
       id: "id",
