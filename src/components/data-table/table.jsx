@@ -10,6 +10,7 @@ import {
 } from "@tanstack/react-table";
 import { useState } from "react";
 import { twMerge } from "tailwind-merge";
+import { Pagination } from "../pagination";
 
 const DataTable = ({
   columns,
@@ -41,24 +42,9 @@ const DataTable = ({
 
   const currentPage = table.getState().pagination.pageIndex;
 
-  const paginationButtons = [];
-  for (let i = 0; i < table?.getPageCount(); i++) {
-    paginationButtons.push(
-      <button
-        className={twMerge(
-          "border bg-white px-4 py-2 text-primary",
-          currentPage === i &&
-            "border border-blue-primary bg-blue-primary text-white",
-        )}
-        key={i}
-        onClick={() => {
-          table.setPageIndex(i);
-        }}
-      >
-        {i + 1}
-      </button>,
-    );
-  }
+  const handlePageChange = (e) => {
+    table.setPageIndex(e.selected);
+  };
 
   return (
     <>
@@ -72,7 +58,7 @@ const DataTable = ({
                     <th
                       key={index}
                       scope="col"
-                      className=" bg-primary p-4"
+                      className="bg-primary px-6 py-4 last:text-center"
                       style={{ width: header.getSize() }}
                     >
                       {header.isPlaceholder ? null : (
@@ -101,13 +87,7 @@ const DataTable = ({
             table?.getRowModel()?.rows.map((row) => (
               <tr key={row.id} className="text-base even:bg-sky">
                 {row.getVisibleCells().map((cell, index) => (
-                  <td
-                    key={index}
-                    className="p-3"
-                    style={{
-                      width: cell.column.getSize(),
-                    }}
-                  >
+                  <td key={index} className="px-6 py-3">
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
                   </td>
                 ))}
@@ -129,25 +109,12 @@ const DataTable = ({
           <p>of</p>
           <p>{total}</p>
         </div>
-        <div className="flex">
-          <button
-            onClick={() => {
-              table.previousPage();
-            }}
-            disabled={pagination.pageIndex === 0}
-            className="rounded-lg rounded-r-none border bg-white p-2 text-primary disabled:opacity-70"
-          >
-            Sebelumnya
-          </button>
-          {paginationButtons.map((u) => u)}
-          <button
-            onClick={() => table.nextPage()}
-            disabled={pagination.pageIndex === table.getPageCount() - 1}
-            className="rounded-lg rounded-l-none border bg-white p-2 text-primary disabled:opacity-70"
-          >
-            Selanjutnya
-          </button>
-        </div>
+        <Pagination
+          perPage={pagination.pageSize}
+          pageCount={pageCount}
+          pageOffset={pagination.pageIndex}
+          onPageChange={handlePageChange}
+        />
       </div>
     </>
   );
