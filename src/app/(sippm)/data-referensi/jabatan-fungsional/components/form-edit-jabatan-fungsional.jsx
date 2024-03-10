@@ -19,7 +19,7 @@ export const FormEditJabatanFungsional = ({ id, setOpen }) => {
     setOpen(false);
   };
 
-  const { mutateAsync } = useQueryEditJabatanFungsional(id);
+  const { mutateAsync, isPending } = useQueryEditJabatanFungsional(id);
   const { data } = useQueryGetDetailJabatanFungsional(id);
 
   return (
@@ -56,7 +56,11 @@ export const FormEditJabatanFungsional = ({ id, setOpen }) => {
             reset();
           }}
         />
-        <ButtonSave className={"w-full rounded"} iconLeft />
+        <ButtonSave
+          className={"w-full rounded"}
+          iconLeft
+          disabled={isPending}
+        />
       </div>
     </form>
   );
