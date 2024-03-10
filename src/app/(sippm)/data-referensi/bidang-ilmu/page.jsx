@@ -1,8 +1,8 @@
 "use client";
 
 import { ContainerPage } from "@/components/container-page";
-// import { TableJabatanFungsional } from "./components/table-jabatan-fungsional";
 import { BasePageTitle } from "@/components/base-page-title";
+import { TableBidangIlmu } from "./components/table-bidang-ilmu";
 
 export default function BidangIlmuPage() {
   return (
@@ -12,7 +12,7 @@ export default function BidangIlmuPage() {
           iconSrc="/icons/data-referensi-black.svg"
           title="Bidang Ilmu"
         />
-        {/* <TableJabatanFungsional /> */}
+        <TableBidangIlmu />
       </div>
     </ContainerPage>
   );
