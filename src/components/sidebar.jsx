@@ -40,7 +40,7 @@ export const Sidebar = () => {
             menu.children ? (
               <li key={menu.link}>
                 <button
-                  className={`flex w-full items-center justify-between gap-2 rounded-lg p-2 text-white hover:bg-secondary ${
+                  className={`mt-2 flex w-full items-center justify-between gap-2 rounded-lg p-2 text-white hover:bg-secondary ${
                     page.includes(menu.link?.slice(1)) || pathname === menu.link
                       ? "bg-secondary"
                       : null
@@ -71,7 +71,7 @@ export const Sidebar = () => {
                 </button>
                 <ul
                   className={twMerge(
-                    "flex flex-col gap-1 overflow-hidden transition duration-500 ease-in-out",
+                    "ease-in-ou mt-1 flex flex-col gap-1 overflow-hidden transition duration-500",
                     open
                       ? "h-auto transition-transform"
                       : "h-0 transition-transform",
