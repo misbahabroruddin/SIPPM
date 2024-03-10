@@ -10,7 +10,7 @@ import { useDeleteTrashJabatanFungsional } from "@/handlers/data-referensi/jabat
 import Swal from "sweetalert2";
 
 export const useColumnTableJabatanFungsional = () => {
-  const { mutateAsync } = useDeleteJabatanFungsional();
+  const { mutateAsync, isPending } = useDeleteJabatanFungsional();
   const columnHelper = createColumnHelper();
   const columns = [
     columnHelper.accessor("id", {
@@ -36,7 +36,7 @@ export const useColumnTableJabatanFungsional = () => {
       header: () => <span>Action</span>,
       cell: (info) => {
         return (
-          <div className="flex gap-2">
+          <div className="flex justify-center gap-2">
             <ModalEditJabatanFungsional id={info.row.original.id} />
             <button
               className="rounded-lg disabled:cursor-not-allowed disabled:opacity-60"
@@ -44,6 +44,7 @@ export const useColumnTableJabatanFungsional = () => {
                 await mutateAsync(info.row.original.id);
                 info.table.reset();
               }}
+              disabled={isPending}
             >
               <Image
                 src="/icons/delete.svg"
@@ -63,9 +64,11 @@ export const useColumnTableJabatanFungsional = () => {
 };
 
 export const useColumnTableTrashJabatanFungsional = (onClose) => {
-  const { mutateAsync: deleteTrashJabatanFungsional } =
-    useDeleteTrashJabatanFungsional();
-  const { mutateAsync: restoreJabatanFungsional } =
+  const {
+    mutateAsync: deleteTrashJabatanFungsional,
+    isPending: isPendingDelete,
+  } = useDeleteTrashJabatanFungsional();
+  const { mutateAsync: restoreJabatanFungsional, isPending: isPendingRestore } =
     useRestoreJabatanFungsional();
   const columnHelper = createColumnHelper();
   const columns = [
@@ -94,7 +97,11 @@ export const useColumnTableTrashJabatanFungsional = (onClose) => {
         return (
           <div className="flex gap-2">
             <ButtonRestore
-              onClick={() => restoreJabatanFungsional(info.row.original.id)}
+              onClick={async () => {
+                await restoreJabatanFungsional(info.row.original.id);
+                onClose();
+              }}
+              disabled={isPendingRestore}
             />
             <button
               className="rounded-lg disabled:cursor-not-allowed disabled:opacity-60"
@@ -118,6 +125,7 @@ export const useColumnTableTrashJabatanFungsional = (onClose) => {
                 });
               }}
               title="Delete"
+              disabled={isPendingDelete}
             >
               <Image
                 src="/icons/delete.svg"
