@@ -18,7 +18,10 @@ export const FormTambahJabatanFungsional = ({ setOpen }) => {
     setOpen(false);
   };
 
-  const { mutateAsync, isPending } = useCreateListingJabatanFungsional(onClose);
+  const { mutateAsync, isPending } = useCreateListingJabatanFungsional(
+    onClose,
+    reset,
+  );
 
   return (
     <form className="flex flex-col gap-4" onSubmit={handleSubmit(mutateAsync)}>

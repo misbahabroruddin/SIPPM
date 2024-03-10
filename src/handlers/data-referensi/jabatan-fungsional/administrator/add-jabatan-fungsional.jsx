@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 
 import { useAxios } from "@/lib/hooks/useAxios";
 
-export const useCreateListingJabatanFungsional = (onClose) => {
+export const useCreateListingJabatanFungsional = (onClose, reset) => {
   const axios = useAxios();
   const queryClient = useQueryClient();
 
@@ -22,6 +22,7 @@ export const useCreateListingJabatanFungsional = (onClose) => {
       });
       toast.success(response.data.message);
       onClose();
+      reset();
       return response.data;
     } catch (error) {
       toast.error(error.message);
