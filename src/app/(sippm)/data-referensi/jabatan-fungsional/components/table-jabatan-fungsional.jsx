@@ -10,6 +10,7 @@ import { useImportJabatanFungsional } from "@/handlers/data-referensi/jabatan-fu
 import { useColumnTableJabatanFungsional } from "./column-table";
 import { useDebouncedCallback } from "use-debounce";
 import { ModalTrashJabatanFungsional } from "./modal-trash-jabatan-fungsional";
+import { SkeletonTableDataRefensi } from "@/components/skeleton/skeleton-table-data-refensi";
 
 export const TableJabatanFungsional = () => {
   const [search, setSearch] = useState("");
@@ -34,7 +35,7 @@ export const TableJabatanFungsional = () => {
     pagination.pageIndex + 1,
   );
 
-  if (isLoading) return <p>Loading.....</p>;
+  if (isLoading) return <SkeletonTableDataRefensi />;
 
   return (
     <div className="flex flex-col gap-4">

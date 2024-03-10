@@ -6,6 +6,7 @@ import { SearchInput } from "@/components/input/search-input";
 import { useColumnTableTrashJabatanFungsional } from "./column-table";
 import { useDebouncedCallback } from "use-debounce";
 import { useQueryTrashListingJabatanFungsional } from "@/handlers/data-referensi/jabatan-fungsional/administrator/query-get-all-trash-jabatan-fungsional";
+import { SkeletonTableDataRefensi } from "@/components/skeleton/skeleton-table-data-refensi";
 
 export const TableTrashJabatanFungsional = ({ onClose }) => {
   const [search, setSearch] = useState("");
@@ -24,7 +25,7 @@ export const TableTrashJabatanFungsional = ({ onClose }) => {
     pagination.pageIndex + 1,
   );
 
-  if (isLoading) return <p>Loading.....</p>;
+  if (isLoading) return <SkeletonTableDataRefensi />;
 
   return (
     <div className="flex flex-col gap-4">

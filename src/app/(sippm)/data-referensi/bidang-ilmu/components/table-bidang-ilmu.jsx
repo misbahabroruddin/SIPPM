@@ -10,6 +10,7 @@ import { useQueryListingBidangIlmu } from "@/handlers/data-referensi/bidang-ilmu
 import { useImportBidangIlmu } from "@/handlers/data-referensi/bidang-ilmu/administrator/import-bidang-ilmu";
 import { ModalTambahBidangIlmu } from "./modal-tambah-bidang-ilmu";
 import { ModalTrashBidangIlmu } from "./modal-trash-bidang-ilmu";
+import { SkeletonTableDataRefensi } from "@/components/skeleton/skeleton-table-data-refensi";
 
 export const TableBidangIlmu = () => {
   const [search, setSearch] = useState("");
@@ -34,7 +35,7 @@ export const TableBidangIlmu = () => {
     pagination.pageIndex + 1,
   );
 
-  if (isLoading) return <p>Loading.....</p>;
+  if (isLoading) return <SkeletonTableDataRefensi />;
 
   return (
     <div className="flex flex-col gap-4">

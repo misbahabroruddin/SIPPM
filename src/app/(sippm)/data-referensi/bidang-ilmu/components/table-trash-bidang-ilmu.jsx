@@ -6,6 +6,7 @@ import { SearchInput } from "@/components/input/search-input";
 import { useColumnTableTrashBidangIlmu } from "./column-table";
 import { useDebouncedCallback } from "use-debounce";
 import { useQueryTrashListingBidangIlmu } from "@/handlers/data-referensi/bidang-ilmu/administrator/query-get-all-trash-bidang-ilmu";
+import { SkeletonTableDataRefensi } from "@/components/skeleton/skeleton-table-data-refensi";
 
 export const TableTrashBidangIlmu = ({ onClose }) => {
   const [search, setSearch] = useState("");
@@ -24,7 +25,7 @@ export const TableTrashBidangIlmu = ({ onClose }) => {
     pagination.pageIndex + 1,
   );
 
-  if (isLoading) return <p>Loading.....</p>;
+  if (isLoading) return <SkeletonTableDataRefensi />;
 
   return (
     <div className="flex flex-col gap-4">
