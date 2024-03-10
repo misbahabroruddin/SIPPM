@@ -5,9 +5,8 @@ import { ButtonCancel } from "@/components/button/button-cancel";
 import { ButtonSave } from "@/components/button/button-save";
 import { Input } from "@/components/input/input";
 import { useQueryEditJabatanFungsional } from "@/handlers/data-referensi/jabatan-fungsional/administrator/edit-jabatan-fungsional";
-import { useQueryGetDetailJabatanFungsional } from "@/handlers/data-referensi/jabatan-fungsional/administrator/get-detail-jabatan-fungsional";
 
-export const FormEditJabatanFungsional = ({ id, setOpen }) => {
+export const FormEditJabatanFungsional = ({ id, setOpen, data, isLoading }) => {
   const {
     register,
     handleSubmit,
@@ -20,7 +19,6 @@ export const FormEditJabatanFungsional = ({ id, setOpen }) => {
   };
 
   const { mutateAsync, isPending } = useQueryEditJabatanFungsional(id);
-  const { data } = useQueryGetDetailJabatanFungsional(id);
 
   return (
     <form className="flex flex-col gap-4" onSubmit={handleSubmit(mutateAsync)}>
@@ -36,6 +34,7 @@ export const FormEditJabatanFungsional = ({ id, setOpen }) => {
         errors={errors.nama}
         required
         defaultValue={data?.nama}
+        disabled={isLoading}
       />
       <Input
         label="Keterangan"
@@ -46,6 +45,7 @@ export const FormEditJabatanFungsional = ({ id, setOpen }) => {
         register={register("keterangan")}
         errors={errors.keterangan}
         defaultValue={data?.keterangan}
+        disabled={isLoading}
       />
       <div className="mt-3 flex gap-4">
         <ButtonCancel

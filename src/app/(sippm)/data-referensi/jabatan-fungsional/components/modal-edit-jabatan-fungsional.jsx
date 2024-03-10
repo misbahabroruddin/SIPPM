@@ -4,10 +4,16 @@ import { useState } from "react";
 import { Modal } from "@/components/modal";
 import Image from "next/image";
 import { FormEditJabatanFungsional } from "./form-edit-jabatan-fungsional";
+import { useQueryGetDetailJabatanFungsional } from "@/handlers/data-referensi/jabatan-fungsional/administrator/get-detail-jabatan-fungsional";
 
 export const ModalEditJabatanFungsional = ({ id }) => {
   const [open, setOpen] = useState(false);
-  const handleOpenModal = () => setOpen(true);
+  const { data, refetch, isLoading } = useQueryGetDetailJabatanFungsional(id);
+
+  const handleOpenModal = () => {
+    setOpen(true);
+    refetch();
+  };
   return (
     <>
       <button className="rounded-lg" onClick={handleOpenModal}>
@@ -22,7 +28,12 @@ export const ModalEditJabatanFungsional = ({ id }) => {
           <h1 className="text-center text-lg font-[500]">
             Edit Jabatan Fungsional
           </h1>
-          <FormEditJabatanFungsional id={id} setOpen={setOpen} />
+          <FormEditJabatanFungsional
+            id={id}
+            setOpen={setOpen}
+            data={data}
+            isLoading={isLoading}
+          />
         </div>
       </Modal>
     </>

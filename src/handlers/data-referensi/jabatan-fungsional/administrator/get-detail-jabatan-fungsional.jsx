@@ -15,7 +15,7 @@ export const useQueryGetDetailJabatanFungsional = (id) => {
       );
       return data.data;
     },
-    enabled: !!id,
+    enabled: false,
   });
 
   return { ...query };
