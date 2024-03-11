@@ -19,11 +19,21 @@ import { useStep } from "@/lib/hooks/useStep";
 
 export default function ProposalPageDosen() {
   const [tabActive] = useState("penelitian");
+  const [pagePenelitian, setPagePenelitian] = useState(1);
+  const [pagePengabdian, setPagePengabdian] = useState(1);
   const [searchPenelitian, setSearchPenelitian] = useState("");
   const [searchPengabdian, setSearchPengabdian] = useState("");
   const tabParams = useSearchParams();
   const currentTab = tabParams.get("tab");
   const { setCurrentStep } = useStep();
+
+  const handlePageChangePenelitian = (event) => {
+    setPagePenelitian(event.selected + 1);
+  };
+  const handlePageChangePengabdian = (event) => {
+    setPagePengabdian(event.selected + 1);
+  };
+
   const debounced = useDebouncedCallback((value) => {
     setSearchPenelitian(value);
   }, 1000);
@@ -32,9 +42,9 @@ export default function ProposalPageDosen() {
   }, 1000);
 
   const { data: penelitian, isLoading: isLoadingPenelitian } =
-    useQueryGetAllPenelitian(searchPenelitian);
+    useQueryGetAllPenelitian(searchPenelitian, pagePenelitian);
   const { data: pengabdian, isLoading: isLoadingPengabdian } =
-    useQueryGetAllPengabdian(searchPengabdian);
+    useQueryGetAllPengabdian(searchPengabdian, pagePengabdian);
 
   return (
     <ContainerPage>
@@ -65,8 +75,8 @@ export default function ProposalPageDosen() {
           <Link href={`/proposal/${currentTab || tabActive}/tambah`}>
             <ButtonAdd
               disabled={
-                penelitian?.find((item) => item.status === "Draft") ||
-                pengabdian?.find((item) => item.status === "Draft")
+                penelitian?.data?.find((item) => item.status === "Draft") ||
+                pengabdian?.data?.find((item) => item.status === "Draft")
               }
               onClick={() => {
                 localStorage.setItem("step", 1);
@@ -78,23 +88,23 @@ export default function ProposalPageDosen() {
             />
           </Link>
         </div>
-        <div className="max-h-[700px] overflow-auto p-[2px]">
-          {currentTab === "penelitian" || !currentTab ? (
-            <ListPenelitian
-              penelitian={penelitian}
-              currentTab={currentTab}
-              tabActive={tabActive}
-              isLoading={isLoadingPenelitian}
-            />
-          ) : (
-            <ListPengabdian
-              pengabdian={pengabdian}
-              currentTab={currentTab}
-              tabActive={tabActive}
-              isLoading={isLoadingPengabdian}
-            />
-          )}
-        </div>
+        {currentTab === "penelitian" || !currentTab ? (
+          <ListPenelitian
+            penelitian={penelitian}
+            currentTab={currentTab}
+            tabActive={tabActive}
+            isLoading={isLoadingPenelitian}
+            handlePageChange={handlePageChangePenelitian}
+          />
+        ) : (
+          <ListPengabdian
+            pengabdian={pengabdian}
+            currentTab={currentTab}
+            tabActive={tabActive}
+            isLoading={isLoadingPengabdian}
+            handlePageChange={handlePageChangePengabdian}
+          />
+        )}
       </div>
     </ContainerPage>
   );

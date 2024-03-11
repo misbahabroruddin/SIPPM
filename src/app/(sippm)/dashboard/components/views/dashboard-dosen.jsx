@@ -9,17 +9,25 @@ import { Tabs } from "../tabs";
 import { ListPenelitian } from "../list-penelitian-dashboard-dosen";
 import { useQueryGetAllPenelitian } from "@/handlers/dosen/penelitian/query-get-all-penelitian";
 import { useQueryGetAllPengabdian } from "@/handlers/dosen/pengabdian/query-get-all-pengabdian";
-import ListCardPenelitianDashboardDosen from "../list-card-penelitian-dashboard-dosen";
-import ListCardPengabdianDashboardDosen from "../list-card-pengabdian-dashboard-dosen";
 import { ListPengabdian } from "../list-pengabdian-dashboard-dosen";
 import { useQueryTotalProposalDosen } from "@/handlers/dosen/query-total-proposal";
 
 export default function DashboardDosen() {
   const [tabActive] = useState("penelitian");
+  const [pagePenelitian, setPagePenelitian] = useState(1);
+  const [pagePengabdian, setPagePengabdian] = useState(1);
   const [searchPenelitian, setSearchPenelitian] = useState("");
   const [searchPengabdian, setSearchPengabdian] = useState("");
   const tabParams = useSearchParams();
   const currentTab = tabParams.get("tab");
+
+  const handlePageChangePenelitian = (event) => {
+    setPagePenelitian(event.selected + 1);
+  };
+  const handlePageChangePengabdian = (event) => {
+    setPagePengabdian(event.selected + 1);
+  };
+
   const debounced = useDebouncedCallback((value) => {
     setSearchPenelitian(value);
   }, 1000);
@@ -28,9 +36,9 @@ export default function DashboardDosen() {
   }, 1000);
 
   const { data: penelitian, isLoading: isLoadingPenelitian } =
-    useQueryGetAllPenelitian(searchPenelitian);
+    useQueryGetAllPenelitian(searchPenelitian, pagePenelitian);
   const { data: pengabdian, isLoading: isLoadingPengabdian } =
-    useQueryGetAllPengabdian(searchPengabdian);
+    useQueryGetAllPengabdian(searchPengabdian, pagePengabdian);
 
   const { data: totalProposal } = useQueryTotalProposalDosen();
 
@@ -54,25 +62,25 @@ export default function DashboardDosen() {
           />
         </div>
       </div>
-      <div className="max-h-[700px] overflow-auto p-[2px]">
-        {currentTab === "penelitian" || !currentTab ? (
-          <ListPenelitian
-            penelitian={penelitian}
-            currentTab={currentTab}
-            tabActive={tabActive}
-            isLoading={isLoadingPenelitian}
-            totalProposal={totalProposal}
-          />
-        ) : (
-          <ListPengabdian
-            pengabdian={pengabdian}
-            currentTab={currentTab}
-            tabActive={tabActive}
-            isLoading={isLoadingPengabdian}
-            totalProposal={totalProposal}
-          />
-        )}
-      </div>
+      {currentTab === "penelitian" || !currentTab ? (
+        <ListPenelitian
+          penelitian={penelitian}
+          currentTab={currentTab}
+          tabActive={tabActive}
+          isLoading={isLoadingPenelitian}
+          totalProposal={totalProposal}
+          handlePageChange={handlePageChangePenelitian}
+        />
+      ) : (
+        <ListPengabdian
+          pengabdian={pengabdian}
+          currentTab={currentTab}
+          tabActive={tabActive}
+          isLoading={isLoadingPengabdian}
+          totalProposal={totalProposal}
+          handlePageChange={handlePageChangePengabdian}
+        />
+      )}
     </div>
   );
 }

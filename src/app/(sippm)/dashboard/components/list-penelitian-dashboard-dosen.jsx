@@ -13,6 +13,7 @@ import { useStep } from "@/lib/hooks/useStep";
 import { SkeletonListingProposal } from "@/components/skeleton/skeleton-listing-proposal";
 import { EmptyState } from "@/components/empty-state";
 import ListCardPenelitianDashboardDosen from "./list-card-penelitian-dashboard-dosen";
+import { Pagination } from "@/components/pagination";
 
 export const ListPenelitian = ({
   penelitian,
@@ -20,6 +21,7 @@ export const ListPenelitian = ({
   tabActive,
   isLoading,
   totalProposal,
+  handlePageChange,
 }) => {
   if (isLoading) return <SkeletonListingProposal />;
   return (
@@ -29,17 +31,27 @@ export const ListPenelitian = ({
         jumlahPenelitianDisetujui={totalProposal?.data.penelitian_disetujui}
         jumlahPenelitianDitolak={totalProposal?.data.penelitian_ditolak}
       />
-      {penelitian?.length ? (
-        penelitian?.map((proposal) => (
-          <ListItem
-            key={proposal.id}
-            data={proposal}
-            currentTab={currentTab}
-            tabActive={tabActive}
-          />
-        ))
-      ) : (
-        <EmptyState />
+      <div className="flex h-[480px] flex-col gap-4 overflow-auto p-1">
+        {penelitian?.data?.length ? (
+          penelitian?.data?.map((proposal) => (
+            <ListItem
+              key={proposal.id}
+              data={proposal}
+              currentTab={currentTab}
+              tabActive={tabActive}
+            />
+          ))
+        ) : (
+          <EmptyState />
+        )}
+      </div>
+      {penelitian?.data?.length && (
+        <Pagination
+          perPage={penelitian?.per_page}
+          onPageChange={handlePageChange}
+          pageCount={penelitian?.last_page}
+          pageOffset={penelitian?.current_page - 1}
+        />
       )}
     </div>
   );

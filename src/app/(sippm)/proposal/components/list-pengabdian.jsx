@@ -12,27 +12,39 @@ import { useDeletePengabdianDosen } from "@/handlers/dosen/pengabdian/delete-pen
 import { useStep } from "@/lib/hooks/useStep";
 import { SkeletonListingProposal } from "@/components/skeleton/skeleton-listing-proposal";
 import { EmptyState } from "@/components/empty-state";
+import { Pagination } from "@/components/pagination";
 
 export const ListPengabdian = ({
   pengabdian,
   currentTab,
   tabActive,
   isLoading,
+  handlePageChange,
 }) => {
   if (isLoading) return <SkeletonListingProposal />;
   return (
-    <div className="flex flex-col gap-4">
-      {pengabdian?.length ? (
-        pengabdian?.map((proposal) => (
-          <ListItem
-            key={proposal.id}
-            data={proposal}
-            currentTab={currentTab}
-            tabActive={tabActive}
-          />
-        ))
-      ) : (
-        <EmptyState />
+    <div className="flex flex-col gap-2">
+      <div className="flex h-[600px] flex-col gap-4 overflow-auto p-1 pb-8">
+        {pengabdian?.data?.length ? (
+          pengabdian?.data?.map((proposal) => (
+            <ListItem
+              key={proposal.id}
+              data={proposal}
+              currentTab={currentTab}
+              tabActive={tabActive}
+            />
+          ))
+        ) : (
+          <EmptyState />
+        )}
+      </div>
+      {pengabdian?.data?.length && (
+        <Pagination
+          perPage={pengabdian?.per_page}
+          onPageChange={handlePageChange}
+          pageCount={pengabdian?.last_page}
+          pageOffset={pengabdian?.current_page - 1}
+        />
       )}
     </div>
   );
