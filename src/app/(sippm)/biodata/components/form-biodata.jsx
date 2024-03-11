@@ -13,6 +13,7 @@ import { useQueryJabatanFungsional } from "@/handlers/data-referensi/jabatan-fun
 import { useQuerySearchKabupaten } from "@/handlers/data-referensi/kabupaten/query-search-kabupaten";
 import { useQueryProgramStudi } from "@/handlers/data-referensi/program-studi/query-program-studi";
 import { useCreateOrUpdateBiodata } from "@/handlers/biodata/create-or-update-biodata";
+import { styles } from "@/lib/utils/style-react-select";
 
 const FormBiodata = () => {
   const {
@@ -106,6 +107,7 @@ const FormBiodata = () => {
               selectedTempatLahir ? selectedTempatLahir?.label : "Tempat Lahir"
             }
             isLoading={isLoadingKabupatenOptions}
+            styles={styles(selectedTempatLahir)}
           />
           <div className="flex flex-col">
             <div className="flex grow">
@@ -190,6 +192,7 @@ const FormBiodata = () => {
                 : "Jabatan Fungsional"
             }
             defaultValue={profile?.jabatan_fungsional_id}
+            styles={styles(selectedJabatanFungsional)}
           />
         </div>
         <div className="flex w-1/2 flex-col gap-2 text-sm font-[500] text-[#666666]">
@@ -209,6 +212,7 @@ const FormBiodata = () => {
                 : "Program Studi"
             }
             defaultValue={profile?.program_studi_id}
+            styles={styles(selectedProgramStudi)}
           />
           <Input
             label="Alamat"
