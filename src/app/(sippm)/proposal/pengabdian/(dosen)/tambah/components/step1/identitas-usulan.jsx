@@ -48,7 +48,7 @@ export const IdentitasUsulanPKM = () => {
   }, []);
 
   const selectedRumpunIlmu = rumpunIlmuOptions?.find(
-    (c) => c.value === identitasUsulanPenelitian?.rumpun_ilmu_id,
+    (c) => c.value === identitasUsulan?.rumpun_ilmu_id,
   );
 
   return (
