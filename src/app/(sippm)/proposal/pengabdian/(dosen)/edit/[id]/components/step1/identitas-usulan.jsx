@@ -13,6 +13,7 @@ import { useQueryRumpunIlmu } from "@/handlers/data-referensi/rumpun-ilmu/query-
 import { useQueryIdentitasUsulanOnUpdate } from "@/handlers/dosen/pengabdian/identitas-usulan/query-identitas-usulan-pkm-onupdate";
 import { useEditIdentitasUsulanPKM } from "@/handlers/dosen/pengabdian/identitas-usulan/update-identitas-usulan";
 import { SingleSelect } from "@/components/select/single-select";
+import { styles } from "@/lib/utils/style-react-select";
 
 export const IdentitasUsulanPKM = () => {
   const id = useId();
@@ -41,6 +42,10 @@ export const IdentitasUsulanPKM = () => {
     refetch();
   }, []);
 
+  const selectedRumpunIlmu = rumpunIlmuOptions?.find(
+    (c) => c.value === identitasUsulanPenelitian?.rumpun_ilmu_id,
+  );
+
   return (
     <ContainerContent className="relative">
       <h1 className="text-lg font-semibold text-primary">Identitas Usulan</h1>
@@ -65,15 +70,14 @@ export const IdentitasUsulanPKM = () => {
               control={control}
               options={rumpunIlmuOptions}
               placeholder={
-                rumpunIlmuOptions?.find(
-                  (c) => c.value === identitasUsulan?.rumpun_ilmu_id,
-                )?.label || "Rumpun Ilmu"
+                selectedRumpunIlmu ? selectedRumpunIlmu?.label : "Rumpun Ilmu"
               }
               name="rumpun_ilmu_id"
               errors={errors.rumpun_ilmu_id}
               rules={{ required: "Wajib diisi" }}
               id={id}
               isLoading={isLoadingRumpunIlmu}
+              styles={styles(selectedRumpunIlmu)}
             />
             <Input
               label="Tahun Usulan"

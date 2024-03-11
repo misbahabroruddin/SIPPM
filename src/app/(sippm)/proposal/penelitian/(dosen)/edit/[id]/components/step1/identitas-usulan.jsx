@@ -12,6 +12,7 @@ import { useQueryJenisPenelitians } from "@/handlers/data-referensi/jenis-peneli
 import { useQueryRumpunIlmu } from "@/handlers/data-referensi/rumpun-ilmu/query-rumpun-ilmu";
 import { useAddIdentitasUsulanPenelitian } from "@/handlers/dosen/penelitian/identitas-usulan/add-identitas-usulan-penelitian";
 import { SingleSelect } from "@/components/select/single-select";
+import { styles } from "@/lib/utils/style-react-select";
 
 export const IdentitasUsulan = () => {
   const id = useId();
@@ -43,6 +44,14 @@ export const IdentitasUsulan = () => {
     refecthIdentitasUsulanPenelitian();
   }, []);
 
+  const selectedJenisPenelitian = jenisPenelitianOptions?.find(
+    (c) => c.value === identitasUsulanPenelitian?.jenis_penelitian_id,
+  );
+
+  const selectedRumpunIlmu = rumpunIlmuOptions?.find(
+    (c) => c.value === identitasUsulanPenelitian?.rumpun_ilmu_id,
+  );
+
   return (
     <ContainerContent className="relative">
       <h1 className="text-lg font-semibold text-primary">Identitas Usulan</h1>
@@ -66,16 +75,16 @@ export const IdentitasUsulan = () => {
               control={control}
               options={jenisPenelitianOptions}
               placeholder={
-                jenisPenelitianOptions?.find(
-                  (c) =>
-                    c.value === identitasUsulanPenelitian?.jenis_penelitian_id,
-                )?.label || "Jenis Penelitian"
+                selectedJenisPenelitian
+                  ? selectedJenisPenelitian?.label
+                  : "Jenis Penelitian"
               }
               name="jenis_penelitian_id"
               errors={errors.jenis_penelitian_id}
               rules={{ required: "Wajib diisi" }}
               id={id}
               isLoading={isLoadingJenisPenelitianOptions}
+              styles={styles(selectedJenisPenelitian)}
             />
             <SingleSelect
               label={"Rumpun ilmu"}
@@ -83,15 +92,14 @@ export const IdentitasUsulan = () => {
               control={control}
               options={rumpunIlmuOptions}
               placeholder={
-                rumpunIlmuOptions?.find(
-                  (c) => c.value === identitasUsulanPenelitian?.rumpun_ilmu_id,
-                )?.label || "Rumpun Ilmu"
+                selectedRumpunIlmu ? selectedRumpunIlmu?.label : "Rumpun Ilmu"
               }
               name="rumpun_ilmu_id"
               errors={errors.rumpun_ilmu_id}
               rules={{ required: "Wajib diisi" }}
               id={id}
               isLoading={isLoadingRumpunIlmu}
+              styles={styles(selectedRumpunIlmu)}
             />
             <Input
               label="Bidang Fokus Penelitian"

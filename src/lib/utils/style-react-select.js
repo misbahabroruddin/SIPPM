@@ -3,7 +3,7 @@ export const styles = (value) => {
     placeholder: (base) => ({
       ...base,
       paddingLeft: "2px",
-      color: value ? "#666666 !important" : "#bdbdbd !important",
+      color: value ? "#333333 !important" : "#bdbdbd !important",
     }),
   };
 };

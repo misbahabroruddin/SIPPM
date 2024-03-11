@@ -12,6 +12,7 @@ import { useQueryTargetCapaianPenelitian } from "@/handlers/dosen/penelitian/tar
 import { useAddTargetCapaianPenelitian } from "@/handlers/dosen/penelitian/target-capaian/add-target-capaian-penelitian";
 import { useStep } from "@/lib/hooks/useStep";
 import { SingleSelect } from "@/components/select/single-select";
+import { styles } from "@/lib/utils/style-react-select";
 
 export const TargetCapaian = () => {
   const { currentStep, setCurrentStep } = useStep();
@@ -66,8 +67,8 @@ export const TargetCapaian = () => {
               rules={{ required: "Wajib diisi" }}
               id={id}
               isLoading={isLoading}
+              styles={styles(data?.data?.luaran_wajib.nama)}
             />
-
             <Input
               type="number"
               label="Tahun Capaian"

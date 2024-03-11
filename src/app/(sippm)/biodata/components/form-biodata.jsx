@@ -63,7 +63,7 @@ const FormBiodata = () => {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="px-2">
       <div className="flex gap-4 p-3">
-        <div className="flex w-1/2 flex-col gap-2 text-sm font-[500] text-[#666666]">
+        <div className="flex w-1/2 flex-col gap-2 text-sm font-[500] text-primary">
           <Input
             label="Nama Lengkap"
             name="nama_lengkap"
