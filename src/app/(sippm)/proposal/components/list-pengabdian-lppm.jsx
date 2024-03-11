@@ -43,12 +43,14 @@ export const ListPengabdianProposalLPPM = ({
           <EmptyState />
         )}
       </div>
-      <Pagination
-        perPage={pengabdian?.per_page}
-        onPageChange={handlePagePengabdianChange}
-        pageCount={pengabdian?.last_page}
-        pageOffset={pengabdian?.current_page - 1}
-      />
+      {pengabdian?.data?.length && (
+        <Pagination
+          perPage={pengabdian?.per_page}
+          onPageChange={handlePagePengabdianChange}
+          pageCount={pengabdian?.last_page}
+          pageOffset={pengabdian?.current_page - 1}
+        />
+      )}
     </div>
   );
 };

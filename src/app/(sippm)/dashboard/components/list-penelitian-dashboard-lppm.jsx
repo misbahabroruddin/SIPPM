@@ -34,12 +34,14 @@ export const ListPenelitianDashboardLPPM = ({
           <EmptyState />
         )}
       </div>
-      <Pagination
-        perPage={penelitian?.per_page}
-        onPageChange={handlePageChange}
-        pageCount={penelitian?.last_page}
-        pageOffset={penelitian?.current_page - 1}
-      />
+      {penelitian?.data?.length && (
+        <Pagination
+          perPage={penelitian?.per_page}
+          onPageChange={handlePageChange}
+          pageCount={penelitian?.last_page}
+          pageOffset={penelitian?.current_page - 1}
+        />
+      )}
     </>
   );
 };
