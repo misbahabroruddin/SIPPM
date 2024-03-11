@@ -25,7 +25,7 @@ export const useAddIdentitasUsulanPKM = (reset) => {
 
       if (isEdit && currentStep === 1) {
         const response = await axios.post(
-          `proposals/dosen/pkms/${pengabdianId}/identitas-usulans`,
+          `proposals/dosens/pkms/${pengabdianId}/identitas-usulan`,
           formData,
         );
         if (response.data.data) {
