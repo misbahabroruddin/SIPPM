@@ -26,9 +26,7 @@ const FormBiodata = () => {
   const id = useId();
 
   const { data: profile, refetch } = useGetProfile(setValue);
-  const [tanggalLahir, setTanggalLahir] = useState(
-    profile ? new Date(profile?.tanggal_lahir) : null,
-  );
+  const [tanggalLahir, setTanggalLahir] = useState(null);
 
   const { mutateAsync: onSubmit, isPending: isLoading } =
     useCreateOrUpdateBiodata();
@@ -57,6 +55,10 @@ const FormBiodata = () => {
   );
 
   useEffect(() => {
+    if (profile?.tanggal_lahir) {
+      setValue("tanggal_lahir", new Date(profile?.tanggal_lahir));
+      setTanggalLahir(new Date(profile?.tanggal_lahir));
+    }
     refetch();
   }, [profile]);
 
