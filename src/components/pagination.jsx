@@ -18,7 +18,7 @@ export function Pagination({ onPageChange, pageCount, perPage, pageOffset }) {
         renderOnZeroPageCount={null}
         containerClassName="flex items-center border border-blue-09 rounded-lg"
         pageClassName="px-4 py-2 border border-y-0 border-blue-09 text-blue-04"
-        activeClassName="bg-primary !text-white"
+        activeClassName="bg-primary !text-white border border-primary"
         forcePage={pageOffset}
         marginPagesDisplayed={3}
         disableInitialCallback={true}
