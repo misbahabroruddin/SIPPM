@@ -19,7 +19,7 @@ export const useRestoreJenisPenelitian = () => {
       queryClient.invalidateQueries({
         queryKey: ["trash-jenis-penelitian"],
       });
-      toast.success("Data program studi berhasil di-restore");
+      toast.success("Data jenis penelitian berhasil di-restore");
     } catch (error) {
       toast.error(error.message);
     }
