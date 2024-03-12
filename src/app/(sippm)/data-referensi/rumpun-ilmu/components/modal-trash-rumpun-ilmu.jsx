@@ -51,9 +51,7 @@ export const ModalTrashRumpunIlmu = () => {
         containerClassName={"lg:w-[900px]"}
       >
         <div className="flex flex-col gap-4">
-          <h1 className="text-center text-lg font-[500]">
-            Trash Jenis Penelitian
-          </h1>
+          <h1 className="text-center text-lg font-[500]">Trash Rumpun Ilmu</h1>
           <TableTrashRumpunIlmu onClose={() => setOpen(false)} />
         </div>
       </Modal>

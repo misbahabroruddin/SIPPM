@@ -35,7 +35,7 @@ export const FormEditRumpunIlmu = ({ id, setOpen, data, isLoading }) => {
         name="nama"
         containerClass="flex-col items-start gap-1"
         spanEmptyClass="hidden"
-        placeholder="Nama Jenis Penelitian"
+        placeholder="Nama Rumpun Ilmu"
         register={register("nama", {
           required: "Wajib diisi",
         })}
@@ -49,7 +49,7 @@ export const FormEditRumpunIlmu = ({ id, setOpen, data, isLoading }) => {
         name="keterangan"
         containerClass="flex-col items-start gap-1"
         spanEmptyClass="hidden"
-        placeholder="Keterangan Jenis Penelitian"
+        placeholder="Keterangan Rumpun Ilmu"
         register={register("keterangan")}
         errors={errors.keterangan}
         defaultValue={data?.keterangan}
