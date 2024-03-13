@@ -22,6 +22,8 @@ export const Sidebar = () => {
   useEffect(() => {
     if (pathname.includes("/data-referensi")) {
       return setOpen("/data-referensi");
+    } else if (pathname.includes("/document")) {
+      return setOpen("/document");
     }
 
     setOpen(null);

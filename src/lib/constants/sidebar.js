@@ -79,11 +79,23 @@ export const MENU_SIDEBAR_DOSEN = [
   //   icon: "/icons/monev.svg",
   //   link: "/monev",
   // },
-  // {
-  //   label: "Document",
-  //   icon: "/icons/document.svg",
-  //   link: "/document",
-  // },
+  {
+    label: "Document",
+    icon: "/icons/document.svg",
+    link: "/document",
+    children: [
+      {
+        label: "Penelitian",
+        icon: "/icons/sub-menu.svg",
+        link: "/document/penelitian",
+      },
+      {
+        label: "PKM",
+        icon: "/icons/sub-menu.svg",
+        link: "/document/pkm",
+      },
+    ],
+  },
   // {
   //   label: "Insentif",
   //   icon: "/icons/insentif.svg",
@@ -94,11 +106,11 @@ export const MENU_SIDEBAR_DOSEN = [
   //   icon: "/icons/repository.svg",
   //   link: "/repository",
   // },
-  // {
-  //   label: "Laporan Hasil",
-  //   icon: "/icons/laporan-hasil.svg",
-  //   link: "/laporan-hasil",
-  // },
+  {
+    label: "Laporan Hasil",
+    icon: "/icons/laporan-hasil.svg",
+    link: "/laporan-hasil",
+  },
 ];
 
 export const MENU_SIDEBAR_LPPM = [
@@ -117,23 +129,23 @@ export const MENU_SIDEBAR_LPPM = [
     icon: "/icons/proposal.svg",
     link: "/proposal",
   },
-  // {
-  //   label: "Document",
-  //   icon: "/icons/document.svg",
-  //   link: "/document",
-  //   children: [
-  //     {
-  //       label: "Penelitian",
-  //       icon: "/icons/sub-menu.svg",
-  //       link: "/document/penelitian",
-  //     },
-  //     {
-  //       label: "PKM",
-  //       icon: "/icons/sub-menu.svg",
-  //       link: "/document/pkm",
-  //     },
-  //   ],
-  // },
+  {
+    label: "Document",
+    icon: "/icons/document.svg",
+    link: "/document",
+    children: [
+      {
+        label: "Penelitian",
+        icon: "/icons/sub-menu.svg",
+        link: "/document/penelitian",
+      },
+      {
+        label: "PKM",
+        icon: "/icons/sub-menu.svg",
+        link: "/document/pkm",
+      },
+    ],
+  },
   // {
   //   label: "Laporan",
   //   icon: "/icons/document.svg",
