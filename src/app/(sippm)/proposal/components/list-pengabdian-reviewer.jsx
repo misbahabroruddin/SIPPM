@@ -43,14 +43,14 @@ export const ListPengabdianProposalReviewer = ({
           <EmptyState />
         )}
       </div>
-      {pengabdian?.data?.length && (
+      {pengabdian?.data?.length ? (
         <Pagination
           perPage={pengabdian?.per_page}
           onPageChange={handlePagePengabdianChange}
           pageCount={pengabdian?.last_page}
           pageOffset={pengabdian?.current_page - 1}
         />
-      )}
+      ) : null}
     </div>
   );
 };

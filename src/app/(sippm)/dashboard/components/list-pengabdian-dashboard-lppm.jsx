@@ -34,14 +34,14 @@ export const ListPengabdianDashboardLPPM = ({
           <EmptyState />
         )}
       </div>
-      {pengabdian?.data?.length && (
+      {pengabdian?.data?.length ? (
         <Pagination
           perPage={pengabdian?.per_page}
           onPageChange={handlePageChange}
           pageCount={pengabdian?.last_page}
           pageOffset={pengabdian?.current_page - 1}
         />
-      )}
+      ) : null}
     </>
   );
 };
