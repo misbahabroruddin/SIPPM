@@ -27,7 +27,6 @@ export const useQueryGetPenelitianReviewer = (search, page) => {
         const { data } = await axios.get("/proposals/reviewers/penelitians", {
           params: params,
         });
-        console.log(data?.data.current_page);
         return data?.data;
       } catch (error) {
         toast.error(error.message);
