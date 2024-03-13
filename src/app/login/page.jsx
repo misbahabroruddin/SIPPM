@@ -25,7 +25,7 @@ export default function Login() {
       username: data.username,
       password: data.password,
       redirect: false,
-      callbackUrl: `${window.location.origin}/dashboard`,
+      callbackUrl: `${window.location.href}/dashboard`,
     });
 
     if (response.error) {
@@ -34,10 +34,9 @@ export default function Login() {
 
     if (response.ok) {
       toast.success("Login berhasil");
+      location.href = "/dashboard";
     }
     setIsLoading(false);
-
-    replace("/dashboard");
 
     resetField("password");
   };
