@@ -46,10 +46,7 @@ export default function DashboardDosen() {
     <div className="flex flex-col gap-4">
       <div className="flex justify-between">
         <div className="flex items-center gap-2 lg:gap-4">
-          <Tabs
-            tabActive={currentTab || tabActive}
-            setSearch={setSearchPenelitian}
-          />
+          <Tabs tabActive={currentTab || tabActive} />
           <SearchInput
             onChange={(e) => {
               currentTab === "pengabdian"
