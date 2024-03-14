@@ -42,7 +42,8 @@ export default function DashboardLppm() {
     infoPenelitian?.data?.status_lppm?.ditolak || 0;
 
   const totalProposal =
-    infoPenelitian?.data?.total + infoPengabdian?.data?.total || 0;
+    infoPenelitian?.data?.status_lppm?.revisi +
+      infoPengabdian?.data?.status_lppm?.revisi || 0;
 
   const totalPengabdianDisetujui =
     infoPengabdian?.data?.status_lppm?.diterima || 0;
