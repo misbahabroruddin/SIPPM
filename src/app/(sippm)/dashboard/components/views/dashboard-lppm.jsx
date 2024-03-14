@@ -7,9 +7,10 @@ import { CardDashboard } from "@/components/card/card-dashboard";
 import { Tabs } from "../tabs";
 import { ListPenelitianDashboardLPPM } from "../list-penelitian-dashboard-lppm";
 import { ListPengabdianDashboardLPPM } from "../list-pengabdian-dashboard-lppm";
-import { useQueryGetPenelitianLPPM } from "@/handlers/lppm/penelitian/query-get-listing-penelitian";
-import { useQueryGetPengabdianLPPM } from "@/handlers/lppm/pengabdian/query-get-listing-pkm-lppm";
-import { useQueryTotalProposalLPPM } from "@/handlers/lppm/query-total-proposal";
+import { useQueryGetAllPengabdianDashboardLPPM } from "@/handlers/lppm/dashboard/pengabdian/query-get-all-pengabdian-dashboard";
+import { useQueryGetAllPenelitianDashboardLPPM } from "@/handlers/lppm/dashboard/penelitian/query-get-all-penelitian-dashboard";
+import { useQueryInfoProposalPenelitianDashboardLPPM } from "@/handlers/lppm/dashboard/penelitian/query-get-info-penelitian-dashboard";
+import { useQueryInfoProposalPengabdianDashboardLPPM } from "@/handlers/lppm/dashboard/pengabdian/query-get-info-pengabdian-dashboard";
 
 export default function DashboardLppm() {
   const [pagePenelitian, setPagePenelitian] = useState(1);
@@ -18,9 +19,9 @@ export default function DashboardLppm() {
   const tabParams = useSearchParams();
   const currentTab = tabParams.get("tab");
   const { data: penelitian, isLoading: isLoadingPenelitian } =
-    useQueryGetPenelitianLPPM("", pagePenelitian);
+    useQueryGetAllPenelitianDashboardLPPM("", pagePenelitian);
   const { data: pengabdian, isLoading: isLoadingPengabdian } =
-    useQueryGetPengabdianLPPM("", pagePengabdian);
+    useQueryGetAllPengabdianDashboardLPPM("", pagePengabdian);
 
   const handlePageChangePenelitian = (event) => {
     setPagePenelitian(event.selected + 1);
@@ -29,33 +30,41 @@ export default function DashboardLppm() {
     setPagePengabdian(event.selected + 1);
   };
 
-  const { data: totalProposal } = useQueryTotalProposalLPPM();
+  const { data: infoPenelitian } =
+    useQueryInfoProposalPenelitianDashboardLPPM();
+  const { data: infoPengabdian } =
+    useQueryInfoProposalPengabdianDashboardLPPM();
+
+  const totalPenelitianDisetujui =
+    infoPenelitian?.data?.status_lppm?.diterima || 0;
+
+  const totalPeneliatianDitolak =
+    infoPenelitian?.data?.status_lppm?.ditolak || 0;
+
+  const totalProposal =
+    infoPenelitian?.data?.total + infoPengabdian?.data?.total || 0;
+
+  const totalPengabdianDisetujui =
+    infoPengabdian?.data?.status_lppm?.diterima || 0;
+
+  const totalPengabdianDitolak =
+    infoPengabdian?.data?.status_lppm?.ditolak || 0;
 
   return (
     <div className="flex flex-col gap-4">
       <div className="flex gap-4">
-        <CardDashboard
-          title="Penelitian"
-          jumlah={totalProposal?.data?.penelitian_disetujui}
-        />
+        <CardDashboard title="Penelitian" jumlah={totalPenelitianDisetujui} />
         <CardDashboard
           status="Ditolak"
           title="Penelitian"
-          jumlah={totalProposal?.data?.penelitian_ditolak}
+          jumlah={totalPeneliatianDitolak}
         />
-        <CardDashboard
-          status="Revisi"
-          title="Semua"
-          jumlah={totalProposal?.data?.revisi}
-        />
-        <CardDashboard
-          title="Pengabdian"
-          jumlah={totalProposal?.data?.pengabdian_disetujui}
-        />
+        <CardDashboard status="Revisi" title="Semua" jumlah={totalProposal} />
+        <CardDashboard title="Pengabdian" jumlah={totalPengabdianDisetujui} />
         <CardDashboard
           status="Ditolak"
           title="Pengabdian"
-          jumlah={totalProposal?.data?.pengabdian_ditolak}
+          jumlah={totalPengabdianDitolak}
         />
       </div>
       <div className="flex justify-between">
