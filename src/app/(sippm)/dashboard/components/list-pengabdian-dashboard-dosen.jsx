@@ -24,12 +24,21 @@ export const ListPengabdian = ({
   handlePageChange,
 }) => {
   if (isLoading) return <SkeletonListingProposal />;
+
+  const totalPengabdianDisetujui =
+    totalProposal?.data.status_lppm?.diterima +
+    totalProposal?.data.status_reviewer?.diterima;
+
+  const totalPengabdianDitolak =
+    totalProposal?.data.status_lppm?.ditolak +
+    totalProposal?.data.status_reviewer?.ditolak;
+
   return (
     <div className="flex flex-col gap-4">
       <ListCardPengabdianDashboardDosen
         jumlahPengabdian={totalProposal?.data.total || 0}
-        jumlahPengabdianDisetujui={totalProposal?.data.pengabdian_disetujui}
-        jumlahPengabdianDitolak={totalProposal?.data.pengabdian_ditolak}
+        jumlahPengabdianDisetujui={totalPengabdianDisetujui}
+        jumlahPengabdianDitolak={totalPengabdianDitolak}
       />
       <div className="flex h-[480px] flex-col gap-4 overflow-auto p-1">
         {pengabdian?.data?.length ? (

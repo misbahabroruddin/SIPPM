@@ -24,12 +24,21 @@ export const ListPenelitian = ({
   handlePageChange,
 }) => {
   if (isLoading) return <SkeletonListingProposal />;
+
+  const totalPenelitianDisetujui =
+    totalProposal?.data.status_lppm?.diterima +
+    totalProposal?.data.status_reviewer?.diterima;
+
+  const totalPenelitianDitolak =
+    totalProposal?.data.status_lppm?.ditolak +
+    totalProposal?.data.status_reviewer?.ditolak;
+
   return (
     <div className="flex flex-col gap-4">
       <ListCardPenelitianDashboardDosen
         jumlahPenelitian={totalProposal?.data?.total || 0}
-        jumlahPenelitianDisetujui={totalProposal?.data.penelitian_disetujui}
-        jumlahPenelitianDitolak={totalProposal?.data.penelitian_ditolak}
+        jumlahPenelitianDisetujui={totalPenelitianDisetujui}
+        jumlahPenelitianDitolak={totalPenelitianDitolak}
       />
       <div className="flex h-[480px] flex-col gap-4 overflow-auto p-1">
         {penelitian?.data?.length ? (
