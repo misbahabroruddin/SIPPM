@@ -30,7 +30,7 @@ export const TableDetailAnggotaMahasiswa = ({ data }) => {
         </tr>
       </thead>
       <tbody>
-        {data?.data?.anggota_proposals.length ? (
+        {data?.data?.anggota_proposals?.length ? (
           data?.data?.anggota_proposals
             ?.filter((anggota) => anggota.jenis_anggota === "Mahasiswa")
             .map((row, index) => {

@@ -42,7 +42,9 @@ export const TrackDosenLPPM = ({ data, isLoading }) => {
   }
 
   return (
-    <TimelineItem date={convertDate(updatedData?.updated_at, " " || "")}>
+    <TimelineItem
+      date={updatedData ? convertDate(updatedData?.updated_at, " ") : ""}
+    >
       <TimelineHeader status={updatedData?.proposal?.status_lppm} />
       <TimelineContent isLoading={isLoading}>
         <ContainerContent className="p-4">
@@ -52,14 +54,16 @@ export const TrackDosenLPPM = ({ data, isLoading }) => {
             </div>
             <div className="flex flex-col gap-2">
               <div className="flex grow items-center justify-between">
-                <p className="text-dark-09">Nama reviewer</p>
+                <p className="text-dark-09">{updatedData?.user?.name}</p>
                 <ButtonStatus
                   status={updatedData?.proposal?.status_lppm}
                   className="px-2 py-1 text-xs font-[500]"
                 />
               </div>
               <p className="text-end font-semibold text-primary">
-                {convertToRupiah(updatedData?.dana_yang_disetujui)}
+                {updatedData
+                  ? convertToRupiah(updatedData?.dana_yang_disetujui)
+                  : 0}
               </p>
             </div>
             <div className="mt-8 flex flex-col gap-2">
@@ -79,11 +83,11 @@ export const TrackDosenLPPM = ({ data, isLoading }) => {
                         />
                         <Link
                           target="_blank"
-                          href={item.file_proposal || ""}
+                          href={item.file_proposal.url || ""}
                           className="hover:underline"
                         >
                           <p className="text-dark-09">
-                            {item.file_proposal.name ||
+                            {item.file_proposal.nama ||
                               "Klik untuk lebih detail"}
                           </p>
                         </Link>

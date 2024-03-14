@@ -7,12 +7,13 @@ export const Tab = ({
   tabActive,
   iconSrc,
   onClick,
-  className = "",
   tabActiveClass,
+  className,
+  upperCase,
 }) => {
   return (
     <button
-      className={`flex items-center gap-2 px-2 py-2 lg:px-4 ${
+      className={`flex w-fit items-center justify-center gap-2 px-2 py-2 lg:px-4 ${
         tabActive === tabName
           ? twMerge("rounded bg-[#10487A] text-white", tabActiveClass)
           : className
@@ -28,7 +29,7 @@ export const Tab = ({
           className="hidden lg:block"
         />
       )}
-      <p>{capitalFirtsLatter(tabName)}</p>
+      <p>{upperCase ? tabName : capitalFirtsLatter(tabName)}</p>
     </button>
   );
 };

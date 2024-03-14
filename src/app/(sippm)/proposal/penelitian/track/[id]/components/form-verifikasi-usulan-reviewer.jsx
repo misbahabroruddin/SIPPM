@@ -4,7 +4,6 @@ import { ButtonSubmit } from "@/components/button/button-submit";
 import { Input } from "@/components/input/input";
 import { Label } from "@/components/label";
 import { SingleSelect } from "@/components/select/single-select";
-import { useUpdateProposalPenelitian } from "@/handlers/lppm/penelitian/update-proposal-penelitian-lppm";
 import { useUpdateProposalPenelitianReviewer } from "@/handlers/lppm/penelitian/update-proposal-penelitian-reviewer";
 import { useRouter } from "next/navigation";
 import { useId } from "react";

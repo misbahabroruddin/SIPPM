@@ -12,6 +12,8 @@ export const TableDetailAnggotaDosen = ({ data }) => {
     "Jabatan Fungsional",
   ];
 
+  console.log(data?.data?.anggotas);
+
   return (
     <table className="w-full min-w-max table-auto overflow-hidden rounded-t-lg text-left !font-poppins">
       <thead className="rounded-lg">
@@ -30,8 +32,8 @@ export const TableDetailAnggotaDosen = ({ data }) => {
         </tr>
       </thead>
       <tbody>
-        {data?.data?.anggota_proposals.length ? (
-          data?.data?.anggota_proposals
+        {data?.data?.anggotas?.length ? (
+          data?.data?.anggotas
             ?.filter((anggota) => anggota.jenis_anggota === "Dosen")
             .map((row, index) => {
               return (

@@ -1,5 +1,7 @@
 "use client";
 
+import { convertDate } from "@/lib/utils/convertDate";
+
 export const SectionHeaderDetailProposal = ({ data }) => {
   return (
     <div className="flex flex-col gap-2">
@@ -22,7 +24,7 @@ export const SectionHeaderDetailProposal = ({ data }) => {
               </div>
               <div className="flex gap-4">
                 <span>:</span>
-                <p>{`${data?.user?.biodata?.tempat_lahir || ""} ${data?.user?.biodata?.tanggal_lahir}`}</p>
+                <p>{`${data?.user?.biodata?.tempat_lahir?.nama || ""}, ${convertDate(data?.user?.biodata?.tanggal_lahir, " ")}`}</p>
               </div>
               <div className="flex gap-4">
                 <span>:</span>

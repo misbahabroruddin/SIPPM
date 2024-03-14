@@ -5,10 +5,10 @@ import { usePathname } from "next/navigation";
 import { BasePageTitle } from "@/components/base-page-title";
 import { capitalFirtsLatter } from "@/lib/utils/capitalizeFirstLetter";
 import { Timeline } from "@/components/timeline";
-import { useQueryGetRiwayatTrackDosenLPPM } from "@/handlers/lppm/query-get-riwayat-track";
-import { useQueryGetRiwayatTrackDosenReviewer } from "@/handlers/reviewer/query-get-riwayat-track";
 import { TrackDosenReviewer } from "@/components/riwayat/dosen/track-dosen-reviewer";
 import { TrackDosenLPPM } from "@/components/riwayat/dosen/track-dosen-lppm";
+import { useQueryGetRiwayatTrackDosenLPPM } from "@/handlers/dosen/riwayat/query-get-riwayat-lppm";
+import { useQueryGetRiwayatTrackDosenReviewer } from "@/handlers/dosen/riwayat/query-get-riwayat-reviewer";
 
 export default function TrackPenelitianDosenPage() {
   const { data: dataTrackDosenLPPM, isLoading: isLoadingTrackDosenLPPM } =

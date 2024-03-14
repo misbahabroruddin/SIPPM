@@ -5,15 +5,17 @@ import { notFound, useParams } from "next/navigation";
 
 import { useAxios } from "@/lib/hooks/useAxios";
 
-export const useQueryGetRiwayatTrackDosenLPPM = () => {
+export const useQueryGetRiwayatVerikasiLPPM = () => {
   const axios = useAxios();
   const { id } = useParams();
 
   const { data, status, isLoading, refetch } = useQuery({
-    queryKey: ["trackDosenLPPM", id],
+    queryKey: ["verfikasiLPPM", id],
     queryFn: async () => {
       try {
-        const { data } = await axios.get(`/proposals/riwayats/${id}/lppms`);
+        const { data } = await axios.get(
+          `/proposals/lppms/proposals/${id}/verifikasis`,
+        );
         return data.data;
       } catch (error) {
         toast.error(error.message);

@@ -4,7 +4,7 @@ import { Modal } from "@/components/modal";
 import Link from "next/link";
 import { useState } from "react";
 
-const ModalViewerPDF = ({ data }) => {
+const ModalViewerPDF = ({ data, fileName }) => {
   const [open, setOpen] = useState(false);
   const handleOpenModal = () => setOpen(true);
   return (
@@ -54,7 +54,7 @@ const ModalViewerPDF = ({ data }) => {
             disabled={data ? false : true}
             className="hover:underline disabled:cursor-default hover:disabled:no-underline"
           >
-            {data ? "Klik untuk lebih detail" : "Tidak ada berkas"}
+            {data ? fileName : "Tidak ada berkas"}
           </button>
         </Link>
       </div>

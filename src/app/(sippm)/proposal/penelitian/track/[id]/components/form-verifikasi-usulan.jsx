@@ -4,7 +4,7 @@ import { ButtonSubmit } from "@/components/button/button-submit";
 import { Input } from "@/components/input/input";
 import { Label } from "@/components/label";
 import { SingleSelect } from "@/components/select/single-select";
-import { useUpdateProposalPenelitian } from "@/handlers/lppm/penelitian/update-proposal-penelitian-lppm";
+import { useVerifikasiProposalLppm } from "@/handlers/lppm/riwayat/verifikasi-proposal-lppm";
 import { useRouter } from "next/navigation";
 import { useId } from "react";
 import { Controller, useForm } from "react-hook-form";
@@ -26,10 +26,10 @@ export const FormVerifikasiUsulan = () => {
   const status = watch("status");
 
   if (status === "Diterima") {
-    setValue("catatan", "");
+    setValue("catatan", "-");
   }
   const { mutateAsync: onSubmit, isPending: isLoading } =
-    useUpdateProposalPenelitian(reset, router);
+    useVerifikasiProposalLppm(reset, router);
 
   const statusOptions = [
     {

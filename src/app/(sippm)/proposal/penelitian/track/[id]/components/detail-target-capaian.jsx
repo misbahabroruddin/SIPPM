@@ -13,11 +13,11 @@ export const DetailTargetCapaian = ({ data }) => {
           <div className="flex flex-col gap-4">
             <div className="flex gap-3">
               <span>:</span>
-              <p>{data?.data?.target_capaian_proposal?.luaran_wajib?.nama}</p>
+              <p>{data?.data?.target_capaian?.luaran_wajib?.nama}</p>
             </div>
             <div className="flex gap-3">
               <span>:</span>
-              <p>{data?.data?.target_capaian_proposal?.tahun_capaian}</p>
+              <p>{data?.data?.target_capaian?.tahun_capaian}</p>
             </div>
           </div>
         </div>
@@ -30,14 +30,14 @@ export const DetailTargetCapaian = ({ data }) => {
             <div className="flex gap-3">
               <span>:</span>
               <p>
-                {data?.data?.target_capaian_proposal?.status_capaian === "null"
+                {data?.data?.target_capaian?.status_capaian === "null"
                   ? ""
-                  : data?.data?.target_capaian_proposal?.status_capaian}
+                  : data?.data?.target_capaian?.status_capaian}
               </p>
             </div>
             <div className="flex gap-3">
               <span>:</span>
-              <p>{data?.data?.target_capaian_proposal?.tahun_capaian}</p>
+              <p>{data?.data?.target_capaian?.tahun_capaian}</p>
             </div>
           </div>
         </div>

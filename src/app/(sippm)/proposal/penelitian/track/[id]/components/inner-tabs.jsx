@@ -65,8 +65,8 @@ export const InnerTabs = ({ tabActive }) => {
             tabName={name}
             tabActive={tabActive}
             onClick={func}
-            className="rounded rounded-bl-none rounded-br-none border-none bg-[#10487A] text-white outline-none"
-            tabActiveClass="rounded rounded-bl-none rounded-br-none border border-b-0 border-blue-primary bg-white text-black"
+            className="w-fit rounded rounded-bl-none rounded-br-none border-none bg-[#10487A] text-white outline-none lg:w-fit"
+            tabActiveClass="rounded rounded-bl-none rounded-br-none border border-b-0 border-blue-primary bg-white text-black w-fit lg:w-fit"
           />
         );
       })}

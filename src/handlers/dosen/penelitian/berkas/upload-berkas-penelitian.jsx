@@ -18,7 +18,9 @@ export const useUploadBerkasPenelitian = (router) => {
     const formData = new FormData();
     formData.append("file_cv", form.file_cv[0]);
     formData.append("file_proposal", form.file_proposal[0]);
-    formData.append("file_pernyataan_mitra", form.file_pernyataan_mitra[0]);
+    if (form.file_pernyataan_mitra) {
+      formData.append("file_pernyataan_mitra", form.file_pernyataan_mitra[0]);
+    }
 
     try {
       const penelitianId = localStorage.getItem("penelitianId");
