@@ -7,10 +7,11 @@ import { useDebouncedCallback } from "use-debounce";
 import { SearchInput } from "@/components/input/search-input";
 import { Tabs } from "../tabs";
 import { ListPenelitian } from "../list-penelitian-dashboard-dosen";
-import { useQueryGetAllPenelitian } from "@/handlers/dosen/penelitian/query-get-all-penelitian";
-import { useQueryGetAllPengabdian } from "@/handlers/dosen/pengabdian/query-get-all-pengabdian";
 import { ListPengabdian } from "../list-pengabdian-dashboard-dosen";
-import { useQueryTotalProposalDosen } from "@/handlers/dosen/query-total-proposal";
+import { useQueryGetAllPenelitianDashboardDosen } from "@/handlers/dosen/penelitian/dashboard/query-get-all-penelitian-dashboard";
+import { useQueryInfoProposalPenelitianDashboardDosen } from "@/handlers/dosen/penelitian/dashboard/query-get-info-dashboard";
+import { useQueryGetAllPengabdianDashboardDosen } from "@/handlers/dosen/pengabdian/dashboard/query-get-all-pengabdian-dashboard";
+import { useQueryInfoProposalPengabdianDashboardDosen } from "@/handlers/dosen/pengabdian/dashboard/query-get-info-pengabdian-dashboard";
 
 export default function DashboardDosen() {
   const [tabActive] = useState("penelitian");
@@ -36,11 +37,15 @@ export default function DashboardDosen() {
   }, 1000);
 
   const { data: penelitian, isLoading: isLoadingPenelitian } =
-    useQueryGetAllPenelitian(searchPenelitian, pagePenelitian);
+    useQueryGetAllPenelitianDashboardDosen(searchPenelitian, pagePenelitian);
   const { data: pengabdian, isLoading: isLoadingPengabdian } =
-    useQueryGetAllPengabdian(searchPengabdian, pagePengabdian);
+    useQueryGetAllPengabdianDashboardDosen(searchPengabdian, pagePengabdian);
 
-  const { data: totalProposal } = useQueryTotalProposalDosen();
+  const { data: infoPenelitian } =
+    useQueryInfoProposalPenelitianDashboardDosen();
+
+  const { data: infoPengabdian } =
+    useQueryInfoProposalPengabdianDashboardDosen();
 
   return (
     <div className="flex flex-col gap-4">
@@ -65,7 +70,7 @@ export default function DashboardDosen() {
           currentTab={currentTab}
           tabActive={tabActive}
           isLoading={isLoadingPenelitian}
-          totalProposal={totalProposal}
+          totalProposal={infoPenelitian}
           handlePageChange={handlePageChangePenelitian}
         />
       ) : (
@@ -74,7 +79,7 @@ export default function DashboardDosen() {
           currentTab={currentTab}
           tabActive={tabActive}
           isLoading={isLoadingPengabdian}
-          totalProposal={totalProposal}
+          totalProposal={infoPengabdian}
           handlePageChange={handlePageChangePengabdian}
         />
       )}
