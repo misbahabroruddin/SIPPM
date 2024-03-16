@@ -22,10 +22,7 @@ export const ListPenelitianKontrakLppm = ({
       <div className="flex h-[580px] flex-col gap-4 overflow-auto p-1">
         {penelitian?.data?.length ? (
           penelitian?.data?.map((proposal) => (
-            <ListItemKontrakMenunggu
-              key={`${proposal.id}-${id}`}
-              data={proposal}
-            />
+            <ListItemKontrakMenunggu key={proposal.id} data={proposal} />
           ))
         ) : (
           <EmptyState />
