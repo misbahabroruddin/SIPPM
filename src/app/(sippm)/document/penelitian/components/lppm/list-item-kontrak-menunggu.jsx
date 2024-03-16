@@ -6,6 +6,7 @@ import FileSaver from "file-saver";
 import { convertDate } from "@/lib/utils/convertDate";
 import { ModalUploadKontrakPenelitian } from "./modal-upload-kontrak-penelitian";
 import Link from "next/link";
+import { ButtonDownload } from "@/components/button/button-download";
 
 export const ListItemKontrakMenunggu = ({ data }) => {
   // const handleSaveFile = () => {
@@ -72,16 +73,7 @@ export const ListItemKontrakMenunggu = ({ data }) => {
         <div className="flex items-end gap-4">
           {!data?.dokumen_kontrak ? (
             <ModalUploadKontrakPenelitian penelitianId={data?.id} />
-          ) : (
-            <Link
-              // onClick={handleSaveFile}
-              href={data?.dokumen_kontrak?.file_kontrak?.url}
-              target="_blank"
-              className="flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-white disabled:cursor-not-allowed disabled:bg-gray-500"
-            >
-              Detail
-            </Link>
-          )}
+          ) : null}
         </div>
       </div>
     </div>

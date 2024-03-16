@@ -1,12 +1,23 @@
 "use client";
 
-import Link from "next/link";
 import Image from "next/image";
+import FileSaver from "file-saver";
 
-import { ButtonDownload } from "@/components/button/button-download";
 import { convertDate } from "@/lib/utils/convertDate";
+import { ModalUploadKontrakPenelitian } from "./modal-upload-kontrak-penelitian";
+import Link from "next/link";
+import { ButtonDownload } from "@/components/button/button-download";
 
-export const ListItemKontrakDibalas = ({ data }) => {
+export const ListItemKontrakDikirim = ({ data }) => {
+  // const handleSaveFile = () => {
+  //   var blob = new Blob([data?.dokumen_kontrak?.file_kontrak?.url], {type: "application/pdf"});
+  //   FileSaver.saveAs(
+  //     blob,
+  //     data?.dokumen_kontrak?.file_kontrak?.nama,
+  //     "application/pdf",
+  //   );
+  // };
+
   return (
     <div className="rounded-lg px-6 py-4 shadow-custom" key={data?.id}>
       <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between">
@@ -60,13 +71,16 @@ export const ListItemKontrakDibalas = ({ data }) => {
           </div>
         </div>
         <div className="flex items-end gap-4">
-          <Link
-            href={data?.dokumen_kontrak?.file_kontrak?.url}
-            target="_blank"
-            className="flex items-center gap-2 rounded-lg bg-primary text-white disabled:cursor-not-allowed disabled:bg-gray-500"
-          >
-            <ButtonDownload />
-          </Link>
+          {data?.dokumen_kontrak?.status === "Menunggu" ? (
+            <Link
+              // onClick={handleSaveFile}
+              href={data?.dokumen_kontrak?.file_kontrak?.url}
+              target="_blank"
+              className="flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-white disabled:cursor-not-allowed disabled:bg-gray-500"
+            >
+              Detail
+            </Link>
+          ) : null}
         </div>
       </div>
     </div>
