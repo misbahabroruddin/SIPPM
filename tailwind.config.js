@@ -29,6 +29,7 @@ module.exports = withMT({
         green: "#23B900",
         "green-09": "#D5FACC",
         "green-06": "#56EC33",
+        "green-05": "#2CE700",
       },
       colors: {
         primary: "#333333",
@@ -44,6 +45,10 @@ module.exports = withMT({
         "blue-primary": "#10487A",
         "blue-09": "#CFDAE4",
         "blue-04": "#0D3A62",
+        green: "#23B900",
+        "green-09": "#D5FACC",
+        "green-06": "#56EC33",
+        "green-05": "#2CE700",
       },
       outline: {
         primary: "1px solid #10487A",
