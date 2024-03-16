@@ -88,7 +88,7 @@ export const Navbar = () => {
                   />
                   <Image
                     src="/logo-unsia.svg"
-                    className="block w-auto lg:hidden"
+                    className="block w-6 lg:hidden"
                     width={25}
                     height={25}
                     alt="UNSIA"
@@ -107,13 +107,22 @@ export const Navbar = () => {
                 href="/"
                 className="hidden transition-all duration-200 lg:block"
               >
-                <Image
-                  className="w-auto"
-                  src="/logo-unsia.svg"
-                  width={25}
-                  height={25}
-                  alt="UNSIA"
-                />
+                <div className="flex items-center gap-3">
+                  <Image
+                    src="/unsia.png"
+                    className="block w-[92px] lg:hidden"
+                    width={92}
+                    height={100}
+                    alt="UNSIA"
+                  />
+                  <Image
+                    src="/logo-unsia.svg"
+                    className="block w-6"
+                    width={25}
+                    height={25}
+                    alt="UNSIA"
+                  />
+                </div>
               </Link>
               <HamburgerMenu onClick={toggleSidebar} />
             </>
