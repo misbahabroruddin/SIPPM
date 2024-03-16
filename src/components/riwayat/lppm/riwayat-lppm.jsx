@@ -24,7 +24,7 @@ import { SkeletonRiwayat } from "@/components/skeleton/skeleton-riwayat";
 export const TrackRiwayatLPPM = ({ data, isLoading }) => {
   const [isOpen, setIsOpen] = useState();
 
-  const updatedData = data ? data[data.length - 1] : undefined;
+  const updatedData = data ? data[0] : undefined;
 
   if (isLoading) {
     return (
@@ -61,7 +61,7 @@ export const TrackRiwayatLPPM = ({ data, isLoading }) => {
             </div>
             <div className="mt-8 flex flex-col gap-2">
               {data?.length ? (
-                data?.toReversed()?.map((item, index) => (
+                data?.map((item, index) => (
                   <div
                     className="overflow-hidden rounded-lg px-4 py-3 shadow-custom transition-all"
                     key={item.id}

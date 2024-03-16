@@ -4,12 +4,14 @@ import { toast } from "react-toastify";
 
 import { useAxios } from "@/lib/hooks/useAxios";
 
-export const useQueryGetRiwayatPesanLPPM = (riwayatId) => {
+export const useQueryGetRiwayatPesanReviewer = (riwayatId) => {
   const axios = useAxios();
 
-  const fetchRiwayatPesanLPPM = async () => {
+  const fetchRiwayatPesanReviewer = async () => {
     try {
-      const { data } = await axios.get(`/proposals/chats/${riwayatId}/lppms`);
+      const { data } = await axios.get(
+        `/proposals/reviewers/verifikasis/${riwayatId}/chats`,
+      );
 
       return data.data;
     } catch (error) {
@@ -18,8 +20,8 @@ export const useQueryGetRiwayatPesanLPPM = (riwayatId) => {
   };
 
   const { data, isLoading, refetch } = useQuery({
-    queryKey: ["getRiwayatPesanLPPM", riwayatId],
-    queryFn: fetchRiwayatPesanLPPM,
+    queryKey: ["getRiwayatPesanReviewer", riwayatId],
+    queryFn: fetchRiwayatPesanReviewer,
     enabled: !!riwayatId,
   });
 

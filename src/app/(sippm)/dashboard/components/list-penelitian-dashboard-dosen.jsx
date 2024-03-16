@@ -26,12 +26,9 @@ export const ListPenelitian = ({
   if (isLoading) return <SkeletonListingProposal />;
 
   const totalPenelitianDisetujui =
-    totalProposal?.data.status_lppm?.diterima +
     totalProposal?.data.status_reviewer?.diterima;
 
-  const totalPenelitianDitolak =
-    totalProposal?.data.status_lppm?.ditolak +
-    totalProposal?.data.status_reviewer?.ditolak;
+  const totalPenelitianDitolak = totalProposal?.data.status_reviewer?.ditolak;
 
   return (
     <div className="flex flex-col gap-4">

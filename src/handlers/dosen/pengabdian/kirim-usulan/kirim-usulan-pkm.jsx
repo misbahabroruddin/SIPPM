@@ -19,6 +19,9 @@ export const useKirimUsulanPKM = () => {
       queryClient.invalidateQueries({
         queryKey: ["listPengabdian"],
       });
+      queryClient.invalidateQueries({
+        queryKey: ["listPengabdianDashboardDosen"],
+      });
       queryClient.resetQueries({
         queryKey: ["anggotaMahasiswa"],
       });

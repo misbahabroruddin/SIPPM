@@ -8,8 +8,8 @@ import { ButtonSubmit } from "@/components/button/button-submit";
 import { Input } from "@/components/input/input";
 import { Label } from "@/components/label";
 import { SingleSelect } from "@/components/select/single-select";
-import { useUpdateProposalPengabdian } from "@/handlers/lppm/pengabdian/update-proposal-pengabdian-lppm";
 import { useRouter } from "next/navigation";
+import { useVerifikasiProposalLppm } from "@/handlers/lppm/riwayat/verifikasi-proposal-lppm";
 
 export const FormVerifikasiUsulan = () => {
   const {
@@ -27,10 +27,10 @@ export const FormVerifikasiUsulan = () => {
   const status = watch("status");
 
   if (status === "Diterima") {
-    setValue("catatan", "");
+    setValue("catatan", "-");
   }
   const { mutateAsync: onSubmit, isPending: isLoading } =
-    useUpdateProposalPengabdian(reset, router);
+    useVerifikasiProposalLppm(reset, router);
 
   const statusOptions = [
     {

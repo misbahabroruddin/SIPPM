@@ -1,10 +1,9 @@
 "use client";
 
 import { ButtonSubmit } from "@/components/button/button-submit";
-import { Input } from "@/components/input/input";
 import { Label } from "@/components/label";
 import { SingleSelect } from "@/components/select/single-select";
-import { useUpdateProposalPenelitianReviewer } from "@/handlers/lppm/penelitian/update-proposal-penelitian-reviewer";
+import { useVerifikasiProposalReviewer } from "@/handlers/reviewer/riwayat/verifikasi-proposal-reviewer";
 import { useRouter } from "next/navigation";
 import { useId } from "react";
 import { Controller, useForm } from "react-hook-form";
@@ -26,10 +25,10 @@ export const FormVerifikasiUsulanReviewer = () => {
   const status = watch("status");
 
   if (status === "Diterima") {
-    setValue("catatan", "");
+    setValue("catatan", "-");
   }
   const { mutateAsync: onSubmit, isPending: isLoading } =
-    useUpdateProposalPenelitianReviewer(reset, router);
+    useVerifikasiProposalReviewer(reset, router);
 
   const statusOptions = [
     {

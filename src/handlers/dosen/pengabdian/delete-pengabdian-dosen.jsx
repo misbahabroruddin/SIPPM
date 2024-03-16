@@ -40,6 +40,9 @@ export const useDeletePengabdianDosen = () => {
           confirmButtonText: "Ok",
         });
         queryClient.invalidateQueries({ queryKey: ["listPengabdian"] });
+        queryClient.invalidateQueries({
+          queryKey: ["listPengabdianDashboardDosen"],
+        });
         queryClient.resetQueries({
           queryKey: ["anggotaDosenPKM"],
         });

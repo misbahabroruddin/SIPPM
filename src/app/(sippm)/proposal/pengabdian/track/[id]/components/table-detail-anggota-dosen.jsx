@@ -30,8 +30,8 @@ export const TableDetailAnggotaDosen = ({ data }) => {
         </tr>
       </thead>
       <tbody>
-        {data?.data?.anggota_proposals.length ? (
-          data?.data?.anggota_proposals
+        {data?.data?.anggotas?.length ? (
+          data?.data?.anggotas
             ?.filter((anggota) => anggota.jenis_anggota === "Dosen")
             .map((row, index) => {
               return (

@@ -25,14 +25,20 @@ export const DetailListBerkas = ({ data }) => {
         <h5>Pernyataan Mitra</h5>
         <div className="flex items-center gap-2">
           <Image src="/icons/file.svg" width={24} height={24} alt="File" />
-          <ModalViewerPDF data={data?.data?.file_pernyataan_mitra} />
+          <ModalViewerPDF
+            data={data?.data?.file_pernyataan_mitra}
+            fileName={data?.data?.file_pernyataan_mitra?.nama}
+          />
         </div>
       </div>
       <div className="flex flex-col gap-2">
         <h5>File CV</h5>
         <div className="flex items-center gap-2">
           <Image src="/icons/file.svg" width={24} height={24} alt="File" />
-          <ModalViewerPDF data={data?.data?.file_cv} />
+          <ModalViewerPDF
+            data={data?.data?.file_cv?.url}
+            fileName={data?.data?.file_cv?.nama}
+          />
         </div>
       </div>
     </>

@@ -17,7 +17,7 @@ import { DetailRincianKegiatan } from "../detail-rincian-kegiatan";
 import { DetailBerkas } from "../detail-berkas";
 import { Timeline } from "@/components/timeline";
 import { TrackRiwayatLPPM } from "@/components/riwayat/lppm/riwayat-lppm";
-import { useQueryGetRiwayatVerikasiLPPM } from "@/handlers/lppm/query-get-riwayat-track";
+import { useQueryGetRiwayatVerikasiLPPM } from "@/handlers/lppm/riwayat/query-get-verifikasi-proposal-lppm";
 
 export default function TrackPenelitianLPPMPage() {
   const [tabActive] = useState("dokumen");

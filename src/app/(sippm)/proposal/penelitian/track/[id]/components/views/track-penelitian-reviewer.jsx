@@ -13,14 +13,14 @@ import { DetailAnggota } from "../detail-anggota";
 import { DetailTargetCapaian } from "../detail-target-capaian";
 import { DetailRencanaAnggaran } from "../detail-rencana-anggaran";
 import { DetailRincianKegiatan } from "../detail-rincian-kegiatan";
-import { useQueryDetailPenelitianReviewer } from "@/handlers/lppm/penelitian/query-get-detail-penelitian-reviewer";
 import { DetailBerkasReviewer } from "../detail-berkas-reviewer";
 import { Timeline } from "@/components/timeline";
 import { TrackRiwayatReviewer } from "@/components/riwayat/reviewer/riwayat-reviewer";
-import { TrackRiwayatLPPM } from "@/components/riwayat/lppm/riwayat-lppm";
-import { useQueryGetRiwayatTrackDosenLPPM } from "@/handlers/lppm/query-get-riwayat-track";
-import { useQueryGetRiwayatTrackDosenReviewer } from "@/handlers/reviewer/query-get-riwayat-track";
+// import { TrackRiwayatLPPM } from "@/components/riwayat/lppm/riwayat-lppm";
 import { ButtonBeranda } from "@/components/button/button-beranda";
+// import { useQueryGetRiwayatVerikasiLPPM } from "@/handlers/lppm/riwayat/query-get-verifikasi-proposal-lppm";
+import { useQueryGetRiwayatVerikasiReviewer } from "@/handlers/reviewer/riwayat/query-get-verifikasi-proposal-reviewer";
+import { useQueryDetailPenelitianReviewer } from "@/handlers/reviewer/penelitian/query-get-detail-penelitian-reviewer";
 
 export default function TrackPenelitianReviewerPage() {
   const [tabActive] = useState("dokumen");
@@ -33,12 +33,12 @@ export default function TrackPenelitianReviewerPage() {
   const router = useRouter();
 
   const { data } = useQueryDetailPenelitianReviewer();
-  const { data: dataTrackDosenLPPM, isLoading: isLoadingTrackDosenLPPM } =
-    useQueryGetRiwayatTrackDosenLPPM();
+  // const { data: dataTrackDosenLPPM, isLoading: isLoadingTrackDosenLPPM } =
+  //   useQueryGetRiwayatVerikasiLPPM();
   const {
     data: dataTrackDosenReviewer,
     isLoading: isLoadingTrackDosenReviewer,
-  } = useQueryGetRiwayatTrackDosenReviewer();
+  } = useQueryGetRiwayatVerikasiReviewer();
 
   return (
     <div className="flex flex-col gap-3">
@@ -74,10 +74,10 @@ export default function TrackPenelitianReviewerPage() {
                 data={dataTrackDosenReviewer}
                 isLoading={isLoadingTrackDosenReviewer}
               />
-              <TrackRiwayatLPPM
+              {/* <TrackRiwayatLPPM
                 data={dataTrackDosenLPPM}
                 isLoading={isLoadingTrackDosenLPPM}
-              />
+              /> */}
             </Timeline>
             <ButtonBeranda
               className="ml-auto w-fit px-8"

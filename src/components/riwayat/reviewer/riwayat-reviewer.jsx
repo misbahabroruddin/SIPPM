@@ -24,7 +24,7 @@ import { RiwayatPesanReviewer } from "./riwayat-pesan-reviewer";
 
 export const TrackRiwayatReviewer = ({ data, isLoading }) => {
   const [isOpen, setIsOpen] = useState();
-  const updatedData = data ? data[data.length - 1] : null;
+  const updatedData = data ? data[0] : null;
 
   if (isLoading) {
     return <SkeletonRiwayat />;
@@ -45,7 +45,7 @@ export const TrackRiwayatReviewer = ({ data, isLoading }) => {
               <p>Reviewer</p>
             </div>
             <div className="flex grow items-center justify-between">
-              <p className="text-dark-09">Nama reviewer</p>
+              <p className="text-dark-09">{updatedData?.user?.name}</p>
               <ButtonStatus
                 status={updatedData?.proposal?.status_reviewer}
                 className="px-2 py-1 text-xs font-[500]"
@@ -54,7 +54,7 @@ export const TrackRiwayatReviewer = ({ data, isLoading }) => {
           </div>
           <div className="mt-8 flex flex-col gap-2">
             {data?.length ? (
-              data?.toReversed()?.map((item) => (
+              data?.map((item) => (
                 <div
                   className="overflow-hidden rounded-lg px-4 py-3 shadow-custom transition-all"
                   key={item.id}
@@ -69,11 +69,11 @@ export const TrackRiwayatReviewer = ({ data, isLoading }) => {
                       />
                       <Link
                         target="_blank"
-                        href={item.file_proposal || ""}
+                        href={item.file_proposal.url || ""}
                         className="hover:underline"
                       >
                         <p className="text-dark-09">
-                          {item.file_proposal.name || "Klik untuk lebih detail"}
+                          {item.file_proposal.nama || "Klik untuk lebih detail"}
                         </p>
                       </Link>
                     </div>

@@ -23,6 +23,7 @@ import { ButtonUpdate } from "@/components/button/button-update";
 import { RiwayatPesanReviewer } from "../reviewer/riwayat-pesan-reviewer";
 import { twMerge } from "tailwind-merge";
 import { convertToRupiah } from "@/lib/utils/convertToRupiah";
+import { RiwayatPesanDosenReviewer } from "./riwayat-pesan/riwayat-pesan-dosen-reviewer";
 
 export const TrackDosenReviewer = ({ data, isLoading }) => {
   const [isOpen, setIsOpen] = useState();
@@ -30,9 +31,8 @@ export const TrackDosenReviewer = ({ data, isLoading }) => {
   const { setCurrentStep } = useStep();
   const pathname = usePathname();
   const path = pathname.split("/");
-  const updatedData = data ? data[data.length - 1] : null;
 
-  console.log(updatedData);
+  const updatedData = data ? data[0] : null;
 
   if (isLoading) {
     return <SkeletonRiwayat />;
@@ -41,7 +41,7 @@ export const TrackDosenReviewer = ({ data, isLoading }) => {
     <TimelineItem
       date={updatedData ? convertDate(updatedData?.updated_at, " ") : ""}
     >
-      <TimelineHeader status={updatedData?.proposal?.status_lppm} />
+      <TimelineHeader status={updatedData?.proposal?.status_reviewer} />
       <TimelineContent isLoading={isLoading}>
         <ContainerContent className="p-4">
           <div className="flex w-full flex-col  justify-between gap-2">
@@ -52,19 +52,14 @@ export const TrackDosenReviewer = ({ data, isLoading }) => {
               <div className="flex grow items-center justify-between">
                 <p className="text-dark-09">{updatedData?.user?.name}</p>
                 <ButtonStatus
-                  status={updatedData?.proposal?.status_lppm}
+                  status={updatedData?.proposal?.status_reviewer}
                   className="px-2 py-1 text-xs font-[500]"
                 />
               </div>
-              <p className="text-end font-semibold text-primary">
-                {updatedData
-                  ? convertToRupiah(updatedData?.dana_yang_disetujui)
-                  : 0}
-              </p>
             </div>
             <div className="mt-8 flex flex-col gap-2">
               {data?.length ? (
-                data?.toReversed()?.map((item, index) => (
+                data?.map((item, index) => (
                   <div
                     className="overflow-hidden rounded-lg px-4 py-3 shadow-custom transition-all"
                     key={item.id}
@@ -135,7 +130,7 @@ export const TrackDosenReviewer = ({ data, isLoading }) => {
                         isOpen === item.id && "h-fit",
                       )}
                     >
-                      <RiwayatPesanLPPM
+                      <RiwayatPesanDosenReviewer
                         riwayatId={item?.id}
                         status={item?.status}
                         catatan={item?.catatan}
@@ -148,23 +143,23 @@ export const TrackDosenReviewer = ({ data, isLoading }) => {
                 <div className="text-center">Belum ada riwayat</div>
               )}
             </div>
-            {updatedData?.length ? (
-              <Link
-                href={`/proposal/${path[2]}/edit/${id}`}
-                className={updatedData?.status === "Diterima" ? "hidden" : ""}
-              >
-                <ButtonUpdate
-                  text="Perbarui"
-                  className="mt-3 flex w-full justify-center bg-primary disabled:bg-gray-500 disabled:opacity-100"
-                  iconLeft
-                  onClick={() => {
-                    localStorage.setItem("isEdit", true);
-                    localStorage.setItem("step", 1);
-                    setCurrentStep(1);
-                  }}
-                />
-              </Link>
-            ) : null}
+            <Link
+              href={`/proposal/${path[2]}/edit/${id}`}
+              className={
+                updatedData?.status_reviewer === "Diterima" ? "hidden" : ""
+              }
+            >
+              <ButtonUpdate
+                text="Perbarui"
+                className="mt-3 flex w-full justify-center bg-primary disabled:bg-gray-500 disabled:opacity-100"
+                iconLeft
+                onClick={() => {
+                  localStorage.setItem("isEdit", true);
+                  localStorage.setItem("step", 1);
+                  setCurrentStep(1);
+                }}
+              />
+            </Link>
           </div>
         </ContainerContent>
       </TimelineContent>

@@ -4,20 +4,15 @@ import Image from "next/image";
 import { useForm } from "react-hook-form";
 
 import { convertToDateNumeric, convertToTime } from "@/lib/utils/convertDate";
-import { useCreatePesanPenelitianLPPM } from "@/handlers/lppm/penelitian/add-pesan-penelitian-lppm";
 import { FormChat } from "@/components/form/form-chat";
-import { useQueryGetRiwayatPesanReviewer } from "@/handlers/reviewer/query-get-riwayat-pesan-reviewer";
+import { useQueryGetRiwayatPesanReviewer } from "@/handlers/reviewer/riwayat/query-get-riwayat-pesan-reviewer";
+import { useCreatePesanReviewer } from "@/handlers/reviewer/riwayat/add-pesan-reviewer";
 
 export const RiwayatPesanReviewer = ({ riwayatId, status, catatan, index }) => {
   const { data } = useQueryGetRiwayatPesanReviewer(riwayatId);
   const { data: session } = useSession();
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    reset,
-  } = useForm();
-  const { onSubmitChat, isLoadingSubmit } = useCreatePesanPenelitianLPPM(
+  const { register, handleSubmit, reset } = useForm();
+  const { onSubmitChat, isLoadingSubmit } = useCreatePesanReviewer(
     riwayatId,
     reset,
   );
@@ -66,7 +61,7 @@ export const RiwayatPesanReviewer = ({ riwayatId, status, catatan, index }) => {
                 (
                 {riwayat?.user_id === session?.user?.id
                   ? "Saya"
-                  : riwayat?.user?.name || "NAMA REVIEWER"}
+                  : riwayat?.user?.name || ""}
                 )
               </p>
             </div>

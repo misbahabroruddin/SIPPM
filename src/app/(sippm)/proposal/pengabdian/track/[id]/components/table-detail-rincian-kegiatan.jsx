@@ -24,8 +24,8 @@ export const TableDetailRincianKegiatan = ({ data }) => {
         </tr>
       </thead>
       <tbody>
-        {data?.data?.rincian_kegiatan_proposals.length ? (
-          data?.data?.rincian_kegiatan_proposals.map((row, index) => (
+        {data?.data?.rincian_kegiatans?.length ? (
+          data?.data?.rincian_kegiatans?.map((row, index) => (
             <tr key={row.id} className="text-base even:bg-sky">
               <td className="w-8 p-3">
                 <Typography

@@ -11,7 +11,8 @@ import { ListPenelitianProposalLPPM } from "../list-penelitian-lppm";
 import { ListPengabdianProposalLPPM } from "../list-pengabdian-lppm";
 import { useQueryGetPenelitianLPPM } from "@/handlers/lppm/penelitian/query-get-listing-penelitian";
 import { useQueryGetPengabdianLPPM } from "@/handlers/lppm/pengabdian/query-get-listing-pkm-lppm";
-import { useQueryTotalProposalLPPM } from "@/handlers/lppm/query-total-proposal";
+import { useQueryInfoProposalPenelitianLPPM } from "@/handlers/lppm/penelitian/query-get-info-penelitian";
+import { useQueryInfoProposalPengabdianLPPM } from "@/handlers/lppm/pengabdian/query-get-info-pengabdian";
 
 export default function ProposalPageLPPM() {
   const [tabActive] = useState("penelitian");
@@ -24,22 +25,29 @@ export default function ProposalPageLPPM() {
   const handlePageChangePenelitian = (event) => {
     setPagePenelitian(event.selected + 1);
   };
+
   const handlePageChangePengabdian = (event) => {
     setPagePengabdian(event.selected + 1);
   };
+
   const handleSearchPenelitian = useDebouncedCallback((value) => {
     setSearchPenelitian(value);
   }, 1000);
+
   const handleSearchPengabdian = useDebouncedCallback((value) => {
     setSearchPengabdian(value);
   }, 1000);
 
   const { data: penelitian, isLoading: isLoadingPenelitian } =
     useQueryGetPenelitianLPPM(searchPenelitian, pagePenelitian);
+
   const { data: pengabdian, isLoading: isLoadingPengabdian } =
     useQueryGetPengabdianLPPM(searchPengabdian, pagePengabdian);
 
-  const { data: totalProposal } = useQueryTotalProposalLPPM();
+  const { data: totalProposalPenelitian } =
+    useQueryInfoProposalPenelitianLPPM();
+  const { data: totalProposalPengabdian } =
+    useQueryInfoProposalPengabdianLPPM();
 
   return (
     <ContainerPage>
@@ -69,10 +77,14 @@ export default function ProposalPageLPPM() {
             currentTab={currentTab}
             tabActive={tabActive}
             jumlahPenelitianDisetujui={
-              totalProposal?.data?.penelitian_disetujui
+              totalProposalPenelitian?.data?.status_lppm?.diterima
             }
-            jumlahPenelitianDitolak={totalProposal?.data?.penelitian_ditolak}
-            jumlahPenelitianRevisi={totalProposal?.data?.penelitian_revisi}
+            jumlahPenelitianDitolak={
+              totalProposalPenelitian?.data?.status_lppm?.ditolak
+            }
+            jumlahPenelitianRevisi={
+              totalProposalPenelitian?.data?.status_lppm?.revisi
+            }
             handlePageChange={handlePageChangePenelitian}
           />
         ) : (
@@ -82,10 +94,14 @@ export default function ProposalPageLPPM() {
             currentTab={currentTab}
             tabActive={tabActive}
             jumlahPengabdianDisetujui={
-              totalProposal?.data?.pengabdian_disetujui
+              totalProposalPengabdian?.data?.status_lppm?.diterima
             }
-            jumlahPengabdianRevisi={totalProposal?.data?.pengabdian_revisi}
-            jumlahPengabdianDitolak={totalProposal?.data?.pengabdian_ditolak}
+            jumlahPengabdianRevisi={
+              totalProposalPengabdian?.data?.status_lppm?.revisi
+            }
+            jumlahPengabdianDitolak={
+              totalProposalPengabdian?.data?.status_lppm?.ditolak
+            }
             handlePagePengabdianChange={handlePageChangePengabdian}
           />
         )}

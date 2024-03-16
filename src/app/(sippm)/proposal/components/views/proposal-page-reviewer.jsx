@@ -12,7 +12,8 @@ import { ListPengabdianProposalReviewer } from "../list-pengabdian-reviewer";
 import { useQueryGetPengabdianReviewer } from "@/handlers/reviewer/pengabdian/query-get-listing-pengabdian";
 import { useQueryGetPenelitianReviewer } from "@/handlers/reviewer/penelitian/query-get-listing-penelitian";
 import { ListPenelitianProposalReviewer } from "../list-penelitian-reviewer";
-import { useQueryTotalProposalReviewer } from "@/handlers/reviewer/query-total-proposal";
+import { useQueryInfoProposalPenelitianReviewer } from "@/handlers/reviewer/penelitian/query-get-info-proposal-penelitian";
+import { useQueryInfoProposalPengabdianReviewer } from "@/handlers/reviewer/pengabdian/query-get-info-proposal-pengabdian";
 
 export default function ProposalPageReviewer() {
   const [tabActive] = useState("penelitian");
@@ -41,7 +42,10 @@ export default function ProposalPageReviewer() {
   const { data: pengabdian, isLoading: isLoadingPengabdian } =
     useQueryGetPengabdianReviewer(searchPengabdian, pagePengabdian);
 
-  const { data: totalProposal } = useQueryTotalProposalReviewer();
+  const { data: totalProposalPenelitian } =
+    useQueryInfoProposalPenelitianReviewer();
+  const { data: totalProposalPengabdian } =
+    useQueryInfoProposalPengabdianReviewer();
 
   return (
     <ContainerPage>
@@ -71,10 +75,14 @@ export default function ProposalPageReviewer() {
             currentTab={currentTab}
             tabActive={tabActive}
             jumlahPenelitianDisetujui={
-              totalProposal?.data?.penelitian_disetujui
+              totalProposalPenelitian?.data?.status_reviewer?.diterima
             }
-            jumlahPenelitianDitolak={totalProposal?.data?.penelitian_ditolak}
-            jumlahPenelitianRevisi={totalProposal?.data?.revisi}
+            jumlahPenelitianDitolak={
+              totalProposalPenelitian?.data?.status_reviewer?.ditolak
+            }
+            jumlahPenelitianRevisi={
+              totalProposalPenelitian?.data?.status_reviewer?.revisi
+            }
             handlePageChange={handlePageChangePenelitian}
           />
         ) : (
@@ -84,10 +92,14 @@ export default function ProposalPageReviewer() {
             currentTab={currentTab}
             tabActive={tabActive}
             jumlahPengabdianDisetujui={
-              totalProposal?.data?.pengabdian_disetujui
+              totalProposalPengabdian?.data?.status_reviewer?.diterima
             }
-            jumlahPengabdianRevisi={totalProposal?.data?.revisi}
-            jumlahPengabdianDitolak={totalProposal?.data?.pengabdian_ditolak}
+            jumlahPengabdianRevisi={
+              totalProposalPengabdian?.data?.status_reviewer?.revisi
+            }
+            jumlahPengabdianDitolak={
+              totalProposalPengabdian?.data?.status_reviewer?.ditolak
+            }
             handlePagePengabdianChange={handlePageChangePengabdian}
           />
         )}

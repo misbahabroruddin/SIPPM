@@ -4,20 +4,15 @@ import Image from "next/image";
 import { useForm } from "react-hook-form";
 
 import { convertToDateNumeric, convertToTime } from "@/lib/utils/convertDate";
-import { useQueryGetRiwayatPesanLPPM } from "@/handlers/lppm/query-get-riwayat-pesan-lppm";
-import { useCreatePesanPenelitianLPPM } from "@/handlers/lppm/penelitian/add-pesan-penelitian-lppm";
 import { FormChat } from "@/components/form/form-chat";
+import { useQueryGetRiwayatPesanLPPM } from "@/handlers/lppm/riwayat/query-get-riwayat-pesan-lppm";
+import { useCreatePesanLPPM } from "@/handlers/lppm/riwayat/add-pesan-lppm";
 
 export const RiwayatPesanLPPM = ({ riwayatId, status, catatan, index }) => {
   const { data } = useQueryGetRiwayatPesanLPPM(riwayatId);
   const { data: session } = useSession();
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    reset,
-  } = useForm();
-  const { onSubmitChat, isLoadingSubmit } = useCreatePesanPenelitianLPPM(
+  const { register, handleSubmit, reset } = useForm();
+  const { onSubmitChat, isLoadingSubmit } = useCreatePesanLPPM(
     riwayatId,
     reset,
   );

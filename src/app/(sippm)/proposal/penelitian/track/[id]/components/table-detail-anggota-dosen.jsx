@@ -12,8 +12,6 @@ export const TableDetailAnggotaDosen = ({ data }) => {
     "Jabatan Fungsional",
   ];
 
-  console.log(data?.data?.anggotas);
-
   return (
     <table className="w-full min-w-max table-auto overflow-hidden rounded-t-lg text-left !font-poppins">
       <thead className="rounded-lg">

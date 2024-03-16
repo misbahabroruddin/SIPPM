@@ -27,9 +27,9 @@ export const TableDetailRencanaAnggaran = ({ data }) => {
         </tr>
       </thead>
       <tbody>
-        {data?.data?.rencana_anggaran_proposals.length ? (
+        {data?.data?.rencana_anggarans?.length ? (
           <>
-            {data?.data?.rencana_anggaran_proposals.map((row, index) => (
+            {data?.data?.rencana_anggarans?.map((row, index) => (
               <tr key={row.id} className="text-base even:bg-sky">
                 <td className="w-8 p-3">
                   <Typography
@@ -58,12 +58,9 @@ export const TableDetailRencanaAnggaran = ({ data }) => {
               </td>
               <td colSpan={2} className="p-3">
                 {convertToRupiah(
-                  data?.data?.rencana_anggaran_proposals.reduce(
-                    (total, item) => {
-                      return total + item.biaya;
-                    },
-                    0,
-                  ),
+                  data?.data?.rencana_anggarans.reduce((total, item) => {
+                    return total + item.biaya;
+                  }, 0),
                 )}
               </td>
             </tr>

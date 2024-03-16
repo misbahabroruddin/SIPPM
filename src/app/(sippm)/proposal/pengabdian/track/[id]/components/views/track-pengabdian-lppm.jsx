@@ -17,7 +17,7 @@ import { DetailRincianKegiatan } from "../detail-rincian-kegiatan";
 import { DetailBerkas } from "../detail-berkas";
 import { Timeline } from "@/components/timeline";
 import { TrackRiwayatLPPM } from "@/components/riwayat/lppm/riwayat-lppm";
-import { useQueryGetRiwayatTrackDosenLPPM } from "@/handlers/lppm/query-get-riwayat-track";
+import { useQueryGetRiwayatVerikasiLPPM } from "@/handlers/lppm/riwayat/query-get-verifikasi-proposal-lppm";
 
 export default function TrackPengabdianLPPMPage() {
   const [tabActive] = useState("dokumen");
@@ -30,7 +30,7 @@ export default function TrackPengabdianLPPMPage() {
 
   const { data } = useQueryDetailPengabdian();
   const { data: dataTrackDosenLPPM, isLoading: isLoadingTrackDosenLPPM } =
-    useQueryGetRiwayatTrackDosenLPPM();
+    useQueryGetRiwayatVerikasiLPPM();
 
   return (
     <div className="flex flex-col gap-3">

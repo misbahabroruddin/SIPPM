@@ -5,11 +5,10 @@ import { Controller, useForm } from "react-hook-form";
 import { twMerge } from "tailwind-merge";
 
 import { ButtonSubmit } from "@/components/button/button-submit";
-import { Input } from "@/components/input/input";
 import { Label } from "@/components/label";
 import { SingleSelect } from "@/components/select/single-select";
 import { useRouter } from "next/navigation";
-import { useUpdateProposalPengabdianReviewer } from "@/handlers/lppm/pengabdian/update-proposal-pengabdian-reviewer";
+import { useVerifikasiProposalReviewer } from "@/handlers/reviewer/riwayat/verifikasi-proposal-reviewer";
 
 export const FormVerifikasiUsulanReviewer = () => {
   const {
@@ -30,7 +29,7 @@ export const FormVerifikasiUsulanReviewer = () => {
     setValue("catatan", "");
   }
   const { mutateAsync: onSubmit, isPending: isLoading } =
-    useUpdateProposalPengabdianReviewer(reset, router);
+    useVerifikasiProposalReviewer(reset, router);
 
   const statusOptions = [
     {

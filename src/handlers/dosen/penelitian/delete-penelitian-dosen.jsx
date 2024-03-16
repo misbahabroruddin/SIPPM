@@ -42,6 +42,9 @@ export const useDeletePenelitianDosen = () => {
           confirmButtonText: "Ok",
         });
         queryClient.invalidateQueries({ queryKey: ["listPenelitian"] });
+        queryClient.invalidateQueries({
+          queryKey: ["listPenelitianDashboardDosen"],
+        });
         queryClient.resetQueries({
           queryKey: ["anggotaMahasiswa"],
         });

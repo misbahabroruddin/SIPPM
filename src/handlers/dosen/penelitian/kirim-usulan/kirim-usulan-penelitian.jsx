@@ -19,6 +19,9 @@ export const useKirimUsulanPenelitian = () => {
       queryClient.invalidateQueries({
         queryKey: ["listPenelitian"],
       });
+      queryClient.invalidateQueries({
+        queryKey: ["listPenelitianDashboardDosen"],
+      });
       queryClient.resetQueries({
         queryKey: ["anggotaMahasiswa"],
       });

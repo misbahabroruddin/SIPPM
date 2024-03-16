@@ -26,12 +26,9 @@ export const ListPengabdian = ({
   if (isLoading) return <SkeletonListingProposal />;
 
   const totalPengabdianDisetujui =
-    totalProposal?.data.status_lppm?.diterima +
     totalProposal?.data.status_reviewer?.diterima;
 
-  const totalPengabdianDitolak =
-    totalProposal?.data.status_lppm?.ditolak +
-    totalProposal?.data.status_reviewer?.ditolak;
+  const totalPengabdianDitolak = totalProposal?.data.status_reviewer?.ditolak;
 
   return (
     <div className="flex flex-col gap-4">

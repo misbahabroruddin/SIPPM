@@ -18,11 +18,11 @@ import {
   convertToDateNumeric,
   convertToTime,
 } from "@/lib/utils/convertDate";
-import { RiwayatPesanLPPM } from "../lppm/riwayat-pesan-lppm";
 import { ButtonUpdate } from "@/components/button/button-update";
 import { convertToRupiah } from "@/lib/utils/convertToRupiah";
 import { useStep } from "@/lib/hooks/useStep";
 import { SkeletonRiwayat } from "@/components/skeleton/skeleton-riwayat";
+import { RiwayatPesanDosenLPPM } from "./riwayat-pesan/riwayat-pesan-dosen-lppm";
 
 export const TrackDosenLPPM = ({ data, isLoading }) => {
   const [isOpen, setIsOpen] = useState();
@@ -31,7 +31,7 @@ export const TrackDosenLPPM = ({ data, isLoading }) => {
   const pathname = usePathname();
   const path = pathname.split("/");
 
-  const updatedData = data ? data[data.length - 1] : null;
+  const updatedData = data ? data[0] : null;
 
   if (isLoading) {
     return (
@@ -68,7 +68,7 @@ export const TrackDosenLPPM = ({ data, isLoading }) => {
             </div>
             <div className="mt-8 flex flex-col gap-2">
               {data?.length ? (
-                data?.toReversed()?.map((item, index) => (
+                data?.map((item, index) => (
                   <div
                     className="overflow-hidden rounded-lg px-4 py-3 shadow-custom transition-all"
                     key={item.id}
@@ -139,7 +139,7 @@ export const TrackDosenLPPM = ({ data, isLoading }) => {
                         isOpen === item.id && "h-fit",
                       )}
                     >
-                      <RiwayatPesanLPPM
+                      <RiwayatPesanDosenLPPM
                         riwayatId={item?.id}
                         status={item?.status}
                         catatan={item?.catatan}
