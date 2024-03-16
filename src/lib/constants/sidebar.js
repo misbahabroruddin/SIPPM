@@ -4,16 +4,16 @@ export const MENU_SIDEBAR_ADMIN = [
     icon: "/icons/dashboard.svg",
     link: "/dashboard",
   },
-  {
-    label: "Biodata",
-    icon: "/icons/biodata.svg",
-    link: "/biodata",
-  },
-  {
-    label: "Anggota",
-    icon: "/icons/anggota.svg",
-    link: "/anggota",
-  },
+  // {
+  //   label: "Biodata",
+  //   icon: "/icons/biodata.svg",
+  //   link: "/biodata",
+  // },
+  // {
+  //   label: "Anggota",
+  //   icon: "/icons/anggota.svg",
+  //   link: "/anggota",
+  // },
   {
     label: "Data Referensi",
     icon: "/icons/data-referensi.svg",
