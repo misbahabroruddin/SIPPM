@@ -1,5 +1,6 @@
 "use client";
 import Image from "next/image";
+import Link from "next/link";
 
 import { EmptyState } from "@/components/empty-state";
 import { SkeletonListingProposal } from "@/components/skeleton/skeleton-listing-proposal";
@@ -90,7 +91,14 @@ const ListItemSK = ({ data }) => {
           </div>
         </div>
         <div className="flex items-end gap-4">
-          <ButtonDownload onClick={() => alert("Downloaded..")} />
+          <Link
+            // onClick={handleSaveFile}
+            href={data?.dokumen_sk?.file_sk?.url}
+            target="_blank"
+            className="flex items-center gap-2 rounded-lg bg-primary text-white disabled:cursor-not-allowed disabled:bg-gray-500"
+          >
+            <ButtonDownload />
+          </Link>
         </div>
       </div>
     </div>
