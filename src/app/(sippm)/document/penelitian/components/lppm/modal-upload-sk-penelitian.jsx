@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 
 import { ButtonCancel } from "@/components/button/button-cancel";
@@ -14,7 +14,6 @@ export const ModalUploadSkPenelitian = ({ penelitianId }) => {
     register,
     handleSubmit,
     reset,
-    watch,
     formState: { errors },
   } = useForm();
 
@@ -26,8 +25,8 @@ export const ModalUploadSkPenelitian = ({ penelitianId }) => {
     reset();
   };
 
-  const onSubmit = async () => {
-    await mutateAsync();
+  const onSubmit = async (form) => {
+    await mutateAsync(form);
     handleClosModal();
   };
 
@@ -51,7 +50,6 @@ export const ModalUploadSkPenelitian = ({ penelitianId }) => {
             register={register("file_sk", {
               required: "harus diisi",
             })}
-            watch={watch}
             errors={errors.file_sk}
             label={"Upload file SK"}
           />
