@@ -4,7 +4,6 @@ import { useId, useState } from "react";
 import { useSearchParams } from "next/navigation";
 
 import { Tabs } from "../tabs";
-import { data } from "../dummy-data";
 import { ListPenelitianKontrakLppm } from "../lppm/list-document-kontrak-lppm";
 import { ListPenelitianSKLppm } from "../lppm/list-document-sk-lppm";
 import { useQueryGetListSKPenelitianLPPM } from "@/handlers/lppm/dokumen/penelitian/sk/query-get-sk-penelitian";
