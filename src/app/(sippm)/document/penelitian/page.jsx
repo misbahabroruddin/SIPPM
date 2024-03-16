@@ -1,9 +1,24 @@
 "use client";
 
+import { useSession } from "next-auth/react";
+
 import { BasePageTitle } from "@/components/base-page-title";
 import { ContainerPage } from "@/components/container-page";
+import dynamic from "next/dynamic";
+import { DOSEN, LPPM } from "@/lib/constants/role";
+
+const DocumentPenelitianLPPM = dynamic(
+  () => import("./components/views/document-penelitian-lppm"),
+);
+
+const DocumentPenelitianDosen = dynamic(
+  () => import("./components/views/document-penelitian-dosen"),
+);
 
 export default function DocumentPage() {
+  const { data } = useSession();
+  const role = data?.user?.roles[0].name;
+
   return (
     <ContainerPage>
       <div className="flex flex-col gap-4">
@@ -11,7 +26,8 @@ export default function DocumentPage() {
           iconSrc="/icons/document-black.svg"
           title="Document - Penelitian"
         />
-        {/* <TableDocument /> */}
+        {role === LPPM ? <DocumentPenelitianLPPM /> : null}
+        {role === DOSEN ? <DocumentPenelitianDosen /> : null}
       </div>
     </ContainerPage>
   );
