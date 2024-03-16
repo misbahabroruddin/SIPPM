@@ -5,11 +5,12 @@ import { useState } from "react";
 
 import { CardDashboard } from "@/components/card/card-dashboard";
 import { Tabs } from "../tabs";
-import { useQueryGetPenelitianReviewer } from "@/handlers/reviewer/penelitian/query-get-listing-penelitian";
-import { useQueryGetPengabdianReviewer } from "@/handlers/reviewer/pengabdian/query-get-listing-pengabdian";
 import { ListPenelitianDashboardReviewer } from "../list-penelitian-dashboard-reviewer";
 import { ListPengabdianDashboardReviewer } from "../list-pengabdian-dashboard-reviewer";
-import { useQueryTotalProposalReviewer } from "@/handlers/reviewer/query-total-proposal";
+import { useQueryGetAllPenelitianDashboardReviewer } from "@/handlers/reviewer/dashboard/penelitian/query-get-all-penelitian-dashboard";
+import { useQueryGetAllPengabdianDashboardReviewer } from "@/handlers/reviewer/dashboard/pengabdian/query-get-all-pengabdian-dashboard";
+import { useQueryInfoProposalPenelitianDashboardReviewer } from "@/handlers/reviewer/dashboard/penelitian/query-get-info-penelitian-dashboard";
+import { useQueryInfoProposalPengabdianDashboardReviewer } from "@/handlers/reviewer/dashboard/pengabdian/query-get-info-pengabdian-dashboard";
 
 export default function DashboardReviewer() {
   const [tabActive] = useState("penelitian");
@@ -19,12 +20,30 @@ export default function DashboardReviewer() {
   const tabParams = useSearchParams();
   const currentTab = tabParams.get("tab");
   const { data: penelitian, isLoading: isLoadingPenelitian } =
-    useQueryGetPenelitianReviewer("", pagePenelitian);
+    useQueryGetAllPenelitianDashboardReviewer("", pagePenelitian);
   const { data: pengabdian, isLoading: isLoadingPengabdian } =
-    useQueryGetPengabdianReviewer("", pagePengabdian);
+    useQueryGetAllPengabdianDashboardReviewer("", pagePengabdian);
 
-  const { data: totalProposal } = useQueryTotalProposalReviewer();
+  const { data: infoPenelitian } =
+    useQueryInfoProposalPenelitianDashboardReviewer();
+  const { data: infoPengabdian } =
+    useQueryInfoProposalPengabdianDashboardReviewer();
 
+  const totalPenelitianDisetujui =
+    infoPenelitian?.data?.status_reviewer?.diterima || 0;
+
+  const totalPeneliatianDitolak =
+    infoPenelitian?.data?.status_reviewer?.ditolak || 0;
+
+  const totalProposal =
+    infoPenelitian?.data?.status_reviewer?.revisi +
+      infoPengabdian?.data?.status_reviewer?.revisi || 0;
+
+  const totalPengabdianDisetujui =
+    infoPengabdian?.data?.status_reviewer?.diterima || 0;
+
+  const totalPengabdianDitolak =
+    infoPengabdian?.data?.status_reviewer?.ditolak || 0;
   const handlePageChangePenelitian = (event) => {
     setPagePenelitian(event.selected + 1);
   };
@@ -35,28 +54,18 @@ export default function DashboardReviewer() {
   return (
     <div className="flex flex-col gap-4">
       <div className="flex gap-4">
-        <CardDashboard
-          title="Penelitian"
-          jumlah={totalProposal?.data?.penelitian_disetujui}
-        />
+        <CardDashboard title="Penelitian" jumlah={totalPenelitianDisetujui} />
         <CardDashboard
           status="Ditolak"
           title="Penelitian"
-          jumlah={totalProposal?.data?.penelitian_ditolak}
+          jumlah={totalPeneliatianDitolak}
         />
-        <CardDashboard
-          status="Revisi"
-          title="Semua"
-          jumlah={totalProposal?.data?.revisi}
-        />
-        <CardDashboard
-          title="Pengabdian"
-          jumlah={totalProposal?.data?.pengabdian_disetujui}
-        />
+        <CardDashboard status="Revisi" title="Semua" jumlah={totalProposal} />
+        <CardDashboard title="Pengabdian" jumlah={totalPengabdianDisetujui} />
         <CardDashboard
           status="Ditolak"
           title="Pengabdian"
-          jumlah={totalProposal?.data?.pengabdian_ditolak}
+          jumlah={totalPengabdianDitolak}
         />
       </div>
       <div className="flex justify-between">
