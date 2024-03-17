@@ -8,6 +8,7 @@ import { convertDate } from "@/lib/utils/convertDate";
 import { EmptyState } from "@/components/empty-state";
 import Link from "next/link";
 import { ButtonUpdate } from "@/components/button/button-update";
+import { useStep } from "@/lib/hooks/useStep";
 
 export const ListPengabdian = ({ pengabdian, isLoading, handlePageChange }) => {
   if (isLoading) return <SkeletonListingProposal />;
@@ -36,6 +37,7 @@ export const ListPengabdian = ({ pengabdian, isLoading, handlePageChange }) => {
 };
 
 const ListItemPengabdian = ({ data }) => {
+  const { setCurrentStep } = useStep();
   return (
     <div className="rounded-lg px-6 py-4 shadow-custom" key={data?.id}>
       <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between">
@@ -81,7 +83,11 @@ const ListItemPengabdian = ({ data }) => {
             <ButtonStatus status="Diterima" />
           </div>
           <Link href={`/laporan-hasil/edit/pengabdian/${data?.id}`}>
-            <ButtonUpdate className="bg-primary" text="Perbarui" />
+            <ButtonUpdate
+              className="bg-primary"
+              text="Perbarui"
+              onClick={() => setCurrentStep(1)}
+            />
           </Link>
         </div>
       </div>
