@@ -92,7 +92,7 @@ export const MENU_SIDEBAR_DOSEN = [
       {
         label: "PKM",
         icon: "/icons/sub-menu.svg",
-        link: "/document/pkm",
+        link: "/document/pengabdian",
       },
     ],
   },
@@ -142,7 +142,7 @@ export const MENU_SIDEBAR_LPPM = [
       {
         label: "PKM",
         icon: "/icons/sub-menu.svg",
-        link: "/document/pkm",
+        link: "/document/pengabdian",
       },
     ],
   },
