@@ -91,14 +91,23 @@ const ListItemSK = ({ data }) => {
           </div>
         </div>
         <div className="flex items-end gap-4">
-          <Link
-            // onClick={handleSaveFile}
-            href={data?.dokumen_sk?.file_sk?.url}
-            target="_blank"
-            className="flex items-center gap-2 rounded-lg bg-primary text-white disabled:cursor-not-allowed disabled:bg-gray-500"
-          >
-            <ButtonDownload />
-          </Link>
+          {data?.dokumen_sk ? (
+            <Link
+              // onClick={handleSaveFile}
+              href={data?.dokumen_sk?.file_sk?.url}
+              target="_blank"
+              className="flex items-center gap-2 rounded-lg bg-primary text-white disabled:cursor-not-allowed disabled:bg-gray-500"
+            >
+              <ButtonDownload />
+            </Link>
+          ) : (
+            <div className="flex flex-col items-center gap-[2px] pr-2 font-[500]">
+              <p className="text-sm text-primary">Status</p>
+              <p className="rounded-lg bg-[#CCCCCC] px-2 py-1 text-[#333333]">
+                SK Belum Ada
+              </p>
+            </div>
+          )}
         </div>
       </div>
     </div>
