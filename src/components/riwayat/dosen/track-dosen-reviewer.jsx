@@ -146,7 +146,9 @@ export const TrackDosenReviewer = ({ data, isLoading }) => {
             <Link
               href={`/proposal/${path[2]}/edit/${id}`}
               className={
-                updatedData?.status_reviewer === "Diterima" ? "hidden" : ""
+                updatedData?.proposal?.status_reviewer === "Diterima"
+                  ? "hidden"
+                  : ""
               }
             >
               <ButtonUpdate
