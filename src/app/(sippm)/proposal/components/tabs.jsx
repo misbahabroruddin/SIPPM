@@ -15,8 +15,8 @@ export const Tabs = ({ tabActive }) => {
       id: 1,
       name: "penelitian",
       icon: {
-        white: "/icons/location-white.svg",
-        black: "/icons/location-black.svg",
+        white: "/icons/search-white.svg",
+        black: "/icons/search-black.svg",
       },
       func: () => handleTabClick("penelitian"),
     },
