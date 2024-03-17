@@ -5,6 +5,7 @@ import Image from "next/image";
 
 import { ButtonDownload } from "@/components/button/button-download";
 import { convertDate } from "@/lib/utils/convertDate";
+import { ModalUploadKontrakPenelitian } from "./modal-upload-kontrak-penelitian";
 
 export const ListItemKontrakDibalas = ({ data }) => {
   return (
@@ -60,6 +61,7 @@ export const ListItemKontrakDibalas = ({ data }) => {
           </div>
         </div>
         <div className="flex items-end gap-4">
+          <ModalUploadKontrakPenelitian penelitianId={data?.id} />
           <Link
             href={data?.dokumen_kontrak?.file_kontrak?.url}
             target="_blank"
