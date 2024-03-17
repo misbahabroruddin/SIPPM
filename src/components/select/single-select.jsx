@@ -17,6 +17,7 @@ export const SingleSelect = ({
   errors,
   id,
   isLoading,
+  isDisabled,
   defaultValue,
   hideSelectedOptions,
   spanEmptyClass,
@@ -56,7 +57,7 @@ export const SingleSelect = ({
                 classNamePrefix="react-select"
                 instanceId={id}
                 isLoading={isLoading}
-                isDisabled={isLoading}
+                isDisabled={isDisabled ? isDisabled : isLoading}
                 defaultValue={defaultValue}
                 hideSelectedOptions={hideSelectedOptions}
                 {...props}
