@@ -9,6 +9,7 @@ import { ButtonDownload } from "@/components/button/button-download";
 import { convertDate } from "@/lib/utils/convertDate";
 import { ButtonUpload } from "@/components/button/button-upload";
 import { ModalUploadKontrakPenelitian } from "./modal-upload-kontrak-penelitian";
+import { twMerge } from "tailwind-merge";
 
 export const ListPenelitianKontrakDosen = ({
   penelitian,
@@ -40,6 +41,17 @@ export const ListPenelitianKontrakDosen = ({
 };
 
 const ListItemKontrak = ({ data }) => {
+  let buttonClass = "bg-red-07 text-white";
+
+  if (data?.dokumen_kontrak?.status === "Menunggu") {
+    buttonClass = "bg-red-07 text-white";
+  } else if (data?.dokumen_kontrak?.status === "Diterima") {
+    buttonClass = "bg-blue-primary text-white";
+  } else if (data?.dokumen_kontrak?.status === "Dibalas") {
+    buttonClass = "bg-sky-05 text-white";
+  } else {
+    buttonClass = "bg-[#CCCCCC] text-[#333333]";
+  }
   return (
     <div className="rounded-lg px-6 py-4 shadow-custom" key={data?.id}>
       <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between">
@@ -116,9 +128,11 @@ const ListItemKontrak = ({ data }) => {
               <ButtonDownload />
             </Link>
           ) : null}
-          <div className="flex w-[150px] flex-col items-center gap-[2px]">
-            <p className="text-sm text-[#999999]">Status</p>
-            <p className="text-primary">{data?.dokumen_kontrak?.status}</p>
+          <div className="flex flex-col items-center gap-[2px] px-8 font-[500]">
+            <p className="text-sm text-primary">Status</p>
+            <p className={twMerge("rounded-lg px-2 py-1", buttonClass)}>
+              {data?.dokumen_kontrak?.status || "Kontrak Belum Ada"}
+            </p>
           </div>
         </div>
       </div>
