@@ -21,7 +21,7 @@ export const ListPenelitianKontrakDosen = ({
       <div className="flex h-[580px] flex-col gap-4 overflow-auto p-1">
         {penelitian?.data?.length ? (
           penelitian?.data?.map((proposal) => (
-            <ListItemKontrakDibalas key={proposal.id} data={proposal} />
+            <ListItemKontrak key={proposal.id} data={proposal} />
           ))
         ) : (
           <EmptyState />
@@ -39,7 +39,7 @@ export const ListPenelitianKontrakDosen = ({
   );
 };
 
-const ListItemKontrakDibalas = ({ data }) => {
+const ListItemKontrak = ({ data }) => {
   return (
     <div className="rounded-lg px-6 py-4 shadow-custom" key={data?.id}>
       <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between">
@@ -80,28 +80,46 @@ const ListItemKontrakDibalas = ({ data }) => {
                   {data?.user?.biodata?.program_studi?.nama}
                 </p>
               </div>
-              {/* <div className="flex items-center gap-[2px]">
-                <Image
-                  src="/icons/date-edit.svg"
-                  height={24}
-                  width={24}
-                  alt="tanggal"
-                />
-                <p className="text-sm text-[#999999]">{data?.tahun_ajaran}</p>
-              </div> */}
             </div>
           </div>
         </div>
         <div className="flex items-end gap-4">
-          <ModalUploadKontrakPenelitian penelitianId={data?.id} />
-          <Link
-            // onClick={handleSaveFile}
-            href={data?.dokumen_kontrak?.file_kontrak?.url}
-            target="_blank"
-            className="flex items-center gap-2 rounded-lg bg-primary text-white disabled:cursor-not-allowed disabled:bg-gray-500"
-          >
-            <ButtonDownload />
-          </Link>
+          {data?.dokumen_kontrak?.status === "Menunggu" ? (
+            <>
+              <ModalUploadKontrakPenelitian penelitianId={data?.id} />
+              <Link
+                // onClick={handleSaveFile}
+                href={data?.dokumen_kontrak?.file_kontrak?.url}
+                target="_blank"
+                className="flex items-center gap-2 rounded-lg bg-primary text-white disabled:cursor-not-allowed disabled:bg-gray-500"
+              >
+                <ButtonDownload />
+              </Link>
+            </>
+          ) : null}
+          {data?.dokumen_kontrak?.status === "Dibalas" ? (
+            <Link
+              href={data?.dokumen_kontrak?.file_kontrak?.url}
+              target="_blank"
+              className="flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-white disabled:cursor-not-allowed disabled:bg-gray-500"
+            >
+              Detail
+            </Link>
+          ) : null}
+          {data?.dokumen_kontrak?.status === "Diterima" ? (
+            <Link
+              // onClick={handleSaveFile}
+              href={data?.dokumen_kontrak?.file_kontrak?.url}
+              target="_blank"
+              className="flex items-center gap-2 rounded-lg bg-primary text-white disabled:cursor-not-allowed disabled:bg-gray-500"
+            >
+              <ButtonDownload />
+            </Link>
+          ) : null}
+          <div className="flex w-[150px] flex-col items-center gap-[2px]">
+            <p className="text-sm text-[#999999]">Status</p>
+            <p className="text-primary">{data?.dokumen_kontrak?.status}</p>
+          </div>
         </div>
       </div>
     </div>
