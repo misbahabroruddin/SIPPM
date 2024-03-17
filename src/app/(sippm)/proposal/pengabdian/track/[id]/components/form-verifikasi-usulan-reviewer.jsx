@@ -26,7 +26,7 @@ export const FormVerifikasiUsulanReviewer = () => {
   const status = watch("status");
 
   if (status === "Diterima") {
-    setValue("catatan", "");
+    setValue("catatan", "-");
   }
   const { mutateAsync: onSubmit, isPending: isLoading } =
     useVerifikasiProposalReviewer(reset, router);
