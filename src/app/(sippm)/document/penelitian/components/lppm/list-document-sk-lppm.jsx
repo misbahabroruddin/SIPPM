@@ -93,7 +93,14 @@ const ListItemSK = ({ data }) => {
         <div className="flex items-end gap-4">
           {!data?.dokumen_sk ? (
             <ModalUploadSkPenelitian penelitianId={data?.id} />
-          ) : null}
+          ) : (
+            <div className="mr-10 flex flex-col items-center gap-2 font-[500]">
+              <p className="text-sm">SK</p>
+              <p className="rounded-lg bg-[#D5FACC] px-2 py-1 text-[#23B900]">
+                Terkirim
+              </p>
+            </div>
+          )}
         </div>
       </div>
     </div>
