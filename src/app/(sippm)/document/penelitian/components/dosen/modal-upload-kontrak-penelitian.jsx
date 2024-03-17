@@ -57,7 +57,7 @@ export const ModalUploadKontrakPenelitian = ({ penelitianId }) => {
           />
           <div className="flex justify-evenly">
             <ButtonCancel iconLeft onClick={handleClosModal} />
-            <ButtonUpload className="w-[200px] justify-center" />
+            <ButtonUpload className="w-[200px] justify-center rounded" />
           </div>
         </form>
       </Modal>
