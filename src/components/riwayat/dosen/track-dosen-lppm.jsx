@@ -154,7 +154,7 @@ export const TrackDosenLPPM = ({ data, isLoading }) => {
             </div>
             <Link
               href={`/proposal/${path[2]}/edit/${id}`}
-              className={updatedData?.status === "Diterima" ? "hidden" : ""}
+              className={updatedData?.status === "Revisi" ? "" : "hidden"}
             >
               <ButtonUpdate
                 text="Perbarui"

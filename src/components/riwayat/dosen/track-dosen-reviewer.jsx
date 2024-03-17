@@ -41,6 +41,7 @@ export const TrackDosenReviewer = ({ data, isLoading }) => {
     <TimelineItem
       date={updatedData ? convertDate(updatedData?.updated_at, " ") : ""}
     >
+      <TimelineConnector />
       <TimelineHeader status={updatedData?.proposal?.status_reviewer} />
       <TimelineContent isLoading={isLoading}>
         <ContainerContent className="p-4">
