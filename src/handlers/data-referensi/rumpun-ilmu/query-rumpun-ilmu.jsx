@@ -10,7 +10,9 @@ export const useQueryRumpunIlmu = () => {
 
   const fetchRumpunIlmu = async () => {
     try {
-      const { data } = await axios.get("/data-referensis/rumpun-ilmus/search");
+      const { data } = await axios.get(
+        "/data-referensis/rumpun-ilmus/search?limit=1000",
+      );
       const result = data?.data.map((opt) => ({
         value: opt.id,
         label: opt.nama,
