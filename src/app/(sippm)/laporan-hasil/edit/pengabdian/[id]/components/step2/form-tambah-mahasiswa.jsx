@@ -12,7 +12,7 @@ import { useQueryProgramStudi } from "@/handlers/data-referensi/program-studi/qu
 import { EMAIL_REGEX } from "@/lib/constants/regex";
 import { useCreateAnggotaMahasiswa } from "@/handlers/anggota/create-anggota-mahasiswa";
 import { SingleSelect } from "@/components/select/single-select";
-import { useAddAnggotaPKM } from "@/handlers/dosen/pengabdian/anggota/add-anggota-pkm";
+import { useAddAnggotaLaporanHasilPKM } from "@/handlers/dosen/laporan-hasil/pengabdian/anggota/add-anggota-pkm";
 
 export const FormTambahMahasiswa = ({ onClose }) => {
   const id = useId();
@@ -28,7 +28,7 @@ export const FormTambahMahasiswa = ({ onClose }) => {
     formState: { errors },
   } = useForm();
 
-  const { handleAddNewAnggotaPKM } = useAddAnggotaPKM();
+  const { handleAddNewAnggotaPKM } = useAddAnggotaLaporanHasilPKM();
 
   const { onCreateAnggotaMahasiswa, isPending } = useCreateAnggotaMahasiswa(
     reset,

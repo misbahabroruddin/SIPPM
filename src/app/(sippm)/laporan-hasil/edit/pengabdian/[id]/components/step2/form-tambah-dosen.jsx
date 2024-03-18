@@ -1,21 +1,23 @@
 "use client";
 
-import ReactSelect from "react-select";
 import { useId } from "react";
 import { Controller, useForm } from "react-hook-form";
 
-import { Label } from "@/components/label";
 import { Input } from "@/components/input/input";
 import { ButtonCancel } from "@/components/button/button-cancel";
 import { ButtonSave } from "@/components/button/button-save";
+import { useQueryJabatanFungsional } from "@/handlers/data-referensi/jabatan-fungsional/query-jabatan-fungsional";
 import { useQueryProgramStudi } from "@/handlers/data-referensi/program-studi/query-program-studi";
 import { EMAIL_REGEX } from "@/lib/constants/regex";
-import { useCreateAnggotaMahasiswa } from "@/handlers/anggota/create-anggota-mahasiswa";
+import { useCreateAnggotaDosen } from "@/handlers/anggota/create-anggota-dosen";
 import { SingleSelect } from "@/components/select/single-select";
-import { useAddAnggotaPKM } from "@/handlers/dosen/pengabdian/anggota/add-anggota-pkm";
+import { useAddAnggotaLaporanHasilPKM } from "@/handlers/dosen/laporan-hasil/pengabdian/anggota/add-anggota-pkm";
 
-export const FormTambahMahasiswa = ({ onClose }) => {
-  const id = useId();
+export const FormTambahDosen = ({ onClose }) => {
+  const {
+    data: jabatanFungsionalOptions,
+    isLoading: isLoadingJabatanFungsionalOptions,
+  } = useQueryJabatanFungsional();
 
   const { data: programStudiOptions, isLoading: isLoadingProgramStudiOptions } =
     useQueryProgramStudi();
@@ -28,17 +30,20 @@ export const FormTambahMahasiswa = ({ onClose }) => {
     formState: { errors },
   } = useForm();
 
-  const { handleAddNewAnggotaPKM } = useAddAnggotaPKM();
+  const id = useId();
 
-  const { onCreateAnggotaMahasiswa, isPending } = useCreateAnggotaMahasiswa(
+  const { handleAddNewAnggotaPKM } = useAddAnggotaLaporanHasilPKM();
+
+  const { onCreateAnggotaDosen, isPending } = useCreateAnggotaDosen(
     reset,
     onClose,
     handleAddNewAnggotaPKM,
   );
+
   return (
     <form
       className="flex flex-col gap-2"
-      onSubmit={handleSubmit(onCreateAnggotaMahasiswa)}
+      onSubmit={handleSubmit(onCreateAnggotaDosen)}
     >
       <Input
         type="number"
@@ -68,12 +73,24 @@ export const FormTambahMahasiswa = ({ onClose }) => {
         required
       />
       <Input
-        label="NIM"
+        label="NIDN/NIDK"
         name={"nidn_or_nidk_or_nim"}
-        placeholder="NIM"
+        placeholder="NIDN/NIDK"
         register={register("nidn_or_nidk_or_nim", { required: "Wajib diisi" })}
         errors={errors.nidn_or_nidk_or_nim}
         required
+      />
+      <SingleSelect
+        label={"Jabatan Fungsional"}
+        Controller={Controller}
+        control={control}
+        options={jabatanFungsionalOptions}
+        placeholder={"Jabatan Fungsional"}
+        name="jabatan_fungsional_id"
+        errors={errors.jabatan_fungsional_id}
+        rules={{ required: "Wajib diisi" }}
+        id={id}
+        isLoading={isLoadingJabatanFungsionalOptions}
       />
       <SingleSelect
         label={"Program Studi"}
@@ -106,7 +123,9 @@ export const FormTambahMahasiswa = ({ onClose }) => {
         label="Nomor hp"
         name={"nomor_hp"}
         placeholder="Nomor hp"
-        register={register("nomor_hp")}
+        register={register("nomor_hp", {
+          required: "Wajib diisi",
+        })}
         errors={errors.nomor_hp}
         required
       />
