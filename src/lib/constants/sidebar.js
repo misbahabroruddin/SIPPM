@@ -49,6 +49,11 @@ export const MENU_SIDEBAR_ADMIN = [
         icon: "/icons/sub-menu.svg",
         link: "/data-referensi/luaran-wajib",
       },
+      {
+        label: "Kabupaten",
+        icon: "/icons/sub-menu.svg",
+        link: "/data-referensi/kabupaten",
+      },
     ],
   },
 ];
