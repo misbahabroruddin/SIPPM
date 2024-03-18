@@ -244,6 +244,7 @@ const FormBiodata = () => {
             register={register("nomor_hp", { required: "Wajib diisi" })}
             errors={errors.nomor_hp}
             defaultValue={profile?.nomor_hp}
+            type="number"
           />
           <Input
             label="Sinta ID"
