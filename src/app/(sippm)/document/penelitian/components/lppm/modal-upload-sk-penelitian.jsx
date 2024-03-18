@@ -17,7 +17,7 @@ export const ModalUploadSkPenelitian = ({ penelitianId }) => {
     formState: { errors },
   } = useForm();
 
-  const { mutateAsync } = useUploadSKPenelitian(penelitianId);
+  const { mutateAsync, isPending } = useUploadSKPenelitian(penelitianId);
 
   const handleOpenModal = () => setOpen(true);
   const handleClosModal = () => {
@@ -32,7 +32,7 @@ export const ModalUploadSkPenelitian = ({ penelitianId }) => {
 
   return (
     <>
-      <ButtonUpload onClick={handleOpenModal} />
+      <ButtonUpload onClick={handleOpenModal} className="h-fit" />
       <Modal
         onClose={() => setOpen(false)}
         open={open}
@@ -55,7 +55,10 @@ export const ModalUploadSkPenelitian = ({ penelitianId }) => {
           />
           <div className="flex justify-evenly">
             <ButtonCancel iconLeft onClick={handleClosModal} />
-            <ButtonUpload className="w-[200px] justify-center" />
+            <ButtonUpload
+              className="w-[200px] justify-center"
+              isLoading={isPending}
+            />
           </div>
         </form>
       </Modal>

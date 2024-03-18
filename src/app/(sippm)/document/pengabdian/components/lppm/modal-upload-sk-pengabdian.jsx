@@ -17,7 +17,7 @@ export const ModalUploadSkPengabdian = ({ pengabdianId }) => {
     formState: { errors },
   } = useForm();
 
-  const { mutateAsync } = useUploadSKPengabdian(pengabdianId);
+  const { mutateAsync, isPending } = useUploadSKPengabdian(pengabdianId);
 
   const handleOpenModal = () => setOpen(true);
   const handleClosModal = () => {
@@ -55,7 +55,10 @@ export const ModalUploadSkPengabdian = ({ pengabdianId }) => {
           />
           <div className="flex justify-evenly">
             <ButtonCancel iconLeft onClick={handleClosModal} />
-            <ButtonUpload className="w-[200px] justify-center" />
+            <ButtonUpload
+              className="w-[200px] justify-center"
+              isLoading={isPending}
+            />
           </div>
         </form>
       </Modal>

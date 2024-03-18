@@ -21,6 +21,8 @@ import { TrackRiwayatLPPM } from "@/components/riwayat/lppm/riwayat-lppm";
 import { ButtonBeranda } from "@/components/button/button-beranda";
 import { useQueryGetRiwayatVerikasiLPPM } from "@/handlers/lppm/riwayat/query-get-verifikasi-proposal-lppm";
 import { useQueryGetRiwayatVerikasiReviewer } from "@/handlers/reviewer/riwayat/query-get-verifikasi-proposal-reviewer";
+import { useQueryGetRiwayatVerikasiReviewerLppm } from "@/handlers/reviewer/riwayat/query-get-verifikasi-proposal-reviewer-lppm";
+import { TrackRiwayatReviewerLPPM } from "@/components/riwayat/reviewer/riwayat-reviewer-lppm";
 
 export default function TrackPengabdianReviewerPage() {
   const [tabActive] = useState("dokumen");
@@ -33,8 +35,8 @@ export default function TrackPengabdianReviewerPage() {
   const router = useRouter();
 
   const { data } = useQueryDetailPengabdianReviewer();
-  // const { data: dataTrackDosenLPPM, isLoading: isLoadingTrackDosenLPPM } =
-  //   useQueryGetRiwayatVerikasiLPPM();
+  const { data: dataTrackDosenLPPM, isLoading: isLoadingTrackDosenLPPM } =
+    useQueryGetRiwayatVerikasiReviewerLppm();
   const {
     data: dataTrackDosenReviewer,
     isLoading: isLoadingTrackDosenReviewer,
@@ -74,10 +76,10 @@ export default function TrackPengabdianReviewerPage() {
                 data={dataTrackDosenReviewer}
                 isLoading={isLoadingTrackDosenReviewer}
               />
-              {/* <TrackRiwayatLPPM
+              <TrackRiwayatReviewerLPPM
                 data={dataTrackDosenLPPM}
                 isLoading={isLoadingTrackDosenLPPM}
-              /> */}
+              />
             </Timeline>
             <ButtonBeranda
               className="ml-auto w-fit px-8"

@@ -110,13 +110,16 @@ const ListItemKontrak = ({ data }) => {
             </>
           ) : null}
           {data?.dokumen_kontrak?.status === "Dibalas" ? (
-            <Link
-              href={data?.dokumen_kontrak?.file_kontrak?.url}
-              target="_blank"
-              className="flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-white disabled:cursor-not-allowed disabled:bg-gray-500"
-            >
-              Detail
-            </Link>
+            <div className="flex items-center gap-4">
+              <ModalUploadKontrakPenelitian penelitianId={data?.id} />
+              <Link
+                href={data?.dokumen_kontrak?.file_kontrak?.url}
+                target="_blank"
+                className="flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-white disabled:cursor-not-allowed disabled:bg-gray-500"
+              >
+                Detail
+              </Link>
+            </div>
           ) : null}
           {data?.dokumen_kontrak?.status === "Diterima" ? (
             <Link

@@ -18,7 +18,7 @@ export const ModalUploadKontrakPenelitian = ({ penelitianId }) => {
     formState: { errors },
   } = useForm();
 
-  const { mutateAsync } = useUploadKontrakPenelitian(penelitianId);
+  const { mutateAsync, isPending } = useUploadKontrakPenelitian(penelitianId);
 
   const handleOpenModal = () => setOpen(true);
   const handleClosModal = () => {
@@ -57,7 +57,10 @@ export const ModalUploadKontrakPenelitian = ({ penelitianId }) => {
           />
           <div className="flex justify-evenly">
             <ButtonCancel iconLeft onClick={handleClosModal} />
-            <ButtonUpload className="w-[200px] justify-center rounded" />
+            <ButtonUpload
+              className="w-[200px] justify-center rounded"
+              isLoading={isPending}
+            />
           </div>
         </form>
       </Modal>

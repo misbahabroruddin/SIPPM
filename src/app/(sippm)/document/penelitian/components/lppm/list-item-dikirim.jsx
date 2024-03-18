@@ -72,14 +72,17 @@ export const ListItemKontrakDikirim = ({ data }) => {
         </div>
         <div className="flex items-end gap-4">
           {data?.dokumen_kontrak?.status === "Menunggu" ? (
-            <Link
-              // onClick={handleSaveFile}
-              href={data?.dokumen_kontrak?.file_kontrak?.url}
-              target="_blank"
-              className="flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-white disabled:cursor-not-allowed disabled:bg-gray-500"
-            >
-              Detail
-            </Link>
+            <>
+              <ModalUploadKontrakPenelitian penelitianId={data?.id} />
+              <Link
+                // onClick={handleSaveFile}
+                href={data?.dokumen_kontrak?.file_kontrak?.url}
+                target="_blank"
+                className="flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-white disabled:cursor-not-allowed disabled:bg-gray-500"
+              >
+                Detail
+              </Link>
+            </>
           ) : null}
         </div>
       </div>
