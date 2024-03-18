@@ -52,7 +52,10 @@ export const Anggota = () => {
       <TableAnggotaMahasiswa data={listAnggotaMahasiswaPenelitian} />
       <div className="absolute -bottom-16 left-0 mt-4 flex w-full items-center justify-between">
         <ButtonPrev onClick={handlePrevStep} />
-        <ButtonNext onClick={handleNextStep} />
+        <ButtonNext
+          onClick={handleNextStep}
+          disabled={listAnggotaDosenPenelitian.length === 0}
+        />
       </div>
     </ContainerContent>
   );

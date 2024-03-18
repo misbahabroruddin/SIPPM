@@ -39,6 +39,9 @@ export const useCreateOrUpdateBiodata = () => {
 
       return data;
     } catch (error) {
+      if (error.response?.data.message.nik) {
+        return toast.error(error.response?.data.message.nik[0]);
+      }
       toast.error(error.message);
     }
   };

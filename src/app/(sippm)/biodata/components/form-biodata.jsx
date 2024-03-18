@@ -79,7 +79,7 @@ const FormBiodata = () => {
             label="NIK"
             name="nik"
             required
-            placeholder="NIK"
+            placeholder="Nomor Induk Kependudukan"
             register={register("nik", { required: "Wajib diisi" })}
             errors={errors.nik}
             defaultValue={profile?.nik}
