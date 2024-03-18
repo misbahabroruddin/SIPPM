@@ -33,7 +33,7 @@ export const ModalUploadKontrakPengabdian = ({ pengabdianId }) => {
 
   return (
     <>
-      <ButtonUpload onClick={handleOpenModal} />
+      <ButtonUpload onClick={handleOpenModal} className="h-fit" />
       <Modal
         onClose={() => setOpen(false)}
         open={open}

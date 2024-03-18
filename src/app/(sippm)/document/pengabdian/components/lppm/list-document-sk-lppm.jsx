@@ -93,11 +93,14 @@ const ListItemSK = ({ data }) => {
           {!data?.dokumen_sk ? (
             <ModalUploadSkPengabdian pengabdianId={data?.id} />
           ) : (
-            <div className="mr-10 flex flex-col items-center gap-2 font-[500]">
-              <p className="text-sm">SK</p>
-              <p className="rounded-lg bg-[#D5FACC] px-2 py-1 text-[#23B900]">
-                Terkirim
-              </p>
+            <div className="flex items-center gap-4">
+              <ModalUploadSkPengabdian pengabdianId={data?.id} />
+              <div className="mr-10 flex flex-col items-center gap-2 font-[500]">
+                <p className="text-sm">SK</p>
+                <p className="rounded-lg bg-[#D5FACC] px-2 py-1 text-[#23B900]">
+                  Terkirim
+                </p>
+              </div>
             </div>
           )}
         </div>

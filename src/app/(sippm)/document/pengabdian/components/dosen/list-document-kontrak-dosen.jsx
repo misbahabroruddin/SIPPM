@@ -97,7 +97,7 @@ const ListItemKontrak = ({ data }) => {
         </div>
         <div className="flex items-end gap-4">
           {data?.dokumen_kontrak?.status === "Menunggu" ? (
-            <>
+            <div className="flex items-center gap-2">
               <ModalUploadKontrakPengabdian pengabdianId={data?.id} />
               <Link
                 // onClick={handleSaveFile}
@@ -107,16 +107,20 @@ const ListItemKontrak = ({ data }) => {
               >
                 <ButtonDownload />
               </Link>
-            </>
+            </div>
           ) : null}
           {data?.dokumen_kontrak?.status === "Dibalas" ? (
-            <Link
-              href={data?.dokumen_kontrak?.file_kontrak?.url}
-              target="_blank"
-              className="flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-white disabled:cursor-not-allowed disabled:bg-gray-500"
-            >
-              Detail
-            </Link>
+            <div className="flex items-center gap-2">
+              <ModalUploadKontrakPengabdian pengabdianId={data?.id} />
+              <Link
+                // onClick={handleSaveFile}
+                href={data?.dokumen_kontrak?.file_kontrak?.url}
+                target="_blank"
+                className="flex items-center gap-2 rounded-lg bg-primary text-white disabled:cursor-not-allowed disabled:bg-gray-500"
+              >
+                <ButtonDownload />
+              </Link>
+            </div>
           ) : null}
           {data?.dokumen_kontrak?.status === "Diterima" ? (
             <Link
