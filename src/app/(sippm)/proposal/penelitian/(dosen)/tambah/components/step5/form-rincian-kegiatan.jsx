@@ -14,6 +14,8 @@ import { useAddEditRincianKegiatanPenelitian } from "@/handlers/dosen/penelitian
 export const FormRincianKegiatan = ({ onClose, id }) => {
   const [startDate, setStartDate] = useState();
   const [endDate, setEndDate] = useState(null);
+  const [isDisabled, setIsDisabled] = useState(false);
+
   const {
     register,
     handleSubmit,
@@ -37,6 +39,7 @@ export const FormRincianKegiatan = ({ onClose, id }) => {
       reset,
       onClose,
     );
+
   return (
     <form
       className="flex flex-col gap-3 px-3"
@@ -54,6 +57,7 @@ export const FormRincianKegiatan = ({ onClose, id }) => {
         errors={errors.kegiatan}
         required
         defaultValue={detailRincianKegiatanPenelitian?.kegiatan}
+        spanEmptyClass="hidden"
       />
       <div className="flex w-full flex-col gap-2">
         <Label
@@ -70,6 +74,13 @@ export const FormRincianKegiatan = ({ onClose, id }) => {
               calendarIconClassname="bg-sky h-fit w-fit -top-2"
               onChange={(dates) => {
                 const [start, end] = dates;
+
+                if (!end) {
+                  setIsDisabled(true);
+                } else {
+                  setIsDisabled(false);
+                }
+
                 setStartDate(start);
                 setEndDate(end);
                 onChange(dates);
@@ -81,7 +92,7 @@ export const FormRincianKegiatan = ({ onClose, id }) => {
               wrapperClassName="w-full flex items-center outline outline-1 h-10 outline-secondary-200 rounded-md focus:outline-none focus:ring-1 focus:ring-primary focus:border-transparent placeholder:text-sm overflow-hidden"
               className="ml-12 !p-0 focus:outline-none"
               isClearable
-              placeholderText="Waktu"
+              placeholderText="Rentang Waktu Kegiatan"
               showIcon
               icon={
                 <svg
@@ -99,14 +110,19 @@ export const FormRincianKegiatan = ({ onClose, id }) => {
               }
             />
           )}
+          rules={{ required: "Harus diisi" }}
         />
+        {errors.waktu && (
+          <p className="text-sm text-red-500">* {errors.waktu.message}</p>
+        )}
       </div>
       <div className="my-4 flex justify-center gap-4">
         <ButtonCancel className="w-36 lg:w-40" iconLeft onClick={onClose} />
         <ButtonSave
           className="w-36 lg:w-40"
           iconLeft
-          disabled={isLoadingSubmit}
+          disabled={isDisabled || isLoadingSubmit}
+          isLoading={isLoadingSubmit}
         />
       </div>
     </form>

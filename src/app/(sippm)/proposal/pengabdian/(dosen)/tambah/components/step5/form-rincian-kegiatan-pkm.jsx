@@ -1,14 +1,12 @@
 "use client";
 
 import { Controller, useForm } from "react-hook-form";
-import { useQueryClient } from "@tanstack/react-query";
 import ReactDatePicker from "react-datepicker";
 import { useState } from "react";
 
 import { Input } from "@/components/input/input";
 import { ButtonCancel } from "@/components/button/button-cancel";
 import { ButtonSave } from "@/components/button/button-save";
-import { useAxios } from "@/lib/hooks/useAxios";
 import { Label } from "@/components/label";
 import { useQueryDetailRincianKegiatanPKM } from "@/handlers/dosen/pengabdian/rincian-kegiatan/query-detail-rincian-kegiatan-pkm";
 import { useAddEditRincianKegiatanPKM } from "@/handlers/dosen/pengabdian/rincian-kegiatan/add-edit-rincian-kegiatan-pkm";
@@ -16,6 +14,7 @@ import { useAddEditRincianKegiatanPKM } from "@/handlers/dosen/pengabdian/rincia
 export const FormRincianKegiatanPKM = ({ onClose, id }) => {
   const [startDate, setStartDate] = useState();
   const [endDate, setEndDate] = useState(null);
+  const [isDisabled, setIsDisabled] = useState(false);
 
   const {
     register,
@@ -67,6 +66,13 @@ export const FormRincianKegiatanPKM = ({ onClose, id }) => {
               calendarIconClassname="bg-sky h-fit w-fit -top-2"
               onChange={(dates) => {
                 const [start, end] = dates;
+
+                if (!end) {
+                  setIsDisabled(true);
+                } else {
+                  setIsDisabled(false);
+                }
+
                 setStartDate(start);
                 setEndDate(end);
                 onChange(dates);
@@ -100,7 +106,12 @@ export const FormRincianKegiatanPKM = ({ onClose, id }) => {
       </div>
       <div className="my-4 flex justify-center gap-4">
         <ButtonCancel className="w-36 lg:w-40" iconLeft onClick={onClose} />
-        <ButtonSave className="w-36 lg:w-40" iconLeft disabled={isPending} />
+        <ButtonSave
+          className="w-36 lg:w-40"
+          iconLeft
+          isLoading={isPending}
+          disabled={isDisabled || isPending}
+        />
       </div>
     </form>
   );

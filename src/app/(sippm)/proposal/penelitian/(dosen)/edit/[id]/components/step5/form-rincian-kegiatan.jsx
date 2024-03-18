@@ -14,6 +14,8 @@ import { useAddEditRincianKegiatanPenelitian } from "@/handlers/dosen/penelitian
 export const FormRincianKegiatan = ({ onClose, id }) => {
   const [startDate, setStartDate] = useState();
   const [endDate, setEndDate] = useState(null);
+  const [isDisabled, setIsDisabled] = useState(false);
+
   const {
     register,
     handleSubmit,
@@ -65,6 +67,13 @@ export const FormRincianKegiatan = ({ onClose, id }) => {
               calendarIconClassname="bg-sky h-fit w-fit -top-2"
               onChange={(dates) => {
                 const [start, end] = dates;
+
+                if (!end) {
+                  setIsDisabled(true);
+                } else {
+                  setIsDisabled(false);
+                }
+
                 setStartDate(start);
                 setEndDate(end);
                 onChange(dates);
@@ -101,7 +110,8 @@ export const FormRincianKegiatan = ({ onClose, id }) => {
         <ButtonSave
           className="w-36 lg:w-40"
           iconLeft
-          disabled={isLoadingSubmit}
+          disabled={isDisabled || isLoadingSubmit}
+          isLoading={isLoadingSubmit}
         />
       </div>
     </form>
