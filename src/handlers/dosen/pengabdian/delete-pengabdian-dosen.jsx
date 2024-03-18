@@ -49,6 +49,18 @@ export const useDeletePengabdianDosen = () => {
         queryClient.resetQueries({
           queryKey: ["anggotaMahasiswaPKM"],
         });
+        queryClient.resetQueries({
+          queryKey: ["rincianKegiatanPKM"],
+        });
+        queryClient.resetQueries({
+          queryKey: ["rencanaAnggaranPKM"],
+        });
+        queryClient.resetQueries({
+          queryKey: ["targetCapaianPKM"],
+        });
+        queryClient.resetQueries({
+          queryKey: ["identitas-usulan-pkm"],
+        });
       },
     });
 

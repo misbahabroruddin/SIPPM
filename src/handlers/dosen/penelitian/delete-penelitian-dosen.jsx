@@ -51,6 +51,18 @@ export const useDeletePenelitianDosen = () => {
         queryClient.resetQueries({
           queryKey: ["anggotaDosen"],
         });
+        queryClient.resetQueries({
+          queryKey: ["rincianKegiatanPenelitian"],
+        });
+        queryClient.resetQueries({
+          queryKey: ["rencanaAnggaranPenelitian"],
+        });
+        queryClient.resetQueries({
+          queryKey: ["targetCapaianPenelitian"],
+        });
+        queryClient.resetQueries({
+          queryKey: ["identitas-usulan-penelitian"],
+        });
       },
     });
 
