@@ -83,6 +83,7 @@ const FormBiodata = () => {
             register={register("nik", { required: "Wajib diisi" })}
             errors={errors.nik}
             defaultValue={profile?.nik}
+            type="number"
           />
           <Input
             label="NIDN"
@@ -94,6 +95,7 @@ const FormBiodata = () => {
             })}
             errors={errors.nidn_or_nidk_or_nim}
             defaultValue={profile?.nidn_or_nidk_or_nim}
+            type="number"
           />
           <SingleSelect
             label="Tempat Lahir"
