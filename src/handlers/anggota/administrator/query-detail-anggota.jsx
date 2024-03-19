@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 
 import { useAxios } from "@/lib/hooks/useAxios";
 
-export const useQueryAdministratorDetailAnggotaDosen = (id) => {
+export const useQueryAdministratorDetailAnggota = (id) => {
   const axios = useAxios();
 
   const query = useQuery({
