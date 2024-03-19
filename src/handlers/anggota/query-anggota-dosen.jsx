@@ -10,7 +10,9 @@ export const useQueryAnggotaDosen = () => {
 
   const fetchListDosen = async () => {
     try {
-      const { data } = await axios.get("/anggotas/search?jenis_anggota=Dosen");
+      const { data } = await axios.get(
+        "/anggotas/search?jenis_anggota=Dosen&limit=1000",
+      );
       const result = data?.data.map((opt) => ({
         value: opt.id,
         label: `${opt.nama_lengkap} (${opt.nidn_or_nidk_or_nim})`,

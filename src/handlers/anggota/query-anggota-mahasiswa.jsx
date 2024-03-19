@@ -11,7 +11,7 @@ export const useQueryAnggotaMahasiswa = () => {
   const fetchListMahasiswa = async () => {
     try {
       const { data } = await axios.get(
-        "/anggotas/search?jenis_anggota=Mahasiswa",
+        "/anggotas/search?jenis_anggota=Mahasiswa&limit=1000",
       );
       const result = data?.data.map((opt) => ({
         value: opt.id,
