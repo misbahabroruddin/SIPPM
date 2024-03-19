@@ -3,12 +3,12 @@ import { useState } from "react";
 import Image from "next/image";
 
 import { Modal } from "@/components/modal";
-import { useQueryAdministratorDetailAnggotaDosen } from "@/handlers/anggota/administrator/query-detail-anggota";
+import { useQueryAdministratorDetailAnggota } from "@/handlers/anggota/administrator/query-detail-anggota";
 import { FormEditAnggotaDosen } from "./form-edit-anggota-dosen";
 
 export const ModalEditAnggotaDosen = (anggota) => {
   const [open, setOpen] = useState(false);
-  const { data, isLoading, refetch } = useQueryAdministratorDetailAnggotaDosen(
+  const { data, isLoading, refetch } = useQueryAdministratorDetailAnggota(
     anggota.id,
   );
   const handleOpenModal = () => {

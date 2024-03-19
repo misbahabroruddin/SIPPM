@@ -5,12 +5,12 @@ import { useState } from "react";
 
 import { Modal } from "@/components/modal";
 import { Input } from "@/components/input/input";
-import { useQueryAdministratorDetailAnggotaDosen } from "@/handlers/anggota/administrator/query-detail-anggota";
+import { useQueryAdministratorDetailAnggota } from "@/handlers/anggota/administrator/query-detail-anggota";
 
 export const ModalDetailAnggotaDosen = ({ id }) => {
   const [openModal, setOpenModal] = useState(false);
 
-  const { data: detail, refetch } = useQueryAdministratorDetailAnggotaDosen(id);
+  const { data: detail, refetch } = useQueryAdministratorDetailAnggota(id);
 
   const handleOpenModal = () => {
     setOpenModal(true);
