@@ -163,6 +163,8 @@ export const TrackDosenLPPM = ({ data, isLoading }) => {
                 onClick={() => {
                   localStorage.setItem("isEdit", true);
                   localStorage.setItem("step", 1);
+                  localStorage.removeItem("penelitianId");
+                  localStorage.removeItem("pengabdianId");
                   setCurrentStep(1);
                 }}
               />
