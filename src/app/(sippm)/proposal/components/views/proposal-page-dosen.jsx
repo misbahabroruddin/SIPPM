@@ -36,9 +36,12 @@ export default function ProposalPageDosen() {
 
   const debounced = useDebouncedCallback((value) => {
     setSearchPenelitian(value);
+    setPagePenelitian(1);
   }, 1000);
+
   const debouncedSearchPengabdian = useDebouncedCallback((value) => {
     setSearchPengabdian(value);
+    setPagePengabdian(1);
   }, 1000);
 
   const { data: penelitian, isLoading: isLoadingPenelitian } =

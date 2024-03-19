@@ -32,10 +32,12 @@ export default function ProposalPageLPPM() {
 
   const handleSearchPenelitian = useDebouncedCallback((value) => {
     setSearchPenelitian(value);
+    setPagePenelitian(1);
   }, 1000);
 
   const handleSearchPengabdian = useDebouncedCallback((value) => {
     setSearchPengabdian(value);
+    setPagePengabdian(1);
   }, 1000);
 
   const { data: penelitian, isLoading: isLoadingPenelitian } =

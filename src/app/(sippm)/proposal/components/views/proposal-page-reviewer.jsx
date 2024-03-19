@@ -26,9 +26,11 @@ export default function ProposalPageReviewer() {
 
   const handlePageChangePenelitian = (event) => {
     setPagePenelitian(event.selected + 1);
+    setPagePenelitian(1);
   };
   const handlePageChangePengabdian = (event) => {
     setPagePengabdian(event.selected + 1);
+    setPagePengabdian(1);
   };
   const handleSearchPenelitian = useDebouncedCallback((value) => {
     setSearchPenelitian(value);
