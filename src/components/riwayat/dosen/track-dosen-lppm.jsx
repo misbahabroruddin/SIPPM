@@ -74,7 +74,7 @@ export const TrackDosenLPPM = ({ data, isLoading }) => {
                     key={item.id}
                   >
                     <div className="flex justify-between">
-                      <div className="flex items-center">
+                      <div className="flex max-w-[200px] items-center sm:max-w-[400px] md:max-w-[600px] lg:max-w-[800px]">
                         <Image
                           src="/icons/file.svg"
                           width={24}
