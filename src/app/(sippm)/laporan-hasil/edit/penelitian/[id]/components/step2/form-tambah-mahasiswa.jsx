@@ -47,7 +47,6 @@ export const FormTambahMahasiswa = ({ onClose }) => {
         errors={errors.nik}
         placeholder="Nomor Induk Kependudukan"
         required
-        spanEmptyClass="hidden"
       />
       <Input
         label="Nama Lengkap"
