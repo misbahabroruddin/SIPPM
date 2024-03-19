@@ -2,7 +2,7 @@
 
 import { ContainerPage } from "@/components/container-page";
 import { BasePageTitle } from "@/components/base-page-title";
-import { TableAnggotaMahasiswa } from "./components/table-anggota-dosen";
+import { TableAnggotaMahasiswa } from "./components/table-anggota-mahasiswa";
 
 export default function AnggotaDosenPage() {
   return (
