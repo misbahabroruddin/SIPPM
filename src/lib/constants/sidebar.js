@@ -9,11 +9,23 @@ export const MENU_SIDEBAR_ADMIN = [
   //   icon: "/icons/biodata.svg",
   //   link: "/biodata",
   // },
-  // {
-  //   label: "Anggota",
-  //   icon: "/icons/anggota.svg",
-  //   link: "/anggota",
-  // },
+  {
+    label: "Anggota",
+    icon: "/icons/anggota.svg",
+    link: "/anggota",
+    children: [
+      {
+        label: "Dosen",
+        icon: "/icons/sub-menu.svg",
+        link: "/anggota/dosen",
+      },
+      {
+        label: "Mahasiswa",
+        icon: "/icons/sub-menu.svg",
+        link: "/anggota/mahasiswa",
+      },
+    ],
+  },
   {
     label: "Data Referensi",
     icon: "/icons/data-referensi.svg",

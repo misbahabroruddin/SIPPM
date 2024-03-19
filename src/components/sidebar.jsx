@@ -3,13 +3,13 @@
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname, useSelectedLayoutSegments } from "next/navigation";
+import { twMerge } from "tailwind-merge";
+import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 
 import { ProfileSidebar } from "./profile-sidebar";
 import { useSidebar } from "@/lib/hooks/useSidebar";
-import { useSession } from "next-auth/react";
 import { useSidebarMenu } from "@/lib/hooks/useMenuSidebar";
-import { twMerge } from "tailwind-merge";
 
 export const Sidebar = () => {
   const pathname = usePathname();
@@ -24,6 +24,8 @@ export const Sidebar = () => {
       return setOpen("/data-referensi");
     } else if (pathname.includes("/document")) {
       return setOpen("/document");
+    } else if (pathname.includes("/anggota")) {
+      return setOpen("/anggota");
     }
 
     setOpen(null);
@@ -67,14 +69,14 @@ export const Sidebar = () => {
                     alt="chevron"
                     className={twMerge(
                       "transition-all",
-                      open ? "rotate-90" : "",
+                      open === menu.link ? "rotate-90" : "",
                     )}
                   />
                 </button>
                 <ul
                   className={twMerge(
                     "ease-in-ou mt-1 flex flex-col gap-1 overflow-hidden transition duration-500",
-                    open
+                    open === menu.link
                       ? "h-auto transition-transform"
                       : "h-0 transition-transform",
                   )}
