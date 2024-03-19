@@ -4,13 +4,13 @@ import { useDebouncedCallback } from "use-debounce";
 
 import DataTable from "@/components/data-table/table";
 import { SearchInput } from "@/components/input/search-input";
-// import { InputFileImport } from "@/components/input/input-file-import";
-// import { useImportBidangIlmu } from "@/handlers/data-referensi/bidang-ilmu/administrator/import-bidang-ilmu";
-// import { ModalTrashBidangIlmu } from "./modal-trash-bidang-ilmu";
 import { SkeletonTableDataRefensi } from "@/components/skeleton/skeleton-table-data-refensi";
 import { useColumnTableKabupaten } from "./column-table";
 import { useQueryListingKabupaten } from "@/handlers/data-referensi/kabupaten/administator/query-get-all-kabupaten";
 import { ModalTambahKabupaten } from "./modal-tambah-kabupaten";
+import { useImportKabupaten } from "@/handlers/data-referensi/kabupaten/administator/import-kabupaten";
+import { ModalTrashKabupaten } from "./modal-trash-kabupaten";
+import { InputFileImport } from "@/components/input/input-file-import";
 
 export const TableKabupaten = () => {
   const [search, setSearch] = useState("");
@@ -19,15 +19,19 @@ export const TableKabupaten = () => {
     pageSize: 10,
   });
   const columns = useColumnTableKabupaten();
-  // const { mutateAsync: onImportFile } = useImportBidangIlmu();
+  const { mutateAsync: onImportFile } = useImportKabupaten();
 
-  // const handleImport = async (e) => {
-  //   const file = e.target.files[0];
-  //   await onImportFile(file);
-  // };
+  const handleImport = async (e) => {
+    const file = e.target.files[0];
+    await onImportFile(file);
+  };
 
   const handleSearch = useDebouncedCallback((value) => {
     setSearch(value);
+    setPagination({
+      ...pagination,
+      pageIndex: 0,
+    });
   }, 1000);
 
   const { data, isLoading } = useQueryListingKabupaten(
@@ -47,8 +51,8 @@ export const TableKabupaten = () => {
           />
         </div>
         <div className="flex gap-2">
-          {/* <ModalTrashBidangIlmu /> */}
-          {/* <InputFileImport onChange={handleImport} /> */}
+          <ModalTrashKabupaten />
+          <InputFileImport onChange={handleImport} />
           <ModalTambahKabupaten />
         </div>
       </div>

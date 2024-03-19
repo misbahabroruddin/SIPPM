@@ -28,6 +28,10 @@ export const TableLuaranWajib = () => {
 
   const handleSearch = useDebouncedCallback((value) => {
     setSearch(value);
+    setPagination({
+      ...pagination,
+      pageIndex: 0,
+    });
   }, 1000);
 
   const { data, isLoading } = useQueryListingLuaranWajib(
