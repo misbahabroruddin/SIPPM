@@ -50,7 +50,11 @@ export const SelectDosen = ({ onClose }) => {
       />
       <div className="flex justify-center gap-6">
         <ButtonCancel iconLeft onClick={onClose} />
-        <ButtonSave iconLeft disabled={isLoadingAnggotaDosenPKM} />
+        <ButtonSave
+          iconLeft
+          disabled={isLoadingAnggotaDosenPKM}
+          isLoading={isLoadingAnggotaDosenPKM}
+        />
       </div>
     </form>
   );

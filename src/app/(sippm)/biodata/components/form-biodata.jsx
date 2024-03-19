@@ -74,6 +74,7 @@ const FormBiodata = () => {
             register={register("nama_lengkap", { required: "Wajib diisi" })}
             errors={errors.nama_lengkap}
             defaultValue={profile?.nama_lengkap}
+            spanEmptyClass="hidden"
           />
           <Input
             label="NIK"
@@ -84,6 +85,7 @@ const FormBiodata = () => {
             errors={errors.nik}
             defaultValue={profile?.nik}
             type="number"
+            spanEmptyClass="hidden"
           />
           <Input
             label="NIDN"
@@ -96,6 +98,7 @@ const FormBiodata = () => {
             errors={errors.nidn_or_nidk_or_nim}
             defaultValue={profile?.nidn_or_nidk_or_nim}
             type="number"
+            spanEmptyClass="hidden"
           />
           <SingleSelect
             label="Tempat Lahir"
@@ -178,6 +181,7 @@ const FormBiodata = () => {
             register={register("pangkat_golongan")}
             errors={errors.pangkat_golongan}
             defaultValue={profile?.pangkat_golongan}
+            spanEmptyClass="hidden"
           />
           <SingleSelect
             label="Jabatan Fungsional"
@@ -235,6 +239,7 @@ const FormBiodata = () => {
             type={"email"}
             required
             defaultValue={profile?.email}
+            spanEmptyClass="hidden"
           />
           <Input
             label="Nomor hp"
@@ -245,6 +250,7 @@ const FormBiodata = () => {
             errors={errors.nomor_hp}
             defaultValue={profile?.nomor_hp}
             type="number"
+            spanEmptyClass="hidden"
           />
           <Input
             label="Sinta ID"
@@ -273,7 +279,12 @@ const FormBiodata = () => {
         </div>
       </div>
       <div className="my-10 px-8">
-        <ButtonSave iconLeft className="ml-auto" disabled={isLoading} />
+        <ButtonSave
+          iconLeft
+          className="ml-auto"
+          disabled={isLoading}
+          isLoading={isLoading}
+        />
       </div>
     </form>
   );

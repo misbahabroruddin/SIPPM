@@ -79,7 +79,7 @@ export const Berkas = () => {
         </div>
         <div className="flex justify-between">
           <ButtonPrev onClick={handlePrevStep} />
-          <ButtonSave disabled={isLoadingSubmit} />
+          <ButtonSave disabled={isLoadingSubmit} isLoading={isLoadingSubmit} />
         </div>
       </form>
     </ContainerContent>

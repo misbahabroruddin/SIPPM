@@ -106,7 +106,7 @@ export const BerkasPKM = () => {
         </div>
         <div className="flex justify-between">
           <ButtonPrev onClick={handlePrevStep} />
-          <ButtonSave disabled={isPending} />
+          <ButtonSave disabled={isPending} isLoading={isPending} />
         </div>
       </form>
     </ContainerContent>

@@ -1,8 +1,8 @@
 "use client";
 
-import { Controller, useForm } from "react-hook-form";
+import { Controller, set, useForm } from "react-hook-form";
 import ReactDatePicker from "react-datepicker";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { Input } from "@/components/input/input";
 import { ButtonCancel } from "@/components/button/button-cancel";
@@ -21,6 +21,8 @@ export const FormRincianKegiatan = ({ onClose, id }) => {
     handleSubmit,
     setValue,
     reset,
+    setError,
+    clearErrors,
     control,
     formState: { errors },
   } = useForm();
@@ -39,6 +41,24 @@ export const FormRincianKegiatan = ({ onClose, id }) => {
       reset,
       onClose,
     );
+
+  const handleClose = () => {
+    onClose();
+    reset();
+    setStartDate();
+    setEndDate(null);
+  };
+
+  useEffect(() => {
+    if (isDisabled === true) {
+      setError("waktu", {
+        type: "required",
+        message: "Rentang waktu harus diisi",
+      });
+    } else {
+      clearErrors("waktu");
+    }
+  }, [isDisabled]);
 
   return (
     <form
@@ -69,6 +89,7 @@ export const FormRincianKegiatan = ({ onClose, id }) => {
         <Controller
           name="waktu"
           control={control}
+          rules={{ required: "Rentang waktu harus diisi" }}
           render={({ field: { onChange } }) => (
             <ReactDatePicker
               calendarIconClassname="bg-sky h-fit w-fit -top-2"
@@ -110,14 +131,13 @@ export const FormRincianKegiatan = ({ onClose, id }) => {
               }
             />
           )}
-          rules={{ required: "Harus diisi" }}
         />
         {errors.waktu && (
           <p className="text-sm text-red-500">* {errors.waktu.message}</p>
         )}
       </div>
       <div className="my-4 flex justify-center gap-4">
-        <ButtonCancel className="w-36 lg:w-40" iconLeft onClick={onClose} />
+        <ButtonCancel className="w-36 lg:w-40" iconLeft onClick={handleClose} />
         <ButtonSave
           className="w-36 lg:w-40"
           iconLeft

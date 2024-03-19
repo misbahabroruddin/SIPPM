@@ -51,8 +51,9 @@ export const FormTambahDosen = ({ onClose }) => {
         name="nik"
         register={register("nik", { required: "wajib diisi" })}
         errors={errors.nik}
-        placeholder="NIK"
+        placeholder="Nomor Induk Kependudukan"
         required
+        spanEmptyClass="hidden"
       />
       <Input
         label="Nama Lengkap"
@@ -63,6 +64,7 @@ export const FormTambahDosen = ({ onClose }) => {
         errors={errors.nama_lengkap}
         placeholder="Nama Lengkap"
         required
+        spanEmptyClass="hidden"
       />
       <Input
         label="Perguruan Tinggi"
@@ -71,6 +73,7 @@ export const FormTambahDosen = ({ onClose }) => {
         errors={errors.perguruan_tinggi}
         placeholder="Perguruan Tinggi"
         required
+        spanEmptyClass="hidden"
       />
       <Input
         label="NIDN/NIDK"
@@ -79,6 +82,7 @@ export const FormTambahDosen = ({ onClose }) => {
         register={register("nidn_or_nidk_or_nim", { required: "wajib diisi" })}
         errors={errors.nidn_or_nidk_or_nim}
         required
+        spanEmptyClass="hidden"
       />
       <SingleSelect
         label={"Jabatan Fungsional"}
@@ -145,7 +149,7 @@ export const FormTambahDosen = ({ onClose }) => {
       />
       <div className="mt-6 flex justify-center gap-6">
         <ButtonCancel iconLeft onClick={onClose} />
-        <ButtonSave iconLeft disabled={isPending} />
+        <ButtonSave iconLeft disabled={isPending} isLoading={isPending} />
       </div>
     </form>
   );

@@ -45,8 +45,9 @@ export const FormTambahMahasiswa = ({ onClose }) => {
         name="nik"
         register={register("nik", { required: "wajib diisi" })}
         errors={errors.nik}
-        placeholder="NIK"
+        placeholder="Nomor Induk Kependudukan"
         required
+        spanEmptyClass="hidden"
       />
       <Input
         label="Nama Lengkap"
@@ -131,7 +132,7 @@ export const FormTambahMahasiswa = ({ onClose }) => {
       />
       <div className="mt-6 flex justify-center gap-6">
         <ButtonCancel iconLeft onClick={onClose} />
-        <ButtonSave iconLeft disabled={isPending} />
+        <ButtonSave iconLeft disabled={isPending} isLoading={isPending} />
       </div>
     </form>
   );

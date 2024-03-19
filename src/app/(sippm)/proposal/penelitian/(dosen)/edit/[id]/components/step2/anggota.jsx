@@ -22,6 +22,8 @@ export const Anggota = () => {
   const { listAnggotaDosenPenelitian, refetchAnggotaDosenPenelitan } =
     useQueryAnggotaDosenPenelitian();
 
+  console.log(listAnggotaDosenPenelitian);
+
   const { handleNextStep } = useNextStep(3);
 
   const handlePrevStep = () => {
@@ -54,7 +56,7 @@ export const Anggota = () => {
         <ButtonPrev onClick={handlePrevStep} />
         <ButtonNext
           onClick={handleNextStep}
-          disabled={listAnggotaDosenPenelitian.length === 0}
+          disabled={listAnggotaDosenPenelitian?.data?.length === 0}
         />
       </div>
     </ContainerContent>

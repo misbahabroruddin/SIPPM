@@ -59,6 +59,7 @@ export const FormTambahJabatanFungsional = ({ setOpen }) => {
           className={"w-full rounded"}
           iconLeft
           disabled={isPending}
+          isLoading={isPending}
         />
       </div>
     </form>

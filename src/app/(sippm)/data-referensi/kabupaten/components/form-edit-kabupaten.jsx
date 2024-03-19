@@ -70,6 +70,7 @@ export const FormEditKabupaten = ({ id, setOpen, data, isLoading }) => {
           className={"w-full rounded"}
           iconLeft
           disabled={isPending}
+          isLoading={isPending}
         />
       </div>
     </form>

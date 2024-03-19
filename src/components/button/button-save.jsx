@@ -6,6 +6,7 @@ import { twMerge } from "tailwind-merge";
 export const ButtonSave = ({
   className,
   iconLeft,
+  isLoading,
   text = "Simpan",
   ...props
 }) => {
@@ -18,7 +19,7 @@ export const ButtonSave = ({
       type="submit"
       {...props}
     >
-      {props.disabled ? (
+      {isLoading ? (
         <Spinner className="h-4 w-4" />
       ) : (
         <svg

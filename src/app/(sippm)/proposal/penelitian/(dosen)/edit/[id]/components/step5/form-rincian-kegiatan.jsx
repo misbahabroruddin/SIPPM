@@ -21,6 +21,8 @@ export const FormRincianKegiatan = ({ onClose, id }) => {
     handleSubmit,
     setValue,
     reset,
+    setError,
+    clearErrors,
     control,
     formState: { errors },
   } = useForm();
@@ -39,6 +41,17 @@ export const FormRincianKegiatan = ({ onClose, id }) => {
       reset,
       onClose,
     );
+
+  useEffect(() => {
+    if (isDisabled === true) {
+      setError("waktu", {
+        type: "required",
+        message: "Rentang waktu harus diisi",
+      });
+    } else {
+      clearErrors("waktu");
+    }
+  }, [isDisabled]);
   return (
     <form
       className="flex flex-col gap-3 px-3"
@@ -56,12 +69,14 @@ export const FormRincianKegiatan = ({ onClose, id }) => {
         errors={errors.kegiatan}
         required
         defaultValue={detailRincianKegiatanPenelitian?.kegiatan}
+        spanEmptyClass="hidden"
       />
       <div className="flex w-full flex-col gap-2">
         <Label htmlFor={"waktu"} text="Waktu" required className="text-start" />
         <Controller
           name="waktu"
           control={control}
+          rules={{ required: "Rentang waktu harus diisi" }}
           render={({ field: { onChange } }) => (
             <ReactDatePicker
               calendarIconClassname="bg-sky h-fit w-fit -top-2"
@@ -104,6 +119,9 @@ export const FormRincianKegiatan = ({ onClose, id }) => {
             />
           )}
         />
+        {errors.waktu && (
+          <p className="text-sm text-red-500">* {errors.waktu.message}</p>
+        )}
       </div>
       <div className="my-4 flex justify-center gap-4">
         <ButtonCancel className="w-36 lg:w-40" iconLeft onClick={onClose} />

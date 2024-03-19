@@ -43,7 +43,11 @@ export const SelectMahasiswa = ({ onClose }) => {
       />
       <div className="flex justify-center gap-6">
         <ButtonCancel iconLeft onClick={onClose} />
-        <ButtonSave iconLeft disabled={isLoadingAnggotaMahasiswaPenelitian} />
+        <ButtonSave
+          iconLeft
+          disabled={isLoadingAnggotaMahasiswaPenelitian}
+          isLoading={isLoadingAnggotaMahasiswaPenelitian}
+        />
       </div>
     </form>
   );

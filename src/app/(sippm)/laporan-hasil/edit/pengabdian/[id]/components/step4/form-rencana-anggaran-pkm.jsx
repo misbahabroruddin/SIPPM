@@ -5,7 +5,6 @@ import { useForm } from "react-hook-form";
 import { Input } from "@/components/input/input";
 import { ButtonCancel } from "@/components/button/button-cancel";
 import { ButtonSave } from "@/components/button/button-save";
-import { useQueryDetailRencanaAnggaranLaporanHasilPKM } from "@/handlers/dosen/laporan-hasil/pengabdian/rencana-anggaran/query-detail-rencana-anggarand-pkm";
 import { useAddEditRencanaAnggaranLaporanHasilPKM } from "@/handlers/dosen/laporan-hasil/pengabdian/rencana-anggaran/add-edit-rencana-anggaran-pkm";
 import { useEffect } from "react";
 
@@ -45,6 +44,7 @@ export const FormRencanaAnggaranPKM = ({ onClose, id, data }) => {
         errors={errors.rincian}
         required
         defaultValue={data?.rincian}
+        spanEmptyClass="hidden"
       />
       <Input
         containerClass="flex-col items-start gap-2"
@@ -59,10 +59,16 @@ export const FormRencanaAnggaranPKM = ({ onClose, id, data }) => {
         errors={errors.biaya}
         required
         defaultValue={data?.biaya}
+        spanEmptyClass="hidden"
       />
       <div className="my-2 flex justify-center gap-4">
         <ButtonCancel className="w-36 lg:w-40" iconLeft onClick={onClose} />
-        <ButtonSave className="w-36 lg:w-40" iconLeft disabled={isPending} />
+        <ButtonSave
+          className="w-36 lg:w-40"
+          iconLeft
+          disabled={isPending}
+          isLoading={isPending}
+        />
       </div>
     </form>
   );

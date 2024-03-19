@@ -46,8 +46,9 @@ export const FormTambahMahasiswa = ({ onClose }) => {
         name="nik"
         register={register("nik", { required: "Wajib diisi" })}
         errors={errors.nik}
-        placeholder="NIK"
+        placeholder="Nomor Induk Kepegawaian"
         required
+        spanEmptyClass="hidden"
       />
       <Input
         label="Nama Lengkap"
@@ -58,6 +59,7 @@ export const FormTambahMahasiswa = ({ onClose }) => {
         errors={errors.nama_lengkap}
         placeholder="Nama Lengkap"
         required
+        spanEmptyClass="hidden"
       />
       <Input
         label="Perguruan Tinggi"
@@ -66,6 +68,7 @@ export const FormTambahMahasiswa = ({ onClose }) => {
         errors={errors.perguruan_tinggi}
         placeholder="Perguruan Tinggi"
         required
+        spanEmptyClass="hidden"
       />
       <Input
         label="NIM"
@@ -74,6 +77,7 @@ export const FormTambahMahasiswa = ({ onClose }) => {
         register={register("nidn_or_nidk_or_nim", { required: "Wajib diisi" })}
         errors={errors.nidn_or_nidk_or_nim}
         required
+        spanEmptyClass="hidden"
       />
       <SingleSelect
         label={"Program Studi"}
@@ -101,6 +105,7 @@ export const FormTambahMahasiswa = ({ onClose }) => {
         })}
         errors={errors.email}
         required
+        spanEmptyClass="hidden"
       />
       <Input
         label="Nomor hp"
@@ -109,6 +114,7 @@ export const FormTambahMahasiswa = ({ onClose }) => {
         register={register("nomor_hp")}
         errors={errors.nomor_hp}
         required
+        spanEmptyClass="hidden"
       />
       <Input
         label="ID Sinta"
@@ -116,6 +122,7 @@ export const FormTambahMahasiswa = ({ onClose }) => {
         placeholder="ID Sinta"
         register={register("sinta_id")}
         errors={errors.sinta_id}
+        spanEmptyClass="hidden"
       />
       <Input
         label="ID Goggle Scholar"
@@ -123,10 +130,11 @@ export const FormTambahMahasiswa = ({ onClose }) => {
         placeholder="ID Goggle Scholar"
         register={register("google_scholar_id")}
         errors={errors.google_scholar_id}
+        spanEmptyClass="hidden"
       />
       <div className="mt-6 flex justify-center gap-6">
         <ButtonCancel iconLeft onClick={onClose} />
-        <ButtonSave iconLeft disabled={isPending} />
+        <ButtonSave iconLeft disabled={isPending} isLoading={isPending} />
       </div>
     </form>
   );

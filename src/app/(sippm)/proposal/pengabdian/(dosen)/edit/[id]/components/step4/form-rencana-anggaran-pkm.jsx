@@ -42,6 +42,7 @@ export const FormRencanaAnggaranPKM = ({ onClose, id }) => {
         errors={errors.rincian}
         required
         defaultValue={data?.rincian}
+        spanEmptyClass="hidden"
       />
       <Input
         containerClass="flex-col items-start gap-2"
@@ -56,10 +57,16 @@ export const FormRencanaAnggaranPKM = ({ onClose, id }) => {
         errors={errors.biaya}
         required
         defaultValue={data?.biaya}
+        spanEmptyClass="hidden"
       />
       <div className="my-2 flex justify-center gap-4">
         <ButtonCancel className="w-36 lg:w-40" iconLeft onClick={onClose} />
-        <ButtonSave className="w-36 lg:w-40" iconLeft disabled={isPending} />
+        <ButtonSave
+          className="w-36 lg:w-40"
+          iconLeft
+          disabled={isPending}
+          isLoading={isPending}
+        />
       </div>
     </form>
   );

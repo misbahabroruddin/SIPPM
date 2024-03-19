@@ -14,6 +14,7 @@ import { useAddEditRincianKegiatanLaporanHasilPKM } from "@/handlers/dosen/lapor
 export const FormRincianKegiatanPKM = ({ onClose, id }) => {
   const [startDate, setStartDate] = useState();
   const [endDate, setEndDate] = useState(null);
+  const [isDisabled, setIsDisabled] = useState(false);
 
   const {
     register,
@@ -57,6 +58,7 @@ export const FormRincianKegiatanPKM = ({ onClose, id }) => {
         errors={errors.kegiatan}
         required
         defaultValue={data?.kegiatan}
+        spanEmptyClass="hidden"
       />
       <div className="flex w-full flex-col gap-2">
         <Label htmlFor={"waktu"} text="Waktu" required className="text-start" />
@@ -68,6 +70,13 @@ export const FormRincianKegiatanPKM = ({ onClose, id }) => {
               calendarIconClassname="bg-sky h-fit w-fit -top-2"
               onChange={(dates) => {
                 const [start, end] = dates;
+
+                if (!end) {
+                  setIsDisabled(true);
+                } else {
+                  setIsDisabled(false);
+                }
+
                 setStartDate(start);
                 setEndDate(end);
                 onChange(dates);
@@ -101,7 +110,12 @@ export const FormRincianKegiatanPKM = ({ onClose, id }) => {
       </div>
       <div className="my-4 flex justify-center gap-4">
         <ButtonCancel className="w-36 lg:w-40" iconLeft onClick={onClose} />
-        <ButtonSave className="w-36 lg:w-40" iconLeft disabled={isPending} />
+        <ButtonSave
+          className="w-36 lg:w-40"
+          iconLeft
+          disabled={isDisabled || isLoadingSubmit}
+          isLoading={isLoadingSubmit}
+        />
       </div>
     </form>
   );
