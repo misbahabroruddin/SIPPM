@@ -28,7 +28,9 @@ export const ModalDetailAnggotaDosen = ({ id }) => {
         containerClassName={"w-[300px] sm:w-[400px] md:w-[600px] lg:w-[700px]"}
       >
         <div className="flex flex-col justify-start gap-4">
-          <h2 className="font-semibold text-primary">Detail Dosen</h2>
+          <h2 className="text-center text-lg font-semibold text-primary">
+            Detail Dosen
+          </h2>
           <button
             className="absolute right-3 top-2 rounded-full bg-red-06 px-[6px] text-sm text-white"
             onClick={() => setOpenModal(false)}
