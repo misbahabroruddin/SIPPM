@@ -85,9 +85,12 @@ const DataTable = ({
         <tbody>
           {table?.getRowModel().rows?.length ? (
             table?.getRowModel()?.rows.map((row) => (
-              <tr key={row.id} className="text-base even:bg-sky">
+              <tr
+                key={row.id}
+                className="text-base even:bg-sky hover:bg-[#E0F4FF]"
+              >
                 {row.getVisibleCells().map((cell, index) => (
-                  <td key={index} className="px-6 py-3 first:text-center">
+                  <td key={index} className="px-6 py-3 first:text-center ">
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
                   </td>
                 ))}
