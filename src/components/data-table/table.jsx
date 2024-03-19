@@ -43,7 +43,7 @@ const DataTable = ({
 
   return (
     <>
-      <table className="w-full table-auto overflow-hidden rounded-t-lg text-left !font-poppins">
+      <table className="w-full table-fixed overflow-hidden rounded-t-lg text-left !font-poppins">
         <thead className="rounded-lg">
           {table?.getHeaderGroups().map((group, index) => {
             return (
