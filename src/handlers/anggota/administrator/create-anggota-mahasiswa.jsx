@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 
 import { useAxios } from "@/lib/hooks/useAxios";
 
-export const useAdministratorCreateAnggotaMahasiswa = () => {
+export const useAdministratorCreateAnggotaMahasiswa = (reset) => {
   const axios = useAxios();
   const queryClient = useQueryClient();
 
@@ -24,6 +24,7 @@ export const useAdministratorCreateAnggotaMahasiswa = () => {
       formData.append("google_scholar_id", form.google_scholar_id);
       formData.append("jenis_anggota", "Mahasiswa");
       const { data } = await axios.post(`/anggotas`, formData);
+      reset();
       return data;
     } catch (error) {
       if (error.response?.data.message.nik) {
