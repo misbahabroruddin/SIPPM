@@ -55,6 +55,12 @@ export const useUploadBerkasLaporanHasilPenelitian = (router) => {
         queryClient.resetQueries({
           queryKey: ["rincianKegiatanLaporanHasilPenelitian"],
         });
+        queryClient.resetQueries({
+          queryKey: ["detailRincianKegiatanPenelitian"],
+        });
+        queryClient.resetQueries({
+          queryKey: ["detailRincianKegiatanPKM"],
+        });
       },
     },
   );

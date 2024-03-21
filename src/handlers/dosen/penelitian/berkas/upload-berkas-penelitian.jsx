@@ -60,6 +60,18 @@ export const useUploadBerkasPenelitian = (router) => {
         queryClient.resetQueries({
           queryKey: ["rincianKegiatanPenelitian"],
         });
+        queryClient.resetQueries({
+          queryKey: ["detailRencanaAnggaranPenelitian"],
+        });
+        queryClient.resetQueries({
+          queryKey: ["detailRencanaAnggaranPKM"],
+        });
+        queryClient.resetQueries({
+          queryKey: ["detailRincianKegiatanPenelitian"],
+        });
+        queryClient.resetQueries({
+          queryKey: ["detailRincianKegiatanPKM"],
+        });
       },
     },
   );

@@ -61,6 +61,12 @@ export const useDeletePengabdianDosen = () => {
         queryClient.resetQueries({
           queryKey: ["identitas-usulan-pkm"],
         });
+        queryClient.resetQueries({
+          queryKey: ["detailRencanaAnggaranPKM"],
+        });
+        queryClient.resetQueries({
+          queryKey: ["detailRincianKegiatanPKM"],
+        });
       },
     });
 

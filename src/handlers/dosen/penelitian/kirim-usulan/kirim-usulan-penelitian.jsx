@@ -28,6 +28,24 @@ export const useKirimUsulanPenelitian = () => {
       queryClient.resetQueries({
         queryKey: ["anggotaDosen"],
       });
+      queryClient.resetQueries({
+        queryKey: ["rencanaAnggaranPenelitian"],
+      });
+      queryClient.resetQueries({
+        queryKey: ["rincianKegiatanPenelitian"],
+      });
+      queryClient.resetQueries({
+        queryKey: ["detailRencanaAnggaranPenelitian"],
+      });
+      queryClient.resetQueries({
+        queryKey: ["detailRencanaAnggaranPKM"],
+      });
+      queryClient.resetQueries({
+        queryKey: ["detailRincianKegiatanPenelitian"],
+      });
+      queryClient.resetQueries({
+        queryKey: ["detailRincianKegiatanPKM"],
+      });
     } catch (error) {
       toast.error(error.message);
     }
