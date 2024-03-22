@@ -39,7 +39,7 @@ export const useAdministratorUpdateAnggotaDosen = (id) => {
       } else if (error.response?.data.message.nomor_hp) {
         return toast.error(error.response.data.message.nomor_hp[0]);
       }
-      toast.error(error.message);
+      toast.error(error.response.data.message);
     }
   };
 

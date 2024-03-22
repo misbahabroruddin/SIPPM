@@ -23,7 +23,7 @@ export const useAdministratorUpdateAnggotaMahasiswa = (id) => {
       formData.append("sinta_id", form.sinta_id);
       formData.append("google_scholar_id", form.google_scholar_id);
       formData.append("jenis_anggota", "Mahasiswa");
-      const { data } = await axios.post(`/anggotas${id}`, formData);
+      const { data } = await axios.post(`/anggotas/${id}`, formData);
       return data;
     } catch (error) {
       if (error.response?.data.message.nik) {
@@ -33,7 +33,7 @@ export const useAdministratorUpdateAnggotaMahasiswa = (id) => {
       } else if (error.response?.data.message.nomor_hp) {
         return toast.error(error.response.data.message.nomor_hp[0]);
       }
-      toast.error(error.message);
+      toast.error(error.response.data.message);
     }
   };
 
