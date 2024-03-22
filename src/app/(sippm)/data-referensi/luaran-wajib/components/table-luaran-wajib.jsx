@@ -11,6 +11,9 @@ import { ModalTrashLuaranWajib } from "./modal-trash-luaran-wajib";
 import { ModalTambahLuaranWajib } from "./modal-tambah-luaran-wajib";
 import { useImportLuaranWajib } from "@/handlers/data-referensi/luaran-wajib/administrator/import-luaran-wajib";
 import { useQueryListingLuaranWajib } from "@/handlers/data-referensi/luaran-wajib/administrator/query-get-all-luaran-wajib";
+import { useExportLuaranWajib } from "@/handlers/data-referensi/luaran-wajib/administrator/export-luaran-wajib";
+import FileSaver from "file-saver";
+import { ButtonExport } from "@/components/button/button-export";
 
 export const TableLuaranWajib = () => {
   const [search, setSearch] = useState("");
@@ -20,6 +23,13 @@ export const TableLuaranWajib = () => {
   });
   const columns = useColumnTableLuaranWajib();
   const { mutateAsync: onImportFile } = useImportLuaranWajib();
+
+  const { data: dataLuaranWajib, refetch } = useExportLuaranWajib();
+
+  const handleExport = async () => {
+    await refetch();
+    FileSaver.saveAs(dataLuaranWajib, "luaran-wajib.xlsx");
+  };
 
   const handleImport = async (e) => {
     const file = e.target.files[0];
@@ -53,6 +63,7 @@ export const TableLuaranWajib = () => {
         <div className="flex gap-2">
           <ModalTrashLuaranWajib />
           <InputFileImport onChange={handleImport} />
+          <ButtonExport onClick={handleExport} />
           <ModalTambahLuaranWajib />
         </div>
       </div>

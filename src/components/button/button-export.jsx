@@ -1,23 +1,15 @@
 "use client";
 
-import FileSaver from "file-saver";
 import { twMerge } from "tailwind-merge";
 
-export const ButtonExport = ({ data, className, ...props }) => {
-  const handleExport = () => {
-    const blob = new Blob([data], {
-      type: "text/csv",
-    });
-    FileSaver.saveAs(blob, "data-referensi-jabatan-fungsional.csv");
-  };
-
+export const ButtonExport = ({ className, onClick, ...props }) => {
   return (
     <button
       className={twMerge(
         "flex items-center gap-2 rounded bg-secondary px-4 py-2 text-white disabled:cursor-not-allowed disabled:bg-gray-500",
         className,
       )}
-      onClick={handleExport}
+      onClick={onClick}
       {...props}
     >
       <svg

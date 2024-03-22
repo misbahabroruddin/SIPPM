@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import { useDebouncedCallback } from "use-debounce";
+import FileSaver from "file-saver";
 
 import DataTable from "@/components/data-table/table";
 import { SearchInput } from "@/components/input/search-input";
@@ -11,6 +12,8 @@ import { ModalTambahKabupaten } from "./modal-tambah-kabupaten";
 import { useImportKabupaten } from "@/handlers/data-referensi/kabupaten/administator/import-kabupaten";
 import { ModalTrashKabupaten } from "./modal-trash-kabupaten";
 import { InputFileImport } from "@/components/input/input-file-import";
+import { useExportKabupaten } from "@/handlers/data-referensi/kabupaten/administator/export-kabupaten";
+import { ButtonExport } from "@/components/button/button-export";
 
 export const TableKabupaten = () => {
   const [search, setSearch] = useState("");
@@ -20,6 +23,13 @@ export const TableKabupaten = () => {
   });
   const columns = useColumnTableKabupaten();
   const { mutateAsync: onImportFile } = useImportKabupaten();
+
+  const { data: dataKabupaten, refetch } = useExportKabupaten();
+
+  const handleExport = async () => {
+    await refetch();
+    FileSaver.saveAs(dataKabupaten, "kabupaten.xlsx");
+  };
 
   const handleImport = async (e) => {
     const file = e.target.files[0];
@@ -53,6 +63,7 @@ export const TableKabupaten = () => {
         <div className="flex gap-2">
           <ModalTrashKabupaten />
           <InputFileImport onChange={handleImport} />
+          <ButtonExport onClick={handleExport} />
           <ModalTambahKabupaten />
         </div>
       </div>

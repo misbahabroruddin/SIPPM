@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import { useDebouncedCallback } from "use-debounce";
+import FileSaver from "file-saver";
 
 import DataTable from "@/components/data-table/table";
 import { SearchInput } from "@/components/input/search-input";
@@ -11,6 +12,8 @@ import { useImportBidangIlmu } from "@/handlers/data-referensi/bidang-ilmu/admin
 import { ModalTambahBidangIlmu } from "./modal-tambah-bidang-ilmu";
 import { ModalTrashBidangIlmu } from "./modal-trash-bidang-ilmu";
 import { SkeletonTableDataRefensi } from "@/components/skeleton/skeleton-table-data-refensi";
+import { useExportBidangIlmu } from "@/handlers/data-referensi/bidang-ilmu/administrator/export-bidang-ilmu";
+import { ButtonExport } from "@/components/button/button-export";
 
 export const TableBidangIlmu = () => {
   const [search, setSearch] = useState("");
@@ -20,6 +23,13 @@ export const TableBidangIlmu = () => {
   });
   const columns = useColumnTableBidangIlmu();
   const { mutateAsync: onImportFile } = useImportBidangIlmu();
+
+  const { data: dataBidangIlmu, refetch } = useExportBidangIlmu();
+
+  const handleExport = async () => {
+    await refetch();
+    FileSaver.saveAs(dataBidangIlmu, "bidang-ilmu.xlsx");
+  };
 
   const handleImport = async (e) => {
     const file = e.target.files[0];
@@ -53,6 +63,7 @@ export const TableBidangIlmu = () => {
         <div className="flex gap-2">
           <ModalTrashBidangIlmu />
           <InputFileImport onChange={handleImport} />
+          <ButtonExport onClick={handleExport} />
           <ModalTambahBidangIlmu />
         </div>
       </div>

@@ -19,8 +19,6 @@ export const SidebarMobile = () => {
   const menus = useSidebarMenu(session);
   const [open, setOpen] = useState(null);
 
-  console.log(isSidebarMobileOpen);
-
   useEffect(() => {
     if (pathname.includes("/data-referensi")) {
       return setOpen("/data-referensi");

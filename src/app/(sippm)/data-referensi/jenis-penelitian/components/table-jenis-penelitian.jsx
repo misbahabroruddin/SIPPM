@@ -1,16 +1,19 @@
 "use client";
+import { useDebouncedCallback } from "use-debounce";
+import FileSaver from "file-saver";
 import { useState } from "react";
 
 import DataTable from "@/components/data-table/table";
 import { SearchInput } from "@/components/input/search-input";
 import { InputFileImport } from "@/components/input/input-file-import";
 import { useColumnTableJenisPenelitian } from "./column-table";
-import { useDebouncedCallback } from "use-debounce";
 import { SkeletonTableDataRefensi } from "@/components/skeleton/skeleton-table-data-refensi";
 import { useImportJenisPenelitian } from "@/handlers/data-referensi/jenis-penelitian/administrator/import-jenis-penelitian";
 import { useQueryListingJenisPenelitian } from "@/handlers/data-referensi/jenis-penelitian/administrator/query-get-all-jenis-penelitian";
 import { ModalTrashJenisPenelitian } from "./modal-trash-jenis-penelitian";
 import { ModalTambahJenisPenelitian } from "./modal-tambah-jenis-penelitian";
+import { ButtonExport } from "@/components/button/button-export";
+import { useExportJenisPenelitian } from "@/handlers/data-referensi/jenis-penelitian/administrator/export-jenis-penelitian";
 
 export const TableJenisPenelitian = () => {
   const [search, setSearch] = useState("");
@@ -20,6 +23,13 @@ export const TableJenisPenelitian = () => {
   });
   const columns = useColumnTableJenisPenelitian();
   const { mutateAsync: onImportFile } = useImportJenisPenelitian();
+
+  const { data: dataJenisPenelitian, refetch } = useExportJenisPenelitian();
+
+  const handleExport = async () => {
+    await refetch();
+    FileSaver.saveAs(dataJenisPenelitian, "jabatan-fungsional.xlsx");
+  };
 
   const handleImport = async (e) => {
     const file = e.target.files[0];
@@ -53,6 +63,7 @@ export const TableJenisPenelitian = () => {
         <div className="flex gap-2">
           <ModalTrashJenisPenelitian />
           <InputFileImport onChange={handleImport} />
+          <ButtonExport onClick={handleExport} />
           <ModalTambahJenisPenelitian />
         </div>
       </div>

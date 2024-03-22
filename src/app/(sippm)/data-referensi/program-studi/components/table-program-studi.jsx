@@ -11,6 +11,9 @@ import { SkeletonTableDataRefensi } from "@/components/skeleton/skeleton-table-d
 import { useImportProgramStudi } from "@/handlers/data-referensi/program-studi/administrator/import-program-studi";
 import { useQueryListingProgramStudi } from "@/handlers/data-referensi/program-studi/administrator/query-get-all-program-studi";
 import { ModalTambahProgramStudi } from "./modal-tambah-program-studi";
+import FileSaver from "file-saver";
+import { useExportProgramStudi } from "@/handlers/data-referensi/program-studi/administrator/export-program-studi";
+import { ButtonExport } from "@/components/button/button-export";
 
 export const TableProgramStudi = () => {
   const [search, setSearch] = useState("");
@@ -20,6 +23,13 @@ export const TableProgramStudi = () => {
   });
   const columns = useColumnTableProgramStudi();
   const { mutateAsync: onImportFile } = useImportProgramStudi();
+
+  const { data: dataProgramStudi, refetch } = useExportProgramStudi();
+
+  const handleExport = async () => {
+    await refetch();
+    FileSaver.saveAs(dataProgramStudi, "program-studi.xlsx");
+  };
 
   const handleImport = async (e) => {
     const file = e.target.files[0];
@@ -53,6 +63,7 @@ export const TableProgramStudi = () => {
         <div className="flex gap-2">
           <ModalTrashProgramStudi />
           <InputFileImport onChange={handleImport} />
+          <ButtonExport onClick={handleExport} />
           <ModalTambahProgramStudi />
         </div>
       </div>

@@ -1,5 +1,7 @@
 "use client";
 import { useState } from "react";
+import FileSaver from "file-saver";
+import { useDebouncedCallback } from "use-debounce";
 
 import DataTable from "@/components/data-table/table";
 import { useQueryListingJabatanFungsional } from "@/handlers/data-referensi/jabatan-fungsional/administrator/query-get-all-jabatan-fungsional";
@@ -8,9 +10,10 @@ import { InputFileImport } from "@/components/input/input-file-import";
 import { ModalTambahJabatanFungsional } from "./modal-tambah-jabatan-fungsional";
 import { useImportJabatanFungsional } from "@/handlers/data-referensi/jabatan-fungsional/administrator/import-jabatan-fungsional";
 import { useColumnTableJabatanFungsional } from "./column-table";
-import { useDebouncedCallback } from "use-debounce";
 import { ModalTrashJabatanFungsional } from "./modal-trash-jabatan-fungsional";
 import { SkeletonTableDataRefensi } from "@/components/skeleton/skeleton-table-data-refensi";
+import { ButtonExport } from "@/components/button/button-export";
+import { useExportJabatanFungsional } from "@/handlers/data-referensi/jabatan-fungsional/administrator/export-jabatan-fungsional";
 
 export const TableJabatanFungsional = () => {
   const [search, setSearch] = useState("");
@@ -20,6 +23,13 @@ export const TableJabatanFungsional = () => {
   });
   const columns = useColumnTableJabatanFungsional();
   const { mutateAsync: onImportFile } = useImportJabatanFungsional();
+
+  const { data: dataJabatanFungsional, refetch } = useExportJabatanFungsional();
+
+  const handleExport = async () => {
+    await refetch();
+    FileSaver.saveAs(dataJabatanFungsional, "jabatan-fungsional.xlsx");
+  };
 
   const handleImport = async (e) => {
     const file = e.target.files[0];
@@ -53,6 +63,7 @@ export const TableJabatanFungsional = () => {
         <div className="flex gap-2">
           <ModalTrashJabatanFungsional />
           <InputFileImport onChange={handleImport} />
+          <ButtonExport onClick={handleExport} />
           <ModalTambahJabatanFungsional />
         </div>
       </div>

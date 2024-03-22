@@ -15,7 +15,7 @@ const SidebarContext = createContext();
 export const SidebarProvider = ({ children }) => {
   const [isOpen, setIsOpen] = useState(true);
   const [isSidebarMobileOpen, setIsSidebarMobileOpen] = useState(false);
-  const [windowSize, setWindowSize] = useState(window.screen.width);
+  const [windowSize, setWindowSize] = useState(null);
 
   const toggleSidebar = useCallback(() => {
     setIsOpen((prev) => !prev);

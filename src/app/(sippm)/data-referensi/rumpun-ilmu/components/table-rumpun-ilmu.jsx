@@ -11,6 +11,9 @@ import { ModalTrashRumpunIlmu } from "./modal-trash-rumpun-ilmu";
 import { ModalTambahRumpunIlmu } from "./modal-tambah-rumpun-ilmu";
 import { useImportRumpunIlmu } from "@/handlers/data-referensi/rumpun-ilmu/administrator/import-rumpun-ilmu";
 import { useQueryListingRumpunIlmu } from "@/handlers/data-referensi/rumpun-ilmu/administrator/query-get-all-rumpun-ilmu";
+import { useExportRumpunIlmu } from "@/handlers/data-referensi/rumpun-ilmu/administrator/export-rumpun-ilmu";
+import { ButtonExport } from "@/components/button/button-export";
+import FileSaver from "file-saver";
 
 export const TableRumpunIlmu = () => {
   const [search, setSearch] = useState("");
@@ -20,6 +23,13 @@ export const TableRumpunIlmu = () => {
   });
   const columns = useColumnTableRumpunIlmu();
   const { mutateAsync: onImportFile } = useImportRumpunIlmu();
+
+  const { data: dataRumpunIlmu, refetch } = useExportRumpunIlmu();
+
+  const handleExport = async () => {
+    await refetch();
+    FileSaver.saveAs(dataRumpunIlmu, "rumpun-ilmu.xlsx");
+  };
 
   const handleImport = async (e) => {
     const file = e.target.files[0];
@@ -53,6 +63,7 @@ export const TableRumpunIlmu = () => {
         <div className="flex gap-2">
           <ModalTrashRumpunIlmu />
           <InputFileImport onChange={handleImport} />
+          <ButtonExport onClick={handleExport} />
           <ModalTambahRumpunIlmu />
         </div>
       </div>
