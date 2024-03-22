@@ -1,6 +1,12 @@
 "use client";
 
-import React, { createContext, useContext, useState, useCallback } from "react";
+import React, {
+  createContext,
+  useContext,
+  useState,
+  useCallback,
+  useEffect,
+} from "react";
 
 // Create a context
 const SidebarContext = createContext();
@@ -8,13 +14,40 @@ const SidebarContext = createContext();
 // Create a context provider
 export const SidebarProvider = ({ children }) => {
   const [isOpen, setIsOpen] = useState(true);
+  const [isSidebarMobileOpen, setIsSidebarMobileOpen] = useState(false);
+  const [windowSize, setWindowSize] = useState(window.screen.width);
 
   const toggleSidebar = useCallback(() => {
     setIsOpen((prev) => !prev);
   }, []);
 
+  const toggleSidebarMobile = useCallback(() => {
+    setIsSidebarMobileOpen((prev) => !prev);
+  }, []);
+
+  useEffect(() => {
+    window.addEventListener("resize", () => {
+      if (windowSize >= 990) {
+        setWindowSize(window.innerWidth);
+        setIsOpen(true);
+        setIsSidebarMobileOpen(false);
+      } else {
+        setWindowSize(window.innerWidth);
+        setIsOpen(false);
+        setIsSidebarMobileOpen(false);
+      }
+    });
+  }, [windowSize]);
+
   return (
-    <SidebarContext.Provider value={{ isOpen, toggleSidebar }}>
+    <SidebarContext.Provider
+      value={{
+        isOpen,
+        toggleSidebar,
+        isSidebarMobileOpen,
+        toggleSidebarMobile,
+      }}
+    >
       {children}
     </SidebarContext.Provider>
   );

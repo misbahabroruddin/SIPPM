@@ -64,40 +64,44 @@ const Chevron = ({ onClick, ...props }) => {
   );
 };
 
-export const Navbar = () => {
-  const { isOpen, toggleSidebar } = useSidebar();
+export const NavbarMobile = () => {
+  const { isSidebarMobileOpen, toggleSidebarMobile } = useSidebar();
+
   return (
-    <nav className="r-0  fixed top-0 z-[999] hidden w-full bg-white shadow lg:block">
+    <nav className="r-0 fixed top-0 z-[999] block w-full bg-white shadow lg:hidden">
       <div className="flex items-center justify-between px-7 py-4">
         <div
           className={twMerge(
-            "flex w-[236px] items-center justify-start gap-2 px-2 transition-all duration-200 lg:gap-3",
-            isOpen ? "lg:justify-between" : "",
+            "flex w-[236px] items-center justify-start gap-2 px-2 transition-all duration-200",
+            isSidebarMobileOpen ? "justify-between" : "",
           )}
         >
-          {isOpen ? (
+          {isSidebarMobileOpen ? (
             <>
               <Link href="/" className="transition-all duration-200">
                 <div className="flex items-center gap-3">
                   <Image
                     src="/unsia.png"
-                    className="hidden w-[92px] lg:block"
+                    className="block w-[92px] lg:hidden"
                     width={92}
                     height={100}
                     alt="UNSIA"
                   />
                   <Image
                     src="/logo-unsia.svg"
-                    className="block w-6 lg:hidden"
+                    className="hidden w-6 lg:block"
                     width={25}
                     height={25}
                     alt="UNSIA"
                   />
                 </div>
               </Link>
-              <Chevron onClick={toggleSidebar} className="hidden lg:block " />
-              <HamburgerMenu
-                onClick={toggleSidebar}
+              <Chevron
+                onClick={toggleSidebarMobile}
+                className="hidden lg:block "
+              />
+              <Chevron
+                onClick={toggleSidebarMobile}
                 className="block lg:hidden"
               />
             </>
@@ -124,7 +128,7 @@ export const Navbar = () => {
                   />
                 </div>
               </Link>
-              <HamburgerMenu onClick={toggleSidebar} />
+              <HamburgerMenu onClick={toggleSidebarMobile} />
             </>
           )}
         </div>
@@ -140,43 +144,6 @@ export const Navbar = () => {
             >
               Sign out
             </button>
-            <div className="cursor-pointer px-1 py-[2px]">
-              <Image
-                className="hidden w-auto"
-                src="/icons/notif.svg"
-                width={19}
-                height={16}
-                alt="notif"
-              />
-            </div>
-            <div className="mx-4 flex cursor-pointer gap-1 px-1 py-[2px] ">
-              <Image
-                className="hidden w-auto"
-                src="/icons/globe.svg"
-                width={19}
-                height={16}
-                alt="notif"
-              />
-              <div className=" hidden items-center">
-                <p className="text-xl font-[500] text-[#666666]">EN</p>
-              </div>
-              <Image
-                src="/icons/arrow.svg"
-                width={12}
-                height={7}
-                alt="notif"
-                className="hidden"
-              />
-            </div>
-            <div className="cursor-pointer px-1 py-[2px]">
-              <Image
-                className="hidden w-auto"
-                src="/icons/setting.svg"
-                width={19}
-                height={16}
-                alt="notif"
-              />
-            </div>
           </div>
         </div>
       </div>
