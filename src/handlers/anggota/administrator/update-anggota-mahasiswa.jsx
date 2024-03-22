@@ -11,18 +11,18 @@ export const useAdministratorUpdateAnggotaMahasiswa = (id) => {
 
   const updateAnggotaMahasiswa = async (form) => {
     try {
-      const formData = new FormData();
-      formData.append("nik", form.nik);
-      formData.append("nama_lengkap", form.nama_lengkap);
-      formData.append("perguruan_tinggi", form.perguruan_tinggi);
-      formData.append("nidn_or_nidk_or_nim", form.nidn_or_nidk_or_nim);
-      formData.append("jabatan_fungsional_id", form.jabatan_fungsional_id);
-      formData.append("program_studi_id", form.program_studi_id);
-      formData.append("email", form.email);
-      formData.append("nomor_hp", form.nomor_hp);
-      formData.append("sinta_id", form.sinta_id);
-      formData.append("google_scholar_id", form.google_scholar_id);
-      formData.append("jenis_anggota", "Mahasiswa");
+      const formData = {
+        nik: form.nik,
+        nama_lengkap: form.nama_lengkap,
+        perguruan_tinggi: form.perguruan_tinggi,
+        nidn_or_nidk_or_nim: form.nidn_or_nidk_or_nim,
+        program_studi_id: form.program_studi_id,
+        email: form.email,
+        nomor_hp: form.nomor_hp,
+        sinta_id: form.sinta_id,
+        google_scholar_id: form.google_scholar_id,
+        jenis_anggota: "Mahasiswa",
+      };
       const { data } = await axios.put(`/anggotas/${id}`, formData);
       return data;
     } catch (error) {
