@@ -67,14 +67,14 @@ export const SidebarMobile = () => {
                     alt="chevron"
                     className={twMerge(
                       "transition-all",
-                      open ? "rotate-90" : "",
+                      open === menu.link ? "rotate-90" : "",
                     )}
                   />
                 </button>
                 <ul
                   className={twMerge(
                     "ease-in-ou mt-1 flex flex-col gap-1 overflow-hidden transition duration-500",
-                    open
+                    open === menu.link
                       ? "h-auto transition-transform"
                       : "h-0 transition-transform",
                   )}
