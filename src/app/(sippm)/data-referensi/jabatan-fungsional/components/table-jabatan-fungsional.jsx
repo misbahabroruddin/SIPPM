@@ -24,7 +24,11 @@ export const TableJabatanFungsional = () => {
   const columns = useColumnTableJabatanFungsional();
   const { mutateAsync: onImportFile } = useImportJabatanFungsional();
 
-  const { data: dataJabatanFungsional, refetch } = useExportJabatanFungsional();
+  const {
+    data: dataJabatanFungsional,
+    refetch,
+    isLoading: isLoadingJabatanFungsional,
+  } = useExportJabatanFungsional();
 
   const handleExport = async () => {
     await refetch();
@@ -63,7 +67,10 @@ export const TableJabatanFungsional = () => {
         <div className="flex gap-2">
           <ModalTrashJabatanFungsional />
           <InputFileImport onChange={handleImport} />
-          <ButtonExport onClick={handleExport} />
+          <ButtonExport
+            onClick={handleExport}
+            isLoading={isLoadingJabatanFungsional}
+          />
           <ModalTambahJabatanFungsional />
         </div>
       </div>

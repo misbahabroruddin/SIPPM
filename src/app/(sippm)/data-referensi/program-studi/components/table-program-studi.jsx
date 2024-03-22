@@ -24,7 +24,11 @@ export const TableProgramStudi = () => {
   const columns = useColumnTableProgramStudi();
   const { mutateAsync: onImportFile } = useImportProgramStudi();
 
-  const { data: dataProgramStudi, refetch } = useExportProgramStudi();
+  const {
+    data: dataProgramStudi,
+    refetch,
+    isLoading: isLoadingProgramStudi,
+  } = useExportProgramStudi();
 
   const handleExport = async () => {
     await refetch();
@@ -63,7 +67,10 @@ export const TableProgramStudi = () => {
         <div className="flex gap-2">
           <ModalTrashProgramStudi />
           <InputFileImport onChange={handleImport} />
-          <ButtonExport onClick={handleExport} />
+          <ButtonExport
+            onClick={handleExport}
+            isLoading={isLoadingProgramStudi}
+          />
           <ModalTambahProgramStudi />
         </div>
       </div>

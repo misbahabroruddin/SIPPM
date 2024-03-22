@@ -24,7 +24,11 @@ export const TableJenisPenelitian = () => {
   const columns = useColumnTableJenisPenelitian();
   const { mutateAsync: onImportFile } = useImportJenisPenelitian();
 
-  const { data: dataJenisPenelitian, refetch } = useExportJenisPenelitian();
+  const {
+    data: dataJenisPenelitian,
+    refetch,
+    isLoading: isLoadingJenisPenelitian,
+  } = useExportJenisPenelitian();
 
   const handleExport = async () => {
     await refetch();
@@ -63,7 +67,10 @@ export const TableJenisPenelitian = () => {
         <div className="flex gap-2">
           <ModalTrashJenisPenelitian />
           <InputFileImport onChange={handleImport} />
-          <ButtonExport onClick={handleExport} />
+          <ButtonExport
+            onClick={handleExport}
+            isLoading={isLoadingJenisPenelitian}
+          />
           <ModalTambahJenisPenelitian />
         </div>
       </div>

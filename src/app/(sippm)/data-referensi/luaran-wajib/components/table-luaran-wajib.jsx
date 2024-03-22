@@ -24,7 +24,11 @@ export const TableLuaranWajib = () => {
   const columns = useColumnTableLuaranWajib();
   const { mutateAsync: onImportFile } = useImportLuaranWajib();
 
-  const { data: dataLuaranWajib, refetch } = useExportLuaranWajib();
+  const {
+    data: dataLuaranWajib,
+    refetch,
+    isLoading: isLoadingLuaranWajib,
+  } = useExportLuaranWajib();
 
   const handleExport = async () => {
     await refetch();
@@ -63,7 +67,10 @@ export const TableLuaranWajib = () => {
         <div className="flex gap-2">
           <ModalTrashLuaranWajib />
           <InputFileImport onChange={handleImport} />
-          <ButtonExport onClick={handleExport} />
+          <ButtonExport
+            onClick={handleExport}
+            isLoading={isLoadingLuaranWajib}
+          />
           <ModalTambahLuaranWajib />
         </div>
       </div>

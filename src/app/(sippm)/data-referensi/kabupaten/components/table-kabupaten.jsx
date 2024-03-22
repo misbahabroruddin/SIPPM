@@ -24,7 +24,11 @@ export const TableKabupaten = () => {
   const columns = useColumnTableKabupaten();
   const { mutateAsync: onImportFile } = useImportKabupaten();
 
-  const { data: dataKabupaten, refetch } = useExportKabupaten();
+  const {
+    data: dataKabupaten,
+    refetch,
+    isLoading: isLoadingKabupaten,
+  } = useExportKabupaten();
 
   const handleExport = async () => {
     await refetch();
@@ -63,7 +67,7 @@ export const TableKabupaten = () => {
         <div className="flex gap-2">
           <ModalTrashKabupaten />
           <InputFileImport onChange={handleImport} />
-          <ButtonExport onClick={handleExport} />
+          <ButtonExport onClick={handleExport} isLoading={isLoadingKabupaten} />
           <ModalTambahKabupaten />
         </div>
       </div>

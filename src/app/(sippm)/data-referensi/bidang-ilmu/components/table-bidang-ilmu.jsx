@@ -24,7 +24,11 @@ export const TableBidangIlmu = () => {
   const columns = useColumnTableBidangIlmu();
   const { mutateAsync: onImportFile } = useImportBidangIlmu();
 
-  const { data: dataBidangIlmu, refetch } = useExportBidangIlmu();
+  const {
+    data: dataBidangIlmu,
+    refetch,
+    isLoading: isLoadingBidangIlmu,
+  } = useExportBidangIlmu();
 
   const handleExport = async () => {
     await refetch();
@@ -63,7 +67,10 @@ export const TableBidangIlmu = () => {
         <div className="flex gap-2">
           <ModalTrashBidangIlmu />
           <InputFileImport onChange={handleImport} />
-          <ButtonExport onClick={handleExport} />
+          <ButtonExport
+            onClick={handleExport}
+            isLoading={isLoadingBidangIlmu}
+          />
           <ModalTambahBidangIlmu />
         </div>
       </div>

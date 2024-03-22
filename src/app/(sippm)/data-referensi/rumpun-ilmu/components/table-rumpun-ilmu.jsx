@@ -24,7 +24,11 @@ export const TableRumpunIlmu = () => {
   const columns = useColumnTableRumpunIlmu();
   const { mutateAsync: onImportFile } = useImportRumpunIlmu();
 
-  const { data: dataRumpunIlmu, refetch } = useExportRumpunIlmu();
+  const {
+    data: dataRumpunIlmu,
+    refetch,
+    isLoading: isLoadingRumpunIlmu,
+  } = useExportRumpunIlmu();
 
   const handleExport = async () => {
     await refetch();
@@ -63,7 +67,10 @@ export const TableRumpunIlmu = () => {
         <div className="flex gap-2">
           <ModalTrashRumpunIlmu />
           <InputFileImport onChange={handleImport} />
-          <ButtonExport onClick={handleExport} />
+          <ButtonExport
+            onClick={handleExport}
+            isLoading={isLoadingRumpunIlmu}
+          />
           <ModalTambahRumpunIlmu />
         </div>
       </div>
