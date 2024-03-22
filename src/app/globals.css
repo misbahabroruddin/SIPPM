@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .image {
-  background-image: url("/unsia.jpg");
+  background-image: url("/unsia.jpeg");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
