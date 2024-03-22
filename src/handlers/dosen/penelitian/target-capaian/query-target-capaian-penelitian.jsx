@@ -25,7 +25,7 @@ export const useQueryTargetCapaianPenelitian = (setValue) => {
       setValue("nama_jurnal_penerbit", data?.data?.nama_jurnal_penerbit);
       return data;
     } catch (error) {
-      toast.error(error.message);
+      toast.error(error.response.data.message);
     }
   };
 

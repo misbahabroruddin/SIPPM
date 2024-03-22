@@ -29,8 +29,7 @@ export const useQueryGetAllPengabdian = (search, page) => {
         });
         return data.data;
       } catch (error) {
-        toast.error(error.message);
-        a8;
+        toast.error(error.response.data.message);
       }
     },
   });

@@ -22,7 +22,7 @@ export const useDeletePengabdianDosen = () => {
     } catch (error) {
       Swal.fire({
         title: "Error",
-        text: error.message,
+        text: error.response.data.message,
         icon: "error",
         confirmButtonText: "Ok",
       });

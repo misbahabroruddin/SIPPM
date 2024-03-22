@@ -30,7 +30,7 @@ export const useQueryGetAllPenelitian = (search, page) => {
 
         return data.data;
       } catch (error) {
-        toast.error(error.message);
+        toast.error(error.response.data.message);
       }
     },
   });
