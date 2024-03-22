@@ -17,7 +17,7 @@ const DataTable = ({
   setPagination,
 }) => {
   const table = useReactTable({
-    data: data?.data,
+    data: data?.data ?? [],
     columns,
     getCoreRowModel: getCoreRowModel(),
 
@@ -83,7 +83,7 @@ const DataTable = ({
           })}
         </thead>
         <tbody>
-          {table?.getRowModel().rows?.length ? (
+          {table?.getRowModel()?.rows?.length ? (
             table?.getRowModel()?.rows.map((row) => (
               <tr
                 key={row.id}
