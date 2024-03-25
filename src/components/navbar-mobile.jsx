@@ -69,7 +69,7 @@ export const NavbarMobile = () => {
 
   return (
     <nav className="r-0 fixed top-0 z-[999] block w-full bg-white shadow lg:hidden">
-      <div className="flex items-center justify-between px-7 py-4">
+      <div className="flex items-center justify-between px-2 py-3 lg:px-7 lg:py-4">
         <div
           className={twMerge(
             "flex w-[236px] items-center justify-start gap-2 px-2 transition-all duration-200",
@@ -133,7 +133,7 @@ export const NavbarMobile = () => {
           )}
         </div>
         <div className="mr-[7px] block">
-          <div className="flex items-center justify-between p-2">
+          <div className="flex items-center justify-between p-1 lg:p-2">
             <button
               onClick={() =>
                 signOut({ redirect: false }).then(() => {

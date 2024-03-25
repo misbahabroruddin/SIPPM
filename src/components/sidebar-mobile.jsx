@@ -14,7 +14,7 @@ import { twMerge } from "tailwind-merge";
 export const SidebarMobile = () => {
   const pathname = usePathname();
   const page = useSelectedLayoutSegments();
-  const { isSidebarMobileOpen } = useSidebar();
+  const { isSidebarMobileOpen, toggleSidebarMobile } = useSidebar();
   const { data: session } = useSession();
   const menus = useSidebarMenu(session);
   const [open, setOpen] = useState(null);
@@ -33,7 +33,7 @@ export const SidebarMobile = () => {
         ${isSidebarMobileOpen ? "left-0 block duration-300" : "block w-full max-w-[256px] duration-200  lg:-left-full"}
       `}
     >
-      <div className="flex flex-col gap-2 p-4">
+      <div className="flex flex-col gap-2 px-3 py-4 lg:p-4">
         <ProfileSidebar />
         <ul className="flex flex-col gap-1">
           {menus?.map((menu) =>
@@ -78,7 +78,11 @@ export const SidebarMobile = () => {
                   )}
                 >
                   {menu.children.map((child) => (
-                    <li key={child.link} className=" pl-4 transition-transform">
+                    <li
+                      key={child.link}
+                      className=" pl-4 transition-transform"
+                      onClick={toggleSidebarMobile}
+                    >
                       <Link
                         href={child.link}
                         className={`flex items-center gap-2 rounded-lg p-2 text-white hover:bg-secondary ${
@@ -101,7 +105,11 @@ export const SidebarMobile = () => {
                 </ul>
               </li>
             ) : (
-              <li key={menu.link} className="transition-transform">
+              <li
+                key={menu.link}
+                className="transition-transform"
+                onClick={toggleSidebarMobile}
+              >
                 <Link
                   href={menu.link}
                   className={`flex items-center gap-2 rounded-lg p-2 text-white hover:bg-secondary ${
