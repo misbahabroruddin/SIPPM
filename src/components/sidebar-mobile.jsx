@@ -22,6 +22,10 @@ export const SidebarMobile = () => {
   useEffect(() => {
     if (pathname.includes("/data-referensi")) {
       return setOpen("/data-referensi");
+    } else if (pathname.includes("/document")) {
+      return setOpen("/document");
+    } else if (pathname.includes("/anggota")) {
+      return setOpen("/anggota");
     }
 
     setOpen(null);
