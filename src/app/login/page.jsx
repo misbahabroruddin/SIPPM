@@ -106,7 +106,7 @@ export default function Login() {
               <p>Sign-in</p>
             </button>
           </form>
-          <div className="flex flex-col gap-1">
+          {/* <div className="flex flex-col gap-1">
             <p className="text-center text-xs text-gray-600">or</p>
             <button
               onClick={() => signIn("sso")}
@@ -143,7 +143,7 @@ export default function Login() {
               </svg>
               <p className="font-[500]">Sign-in with SSO</p>
             </button>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>
