@@ -31,7 +31,7 @@ export const FormRencanaAnggaranPKM = ({ onClose, id }) => {
       onSubmit={handleSubmit(addEditRencanaAnggaran)}
     >
       <Input
-        containerClass="flex-col items-start gap-2"
+        containerClass="lg:flex-col lg:items-start lg:gap-2"
         labelClass="text-start"
         label="Rincian"
         name={"rincian"}
@@ -45,7 +45,7 @@ export const FormRencanaAnggaranPKM = ({ onClose, id }) => {
         spanEmptyClass="hidden"
       />
       <Input
-        containerClass="flex-col items-start gap-2"
+        containerClass="lg:flex-col lg:items-start lg:gap-2"
         labelClass="text-start"
         type="number"
         label="Biaya"
