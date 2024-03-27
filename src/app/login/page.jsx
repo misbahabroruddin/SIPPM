@@ -5,7 +5,9 @@ import { useEffect } from "react";
 
 export default function Login() {
   useEffect(() => {
-    signIn("sso");
+    signIn("sso", {
+      callbackUrl: `${window.location.href}/dashboard`,
+    });
   }, []);
   return (
     <div className="relative flex h-screen items-center justify-center font-poppins">
