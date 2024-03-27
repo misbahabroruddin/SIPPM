@@ -22,6 +22,7 @@ export const FormRincianKegiatanPKM = ({ onClose, id }) => {
     setValue,
     reset,
     clearErrors,
+    setError,
     control,
     formState: { errors },
   } = useForm();
