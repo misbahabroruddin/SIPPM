@@ -45,7 +45,7 @@ export default function Login() {
 
   useEffect(() => {
     signIn("sso", {
-      callbackUrl: "/dashboard",
+      callbackUrl: "/api/auth/callback/sso",
       redirect: false,
     });
   }, []);
