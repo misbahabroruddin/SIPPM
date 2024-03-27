@@ -3,5 +3,9 @@
 import { SessionProvider } from "next-auth/react";
 
 export const AuthProvider = ({ children, session }) => {
-  return <SessionProvider session={session}>{children}</SessionProvider>;
+  return (
+    <SessionProvider baseUrl="https://sippm.unsia.ac.id" session={session}>
+      {children}
+    </SessionProvider>
+  );
 };
