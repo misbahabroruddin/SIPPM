@@ -1,5 +1,7 @@
 import CredentialsProvider from "next-auth/providers/credentials";
 
+import { createSession } from "@/handlers/create-session";
+
 export const authOptions = {
   providers: [
     CredentialsProvider({
@@ -48,6 +50,41 @@ export const authOptions = {
         }
       },
     }),
+    {
+      id: "sso",
+      name: "sso",
+      type: "oauth",
+      version: "2.0",
+      // wellKnown: `${process.env.NEXT_PUBLIC_API_BASE_URL}/authentication/realms/mahasiswa/.well-known/openid-configuration`,
+      state: true,
+      protection: "state",
+      params: { grant_type: "authorization_code" },
+      authorization: {
+        url: `${process.env.NEXT_PUBLIC_SSO_BASE_URL}/oauth/authorize`,
+        params: { scope: "" },
+      },
+      token: {
+        url: `${process.env.NEXT_PUBLIC_SSO_BASE_URL}/oauth/token`,
+      },
+      userinfo: `${process.env.NEXT_PUBLIC_SSO_BASE_URL}/api/users/profile`,
+      clientId: process.env.NEXT_PUBLIC_SSO_CLIENT_ID,
+      clientSecret: process.env.NEXT_PUBLIC_SSO_CLIENT_SECRET,
+      checks: ["state"],
+      async profile(profile, tokens, account) {
+        const response = await createSession(tokens);
+        return {
+          id: profile.data.id,
+          name: profile.data.name,
+          username: profile.data.username,
+          email: profile.data.email,
+          emailVerifiedAt: profile.data.email_verified_at,
+          avatar: profile.data.avatar_url,
+          google_avatar: profile.data.google_avatar,
+          roles: profile.data.roles,
+          accessToken: response?.data?.token,
+        };
+      },
+    },
   ],
   secret: process.env.NEXT_PUBLIC_AUTH_SECRET,
   session: {
@@ -86,4 +123,5 @@ export const authOptions = {
       return session;
     },
   },
+  debug: true,
 };
