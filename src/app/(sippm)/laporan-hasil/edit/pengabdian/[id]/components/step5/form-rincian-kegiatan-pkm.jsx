@@ -47,7 +47,7 @@ export const FormRincianKegiatanPKM = ({ onClose, id }) => {
       onSubmit={handleSubmit(addEditRincianKegiatan)}
     >
       <Input
-        containerClass="lg:flex-col lg:items-start lg:gap-2"
+        containerClass="flex-col items-start gap-2 lg:flex-col lg:items-start lg:gap-2"
         labelClass="text-start"
         label="Kegiatan"
         name={"kegiatan"}
