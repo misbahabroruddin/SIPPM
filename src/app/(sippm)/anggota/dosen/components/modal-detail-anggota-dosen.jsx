@@ -17,6 +17,8 @@ export const ModalDetailAnggotaDosen = ({ id }) => {
     refetch();
   };
 
+  console.log(detail?.program_studi?.nama);
+
   return (
     <>
       <button className="rounded-lg" onClick={handleOpenModal}>
@@ -76,7 +78,7 @@ export const ModalDetailAnggotaDosen = ({ id }) => {
               name="Jabatan Funsional"
               placeholder="Jabatan Funsional"
               disabled
-              defaultValue={detail?.jabatan_fungsional?.nama || "-"}
+              defaultValue={detail?.jabatan_fungsional?.nama}
             />
             <Input
               label="Program Studi"
@@ -84,7 +86,7 @@ export const ModalDetailAnggotaDosen = ({ id }) => {
               name="Program Studi"
               placeholder="Program Studi"
               disabled
-              defaultValue={detail?.program_studi?.nama || "-"}
+              defaultValue={detail?.program_studi?.nama}
             />
             <Input
               label="Email"
@@ -100,7 +102,7 @@ export const ModalDetailAnggotaDosen = ({ id }) => {
               name="ID Sinta"
               placeholder="ID Sinta"
               disabled
-              defaultValue={detail?.sinta_id || "-"}
+              defaultValue={detail?.sinta_id}
             />
             <Input
               label="ID Goggle Scholar"
@@ -108,7 +110,7 @@ export const ModalDetailAnggotaDosen = ({ id }) => {
               name="ID Goggle Scholar"
               placeholder="ID Goggle Scholar"
               disabled
-              defaultValue={detail?.google_scholar_id || "-"}
+              defaultValue={detail?.google_scholar_id}
             />
           </div>
         </div>

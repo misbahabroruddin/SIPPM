@@ -76,7 +76,7 @@ export const ModalDetailAnggotaMahasiswa = ({ id }) => {
               name="Program Studi"
               placeholder="Program Studi"
               disabled
-              defaultValue={detail?.program_studi?.nama || "-"}
+              defaultValue={detail?.program_studi?.nama}
             />
             <Input
               label="Email"
@@ -92,7 +92,7 @@ export const ModalDetailAnggotaMahasiswa = ({ id }) => {
               name="ID Sinta"
               placeholder="ID Sinta"
               disabled
-              defaultValue={detail?.sinta_id || "-"}
+              defaultValue={detail?.sinta_id}
             />
             <Input
               label="ID Goggle Scholar"
@@ -100,7 +100,7 @@ export const ModalDetailAnggotaMahasiswa = ({ id }) => {
               name="ID Goggle Scholar"
               placeholder="ID Goggle Scholar"
               disabled
-              defaultValue={detail?.google_scholar_id || "-"}
+              defaultValue={detail?.google_scholar_id}
             />
           </div>
         </div>
