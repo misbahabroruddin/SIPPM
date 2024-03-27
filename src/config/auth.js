@@ -72,6 +72,7 @@ export const authOptions = {
       checks: ["state"],
       async profile(profile, tokens, account) {
         const response = await createSession(tokens);
+        console.log(response, "<<<<<<<<<");
         return {
           id: profile.data.id,
           name: profile.data.name,
