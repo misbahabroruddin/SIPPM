@@ -7,6 +7,7 @@ export default function Login() {
   useEffect(() => {
     signIn("sso", {
       callbackUrl: `/dashboard`,
+      redirect: false,
     });
   }, [signIn]);
   return (
