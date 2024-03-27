@@ -70,14 +70,14 @@ const ListItem = ({ data, currentTab, tabActive }) => {
 
   return (
     <div
-      className={`rounded-lg px-6 py-4 shadow-custom ${
+      className={`rounded-lg p-3 shadow-custom lg:px-6 lg:py-4 ${
         data.status === "Draft" ? "bg-draft" : "inherit"
       }`}
       key={data?.id}
     >
-      <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between">
+      <div className="flex flex-col gap-2 lg:flex-row lg:items-center lg:justify-between">
         <div className="flex w-fit flex-col gap-1 lg:max-w-[731px]">
-          <h2 className="text-lg">{data?.judul}</h2>
+          <h2 className="text-base lg:text-lg">{data?.judul}</h2>
           <div className="flex flex-wrap gap-x-4 gap-y-2">
             <div className="flex items-center gap-[2px]">
               <Image
@@ -112,22 +112,29 @@ const ListItem = ({ data, currentTab, tabActive }) => {
             </div>
           </div>
         </div>
-        <div className="flex items-end gap-4">
+        <div className="flex flex-wrap items-end justify-center gap-4">
           {data.status === "Terkirim" ? (
             <>
-              <div className="flex flex-col items-center gap-1">
+              <div className="flex w-2/5 flex-col items-center gap-1 lg:w-fit">
                 <p>LPPM</p>
-                <ButtonStatus status={data?.status_lppm} />
+                <ButtonStatus
+                  status={data?.status_lppm}
+                  className="w-full lg:w-fit"
+                />
               </div>
-              <div className="flex flex-col items-center gap-1">
+              <div className="flex w-2/5 flex-col items-center gap-1 lg:w-fit">
                 <p>Reviewer</p>
-                <ButtonStatus status={data?.status_reviewer} />
+                <ButtonStatus
+                  status={data?.status_reviewer}
+                  className="lg-px-4 w-full px-3 lg:w-fit"
+                />
               </div>
               <Link
                 href={`/proposal/${currentTab || tabActive}/track/${data?.id}`}
+                className="w-full lg:w-fit"
               >
                 <button
-                  className="rounded-lg bg-primary px-7 py-2 text-white disabled:cursor-not-allowed disabled:bg-gray-500"
+                  className="w-full rounded-lg bg-primary px-7 py-2 text-white disabled:cursor-not-allowed disabled:bg-gray-500"
                   disabled={data?.status_lppm === "Pending"}
                 >
                   Track
@@ -135,7 +142,7 @@ const ListItem = ({ data, currentTab, tabActive }) => {
               </Link>
             </>
           ) : (
-            <div className="flex gap-4">
+            <div className="flex w-full flex-wrap gap-2 lg:w-fit lg:gap-4">
               <ButtonDelete
                 onClick={() => {
                   Swal.fire({
@@ -144,8 +151,8 @@ const ListItem = ({ data, currentTab, tabActive }) => {
                     icon: "warning",
                     dangerMode: true,
                     showCancelButton: true,
-                    confirmButtonText: "Yes, delete",
-                    cancelButtonText: "No, cancel",
+                    confirmButtonText: "Ya, hapus",
+                    cancelButtonText: "Tidak, batalkan",
                     confirmButtonColor: "#0BD72C",
                     cancelButtonColor: "#E32626",
                     reverseButtons: true,
@@ -156,8 +163,12 @@ const ListItem = ({ data, currentTab, tabActive }) => {
                   });
                 }}
                 disabled={isLoadingDelete}
+                className="w-full lg:w-24"
               />
-              <Link href={`/proposal/penelitian/edit/${data?.id}`}>
+              <Link
+                href={`/proposal/penelitian/edit/${data?.id}`}
+                className="w-full lg:w-fit"
+              >
                 <ButtonUpdate
                   onClick={() => {
                     localStorage.setItem("isEdit", true);
@@ -165,6 +176,7 @@ const ListItem = ({ data, currentTab, tabActive }) => {
                     setCurrentStep(1);
                   }}
                   disabled={isLoadingDelete}
+                  className="w-full lg:w-24"
                 />
               </Link>
             </div>

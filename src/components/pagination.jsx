@@ -13,7 +13,6 @@ export function Pagination({ onPageChange, pageCount, perPage, pageOffset }) {
           <span className="mx-2 text-blue-primary">Sebelumnya</span>
         }
         onPageChange={onPageChange}
-        pageRangeDisplayed={perPage}
         pageCount={pageCount}
         renderOnZeroPageCount={null}
         containerClassName="flex items-center border border-blue-09 rounded-lg"

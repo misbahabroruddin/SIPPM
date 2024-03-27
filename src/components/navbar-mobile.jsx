@@ -72,7 +72,7 @@ export const NavbarMobile = () => {
       <div className="flex items-center justify-between px-2 py-3 lg:px-7 lg:py-4">
         <div
           className={twMerge(
-            "flex w-[236px] items-center justify-start gap-2 px-2 transition-all duration-200",
+            "flex w-[200px] items-center justify-start gap-2 px-2 transition-all duration-200",
             isSidebarMobileOpen ? "justify-between" : "",
           )}
         >
@@ -81,7 +81,7 @@ export const NavbarMobile = () => {
               <Link href="/" className="transition-all duration-200">
                 <div className="flex items-center gap-3">
                   <Image
-                    src="/unsia.png"
+                    src="/logo-unsia.png"
                     className="block w-[92px] lg:hidden"
                     width={92}
                     height={100}
@@ -113,7 +113,7 @@ export const NavbarMobile = () => {
               >
                 <div className="flex items-center gap-3">
                   <Image
-                    src="/unsia.png"
+                    src="/logo-unsia.png"
                     className="block w-[92px] lg:hidden"
                     width={92}
                     height={100}
@@ -133,16 +133,23 @@ export const NavbarMobile = () => {
           )}
         </div>
         <div className="mr-[7px] block">
-          <div className="flex items-center justify-between p-1 lg:p-2">
+          <div className="flex w-fit items-center justify-between p-1 lg:p-2">
             <button
               onClick={() =>
                 signOut({ redirect: false }).then(() => {
-                  window.location.href = "/login";
+                  window.location.href = "https://sso.unsia.ac.id/home";
                 })
               }
-              className="rounded border border-primary px-4 py-1 text-black hover:bg-primary hover:text-white"
+              className="flex w-fit items-center gap-2 rounded-lg border border-primary px-2 py-1"
             >
-              Sign out
+              <Image
+                src="/icons/menu.svg"
+                width={20}
+                height={20}
+                alt="menu"
+                className="bg-white"
+              />
+              <span className="mt-[2px]">Menu</span>
             </button>
           </div>
         </div>

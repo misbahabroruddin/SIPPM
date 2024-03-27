@@ -64,8 +64,8 @@ const FormBiodata = () => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="px-2">
-      <div className="flex gap-4 p-3">
-        <div className="flex w-1/2 flex-col gap-2 text-sm font-[500] text-primary">
+      <div className="flex flex-col gap-2 p-3 lg:flex-row lg:gap-4">
+        <div className="flex w-full flex-col gap-2 text-sm font-[500] text-primary lg:w-1/2">
           <Input
             label="Nama Lengkap"
             name="nama_lengkap"
@@ -117,7 +117,7 @@ const FormBiodata = () => {
             styles={styles(selectedTempatLahir)}
           />
           <div className="flex flex-col">
-            <div className="flex grow">
+            <div className="flex grow flex-col gap-1 lg:flex-row lg:gap-0">
               <Label
                 htmlFor={"tanggal_lahir"}
                 text="Tanggal Lahir"
@@ -203,7 +203,7 @@ const FormBiodata = () => {
             styles={styles(selectedJabatanFungsional)}
           />
         </div>
-        <div className="flex w-1/2 flex-col gap-2 text-sm font-[500] text-[#666666]">
+        <div className="flex w-full flex-col gap-2 text-sm font-[500] text-[#666666] lg:w-1/2">
           <SingleSelect
             label="Program Studi"
             name={"program_studi_id"}

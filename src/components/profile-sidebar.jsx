@@ -12,7 +12,7 @@ export const ProfileSidebar = () => {
 
   return (
     <div className="flex items-center rounded-lg bg-[#0D3A62]">
-      <div className="flex items-center gap-1 px-1 py-3 lg:gap-2 lg:px-2 lg:py-4">
+      <div className="flex items-center gap-[6px] px-1 py-3 lg:gap-2 lg:px-2 lg:py-4">
         <Image
           className="inline-block rounded-full"
           src={session?.user.avatar}

@@ -12,19 +12,19 @@ export const ButtonAdd = ({
   return (
     <button
       className={twMerge(
-        "flex gap-2 items-center px-4 py-2 bg-[#23B900] rounded text-white disabled:bg-gray-500 disabled:cursor-not-allowed",
-        className
+        "flex items-center gap-2 rounded bg-[#23B900] px-4 py-2 text-white disabled:cursor-not-allowed disabled:bg-gray-500",
+        className,
       )}
       onClick={onClick}
       {...props}
     >
       <Image
-        src='/icons/plus-circle-white.svg'
+        src="/icons/plus-circle-white.svg"
         width={24}
         height={24}
-        alt='tab'
+        alt="tab"
       />
-      <p className='hidden lg:block'>{text}</p>
+      <p className="block">{text}</p>
     </button>
   );
 };

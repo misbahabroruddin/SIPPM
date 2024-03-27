@@ -13,7 +13,7 @@ export const Tab = ({
 }) => {
   return (
     <button
-      className={`flex w-fit items-center justify-center gap-2 px-2 py-2 lg:px-4 ${
+      className={`flex w-fit items-center justify-center gap-2 px-3 py-2 lg:px-4 ${
         tabActive === tabName
           ? twMerge("rounded bg-[#10487A] text-white", tabActiveClass)
           : className

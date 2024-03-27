@@ -8,10 +8,10 @@ export const ContainerPage = ({ children }) => {
   return (
     <div
       className={twMerge(
-        "pt-4 pr-[35px] pl-4 grow ml-0 lg:ml-[256px]",
+        "ml-0 grow p-2 pt-4 lg:ml-[256px] lg:pl-4 lg:pr-[35px]",
         isOpen
-          ? "ml-0 lg:ml-[256px] transition-all duration-300"
-          : "!ml-0 transition-all duration-300"
+          ? "ml-0 transition-all duration-300 lg:ml-[256px]"
+          : "!ml-0 transition-all duration-300",
       )}
     >
       {children}

@@ -29,8 +29,8 @@ export const SidebarMobile = () => {
 
   return (
     <aside
-      className={`absolute -left-full z-50 min-h-dvh  bg-primary transition-all lg:hidden
-        ${isSidebarMobileOpen ? "left-0 block duration-300" : "block w-full max-w-[256px] duration-200  lg:-left-full"}
+      className={`fixed -left-full z-50 min-h-dvh  w-[200px] bg-primary transition-all duration-300  lg:hidden
+        ${isSidebarMobileOpen ? "left-0 block" : "block w-full   lg:-left-full"}
       `}
     >
       <div className="flex flex-col gap-2 px-3 py-4 lg:p-4">

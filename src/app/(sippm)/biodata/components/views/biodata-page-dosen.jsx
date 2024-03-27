@@ -19,7 +19,7 @@ export default function BiodataPageDosen() {
     <ContainerPage>
       <div className="flex flex-col gap-4">
         <BasePageTitle iconSrc="/icons/biodata-black.svg" title="Biodata" />
-        <section className="ml-[7px] flex gap-4">
+        <section className="flex gap-4 lg:ml-[7px]">
           <Profile />
           <div className="flex grow flex-col gap-[15px]">
             <Tabs tabActive={currentTab || tabActive} />

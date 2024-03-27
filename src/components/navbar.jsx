@@ -80,10 +80,10 @@ export const Navbar = () => {
               <Link href="/" className="transition-all duration-200">
                 <div className="flex items-center gap-3">
                   <Image
-                    src="/unsia.png"
+                    src="/logo-unsia.png"
                     className="hidden w-[92px] lg:block"
                     width={92}
-                    height={100}
+                    height={107}
                     alt="UNSIA"
                   />
                   <Image
@@ -109,10 +109,10 @@ export const Navbar = () => {
               >
                 <div className="flex items-center gap-3">
                   <Image
-                    src="/unsia.png"
+                    src="/logo-unsia.png"
                     className="block w-[92px] lg:hidden"
                     width={92}
-                    height={100}
+                    height={107}
                     alt="UNSIA"
                   />
                   <Image
@@ -133,12 +133,19 @@ export const Navbar = () => {
             <button
               onClick={() =>
                 signOut({ redirect: false }).then(() => {
-                  window.location.href = "/login";
+                  window.location.href = "https://sso.unsia.ac.id/home";
                 })
               }
-              className="rounded border border-primary px-4 py-1 text-black hover:bg-primary hover:text-white"
+              className="flex items-center  gap-2 rounded-lg border border-primary px-2 py-1 "
             >
-              Sign out
+              <Image
+                src="/icons/menu.svg"
+                width={22}
+                height={22}
+                alt="menu"
+                className="bg-white"
+              />
+              <span>Menu</span>
             </button>
             <div className="cursor-pointer px-1 py-[2px]">
               <Image

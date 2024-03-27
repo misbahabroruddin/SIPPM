@@ -10,7 +10,7 @@ export default function HomeLayout({ children }) {
         <Navbar />
         <NavbarMobile />
       </header>
-      <div className="relative mt-20 flex">
+      <div className="relative mt-16 flex md:mt-16 lg:mt-20">
         <Sidebar />
         <SidebarMobile />
         <main className="flex w-full">{children}</main>

@@ -8,7 +8,7 @@ export default function ListCardPengabdianDashboardDosen({
   jumlahPengabdianDitolak,
 }) {
   return (
-    <div className="flex gap-4">
+    <div className="flex flex-wrap gap-2 lg:gap-4">
       <CardDashboard status="Jumlah" jumlah={jumlahPengabdian} />
       <CardDashboard jumlah={jumlahPengabdianDisetujui} />
       <CardDashboard status="Ditolak" jumlah={jumlahPengabdianDitolak} />
