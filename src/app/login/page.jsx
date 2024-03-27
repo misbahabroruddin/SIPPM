@@ -44,7 +44,10 @@ export default function Login() {
   };
 
   useEffect(() => {
-    signIn("sso");
+    signIn("sso", {
+      callbackUrl: "/dashboard",
+      redirect: false,
+    });
   }, []);
   return (
     <div className="relative flex h-screen items-center justify-center font-poppins">
