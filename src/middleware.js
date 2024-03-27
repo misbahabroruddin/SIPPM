@@ -10,7 +10,7 @@ const middleware = async (request) => {
     const path = request.nextUrl.pathname;
     const nextAuthToken =
       process.env.NODE_ENV === "production"
-        ? request.cookies.get("next-auth.session-token")
+        ? request.cookies.get("__Secure-next-auth.session-token")
         : request.cookies.get("next-auth.session-token");
 
     const token = await getToken({
