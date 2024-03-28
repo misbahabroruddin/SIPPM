@@ -10,8 +10,8 @@ export const SearchInput = ({
   ...props
 }) => {
   return (
-    <div className="w-52 lg:w-64 xl:w-[400px]">
-      <div className="h-9.5 relative w-full min-w-[200px]">
+    <div className="w-full lg:w-64 xl:w-[400px]">
+      <div className="h-9.5 relative ml-auto w-full lg:ml-0 lg:min-w-[200px]">
         <div className="absolute right-3 top-2/4 grid h-5 w-5 -translate-y-2/4 place-items-center text-blue-gray-500">
           <Image src="/icons/search.svg" height={24} width={24} alt="search" />
         </div>
