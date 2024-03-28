@@ -25,7 +25,7 @@ export const SingleSelect = ({
 }) => {
   return (
     <div className="flex flex-col">
-      <div className="flex items-center">
+      <div className="flex flex-col items-start gap-1 lg:flex-row lg:items-center lg:gap-0">
         {label && <Label htmlFor={name} text={label} required={required} />}
         <div className="flex w-full flex-col">
           <Controller
