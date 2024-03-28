@@ -2,8 +2,8 @@
 
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
-import { useDebounce, useDebouncedCallback } from "use-debounce";
+import { useState } from "react";
+import { useDebouncedCallback } from "use-debounce";
 
 import { BasePageTitle } from "@/components/base-page-title";
 import { SearchInput } from "@/components/input/search-input";
@@ -56,8 +56,8 @@ export default function ProposalPageDosen() {
           iconSrc="/icons/search-black.svg"
           title={`Proposal - ${capitalFirtsLatter(currentTab || tabActive)}`}
         />
-        <div className="flex justify-between">
-          <div className="flex items-center gap-2 lg:gap-4">
+        <div className="flex flex-col justify-between gap-2 lg:flex-row">
+          <div className="flex flex-wrap items-center justify-between gap-2 lg:justify-start lg:gap-4">
             <Tabs
               tabActive={currentTab || tabActive}
               setSearch={setSearchPenelitian}
@@ -88,6 +88,7 @@ export default function ProposalPageDosen() {
                 localStorage.removeItem("pengabdianId");
                 setCurrentStep(1);
               }}
+              className="w-full justify-center lg:w-fit"
             />
           </Link>
         </div>
