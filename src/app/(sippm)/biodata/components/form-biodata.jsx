@@ -143,7 +143,6 @@ const FormBiodata = () => {
                       errors.tanggal_lahir && "outline-red-500",
                     )}
                     className="ml-12 !p-0 focus:outline-none"
-                    isClearable
                     placeholderText="Tanggal Lahir"
                     showIcon
                     icon={
