@@ -52,7 +52,7 @@ export default function DashboardDosen() {
       <div className="flex justify-between">
         <div className="flex flex-wrap items-center justify-between gap-2 lg:justify-start lg:gap-4">
           <Tabs tabActive={currentTab || tabActive} />
-          {/* <SearchInput
+          <SearchInput
             onChange={(e) => {
               currentTab === "pengabdian"
                 ? debouncedSearchPengabdian(e.target.value)
@@ -61,7 +61,7 @@ export default function DashboardDosen() {
             defaultValue={
               currentTab === "pengabdian" ? searchPengabdian : searchPenelitian
             }
-          /> */}
+          />
         </div>
       </div>
       {currentTab === "penelitian" || !currentTab ? (
