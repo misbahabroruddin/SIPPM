@@ -7,6 +7,7 @@ import { SkeletonListingProposal } from "@/components/skeleton/skeleton-listing-
 import { convertDate } from "@/lib/utils/convertDate";
 import { EmptyState } from "@/components/empty-state";
 import { Pagination } from "@/components/pagination";
+import { CardDashboard } from "@/components/card/card-dashboard";
 
 export const ListPenelitianDashboardLPPM = ({
   penelitian,
@@ -14,10 +15,22 @@ export const ListPenelitianDashboardLPPM = ({
   tabActive,
   isLoading,
   handlePageChange,
+  totalPenelitianRevisi,
+  totalPenelitianDisetujui,
+  totalPenelitianDitolak,
+  totalPenelitianPending,
+  totalProposal,
 }) => {
   if (isLoading) return <SkeletonListingProposal />;
   return (
-    <>
+    <div className="flex flex-col gap-4">
+      <div className="flex flex-wrap gap-2 lg:flex-nowrap">
+        <CardDashboard jumlah={totalProposal} status="Total" />
+        <CardDashboard jumlah={totalPenelitianPending} status="Pending" />
+        <CardDashboard jumlah={totalPenelitianDisetujui} />
+        <CardDashboard status="Ditolak" jumlah={totalPenelitianDitolak} />
+        <CardDashboard status="Revisi" jumlah={totalPenelitianRevisi} />
+      </div>
       <div className="flex h-[550px] flex-col gap-4 overflow-auto p-1">
         {penelitian?.data?.length ? (
           penelitian?.data
@@ -42,16 +55,16 @@ export const ListPenelitianDashboardLPPM = ({
           pageOffset={penelitian?.current_page - 1}
         />
       ) : null}
-    </>
+    </div>
   );
 };
 
 const ListItem = ({ data, currentTab, tabActive }) => {
   return (
-    <div className="rounded-lg px-6 py-4 shadow-custom">
-      <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between">
+    <div className="rounded-lg p-3 shadow-custom lg:px-6 lg:py-4">
+      <div className="flex flex-col gap-2 lg:flex-row lg:items-center lg:justify-between">
         <div className="flex w-fit flex-col gap-1 lg:max-w-[731px]">
-          <h2 className="text-lg">{data?.judul}</h2>
+          <h2 className="text-base lg:text-lg">{data?.judul}</h2>
           <div className="flex flex-wrap gap-x-4 gap-y-2">
             <div className="flex items-center gap-[2px]">
               <Image
@@ -89,8 +102,11 @@ const ListItem = ({ data, currentTab, tabActive }) => {
           </div>
         </div>
         <div className="flex items-end gap-4">
-          <Link href={`/proposal/${currentTab || tabActive}/track/${data?.id}`}>
-            <button className="rounded-lg bg-primary px-7 py-2 text-white disabled:cursor-not-allowed disabled:bg-gray-500">
+          <Link
+            href={`/proposal/${currentTab || tabActive}/track/${data?.id}`}
+            className="w-full lg:w-fit"
+          >
+            <button className="w-full rounded-lg bg-primary px-7 py-2 text-white disabled:cursor-not-allowed disabled:bg-gray-500">
               Detail
             </button>
           </Link>

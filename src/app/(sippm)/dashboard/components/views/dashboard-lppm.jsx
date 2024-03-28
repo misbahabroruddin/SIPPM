@@ -41,9 +41,16 @@ export default function DashboardLppm() {
   const totalPeneliatianDitolak =
     infoPenelitian?.data?.status_lppm?.ditolak || 0;
 
-  const totalProposal =
-    infoPenelitian?.data?.status_lppm?.revisi +
-      infoPengabdian?.data?.status_lppm?.revisi || 0;
+  const totalPenelitianRevisi = infoPenelitian?.data?.status_lppm?.revisi || 0;
+
+  const totalPenelitianPending =
+    infoPenelitian?.data?.status_lppm?.pending || 0;
+
+  const totalProposalPenelitian = infoPenelitian?.data?.total || 0;
+
+  const totalPengabdianRevisi = infoPengabdian?.data?.status_lppm?.revisi || 0;
+
+  const totalProposalPengabdian = infoPengabdian?.data?.total || 0;
 
   const totalPengabdianDisetujui =
     infoPengabdian?.data?.status_lppm?.diterima || 0;
@@ -51,23 +58,11 @@ export default function DashboardLppm() {
   const totalPengabdianDitolak =
     infoPengabdian?.data?.status_lppm?.ditolak || 0;
 
+  const totalPengabdianPending =
+    infoPengabdian?.data?.status_lppm?.pending || 0;
+
   return (
     <div className="flex flex-col gap-4">
-      <div className="flex gap-4">
-        <CardDashboard title="Penelitian" jumlah={totalPenelitianDisetujui} />
-        <CardDashboard
-          status="Ditolak"
-          title="Penelitian"
-          jumlah={totalPeneliatianDitolak}
-        />
-        <CardDashboard status="Revisi" title="Semua" jumlah={totalProposal} />
-        <CardDashboard title="Pengabdian" jumlah={totalPengabdianDisetujui} />
-        <CardDashboard
-          status="Ditolak"
-          title="Pengabdian"
-          jumlah={totalPengabdianDitolak}
-        />
-      </div>
       <div className="flex justify-between">
         <div className="flex items-center gap-2 lg:gap-4">
           <Tabs tabActive={currentTab || tabActive} />
@@ -80,6 +75,11 @@ export default function DashboardLppm() {
           currentTab={currentTab}
           tabActive={tabActive}
           handlePageChange={handlePageChangePenelitian}
+          totalProposal={totalProposalPenelitian}
+          totalPenelitianPending={totalPenelitianPending}
+          totalPenelitianDisetujui={totalPenelitianDisetujui}
+          totalPenelitianRevisi={totalPenelitianRevisi}
+          totalPenelitianDitolak={totalPeneliatianDitolak}
         />
       ) : (
         <ListPengabdianDashboardLPPM
@@ -88,6 +88,11 @@ export default function DashboardLppm() {
           currentTab={currentTab}
           tabActive={tabActive}
           handlePageChange={handlePageChangePengabdian}
+          totalProposal={totalProposalPengabdian}
+          totalPengabdianPending={totalPengabdianPending}
+          totalPengabdianDisetujui={totalPengabdianDisetujui}
+          totalPengabdianRevisi={totalPengabdianRevisi}
+          totalPengabdianDitolak={totalPengabdianDitolak}
         />
       )}
     </div>
