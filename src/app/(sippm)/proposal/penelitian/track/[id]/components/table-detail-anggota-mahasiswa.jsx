@@ -1,6 +1,7 @@
 "use client";
 
 import { Typography } from "@material-tailwind/react";
+import { twMerge } from "tailwind-merge";
 
 export const TableDetailAnggotaMahasiswa = ({ data }) => {
   const header = [
@@ -16,12 +17,20 @@ export const TableDetailAnggotaMahasiswa = ({ data }) => {
     <table className="w-full min-w-max table-auto overflow-hidden rounded-t-lg text-left !font-poppins">
       <thead className="rounded-lg">
         <tr>
-          {header.map((head) => (
-            <th key={head} className="  bg-primary p-4">
+          {header.map((head, index) => (
+            <th
+              key={head}
+              className={twMerge(
+                "bg-primary px-1 py-3 lg:p-4",
+                index === 3 && "hidden lg:table-cell",
+                index === 4 && "hidden lg:table-cell",
+                index === 5 && "hidden lg:table-cell",
+              )}
+            >
               <Typography
                 variant="small"
                 color="blue-gray"
-                className="text-center font-poppins font-semibold leading-none text-white"
+                className="text-center font-poppins text-sm font-[500] leading-none text-white lg:text-lg lg:font-semibold"
               >
                 {head}
               </Typography>
@@ -36,7 +45,7 @@ export const TableDetailAnggotaMahasiswa = ({ data }) => {
             .map((row, index) => {
               return (
                 <tr key={row.id} className="text-base even:bg-sky">
-                  <td className="p-3">
+                  <td className="p-2 lg:p-3">
                     <Typography
                       color="blue-gray"
                       className="text-center font-normal"
@@ -44,27 +53,27 @@ export const TableDetailAnggotaMahasiswa = ({ data }) => {
                       {index + 1}
                     </Typography>
                   </td>
-                  <td className="p-3 ">
+                  <td className="p-2 lg:p-3 ">
                     <Typography color="blue-gray" className="font-normal">
                       {row.anggota.nama_lengkap}
                     </Typography>
                   </td>
-                  <td className="p-3 ">
+                  <td className="p-2 lg:p-3 ">
                     <Typography color="blue-gray" className="font-normal">
                       {row.anggota.perguruan_tinggi}
                     </Typography>
                   </td>
-                  <td className="p-3 ">
+                  <td className="hidden p-2 lg:table-cell lg:p-3">
                     <Typography color="blue-gray" className="font-normal">
                       {row.anggota.nidn_or_nidk_or_nim}
                     </Typography>
                   </td>
-                  <td className="p-3 ">
+                  <td className="hidden p-2 lg:table-cell lg:p-3">
                     <Typography color="blue-gray" className="font-normal">
                       {row.anggota.program_studi?.nama}
                     </Typography>
                   </td>
-                  <td className="p-3 ">
+                  <td className="hidden p-2 lg:table-cell lg:p-3">
                     <Typography color="blue-gray" className="font-normal">
                       {row.anggota.email || "-"}
                     </Typography>
@@ -74,7 +83,7 @@ export const TableDetailAnggotaMahasiswa = ({ data }) => {
             })
         ) : (
           <tr className="text-base even:bg-sky">
-            <td className="p-3" colSpan={7}>
+            <td className="p-2 lg:p-3" colSpan={7}>
               <Typography color="blue-gray" className="text-center font-normal">
                 Tidak ada anggota
               </Typography>

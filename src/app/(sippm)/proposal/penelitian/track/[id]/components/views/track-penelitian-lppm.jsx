@@ -40,7 +40,7 @@ export default function TrackPenelitianLPPMPage() {
       />
       <SectionHeaderDetailProposal data={data?.data} />
       <Tabs tabActive={currentTab || tabActive} />
-      <div className="custom mb-14 flex flex-col gap-3 rounded-lg p-4 shadow-custom">
+      <div className="custom mb-14 flex flex-col gap-3 rounded-lg px-2 py-3 shadow-custom lg:p-4">
         {currentTab === "dokumen" || !currentTab ? (
           <>
             <InnerTabs tabActive={innerTab || innerTabActive} />

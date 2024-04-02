@@ -11,11 +11,14 @@ export const TableDetailRincianKegiatan = ({ data }) => {
       <thead className="rounded-lg">
         <tr>
           {header.map((head) => (
-            <th key={head} className="  bg-primary p-4 last:text-center">
+            <th
+              key={head}
+              className="bg-primary px-1 py-3 text-sm last:text-center lg:p-4 lg:text-base"
+            >
               <Typography
                 variant="small"
                 color="blue-gray"
-                className="font-poppins font-semibold leading-none text-white"
+                className="text-center font-poppins text-sm font-[500] leading-none text-white lg:text-lg lg:font-semibold"
               >
                 {head}
               </Typography>
@@ -27,21 +30,27 @@ export const TableDetailRincianKegiatan = ({ data }) => {
         {data?.data?.rincian_kegiatans?.length ? (
           data?.data?.rincian_kegiatans?.map((row, index) => (
             <tr key={row.id} className="text-base even:bg-sky">
-              <td className="w-8 p-3">
+              <td className="w-8 p-2 lg:p-3">
                 <Typography
                   color="blue-gray"
-                  className="text-center font-normal"
+                  className="text-center text-sm font-normal lg:text-base"
                 >
                   {index + 1}
                 </Typography>
               </td>
-              <td className="p-3 ">
-                <Typography color="blue-gray" className="font-normal">
+              <td className="w-[50px] p-2 lg:w-fit lg:p-3">
+                <Typography
+                  color="blue-gray"
+                  className="text-sm font-normal lg:text-base"
+                >
                   {row.kegiatan}
                 </Typography>
               </td>
-              <td className="p-3 text-center">
-                <Typography color="blue-gray" className="font-normal">
+              <td className="w-[100px] p-2 text-center lg:w-fit lg:p-3">
+                <Typography
+                  color="blue-gray"
+                  className="text-sm font-normal lg:text-base"
+                >
                   {converDateRange(row.waktu)}
                 </Typography>
               </td>
