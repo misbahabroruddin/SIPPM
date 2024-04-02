@@ -35,7 +35,7 @@ export const TrackDosenLPPM = ({ data, isLoading }) => {
 
   if (isLoading) {
     return (
-      <div className="flex flex-col gap-4">
+      <div className="mt-4 flex flex-col gap-4">
         <SkeletonRiwayat />
       </div>
     );
@@ -47,14 +47,16 @@ export const TrackDosenLPPM = ({ data, isLoading }) => {
     >
       <TimelineHeader status={updatedData?.proposal?.status_lppm} />
       <TimelineContent isLoading={isLoading}>
-        <ContainerContent className="p-4">
+        <ContainerContent className="p-3 md:p-4">
           <div className="flex w-full flex-col  justify-between gap-2">
             <div className="flex grow font-[500] text-dark-80">
-              <p>LPPM</p>
+              <p className="text-sm lg:text-base">LPPM</p>
             </div>
             <div className="flex flex-col gap-2">
-              <div className="flex grow items-center justify-between">
-                <p className="text-dark-09">{updatedData?.user?.name}</p>
+              <div className="flex grow flex-wrap items-center justify-between gap-1">
+                <p className="text-sm font-[500] text-dark-09 lg:text-base">
+                  {updatedData?.user?.name}
+                </p>
                 <ButtonStatus
                   status={updatedData?.proposal?.status_lppm}
                   className="px-2 py-1 text-xs font-[500]"
@@ -66,27 +68,31 @@ export const TrackDosenLPPM = ({ data, isLoading }) => {
                   : 0}
               </p>
             </div>
-            <div className="mt-8 flex flex-col gap-2">
+            <div className="mt-3 flex flex-col gap-2 md:mt-5 lg:mt-8">
               {data?.length ? (
                 data?.map((item, index) => (
                   <div
-                    className="overflow-hidden rounded-lg px-4 py-3 shadow-custom transition-all"
+                    className="overflow-hidden rounded-lg p-2 shadow-custom transition-all lg:px-4 lg:py-3"
                     key={item.id}
                   >
                     <div className="flex justify-between">
-                      <div className="flex max-w-[200px] items-center sm:max-w-[400px] md:max-w-[600px] lg:max-w-[800px]">
+                      <div
+                        className="flex max-w-[200px] items-center overflow-hidden sm:max-w-[400px] md:max-w-[600px] lg:max-w-[800px]"
+                        title={item?.file_proposal.nama}
+                      >
                         <Image
                           src="/icons/file.svg"
                           width={24}
                           height={24}
                           alt="file"
+                          className="h-5 w-5 lg:h-6 lg:w-6"
                         />
                         <Link
                           target="_blank"
                           href={item.file_proposal.url || ""}
                           className="hover:underline"
                         >
-                          <p className="text-dark-09">
+                          <p className="text-sm text-dark-09 lg:text-base">
                             {item.file_proposal.nama ||
                               "Klik untuk lebih detail"}
                           </p>
@@ -100,7 +106,7 @@ export const TrackDosenLPPM = ({ data, isLoading }) => {
                         }
                       >
                         {isOpen !== item.id && (
-                          <>
+                          <div className="hidden items-center gap-2 lg:flex">
                             <div className="flex items-center gap-1 text-sm">
                               <Image
                                 src="/icons/time.svg"
@@ -119,7 +125,7 @@ export const TrackDosenLPPM = ({ data, isLoading }) => {
                               />
                               <p>{convertToDateNumeric(item.updated_at)}</p>
                             </div>
-                          </>
+                          </div>
                         )}
                         <Image
                           src="/icons/chevron-down.svg"
@@ -158,7 +164,7 @@ export const TrackDosenLPPM = ({ data, isLoading }) => {
             >
               <ButtonUpdate
                 text="Perbarui"
-                className="mt-3 flex w-full justify-center bg-primary disabled:bg-gray-500 disabled:opacity-100"
+                className="mt-2 flex w-full justify-center bg-primary disabled:bg-gray-500 disabled:opacity-100 lg:mt-3"
                 iconLeft
                 onClick={() => {
                   localStorage.setItem("isEdit", true);

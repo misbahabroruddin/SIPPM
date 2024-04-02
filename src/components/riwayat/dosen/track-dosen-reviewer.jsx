@@ -20,9 +20,7 @@ import {
   convertToTime,
 } from "@/lib/utils/convertDate";
 import { ButtonUpdate } from "@/components/button/button-update";
-import { RiwayatPesanReviewer } from "../reviewer/riwayat-pesan-reviewer";
 import { twMerge } from "tailwind-merge";
-import { convertToRupiah } from "@/lib/utils/convertToRupiah";
 import { RiwayatPesanDosenReviewer } from "./riwayat-pesan/riwayat-pesan-dosen-reviewer";
 
 export const TrackDosenReviewer = ({ data, isLoading }) => {
@@ -44,14 +42,16 @@ export const TrackDosenReviewer = ({ data, isLoading }) => {
       <TimelineConnector />
       <TimelineHeader status={updatedData?.proposal?.status_reviewer} />
       <TimelineContent isLoading={isLoading}>
-        <ContainerContent className="p-4">
+        <ContainerContent className="p-3 md:p-4">
           <div className="flex w-full flex-col  justify-between gap-2">
             <div className="flex grow font-[500] text-dark-80">
-              <p>Reviewer</p>
+              <p className="text-sm lg:text-base">Reviewer</p>
             </div>
             <div className="flex flex-col gap-2">
-              <div className="flex grow items-center justify-between">
-                <p className="text-dark-09">{updatedData?.user?.name}</p>
+              <div className="flex grow flex-wrap items-center justify-between gap-1">
+                <p className="text-sm font-[500] text-dark-09 lg:text-base">
+                  {updatedData?.user?.name}
+                </p>
                 <ButtonStatus
                   status={updatedData?.proposal?.status_reviewer}
                   className="px-2 py-1 text-xs font-[500]"
@@ -62,11 +62,14 @@ export const TrackDosenReviewer = ({ data, isLoading }) => {
               {data?.length ? (
                 data?.map((item, index) => (
                   <div
-                    className="overflow-hidden rounded-lg px-4 py-3 shadow-custom transition-all"
+                    className="overflow-hidden rounded-lg p-2 shadow-custom transition-all lg:px-4 lg:py-3"
                     key={item.id}
                   >
                     <div className="flex justify-between">
-                      <div className="flex max-w-[200px] items-center sm:max-w-[400px] md:max-w-[600px] lg:max-w-[800px]">
+                      <div
+                        className="flex max-w-[200px] items-center overflow-hidden sm:max-w-[400px] md:max-w-[600px] lg:max-w-[800px]"
+                        title={item?.file_proposal.nama}
+                      >
                         <Image
                           src="/icons/file.svg"
                           width={24}
@@ -78,7 +81,7 @@ export const TrackDosenReviewer = ({ data, isLoading }) => {
                           href={item.file_proposal.url || ""}
                           className="hover:underline"
                         >
-                          <p className="text-dark-09">
+                          <p className="text-sm text-dark-09 lg:text-base">
                             {item.file_proposal.nama ||
                               "Klik untuk lebih detail"}
                           </p>
@@ -92,7 +95,7 @@ export const TrackDosenReviewer = ({ data, isLoading }) => {
                         }
                       >
                         {isOpen !== item.id && (
-                          <>
+                          <div className="hidden items-center gap-2 lg:flex">
                             <div className="flex items-center gap-1 text-sm">
                               <Image
                                 src="/icons/time.svg"
@@ -111,7 +114,7 @@ export const TrackDosenReviewer = ({ data, isLoading }) => {
                               />
                               <p>{convertToDateNumeric(item.updated_at)}</p>
                             </div>
-                          </>
+                          </div>
                         )}
                         <Image
                           src="/icons/chevron-down.svg"
@@ -154,7 +157,7 @@ export const TrackDosenReviewer = ({ data, isLoading }) => {
             >
               <ButtonUpdate
                 text="Perbarui"
-                className="mt-3 flex w-full justify-center bg-primary disabled:bg-gray-500 disabled:opacity-100"
+                className="mt-2 flex w-full justify-center bg-primary disabled:bg-gray-500 disabled:opacity-100 lg:mt-3"
                 iconLeft
                 onClick={() => {
                   localStorage.setItem("isEdit", true);
