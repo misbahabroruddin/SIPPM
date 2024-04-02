@@ -27,7 +27,7 @@ const ModalViewerPDF = ({ data, fileName }) => {
         onClose={() => setOpen(false)}
         open={open}
         containerClassName={
-          "w-[300px] md:w-[550px] lg:w-[700px] xl:w-[900px] flex-col items-end p-2 hidden md:flex"
+          "w-[300px] md:w-[650px] lg:w-[800px] xl:w-[1000px] flex-col items-end p-2 hidden md:flex"
         }
       >
         <i className="w-fit " onClick={() => setOpen(false)} role="button">
