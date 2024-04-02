@@ -2,28 +2,35 @@
 
 import { Modal } from "@/components/modal";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const ModalViewerPDF = ({ data, fileName }) => {
   const [open, setOpen] = useState(false);
   const handleOpenModal = () => setOpen(true);
+
+  useEffect(() => {
+    window.addEventListener("resize", () => {
+      if (window.innerWidth < 720) {
+        setOpen(false);
+      }
+    });
+  }, [open]);
   return (
     <>
-      {/* <button
+      <button
         onClick={data && handleOpenModal}
-        className={`text-black-07 ${data ? "cursor-pointer hover:underline" : "cursor-default"}`}
+        className={`hidden text-black-07 md:block ${data ? "cursor-pointer hover:underline" : "cursor-default"}`}
       >
-        {data ? "Klik untuk lebih detail" : "Tidak ada berkas"}
-      </button> */}
-      {/* <Modal
+        {data ? fileName : "Tidak ada berkas"}
+      </button>
+      <Modal
         onClose={() => setOpen(false)}
         open={open}
         containerClassName={
-          "w-[300px] md:w-[550px] lg:w-[700px] xl:w-[900px] flex flex-col items-end p-2"
+          "w-[300px] md:w-[550px] lg:w-[700px] xl:w-[900px] flex-col items-end p-2 hidden md:flex"
         }
-      > */}
-      <div className="flex gap-2">
-        {/* <i className="w-fit " onClick={() => setOpen(false)} role="button">
+      >
+        <i className="w-fit " onClick={() => setOpen(false)} role="button">
           <svg
             width="24"
             height="24"
@@ -36,15 +43,16 @@ const ModalViewerPDF = ({ data, fileName }) => {
               fill="#666666"
             />
           </svg>
-        </i> */}
-        {/* <embed
+        </i>
+        <embed
           src={data}
           width={"100%"}
           height={"500px"}
           className="mt-2 rounded"
           type="application/pdf"
-        /> */}
-
+        />
+      </Modal>
+      <div className="flex gap-2 md:hidden">
         <Link
           href={data ? data : "#"}
           target={data ? "_blank" : ""}
@@ -52,13 +60,12 @@ const ModalViewerPDF = ({ data, fileName }) => {
         >
           <button
             disabled={data ? false : true}
-            className="hover:underline disabled:cursor-default hover:disabled:no-underline"
+            className="text-sm text-black-07 hover:underline disabled:cursor-default hover:disabled:no-underline lg:text-base"
           >
             {data ? fileName : "Tidak ada berkas"}
           </button>
         </Link>
       </div>
-      {/* </Modal> */}
     </>
   );
 };
