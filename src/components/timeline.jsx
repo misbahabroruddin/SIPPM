@@ -10,7 +10,7 @@ export const Timeline = ({ children }) => {
 export const TimelineConnector = () => {
   return (
     <span
-      className="absolute -left-1 grid justify-center bg-transparent transition-opacity duration-200"
+      className="absolute -left-1 hidden justify-center bg-transparent transition-opacity duration-200 lg:grid"
       style={{
         top: "16px",
         width: "24px",
@@ -26,7 +26,7 @@ export const TimelineConnector = () => {
 export const TimelineHeader = ({ status = "null" }) => {
   return (
     <div className="flex items-center gap-4">
-      <span className="relative z-[2] w-max flex-shrink-0 overflow-hidden rounded-full !border-none bg-gray-900 p-0 text-white">
+      <span className="relative z-[2] hidden w-max flex-shrink-0 overflow-hidden rounded-full !border-none bg-gray-900 p-0 text-white lg:flex">
         {status === "Diterima" && (
           <Image
             src={`/icons/track/disetujui.svg`}
@@ -74,9 +74,9 @@ export const TimelineHeader = ({ status = "null" }) => {
 
 export const TimelineItem = ({ date = "3 November 2021", children }) => {
   return (
-    <div className="flex gap-2">
-      <div className="flex w-[150px] min-w-fit flex-col">
-        <p className="text-dark-09">{date}</p>
+    <div className="flex flex-col gap-2 lg:flex-row lg:flex-wrap">
+      <div className="flex w-[150px] flex-col ">
+        <p className="text-dark-09">{date || "Not Yet"}</p>
         <span className="grow"></span>
       </div>
       <li className="relative flex grow flex-col gap-1 ">{children}</li>
@@ -86,11 +86,8 @@ export const TimelineItem = ({ date = "3 November 2021", children }) => {
 
 export const TimelineContent = ({ children, className }) => {
   return (
-    <div className={twMerge("flex w-full gap-3 pb-8", className)}>
-      <span
-        className="pointer-events-none invisible h-full flex-shrink-0"
-        style={{ width: "24px" }}
-      ></span>
+    <div className={twMerge("flex w-full gap-3 pb-8 ", className)}>
+      <span className="pointer-events-none invisible hidden h-full w-3 flex-shrink-0 lg:flex lg:w-6"></span>
       {children}
     </div>
   );
