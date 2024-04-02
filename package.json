@@ -3,11 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev  -p 3001",
     "build": "next build",
-    "start": "next start",
+    "start": "next start -p 3001",
     "lint": "next lint",
-    "pm2": "pm2 start npm --name sippm -- start -- -p 3000"
+    "pm2": "pm2 start npm --name sippm -- start -- -p 3001"
   },
   "dependencies": {
     "@material-tailwind/react": "^2.1.8",
