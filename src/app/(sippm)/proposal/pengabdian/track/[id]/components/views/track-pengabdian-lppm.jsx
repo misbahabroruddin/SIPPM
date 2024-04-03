@@ -8,16 +8,16 @@ import { capitalFirtsLatter } from "@/lib/utils/capitalizeFirstLetter";
 import { Tabs } from "../tabs";
 import { InnerTabs } from "../inner-tabs";
 import { useQueryDetailPengabdian } from "@/handlers/lppm/pengabdian/query-get-detail-pengabdian";
-import { SectionHeaderDetailProposal } from "../section-header-detail-proposal";
 import { DetailIdentitasUsulan } from "../detail-identitas-usulan";
-import { DetailAnggota } from "../detail-anggota";
-import { DetailTargetCapaian } from "../detail-target-capaian";
-import { DetailRencanaAnggaran } from "../detail-rencana-anggaran";
-import { DetailRincianKegiatan } from "../detail-rincian-kegiatan";
-import { DetailBerkas } from "../detail-berkas";
 import { Timeline } from "@/components/timeline";
 import { TrackRiwayatLPPM } from "@/components/riwayat/lppm/riwayat-lppm";
 import { useQueryGetRiwayatVerikasiLPPM } from "@/handlers/lppm/riwayat/query-get-verifikasi-proposal-lppm";
+import { SectionHeaderDetailProposal } from "@/components/proposal/track/section-header-detail-proposal";
+import { DetailTargetCapaian } from "@/components/proposal/track/track-detail-target-capaian";
+import { DetailRencanaAnggaran } from "@/components/proposal/track/detail-rencana-anggaran";
+import { DetailRincianKegiatan } from "@/components/proposal/track/detail-rincian-kegiatan";
+import { DetailBerkas } from "@/components/proposal/track/detail-berkas";
+import { DetailAnggota } from "@/components/proposal/track/detail-anggota";
 
 export default function TrackPengabdianLPPMPage() {
   const [tabActive] = useState("dokumen");

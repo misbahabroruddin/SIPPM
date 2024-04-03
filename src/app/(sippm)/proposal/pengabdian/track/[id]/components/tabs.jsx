@@ -54,6 +54,8 @@ export const Tabs = ({ tabActive }) => {
             tabActive={tabActive}
             iconSrc={icon}
             onClick={func}
+            className="text-sm lg:text-base"
+            tabActiveClass="text-sm lg:text-base"
           />
         );
       })}

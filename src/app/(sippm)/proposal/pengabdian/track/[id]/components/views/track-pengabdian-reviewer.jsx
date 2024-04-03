@@ -4,25 +4,23 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 import { BasePageTitle } from "@/components/base-page-title";
 import { capitalFirtsLatter } from "@/lib/utils/capitalizeFirstLetter";
-import { SectionHeaderDetailProposal } from "../section-header-detail-proposal";
 import { Tabs } from "../tabs";
 import { useState } from "react";
 import { InnerTabs } from "../inner-tabs";
 import { DetailIdentitasUsulan } from "../detail-identitas-usulan";
-import { DetailAnggota } from "../detail-anggota";
-import { DetailTargetCapaian } from "../detail-target-capaian";
-import { DetailRencanaAnggaran } from "../detail-rencana-anggaran";
-import { DetailRincianKegiatan } from "../detail-rincian-kegiatan";
 import { useQueryDetailPengabdianReviewer } from "@/handlers/lppm/pengabdian/query-get-detail-pengabdian-reviewer";
-import { DetailBerkasReviewer } from "../detail-berkas-reviewer";
 import { Timeline } from "@/components/timeline";
 import { TrackRiwayatReviewer } from "@/components/riwayat/reviewer/riwayat-reviewer";
-import { TrackRiwayatLPPM } from "@/components/riwayat/lppm/riwayat-lppm";
 import { ButtonBeranda } from "@/components/button/button-beranda";
-import { useQueryGetRiwayatVerikasiLPPM } from "@/handlers/lppm/riwayat/query-get-verifikasi-proposal-lppm";
 import { useQueryGetRiwayatVerikasiReviewer } from "@/handlers/reviewer/riwayat/query-get-verifikasi-proposal-reviewer";
 import { useQueryGetRiwayatVerikasiReviewerLppm } from "@/handlers/reviewer/riwayat/query-get-verifikasi-proposal-reviewer-lppm";
 import { TrackRiwayatReviewerLPPM } from "@/components/riwayat/reviewer/riwayat-reviewer-lppm";
+import { SectionHeaderDetailProposal } from "@/components/proposal/track/section-header-detail-proposal";
+import { DetailTargetCapaian } from "@/components/proposal/track/track-detail-target-capaian";
+import { DetailRencanaAnggaran } from "@/components/proposal/track/detail-rencana-anggaran";
+import { DetailRincianKegiatan } from "@/components/proposal/track/detail-rincian-kegiatan";
+import { DetailBerkasReviewer } from "@/components/proposal/track/detail-berkas-reviewer";
+import { DetailAnggota } from "@/components/proposal/track/detail-anggota";
 
 export default function TrackPengabdianReviewerPage() {
   const [tabActive] = useState("dokumen");

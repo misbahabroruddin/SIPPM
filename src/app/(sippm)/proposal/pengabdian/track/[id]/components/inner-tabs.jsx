@@ -57,7 +57,7 @@ export const InnerTabs = ({ tabActive }) => {
   };
 
   return (
-    <div className="flex gap-2">
+    <div className="flex flex-wrap gap-2">
       {tabs.map(({ id, name, icon, func }) => {
         return (
           <Tab
@@ -65,8 +65,8 @@ export const InnerTabs = ({ tabActive }) => {
             tabName={name}
             tabActive={tabActive}
             onClick={func}
-            className="rounded rounded-bl-none rounded-br-none border-none bg-[#10487A] text-white outline-none"
-            tabActiveClass="rounded rounded-bl-none rounded-br-none border border-b-0 border-blue-primary bg-white text-black"
+            className="rounded rounded-bl-none rounded-br-none border-none bg-[#10487A] text-sm text-white outline-none lg:w-fit lg:text-base"
+            tabActiveClass="rounded rounded-bl-none rounded-br-none border border-b-0 border-blue-primary bg-white text-black w-fit lg:w-fit text-sm lg:text-base"
           />
         );
       })}
