@@ -46,7 +46,7 @@ export const TableDetailRincianKegiatan = ({ data }) => {
                   {row.kegiatan}
                 </Typography>
               </td>
-              <td className="w-[100px] p-2 text-center lg:w-fit lg:p-3">
+              <td className="w-[100px] p-2 lg:w-fit lg:p-3">
                 <Typography
                   color="blue-gray"
                   className="text-sm font-normal lg:text-base"

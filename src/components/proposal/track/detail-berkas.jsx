@@ -1,7 +1,7 @@
 "use client";
 
 import { DetailListBerkas } from "./detail-list-berkas";
-import { FormVerifikasiUsulan } from "./form-verifikasi-usulan";
+import { FormVerifikasiUsulan } from "./form-verifikasi-usulan-lppm";
 
 export const DetailBerkas = ({ data }) => {
   return (
