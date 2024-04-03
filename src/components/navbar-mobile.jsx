@@ -87,49 +87,15 @@ export const NavbarMobile = () => {
                     height={100}
                     alt="UNSIA"
                   />
-                  <Image
-                    src="/logo-unsia.svg"
-                    className="hidden w-6 lg:block"
-                    width={25}
-                    height={25}
-                    alt="UNSIA"
-                  />
                 </div>
               </Link>
-              <Chevron
-                onClick={toggleSidebarMobile}
-                className="hidden lg:block "
-              />
               <Chevron
                 onClick={toggleSidebarMobile}
                 className="block lg:hidden"
               />
             </>
           ) : (
-            <>
-              <Link
-                href="/"
-                className="hidden transition-all duration-200 lg:block"
-              >
-                <div className="flex items-center gap-3">
-                  <Image
-                    src="/logo-unsia.png"
-                    className="block w-[92px] lg:hidden"
-                    width={92}
-                    height={100}
-                    alt="UNSIA"
-                  />
-                  <Image
-                    src="/logo-unsia.svg"
-                    className="block w-6"
-                    width={25}
-                    height={25}
-                    alt="UNSIA"
-                  />
-                </div>
-              </Link>
-              <HamburgerMenu onClick={toggleSidebarMobile} />
-            </>
+            <HamburgerMenu onClick={toggleSidebarMobile} />
           )}
         </div>
         <div className="mr-[7px] block">

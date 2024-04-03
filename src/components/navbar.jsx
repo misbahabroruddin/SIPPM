@@ -86,20 +86,9 @@ export const Navbar = () => {
                     height={107}
                     alt="UNSIA"
                   />
-                  <Image
-                    src="/logo-unsia.svg"
-                    className="block w-6 lg:hidden"
-                    width={25}
-                    height={25}
-                    alt="UNSIA"
-                  />
                 </div>
               </Link>
               <Chevron onClick={toggleSidebar} className="hidden lg:block " />
-              <HamburgerMenu
-                onClick={toggleSidebar}
-                className="block lg:hidden"
-              />
             </>
           ) : (
             <>
@@ -108,13 +97,6 @@ export const Navbar = () => {
                 className="hidden transition-all duration-200 lg:block"
               >
                 <div className="flex items-center gap-3">
-                  <Image
-                    src="/logo-unsia.png"
-                    className="block w-[92px] lg:hidden"
-                    width={92}
-                    height={107}
-                    alt="UNSIA"
-                  />
                   <Image
                     src="/logo-unsia.svg"
                     className="block w-6"
