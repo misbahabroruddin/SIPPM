@@ -1,4 +1,6 @@
 "use client";
+import Image from "next/image";
+import Link from "next/link";
 
 import { ButtonStatus } from "@/components/button/button-status";
 import { CardDashboard } from "@/components/card/card-dashboard";
@@ -6,8 +8,6 @@ import { EmptyState } from "@/components/empty-state";
 import { Pagination } from "@/components/pagination";
 import { SkeletonListingProposal } from "@/components/skeleton/skeleton-listing-proposal";
 import { convertDate } from "@/lib/utils/convertDate";
-import Image from "next/image";
-import Link from "next/link";
 
 export const ListPengabdianProposalLPPM = ({
   pengabdian,
@@ -17,12 +17,14 @@ export const ListPengabdianProposalLPPM = ({
   jumlahPengabdianDisetujui,
   jumlahPengabdianRevisi,
   jumlahPengabdianDitolak,
+  jumlahPengabdianPending,
   handlePagePengabdianChange,
 }) => {
   if (isLoading) return <SkeletonListingProposal />;
   return (
     <div className="flex flex-col gap-2">
-      <div className="flex gap-4">
+      <div className="flex flex-wrap gap-2 lg:flex-nowrap">
+        <CardDashboard jumlah={jumlahPengabdianPending} status="Pending" />
         <CardDashboard jumlah={jumlahPengabdianDisetujui} />
         <CardDashboard status="Revisi" jumlah={jumlahPengabdianRevisi} />
         <CardDashboard status="Ditolak" jumlah={jumlahPengabdianDitolak} />
@@ -57,10 +59,10 @@ export const ListPengabdianProposalLPPM = ({
 
 const ListItem = ({ data, currentTab, tabActive }) => {
   return (
-    <div className="rounded-lg px-6 py-4 shadow-custom">
-      <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between">
+    <div className="rounded-lg p-3 shadow-custom lg:px-6 lg:py-4">
+      <div className="flex flex-col gap-2 lg:flex-row lg:items-center lg:justify-between">
         <div className="flex w-fit flex-col gap-1 lg:max-w-[731px]">
-          <h2 className="text-lg">{data?.judul}</h2>
+          <h2 className="text-base lg:text-lg">{data?.judul}</h2>
           <div className="flex flex-wrap gap-x-4 gap-y-2">
             <div className="flex items-center gap-[2px]">
               <Image
@@ -97,16 +99,16 @@ const ListItem = ({ data, currentTab, tabActive }) => {
             </div>
           </div>
         </div>
-        <div className="flex items-end gap-4">
+        <div className="flex flex-wrap items-end justify-center gap-4 lg:flex-nowrap lg:justify-start">
           <div className="flex flex-col items-center gap-1">
             <p>LPPM</p>
             <ButtonStatus status={data?.status_lppm} />
           </div>
-          <Link href={`/proposal/${currentTab || tabActive}/track/${data?.id}`}>
-            <button
-              className="rounded-lg bg-primary px-7 py-2 text-white disabled:cursor-not-allowed disabled:bg-gray-500"
-              // disabled={data?.status_lppm === "Pending"}
-            >
+          <Link
+            href={`/proposal/${currentTab || tabActive}/track/${data?.id}`}
+            className="w-full lg:w-fit"
+          >
+            <button className="w-full rounded-lg bg-primary px-7 py-2 text-white disabled:cursor-not-allowed disabled:bg-gray-500">
               Detail
             </button>
           </Link>

@@ -55,8 +55,8 @@ export default function ProposalPageLPPM() {
     <ContainerPage>
       <div className="flex flex-col gap-4">
         <BasePageTitle iconSrc="/icons/search-black.svg" title="Proposal" />
-        <div className="flex justify-between">
-          <div className="flex items-center gap-2 lg:gap-4">
+        <div className="flex flex-col justify-between gap-2 lg:flex-row">
+          <div className="flex flex-wrap items-center justify-between gap-2 lg:justify-start lg:gap-4">
             <Tabs tabActive={currentTab || tabActive} />
             <SearchInput
               onChange={(e) => {
@@ -87,6 +87,9 @@ export default function ProposalPageLPPM() {
             jumlahPenelitianRevisi={
               totalProposalPenelitian?.data?.status_lppm?.revisi
             }
+            jumlahPenelitianPending={
+              totalProposalPenelitian?.data?.status_lppm?.pending
+            }
             handlePageChange={handlePageChangePenelitian}
           />
         ) : (
@@ -103,6 +106,9 @@ export default function ProposalPageLPPM() {
             }
             jumlahPengabdianDitolak={
               totalProposalPengabdian?.data?.status_lppm?.ditolak
+            }
+            jumlahPengabdianPending={
+              totalProposalPengabdian?.data?.status_lppm?.pending
             }
             handlePagePengabdianChange={handlePageChangePengabdian}
           />

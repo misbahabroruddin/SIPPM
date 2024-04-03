@@ -3,7 +3,7 @@
 export const SkeletonRiwayat = () => {
   return (
     <div className="flex gap-4">
-      <span className="h-6 w-[180px] min-w-fit animate-pulse rounded bg-gray-200"></span>
+      <span className="hidden h-6 w-[180px] min-w-fit animate-pulse rounded bg-gray-200 lg:block"></span>
       <div className="flex h-80 w-full flex-col gap-2 rounded-lg p-4 shadow-custom">
         <span className="h-4 w-12 min-w-fit animate-pulse rounded bg-gray-200"></span>
         <div className="flex justify-between">
