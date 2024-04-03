@@ -27,7 +27,7 @@ export const SidebarProvider = ({ children }) => {
 
   useEffect(() => {
     window.addEventListener("resize", () => {
-      if (windowSize >= 990) {
+      if (windowSize >= 1140) {
         setWindowSize(window.innerWidth);
         setIsOpen(true);
         setIsSidebarMobileOpen(false);
