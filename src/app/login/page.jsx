@@ -6,11 +6,10 @@ import { toast } from "react-toastify";
 
 export default function Login() {
   const handleLoginSSO = async () => {
-    const response = await signIn("sso", {
+    await signIn("sso", {
       callbackUrl: "/dashboard",
       redirect: false,
     });
-    if (!response) toast.error("Internal server error");
   };
 
   useEffect(() => {
