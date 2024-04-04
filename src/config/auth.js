@@ -55,7 +55,6 @@ export const authOptions = {
       name: "sso",
       type: "oauth",
       version: "2.0",
-      // wellKnown: `${process.env.NEXT_PUBLIC_API_BASE_URL}/authentication/realms/mahasiswa/.well-known/openid-configuration`,
       state: true,
       protection: "state",
       params: { grant_type: "authorization_code" },
@@ -72,6 +71,11 @@ export const authOptions = {
       checks: ["state"],
       async profile(profile, tokens, account) {
         const response = await createSession(tokens);
+        // error handling at backend API
+        if (response.error) {
+          console.log(response.message, "<<<<< ERROR");
+          throw new Error(response.message);
+        }
         return {
           id: profile.data.id,
           name: profile.data.name,
