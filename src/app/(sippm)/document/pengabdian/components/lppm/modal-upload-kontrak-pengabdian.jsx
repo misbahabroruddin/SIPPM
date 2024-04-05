@@ -60,6 +60,7 @@ export const ModalUploadKontrakPengabdian = ({ pengabdianId }) => {
             <ButtonUpload
               className="w-[200px] justify-center rounded"
               isLoading={isPending}
+              disabled={isPending}
             />
           </div>
         </form>
