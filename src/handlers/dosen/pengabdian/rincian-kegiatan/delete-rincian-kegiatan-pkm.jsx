@@ -6,7 +6,7 @@ import { useParams } from "next/navigation";
 
 import { useAxios } from "@/lib/hooks/useAxios";
 
-export const useDeleteRincianKegiatanPKM = (router) => {
+export const useDeleteRincianKegiatanPKM = () => {
   const axios = useAxios();
   const queryClient = useQueryClient();
   const { id } = useParams();
@@ -20,7 +20,6 @@ export const useDeleteRincianKegiatanPKM = (router) => {
         }/rincian-kegiatans/${rincianKegiatanId}`,
       );
       toast.success("Rincian kegiatan berhasil dihapus");
-      router.refresh();
       return data;
     } catch (error) {
       toast.error(error.message);

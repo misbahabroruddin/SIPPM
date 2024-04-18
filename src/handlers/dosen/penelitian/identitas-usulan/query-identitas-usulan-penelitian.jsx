@@ -30,9 +30,9 @@ export const useQueryIdentitasUsulanPenelitian = (setValue) => {
       setValue("tahun_usulan", data?.data.tahun_usulan);
       setValue("jangka_waktu", data?.data.jangka_waktu);
       setValue("ringkasan", data?.data.ringkasan);
-      localStorage.setItem("step", 2);
+      localStorage.setItem("step", 1);
       localStorage.setItem("isEdit", true);
-      if (!step) setCurrentStep(2);
+      if (!step) setCurrentStep(1);
       return data.data;
     } catch (error) {
       toast.error(error.message);

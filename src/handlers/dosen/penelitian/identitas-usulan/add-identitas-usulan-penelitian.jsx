@@ -35,12 +35,11 @@ export const useAddIdentitasUsulanPenelitian = (reset) => {
         if (response.data.data) {
           setCurrentStep(2);
           localStorage.setItem("step", 2);
-          if (isEdit === true) {
+          if (isEdit) {
             localStorage.setItem("isEdit", true);
           } else {
             localStorage.setItem("isEdit", false);
           }
-          localStorage.setItem("penelitianId", response.data.data.id);
           reset();
         }
       } else {
