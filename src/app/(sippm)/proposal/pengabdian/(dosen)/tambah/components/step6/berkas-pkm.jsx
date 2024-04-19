@@ -36,7 +36,9 @@ export const BerkasPKM = () => {
         onSubmit={handleSubmit(uploadBerkas)}
       >
         <div className="flex flex-col gap-4">
-          <h1 className="text-lg font-semibold text-primary">File Proposal</h1>
+          <h1 className="text-base font-semibold text-primary lg:text-lg">
+            File Proposal
+          </h1>
           <InputFile
             register={register("file_proposal", {
               required: "Wajib diisi",
@@ -64,7 +66,7 @@ export const BerkasPKM = () => {
           />
         </div>
         <div className="flex flex-col gap-4">
-          <h1 className="text-lg font-semibold text-primary">
+          <h1 className="text-base font-semibold text-primary lg:text-lg">
             Pernyataan Mitra
           </h1>
           <InputFile
@@ -105,8 +107,15 @@ export const BerkasPKM = () => {
           />
         </div>
         <div className="flex justify-between">
-          <ButtonPrev onClick={handlePrevStep} />
-          <ButtonSave disabled={isPending} isLoading={isPending} />
+          <ButtonPrev
+            onClick={handlePrevStep}
+            className="w-[120px] lg:w-[200px]"
+          />
+          <ButtonSave
+            disabled={isPending}
+            isLoading={isPending}
+            className="w-[120px] lg:w-[200px]"
+          />
         </div>
       </form>
     </ContainerContent>

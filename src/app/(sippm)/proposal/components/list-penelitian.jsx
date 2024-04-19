@@ -157,6 +157,7 @@ const ListItem = ({ data, currentTab, tabActive }) => {
                   onClick={() => {
                     localStorage.setItem("isEdit", true);
                     localStorage.setItem("step", 1);
+                    localStorage.removeItem("penelitianId");
                     setCurrentStep(1);
                   }}
                   disabled={isLoadingDelete}

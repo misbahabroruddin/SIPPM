@@ -6,13 +6,13 @@ import { useForm, Controller } from "react-hook-form";
 import { ButtonNext } from "@/components/button/button-next";
 import { Input } from "@/components/input/input";
 import { ContainerContent } from "@/components/container-content";
-import { useStep } from "@/lib/hooks/useStep";
 import { useQueryIdentitasUsulanPenelitian } from "@/handlers/dosen/penelitian/identitas-usulan/query-identitas-usulan-penelitian";
 import { useQueryJenisPenelitians } from "@/handlers/data-referensi/jenis-penelitian/query-jenis-penelitian";
 import { useQueryRumpunIlmu } from "@/handlers/data-referensi/rumpun-ilmu/query-rumpun-ilmu";
 import { useAddIdentitasUsulanPenelitian } from "@/handlers/dosen/penelitian/identitas-usulan/add-identitas-usulan-penelitian";
 import { SingleSelect } from "@/components/select/single-select";
 import { styles } from "@/lib/utils/style-react-select";
+import { TextArea } from "@/components/input/text-area";
 
 export const IdentitasUsulan = () => {
   const id = useId();
@@ -56,12 +56,14 @@ export const IdentitasUsulan = () => {
     <ContainerContent className="relative">
       <h1 className="text-lg font-semibold text-primary">Identitas Usulan</h1>
       <form onSubmit={handleSubmit(onSubmitIdentitasUsulanPenelitian)}>
-        <div className="flex gap-4 ">
-          <div className="flex grow flex-col gap-4">
+        <div className="flex flex-col gap-2 lg:flex-row lg:gap-4">
+          <div className="flex grow flex-col gap-2 lg:gap-4">
             <Input
               label="Judul Penelitian"
               name="judul"
               placeholder="Judul Penelitian"
+              labelClass={"text-sm font-[500] text-primary w-full lg:w-1/2"}
+              spanEmptyClass={"hidden lg:block lg:w-1/2"}
               register={register("judul", {
                 required: "Wajib diisi",
               })}
@@ -85,6 +87,7 @@ export const IdentitasUsulan = () => {
               id={id}
               isLoading={isLoadingJenisPenelitianOptions}
               styles={styles(selectedJenisPenelitian)}
+              maxMenuHeight={180}
             />
             <SingleSelect
               label={"Rumpun ilmu"}
@@ -100,11 +103,14 @@ export const IdentitasUsulan = () => {
               id={id}
               isLoading={isLoadingRumpunIlmu}
               styles={styles(selectedRumpunIlmu)}
+              maxMenuHeight={180}
             />
             <Input
               label="Bidang Fokus Penelitian"
               name="bidang_fokus"
               placeholder="Bidang Fokus Penelitian"
+              labelClass={"text-sm font-[500] text-primary w-full lg:w-1/2"}
+              spanEmptyClass={"hidden lg:block lg:w-1/2"}
               register={register("bidang_fokus", {
                 required: "Wajib diisi",
               })}
@@ -113,12 +119,14 @@ export const IdentitasUsulan = () => {
               disabled={isLoadingIdentitasUsulanPenelitian}
             />
           </div>
-          <div className="flex grow flex-col gap-4">
+          <div className="flex grow flex-col gap-2 lg:gap-4">
             <Input
               label="Tahun Usulan"
               type="number"
               name="tahun_usulan"
               placeholder="Tahun Usulan"
+              labelClass={"text-sm font-[500] text-primary w-full lg:w-1/2"}
+              spanEmptyClass={"hidden lg:block lg:w-1/2"}
               register={register("tahun_usulan", {
                 required: "Wajib diisi",
                 max: {
@@ -134,27 +142,33 @@ export const IdentitasUsulan = () => {
               label="Jangka Waktu Penelitian"
               name="jangka_waktu"
               placeholder="Jangka Waktu Penelitian"
+              labelClass={"text-sm font-[500] text-primary w-full lg:w-1/2"}
+              spanEmptyClass={"hidden lg:block lg:w-1/2"}
               register={register("jangka_waktu", {
                 required: "Wajib diisi",
               })}
               errors={errors.jangka_waktu}
               required
             />
-            <Input
+            <TextArea
               label="Ringkasan Penelitian"
               name="ringkasan"
-              placeholder="Ringkasan Penelitian"
+              labelClass={"text-sm font-[500] text-primary w-full lg:w-1/2"}
               register={register("ringkasan", {
                 required: "Wajib diisi",
               })}
               errors={errors.ringkasan}
               required
-              disabled={isLoadingIdentitasUsulanPenelitian}
+              spanEmptyClass={"hidden lg:block lg:w-1/2"}
+              placeholder="Ringkasan Penelitian"
             />
           </div>
         </div>
-        <div className="absolute -bottom-16 left-0 flex w-full justify-end">
-          <ButtonNext disabled={isLoadingSubmit} />
+        <div className="absolute -bottom-12 left-0 flex w-full justify-end lg:-bottom-16">
+          <ButtonNext
+            disabled={isLoadingSubmit}
+            className="w-full p-1 lg:w-[200px] lg:p-2"
+          />
         </div>
       </form>
     </ContainerContent>

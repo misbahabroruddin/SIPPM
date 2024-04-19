@@ -2,21 +2,20 @@
 
 import { useEffect, useId } from "react";
 import { useForm, Controller } from "react-hook-form";
-import ReactSelect from "react-select";
 
 import { ButtonNext } from "@/components/button/button-next";
 import { Input } from "@/components/input/input";
-import { Label } from "@/components/label";
 import { ContainerContent } from "@/components/container-content";
-import { useStep } from "@/lib/hooks/useStep";
 import { useQueryRumpunIlmu } from "@/handlers/data-referensi/rumpun-ilmu/query-rumpun-ilmu";
 import { useQueryIdentitasUsulanOnUpdate } from "@/handlers/dosen/pengabdian/identitas-usulan/query-identitas-usulan-pkm-onupdate";
 import { useEditIdentitasUsulanPKM } from "@/handlers/dosen/pengabdian/identitas-usulan/update-identitas-usulan";
 import { SingleSelect } from "@/components/select/single-select";
 import { styles } from "@/lib/utils/style-react-select";
+import { TextArea } from "@/components/input/text-area";
 
 export const IdentitasUsulanPKM = () => {
   const id = useId();
+
   const {
     register,
     handleSubmit,
@@ -48,15 +47,19 @@ export const IdentitasUsulanPKM = () => {
 
   return (
     <ContainerContent className="relative">
-      <h1 className="text-lg font-semibold text-primary">Identitas Usulan</h1>
+      <h1 className="text-base font-semibold text-primary lg:text-lg">
+        Identitas Usulan
+      </h1>
       <form onSubmit={handleSubmit(onEditIdentitasUsulan)}>
-        <div className="flex gap-4 ">
-          <div className="flex grow flex-col gap-4">
+        <div className="flex flex-col gap-2 lg:flex-row lg:gap-4">
+          <div className="flex grow flex-col gap-2 lg:gap-4">
             <Input
               label="Judul PKM"
               name="judul"
               placeholder="Judul PKM"
               defaultValue={identitasUsulan?.judul}
+              labelClass={"text-sm font-[500] text-primary w-full lg:w-1/2"}
+              spanEmptyClass={"hidden lg:block lg:w-1/2"}
               register={register("judul", {
                 required: "Wajib diisi",
               })}
@@ -78,12 +81,15 @@ export const IdentitasUsulanPKM = () => {
               id={id}
               isLoading={isLoadingRumpunIlmu}
               styles={styles(selectedRumpunIlmu)}
+              maxMenuHeight={150}
             />
             <Input
               label="Tahun Usulan"
               type="number"
               name="tahun_usulan"
               placeholder="Tahun Usulan"
+              labelClass={"text-sm font-[500] text-primary w-full lg:w-1/2"}
+              spanEmptyClass={"hidden lg:block lg:w-1/2"}
               defaultValue={identitasUsulan?.tahun_usulan}
               register={register("tahun_usulan", {
                 required: "Wajib diisi",
@@ -102,30 +108,34 @@ export const IdentitasUsulanPKM = () => {
               label="Jangka Waktu PKM"
               name="jangka_waktu"
               placeholder="Jangka Waktu PKM"
+              labelClass={"text-sm font-[500] text-primary w-full lg:w-1/2"}
+              spanEmptyClass={"hidden lg:block lg:w-1/2"}
               defaultValue={identitasUsulan?.jangka_waktu}
               register={register("jangka_waktu", {
                 required: "Wajib diisi",
               })}
               errors={errors.jangka_waktu}
               required
-              disabled={isLoadingIdentitasUsulan}
             />
-            <Input
+            <TextArea
               label="Ringkasan PKM"
               name="ringkasan"
-              placeholder="Ringkasan PKM"
-              defaultValue={identitasUsulan?.ringkasan}
+              labelClass={"text-sm font-[500] text-primary w-full lg:w-1/2"}
               register={register("ringkasan", {
                 required: "Wajib diisi",
               })}
               errors={errors.ringkasan}
               required
-              disabled={isLoadingIdentitasUsulan}
+              spanEmptyClass={"hidden lg:block lg:w-1/2"}
+              placeholder="Ringkasan PKM"
             />
           </div>
         </div>
         <div className="absolute -bottom-16 left-0 flex w-full justify-end">
-          <ButtonNext disabled={isLoadingEdit} />
+          <ButtonNext
+            disabled={isLoadingEdit}
+            className="w-full p-1 lg:w-[200px] lg:p-2"
+          />
         </div>
       </form>
     </ContainerContent>

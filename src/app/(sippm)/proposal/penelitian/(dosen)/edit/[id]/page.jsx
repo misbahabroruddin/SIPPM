@@ -16,7 +16,6 @@ import { Berkas } from "./components/step6/berkas";
 export default function EditPenelitianPage() {
   const {
     currentStep,
-    setCurrentStep,
     isFirstStep,
     setIsFirstStep,
     isLastStep,
@@ -25,8 +24,8 @@ export default function EditPenelitianPage() {
 
   return (
     <ContainerPage>
-      <div className='flex flex-col gap-4'>
-        <BasePageTitle iconSrc='/icons/users.svg' title='Proposal' />
+      <div className="flex flex-col gap-2 lg:gap-4">
+        <BasePageTitle iconSrc="/icons/users.svg" title="Proposal" />
         <ContainerContent>
           <Stepper
             steps={steps}
@@ -37,7 +36,7 @@ export default function EditPenelitianPage() {
             isLastStep={isLastStep}
           />
           <div
-            className={`flex flex-col gap-4  mt-14 ${
+            className={`mt-0 flex flex-col gap-4  lg:mt-14 ${
               currentStep !== 6 ? "mb-16" : ""
             }`}
           >

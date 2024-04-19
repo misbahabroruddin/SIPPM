@@ -36,10 +36,12 @@ export const Berkas = () => {
         onSubmit={handleSubmit(uploadBerkas)}
       >
         <div className="flex flex-col gap-4">
-          <h1 className="text-lg font-semibold text-primary">File Proposal</h1>
+          <h1 className="text-base font-semibold text-primary lg:text-lg">
+            File Proposal
+          </h1>
           <InputFile
             register={register("file_proposal", {
-              required: "Harus diisi",
+              required: "Wajib diisi!",
               validate: {
                 acceptedFormat: (file) => {
                   if (!file || !file[0]) {
@@ -64,7 +66,7 @@ export const Berkas = () => {
           />
         </div>
         <div className="flex flex-col gap-4">
-          <h1 className="text-lg font-semibold text-primary">
+          <h1 className="text-base font-semibold text-primary lg:text-lg">
             Pernyataan Mitra
           </h1>
           <InputFile
@@ -76,10 +78,12 @@ export const Berkas = () => {
           />
         </div>
         <div className="flex flex-col gap-4">
-          <h1 className="text-lg font-semibold text-primary">CV</h1>
+          <h1 className="text-base font-semibold text-primary lg:text-lg">
+            CV
+          </h1>
           <InputFile
             register={register("file_cv", {
-              required: "Harus diisi",
+              required: "Wajib diisi!",
               validate: {
                 acceptedFormat: (file) => {
                   if (!file || !file[0]) {
@@ -104,8 +108,15 @@ export const Berkas = () => {
           />
         </div>
         <div className="flex justify-between">
-          <ButtonPrev onClick={handlePrevStep} />
-          <ButtonSave disabled={isLoadingSubmit} isLoading={isLoadingSubmit} />
+          <ButtonPrev
+            onClick={handlePrevStep}
+            className="w-[120px] lg:w-[200px]"
+          />
+          <ButtonSave
+            disabled={isLoadingSubmit}
+            isLoading={isLoadingSubmit}
+            className="w-[120px] lg:w-[200px]"
+          />
         </div>
       </form>
     </ContainerContent>
