@@ -87,7 +87,7 @@ export const Input = ({
       {errors && (
         <div className="flex">
           <span className={twMerge("w-1/2", spanEmptyClass)}></span>
-          <span className="w-full text-sm text-red-600">
+          <span className="w-full text-start text-sm text-red-600">
             * {errors?.message}
           </span>
         </div>

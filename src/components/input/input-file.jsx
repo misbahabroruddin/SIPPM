@@ -25,7 +25,7 @@ export const InputFile = ({
     <label
       htmlFor={name}
       className={twMerge(
-        "relative flex cursor-pointer items-center justify-center rounded-lg border border-gray-100 p-6",
+        "relative flex cursor-pointer items-center justify-center rounded-lg border border-gray-100 p-6 text-sm lg:text-base",
         errors && "border-red-500",
       )}
     >
@@ -35,6 +35,7 @@ export const InputFile = ({
           width={40}
           height={40}
           alt="file"
+          className="h-7 w-7 lg:h-10 lg:w-10"
         />
         <label htmlFor={name} className="cursor-pointer text-center">
           {preview ? preview : "Select File"}

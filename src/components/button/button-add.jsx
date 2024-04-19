@@ -24,7 +24,7 @@ export const ButtonAdd = ({
         height={24}
         alt="tab"
       />
-      <p className="hidden lg:block">{text}</p>
+      <p>{text}</p>
     </button>
   );
 };

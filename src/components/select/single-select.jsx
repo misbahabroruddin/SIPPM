@@ -21,12 +21,20 @@ export const SingleSelect = ({
   defaultValue,
   hideSelectedOptions,
   spanEmptyClass,
+  maxMenuHeight = 100,
   ...props
 }) => {
   return (
     <div className="flex flex-col">
       <div className="flex flex-col items-start gap-1 lg:flex-row lg:items-center lg:gap-0">
-        {label && <Label htmlFor={name} text={label} required={required} />}
+        {label && (
+          <Label
+            htmlFor={name}
+            text={label}
+            required={required}
+            className={"w-full text-sm font-[500] text-primary lg:w-1/2"}
+          />
+        )}
         <div className="flex w-full flex-col">
           <Controller
             name={name}
@@ -60,6 +68,7 @@ export const SingleSelect = ({
                 isDisabled={isDisabled ? isDisabled : isLoading}
                 defaultValue={defaultValue}
                 hideSelectedOptions={hideSelectedOptions}
+                maxMenuHeight={maxMenuHeight}
                 {...props}
               />
             )}
