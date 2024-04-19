@@ -55,9 +55,6 @@ export const FormRincianKegiatanPKM = ({ onClose, id }) => {
     } else {
       clearErrors("waktu");
     }
-
-    console.log(startDate);
-    console.log(endDate);
   }, [isDisabled]);
 
   return (
