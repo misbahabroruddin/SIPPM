@@ -1,15 +1,14 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
+import { twMerge } from "tailwind-merge";
 
 import { EmptyState } from "@/components/empty-state";
 import { SkeletonListingProposal } from "@/components/skeleton/skeleton-listing-proposal";
 import { Pagination } from "@/components/pagination";
 import { ButtonDownload } from "@/components/button/button-download";
 import { convertDate } from "@/lib/utils/convertDate";
-import { ButtonUpload } from "@/components/button/button-upload";
 import { ModalUploadKontrakPenelitian } from "./modal-upload-kontrak-penelitian";
-import { twMerge } from "tailwind-merge";
 
 export const ListPenelitianKontrakDosen = ({
   penelitian,
@@ -19,7 +18,7 @@ export const ListPenelitianKontrakDosen = ({
   if (isLoading) return <SkeletonListingProposal />;
   return (
     <div className="flex flex-col gap-4">
-      <div className="flex h-[580px] flex-col gap-4 overflow-auto p-1">
+      <div className="flex h-[380px] flex-col gap-4 overflow-auto p-1 md:h-[450px] lg:h-[580px]">
         {penelitian?.data?.length ? (
           penelitian?.data?.map((proposal) => (
             <ListItemKontrak key={proposal.id} data={proposal} />
@@ -46,7 +45,7 @@ const ListItemKontrak = ({ data }) => {
   if (data?.dokumen_kontrak?.status === "Menunggu") {
     buttonClass = "bg-red-07 text-white";
   } else if (data?.dokumen_kontrak?.status === "Diterima") {
-    buttonClass = "bg-blue-primary text-white";
+    buttonClass = "bg-[#D5FACC] text-[#23B900]";
   } else if (data?.dokumen_kontrak?.status === "Dibalas") {
     buttonClass = "bg-sky-05 text-white";
   } else {
@@ -65,8 +64,11 @@ const ListItemKontrak = ({ data }) => {
                   height={24}
                   width={24}
                   alt="author"
+                  className="h-5 w-5"
                 />
-                <p className="text-sm text-[#999999]">{data?.user?.name}</p>
+                <p className="text-xs text-[#999999] md:text-sm">
+                  {data?.user?.name}
+                </p>
               </div>
               <div className="flex items-center gap-[2px]">
                 <Image
@@ -74,8 +76,9 @@ const ListItemKontrak = ({ data }) => {
                   height={24}
                   width={24}
                   alt="tanggal"
+                  className="h-5 w-5"
                 />
-                <p className="text-sm text-[#999999]">
+                <p className="text-xs text-[#999999] md:text-sm">
                   {convertDate(data?.created_at)}
                 </p>
               </div>
@@ -86,24 +89,24 @@ const ListItemKontrak = ({ data }) => {
                   src="/icons/Book.svg"
                   height={24}
                   width={24}
-                  alt="mata kuliah"
+                  alt="Program studi"
+                  className="h-5 w-5"
                 />
-                <p className="text-sm text-[#999999]">
+                <p className="text-xs text-[#999999] md:text-sm">
                   {data?.user?.biodata?.program_studi?.nama}
                 </p>
               </div>
             </div>
           </div>
         </div>
-        <div className="flex items-end gap-4">
+        <div className="flex w-full flex-wrap items-end justify-center gap-4">
           {data?.dokumen_kontrak?.status === "Menunggu" ? (
             <>
               <ModalUploadKontrakPenelitian penelitianId={data?.id} />
               <Link
-                // onClick={handleSaveFile}
                 href={data?.dokumen_kontrak?.file_kontrak?.url}
                 target="_blank"
-                className="flex items-center gap-2 rounded-lg bg-primary text-white disabled:cursor-not-allowed disabled:bg-gray-500"
+                className="order-2 flex w-full items-center justify-center gap-2 rounded-lg bg-primary text-white disabled:cursor-not-allowed disabled:bg-gray-500 lg:order-none lg:w-fit"
               >
                 <ButtonDownload />
               </Link>
@@ -115,7 +118,7 @@ const ListItemKontrak = ({ data }) => {
               <Link
                 href={data?.dokumen_kontrak?.file_kontrak?.url}
                 target="_blank"
-                className="flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-white disabled:cursor-not-allowed disabled:bg-gray-500"
+                className="order-2 flex w-full items-center justify-center gap-2 rounded-lg bg-primary px-4 py-2 text-white disabled:cursor-not-allowed disabled:bg-gray-500 lg:order-none lg:w-fit"
               >
                 Detail
               </Link>
@@ -126,12 +129,12 @@ const ListItemKontrak = ({ data }) => {
               // onClick={handleSaveFile}
               href={data?.dokumen_kontrak?.file_kontrak?.url}
               target="_blank"
-              className="flex items-center gap-2 rounded-lg bg-primary text-white disabled:cursor-not-allowed disabled:bg-gray-500"
+              className="order-2 flex w-full items-center justify-center gap-2 rounded-lg bg-primary text-white disabled:cursor-not-allowed disabled:bg-gray-500 lg:order-none lg:w-fit"
             >
-              <ButtonDownload />
+              <ButtonDownload className="px-2 py-1 md:px-4" />
             </Link>
           ) : null}
-          <div className="flex flex-col items-center gap-[2px] px-8 font-[500]">
+          <div className="order-1 flex flex-col items-center gap-[2px] px-8 font-[500] lg:order-none">
             <p className="text-sm text-primary">Status</p>
             <p className={twMerge("rounded-lg px-2 py-1", buttonClass)}>
               {data?.dokumen_kontrak?.status || "Kontrak Belum Ada"}
