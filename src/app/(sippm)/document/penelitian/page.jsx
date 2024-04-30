@@ -9,10 +9,12 @@ import { DOSEN, LPPM } from "@/lib/constants/role";
 
 const DocumentPenelitianLPPM = dynamic(
   () => import("./components/views/document-penelitian-lppm"),
+  { ssr: false },
 );
 
 const DocumentPenelitianDosen = dynamic(
   () => import("./components/views/document-penelitian-dosen"),
+  { ssr: false },
 );
 
 export default function DocumentPage() {

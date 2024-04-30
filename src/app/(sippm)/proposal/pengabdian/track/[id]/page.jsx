@@ -8,10 +8,12 @@ import TrackPengabdianReviewerPage from "./components/views/track-pengabdian-rev
 
 const TrackPengabdianDosenPage = dynamic(
   () => import("./components/views/track-pengabdian-dosen"),
+  { ssr: false },
 );
 
 const TrackPengabdianLPPMPage = dynamic(
   () => import("./components/views/track-pengabdian-lppm"),
+  { ssr: false },
 );
 
 export default async function PageTrackProposal() {

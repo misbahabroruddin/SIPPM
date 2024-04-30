@@ -6,6 +6,7 @@ import { LPPM } from "@/lib/constants/role";
 
 const DosenPageLPPM = dynamic(
   () => import("./components/views/dosen-page-lppm"),
+  { ssr: false },
 );
 
 export default async function DosenPage() {

@@ -3,11 +3,13 @@ import { getServerSession } from "next-auth";
 import dynamic from "next/dynamic";
 
 import { DOSEN } from "@/lib/constants/role";
-const BiodataPageDosen = dynamic(() =>
-  import("./components/views/biodata-page-dosen")
+const BiodataPageDosen = dynamic(
+  () => import("./components/views/biodata-page-dosen"),
+  { ssr: false },
 );
-const BiodataPageAdministrator = dynamic(() =>
-  import("./components/views/biodata-page-administrator")
+const BiodataPageAdministrator = dynamic(
+  () => import("./components/views/biodata-page-administrator"),
+  { ssr: false },
 );
 
 export default async function BiodataPage() {

@@ -7,14 +7,17 @@ import { DOSEN, LPPM, REVIEWER } from "@/lib/constants/role";
 
 const TrackPenelitianDosenPage = dynamic(
   () => import("./components/views/track-penelitian-dosen"),
+  { ssr: false },
 );
 
 const TrackPenelitianLPPMPage = dynamic(
   () => import("./components/views/track-penelitian-lppm"),
+  { ssr: false },
 );
 
 const TrackPenelitianReviewerPage = dynamic(
   () => import("./components/views/track-penelitian-reviewer"),
+  { ssr: false },
 );
 
 export default async function TrackPenelitianPage() {
