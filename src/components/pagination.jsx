@@ -15,12 +15,14 @@ export function Pagination({ onPageChange, pageCount, perPage, pageOffset }) {
         onPageChange={onPageChange}
         pageCount={pageCount}
         renderOnZeroPageCount={null}
-        containerClassName="flex items-center border border-blue-09 rounded-lg"
+        containerClassName="flex items-center border border-blue-09 lg:rounded-lg"
         pageClassName="px-2 py-1 lg:px-4 lg:py-2 border border-y-0 border-blue-09 text-blue-04"
         activeClassName="bg-primary !text-white border border-primary"
         forcePage={pageOffset}
         marginPagesDisplayed={3}
         disableInitialCallback={true}
+        nextClassName="hidden lg:list-item"
+        previousClassName="hidden lg:list-item"
       />
     </div>
   );

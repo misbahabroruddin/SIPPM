@@ -7,15 +7,15 @@ export const ButtonDownload = ({ onClick, className, ...props }) => {
   return (
     <button
       className={twMerge(
-        "flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-white disabled:cursor-not-allowed disabled:bg-gray-500",
+        "flex items-center gap-1 rounded-lg bg-primary px-4 py-2 text-white disabled:cursor-not-allowed disabled:bg-gray-500",
         className,
       )}
       onClick={onClick}
       {...props}
     >
       <svg
-        width="25"
-        height="25"
+        width="23"
+        height="23"
         viewBox="0 0 25 25"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
@@ -25,7 +25,7 @@ export const ButtonDownload = ({ onClick, className, ...props }) => {
           fill="white"
         />
       </svg>
-      <p className="hidden lg:block">Download</p>
+      <p className="text-sm md:text-base">Download</p>
     </button>
   );
 };

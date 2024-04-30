@@ -11,11 +11,11 @@ export const InputFileDokumen = ({
   accept = "application/pdf",
 }) => {
   return (
-    <div className="flex items-center">
+    <div className="flex flex-col items-start gap-2 overflow-hidden lg:flex-row lg:items-center">
       <label
         htmlFor={name}
         className={twMerge(
-          "flex w-2/5 cursor-pointer text-start",
+          "flex w-full cursor-pointer text-start lg:w-2/5",
           errors && "border-red-500",
         )}
       >

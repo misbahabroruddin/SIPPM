@@ -17,8 +17,8 @@ export const ButtonUpload = ({ onClick, className, isLoading, ...props }) => {
         <Spinner className="h-4 w-4" />
       ) : (
         <svg
-          width="25"
-          height="25"
+          width="24"
+          height="24"
           viewBox="0 0 25 25"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
@@ -29,7 +29,7 @@ export const ButtonUpload = ({ onClick, className, isLoading, ...props }) => {
           />
         </svg>
       )}
-      <p className="hidden lg:block">Upload</p>
+      <p className="text-sm md:text-base">Upload</p>
     </button>
   );
 };
