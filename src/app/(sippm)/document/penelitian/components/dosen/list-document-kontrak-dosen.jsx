@@ -18,7 +18,7 @@ export const ListPenelitianKontrakDosen = ({
   if (isLoading) return <SkeletonListingProposal />;
   return (
     <div className="flex flex-col gap-4">
-      <div className="flex h-[380px] flex-col gap-4 overflow-auto p-1 md:h-[450px] lg:h-[580px]">
+      <div className="flex h-[450px] flex-col gap-4 overflow-auto p-1 md:h-[500px] lg:h-[580px]">
         {penelitian?.data?.length ? (
           penelitian?.data?.map((proposal) => (
             <ListItemKontrak key={proposal.id} data={proposal} />
@@ -101,24 +101,30 @@ const ListItemKontrak = ({ data }) => {
         </div>
         <div className="flex w-full flex-wrap items-end justify-center gap-4">
           {data?.dokumen_kontrak?.status === "Menunggu" ? (
-            <>
-              <ModalUploadKontrakPenelitian penelitianId={data?.id} />
+            <div className="order-2 flex w-full flex-wrap items-center justify-center gap-2 lg:order-none lg:flex-nowrap lg:gap-4">
+              <ModalUploadKontrakPenelitian
+                penelitianId={data?.id}
+                buttonClassName="w-full lg:w-fit justify-center px-2 py-1 md:px-4 gap-1 lg:gap-2"
+              />
               <Link
                 href={data?.dokumen_kontrak?.file_kontrak?.url}
                 target="_blank"
                 className="order-2 flex w-full items-center justify-center gap-2 rounded-lg bg-primary text-white disabled:cursor-not-allowed disabled:bg-gray-500 lg:order-none lg:w-fit"
               >
-                <ButtonDownload />
+                <ButtonDownload className="px-2 py-1 md:px-4" />
               </Link>
-            </>
+            </div>
           ) : null}
           {data?.dokumen_kontrak?.status === "Dibalas" ? (
-            <div className="flex items-center gap-4">
-              <ModalUploadKontrakPenelitian penelitianId={data?.id} />
+            <div className="order-2 flex w-full flex-wrap items-center justify-center gap-2 lg:order-none lg:flex-nowrap lg:gap-4">
+              <ModalUploadKontrakPenelitian
+                penelitianId={data?.id}
+                buttonClassName="w-full lg:w-fit justify-center px-2 py-1 md:px-4 gap-1 lg:gap-2"
+              />
               <Link
                 href={data?.dokumen_kontrak?.file_kontrak?.url}
                 target="_blank"
-                className="order-2 flex w-full items-center justify-center gap-2 rounded-lg bg-primary px-4 py-2 text-white disabled:cursor-not-allowed disabled:bg-gray-500 lg:order-none lg:w-fit"
+                className="order-2 flex w-full items-center justify-center gap-2 rounded-lg bg-primary px-2 py-1 text-white disabled:cursor-not-allowed disabled:bg-gray-500 md:px-4 md:py-2 lg:order-none lg:w-fit"
               >
                 Detail
               </Link>
@@ -126,7 +132,6 @@ const ListItemKontrak = ({ data }) => {
           ) : null}
           {data?.dokumen_kontrak?.status === "Diterima" ? (
             <Link
-              // onClick={handleSaveFile}
               href={data?.dokumen_kontrak?.file_kontrak?.url}
               target="_blank"
               className="order-2 flex w-full items-center justify-center gap-2 rounded-lg bg-primary text-white disabled:cursor-not-allowed disabled:bg-gray-500 lg:order-none lg:w-fit"

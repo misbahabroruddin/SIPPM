@@ -8,7 +8,10 @@ import { Modal } from "@/components/modal";
 import { InputFileDokumen } from "@/components/input/input-file-dokumen";
 import { useUploadKontrakPenelitian } from "@/handlers/dosen/dokumen/penelitian/kontrak/upload-kontrak-penelitian";
 
-export const ModalUploadKontrakPenelitian = ({ penelitianId }) => {
+export const ModalUploadKontrakPenelitian = ({
+  penelitianId,
+  buttonClassName,
+}) => {
   const [open, setOpen] = useState(false);
   const {
     register,
@@ -33,7 +36,7 @@ export const ModalUploadKontrakPenelitian = ({ penelitianId }) => {
 
   return (
     <>
-      <ButtonUpload onClick={handleOpenModal} className="h-fit" />
+      <ButtonUpload onClick={handleOpenModal} className={buttonClassName} />
       <Modal
         onClose={() => setOpen(false)}
         open={open}
@@ -56,10 +59,15 @@ export const ModalUploadKontrakPenelitian = ({ penelitianId }) => {
             label={"Upload File Kontrak"}
           />
           <div className="flex justify-evenly">
-            <ButtonCancel iconLeft onClick={handleClosModal} />
+            <ButtonCancel
+              iconLeft
+              onClick={handleClosModal}
+              className="w-[120px] lg:w-[200px]"
+            />
             <ButtonUpload
-              className="w-[200px] justify-center rounded"
+              className="w-[120px] justify-center rounded lg:w-[200px]"
               isLoading={isPending}
+              disabled={isPending}
             />
           </div>
         </form>

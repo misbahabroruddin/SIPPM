@@ -33,7 +33,10 @@ export const ModalUploadKontrakPenelitian = ({ penelitianId }) => {
 
   return (
     <>
-      <ButtonUpload onClick={handleOpenModal} />
+      <ButtonUpload
+        onClick={handleOpenModal}
+        className="order-2 w-full justify-center px-2 py-1 md:px-4 md:py-2 lg:order-none lg:w-fit"
+      />
       <Modal
         onClose={() => setOpen(false)}
         open={open}
@@ -56,10 +59,15 @@ export const ModalUploadKontrakPenelitian = ({ penelitianId }) => {
             label={"File Kontrak Penelitian"}
           />
           <div className="flex justify-evenly">
-            <ButtonCancel iconLeft onClick={handleClosModal} />
+            <ButtonCancel
+              iconLeft
+              onClick={handleClosModal}
+              className="w-[120px] rounded lg:w-[200px]"
+            />
             <ButtonUpload
-              className="w-[200px] justify-center rounded"
+              className="w-[120px] justify-center rounded lg:w-[200px]"
               isLoading={isPending}
+              disabled={isPending}
             />
           </div>
         </form>

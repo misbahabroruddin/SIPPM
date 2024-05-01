@@ -8,7 +8,7 @@ import { InputFileDokumen } from "@/components/input/input-file-dokumen";
 import { Modal } from "@/components/modal";
 import { useUploadSKPengabdian } from "@/handlers/lppm/dokumen/pengabdian/sk/upload-sk-pengabdian";
 
-export const ModalUploadSkPengabdian = ({ pengabdianId }) => {
+export const ModalUploadSkPengabdian = ({ pengabdianId, buttonClassName }) => {
   const [open, setOpen] = useState(false);
   const {
     register,
@@ -32,7 +32,7 @@ export const ModalUploadSkPengabdian = ({ pengabdianId }) => {
 
   return (
     <>
-      <ButtonUpload onClick={handleOpenModal} />
+      <ButtonUpload onClick={handleOpenModal} className={buttonClassName} />
       <Modal
         onClose={() => setOpen(false)}
         open={open}

@@ -1,28 +1,16 @@
 "use client";
 
 import Image from "next/image";
-import FileSaver from "file-saver";
+import Link from "next/link";
 
 import { convertDate } from "@/lib/utils/convertDate";
-import { ModalUploadKontrakPenelitian } from "./modal-upload-kontrak-penelitian";
-import Link from "next/link";
-import { ButtonDownload } from "@/components/button/button-download";
 
 export const ListItemKontrakDiterima = ({ data }) => {
-  // const handleSaveFile = () => {
-  //   var blob = new Blob([data?.dokumen_kontrak?.file_kontrak?.url], {type: "application/pdf"});
-  //   FileSaver.saveAs(
-  //     blob,
-  //     data?.dokumen_kontrak?.file_kontrak?.nama,
-  //     "application/pdf",
-  //   );
-  // };
-
   return (
     <div className="rounded-lg px-6 py-4 shadow-custom" key={data?.id}>
-      <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between">
+      <div className="flex flex-col gap-y-3 lg:flex-row lg:items-center lg:justify-between">
         <div className="flex w-fit flex-col gap-1 lg:max-w-[731px]">
-          <h2 className="text-lg">{data?.judul}</h2>
+          <h2 className="text-base lg:text-lg">{data?.judul}</h2>
           <div className="flex flex-col gap-2">
             <div className="flex flex-wrap gap-x-4 gap-y-2">
               <div className="flex items-center gap-[2px]">
@@ -31,8 +19,11 @@ export const ListItemKontrakDiterima = ({ data }) => {
                   height={24}
                   width={24}
                   alt="author"
+                  className="h-5 w-5"
                 />
-                <p className="text-sm text-[#999999]">{data?.user?.name}</p>
+                <p className="text-xs text-[#999999] md:text-sm">
+                  {data?.user?.name}
+                </p>
               </div>
               <div className="flex items-center gap-[2px]">
                 <Image
@@ -40,8 +31,9 @@ export const ListItemKontrakDiterima = ({ data }) => {
                   height={24}
                   width={24}
                   alt="tanggal"
+                  className="h-5 w-5"
                 />
-                <p className="text-sm text-[#999999]">
+                <p className="text-xs text-[#999999] md:text-sm">
                   {convertDate(data?.created_at)}
                 </p>
               </div>
@@ -52,33 +44,24 @@ export const ListItemKontrakDiterima = ({ data }) => {
                   src="/icons/Book.svg"
                   height={24}
                   width={24}
-                  alt="mata kuliah"
+                  alt="Program studi"
+                  className="h-5 w-5"
                 />
-                <p className="text-sm text-[#999999]">
+                <p className="text-xs text-[#999999] md:text-sm">
                   {data?.user?.biodata?.program_studi?.nama}
                 </p>
               </div>
-              {/* <div className="flex items-center gap-[2px]">
-                <Image
-                  src="/icons/date-edit.svg"
-                  height={24}
-                  width={24}
-                  alt="tanggal"
-                />
-                <p className="text-sm text-[#999999]">{data?.tahun_ajaran}</p>
-              </div> */}
             </div>
           </div>
         </div>
-        <div className="flex items-end gap-4">
+        <div className="flex items-end justify-center gap-4">
           {data?.dokumen_kontrak?.status === "Diterima" ? (
             <Link
-              // onClick={handleSaveFile}
               href={data?.dokumen_kontrak?.file_kontrak?.url}
               target="_blank"
-              className="flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-white disabled:cursor-not-allowed disabled:bg-gray-500"
+              className="flex w-full items-center justify-center gap-2 rounded-lg bg-primary px-2 py-1 text-white disabled:cursor-not-allowed disabled:bg-gray-500 md:px-4 md:py-2 lg:w-fit"
             >
-              Detail
+              <span>Detail</span>
             </Link>
           ) : null}
         </div>

@@ -8,7 +8,7 @@ import { InputFileDokumen } from "@/components/input/input-file-dokumen";
 import { Modal } from "@/components/modal";
 import { useUploadSKPenelitian } from "@/handlers/lppm/dokumen/penelitian/sk/upload-sk-penelitian";
 
-export const ModalUploadSkPenelitian = ({ penelitianId }) => {
+export const ModalUploadSkPenelitian = ({ penelitianId, buttonClassName }) => {
   const [open, setOpen] = useState(false);
   const {
     register,
@@ -32,7 +32,7 @@ export const ModalUploadSkPenelitian = ({ penelitianId }) => {
 
   return (
     <>
-      <ButtonUpload onClick={handleOpenModal} className="h-fit" />
+      <ButtonUpload onClick={handleOpenModal} className={buttonClassName} />
       <Modal
         onClose={() => setOpen(false)}
         open={open}
@@ -53,11 +53,16 @@ export const ModalUploadSkPenelitian = ({ penelitianId }) => {
             errors={errors.file_sk}
             label={"Upload file SK"}
           />
-          <div className="flex justify-evenly">
-            <ButtonCancel iconLeft onClick={handleClosModal} />
+          <div className="flex flex-wrap justify-evenly gap-2">
+            <ButtonCancel
+              iconLeft
+              onClick={handleClosModal}
+              className="w-[120px] justify-center lg:w-[200px]"
+            />
             <ButtonUpload
-              className="w-[200px] justify-center"
+              className="w-[120px] justify-center rounded lg:w-[200px]"
               isLoading={isPending}
+              disabled={isPending}
             />
           </div>
         </form>
