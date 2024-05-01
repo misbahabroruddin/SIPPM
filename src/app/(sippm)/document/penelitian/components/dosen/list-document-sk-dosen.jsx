@@ -16,7 +16,7 @@ export const ListPenelitianSKDosen = ({
   if (isLoading) return <SkeletonListingProposal />;
   return (
     <div className="flex flex-col gap-4">
-      <div className="flex h-[380px] flex-col gap-4 overflow-auto p-1 md:h-[450px] lg:h-[580px]">
+      <div className="flex h-[450px] flex-col gap-4 overflow-auto p-1 md:h-[500px] lg:h-[580px]">
         {penelitian?.data?.length ? (
           penelitian?.data?.map((proposal) => (
             <ListItemSK key={proposal.id} data={proposal} />
