@@ -99,7 +99,7 @@ const ListItemKontrak = ({ data }) => {
             </div>
           </div>
         </div>
-        <div className="flex w-full flex-wrap items-end justify-center gap-4">
+        <div className="flex flex-wrap items-end justify-center gap-4">
           {data?.dokumen_kontrak?.status === "Menunggu" ? (
             <>
               <ModalUploadKontrakPengabdian pengabdianId={data?.id} />
