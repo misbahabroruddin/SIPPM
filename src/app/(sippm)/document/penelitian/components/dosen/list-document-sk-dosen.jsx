@@ -93,7 +93,7 @@ const ListItemSK = ({ data }) => {
               target="_blank"
               className="flex w-full items-center justify-center gap-2 rounded-lg bg-primary text-white disabled:cursor-not-allowed disabled:bg-gray-500 md:w-fit"
             >
-              <ButtonDownload className="px-2 py-1 md:px-4" />
+              <ButtonDownload className="px-2 py-1 md:px-4 md:py-2" />
             </Link>
           ) : (
             <div className="flex w-full flex-col items-center gap-[2px] pr-2 font-[500] md:w-fit">
