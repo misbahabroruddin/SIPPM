@@ -8,7 +8,7 @@ export const DetailIdentitasUsulan = ({ data }) => {
         <div className="flex w-full gap-1 text-sm lg:w-2/5 lg:text-base">
           <div className="flex flex-col gap-2 lg:gap-4">
             <div className="flex gap-2 lg:gap-4">
-              <p className="min-w-[150px] font-[500] md:min-w-[182px] lg:min-w-[200px]">
+              <p className="min-w-[150px] max-w-[150px] font-[500] md:min-w-[182px] lg:min-w-[200px]">
                 Jenis Penelitian
               </p>
               <div className="flex gap-2 lg:gap-3">
@@ -26,7 +26,7 @@ export const DetailIdentitasUsulan = ({ data }) => {
               </div>
             </div>
             <div className="flex gap-2 lg:gap-4">
-              <p className="min-w-[150px] font-[500] md:min-w-[182px] lg:min-w-[200px]">
+              <p className="min-w-[150px] max-w-[150px] font-[500] md:min-w-[182px] lg:min-w-[200px]">
                 Bidang Fokus Penelitian
               </p>
               <div className="flex gap-2 lg:gap-3">
@@ -35,7 +35,7 @@ export const DetailIdentitasUsulan = ({ data }) => {
               </div>
             </div>
             <div className="flex gap-2 lg:gap-4">
-              <p className="min-w-[150px] font-[500] md:min-w-[182px] lg:min-w-[200px]">
+              <p className="min-w-[150px] max-w-[150px] font-[500] md:min-w-[182px] lg:min-w-[200px]">
                 Tahun Usulan
               </p>
               <div className="flex gap-2 lg:gap-3">
@@ -48,23 +48,23 @@ export const DetailIdentitasUsulan = ({ data }) => {
         <div className="flex w-full gap-2 text-sm lg:w-1/2 lg:gap-4 lg:text-base">
           <div className="flex w-fit flex-col gap-4">
             <div className="flex gap-2">
-              <p className="min-w-[150px] font-[500] md:min-w-[182px] lg:min-w-[200px]">
-                Jangka Waktu Pengabdian
+              <p className="min-w-[150px] max-w-[150px] font-[500] md:min-w-[182px] lg:min-w-[200px]">
+                Jangka Waktu Penelitian
               </p>
               <div className="flex gap-2 lg:gap-3">
                 <span>:</span>
-                <p className="flex w-[140px] md:w-[200px] xl:w-[330px] 2xl:w-full 2xl:max-w-[450px]">
+                <p className="flex min-w-[150px] max-w-[150px] md:w-[200px] xl:w-[330px] 2xl:w-full 2xl:max-w-[450px]">
                   {data?.data?.jangka_waktu}
                 </p>
               </div>
             </div>
             <div className="flex gap-2">
-              <p className="min-w-[150px] font-[500] md:min-w-[182px] lg:min-w-[200px]">
+              <p className="min-w-[150px] max-w-[150px] font-[500] md:min-w-[182px] lg:min-w-[200px]">
                 Ringkasan Penelitian
               </p>
               <div className="flex gap-2 lg:gap-3">
                 <span>:</span>
-                <p className="max-h-[300px] w-[140px] gap-3 overflow-auto px-1 sm:w-[300px] md:w-[500px] lg:w-[230px] xl:w-[330px] 2xl:w-full 2xl:max-w-[450px]">
+                <p className="max-h-[300px] min-w-[170px] gap-3 overflow-auto px-1 sm:w-[300px] md:min-w-[500px] lg:min-w-[230px] xl:min-w-[330px] 2xl:w-full 2xl:max-w-[450px]">
                   {data?.data?.ringkasan}
                 </p>
               </div>
