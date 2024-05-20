@@ -27,10 +27,13 @@ export const DetailPenilaianReviewer = ({ data }) => {
               ) : null}
             </>
           ) : (
-            <ModalViewerPDF
-              data={dataForm?.form_penilaian}
-              fileName={"Detail"}
-            />
+            <>
+              <ModalUploadFormPenilaian id={data?.data?.id} />
+              <ModalViewerPDF
+                data={dataForm?.form_penilaian}
+                fileName={"Detail"}
+              />
+            </>
           )}
         </div>
       </div>
