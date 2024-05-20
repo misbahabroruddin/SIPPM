@@ -88,7 +88,9 @@ export const authOptions = {
           accessToken: response?.data?.token,
         };
       },
-      httpOptions: 10000,
+      httpOptions: {
+        timeout: 1000,
+      },
     },
   ],
   secret: process.env.NEXT_PUBLIC_AUTH_SECRET,
