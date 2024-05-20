@@ -69,7 +69,7 @@ export const authOptions = {
       clientId: process.env.NEXT_PUBLIC_SSO_CLIENT_ID,
       clientSecret: process.env.NEXT_PUBLIC_SSO_CLIENT_SECRET,
       checks: ["state"],
-      async profile(profile, tokens, account) {
+      async profile(profile, tokens) {
         const response = await createSession(tokens);
         // error handling at backend API
         if (response.error) {
@@ -88,6 +88,7 @@ export const authOptions = {
           accessToken: response?.data?.token,
         };
       },
+      httpOptions: 10000,
     },
   ],
   secret: process.env.NEXT_PUBLIC_AUTH_SECRET,

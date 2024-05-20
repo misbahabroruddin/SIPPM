@@ -6,7 +6,6 @@ import { BasePageTitle } from "@/components/base-page-title";
 import { capitalFirtsLatter } from "@/lib/utils/capitalizeFirstLetter";
 import { Tabs } from "../tabs";
 import { useState } from "react";
-import { InnerTabs } from "../inner-tabs";
 import { DetailIdentitasUsulan } from "../detail-identitas-usulan";
 import { useQueryDetailPengabdianReviewer } from "@/handlers/lppm/pengabdian/query-get-detail-pengabdian-reviewer";
 import { Timeline } from "@/components/timeline";
@@ -21,6 +20,8 @@ import { DetailRencanaAnggaran } from "@/components/proposal/track/detail-rencan
 import { DetailRincianKegiatan } from "@/components/proposal/track/detail-rincian-kegiatan";
 import { DetailBerkasReviewer } from "@/components/proposal/track/detail-berkas-reviewer";
 import { DetailAnggota } from "@/components/proposal/track/detail-anggota";
+import { DetailPenilaianReviewer } from "@/components/proposal/track/detail-penilaian";
+import { InnerTabsReviewer } from "../inner-tabs-reviewer";
 
 export default function TrackPengabdianReviewerPage() {
   const [tabActive] = useState("dokumen");
@@ -51,7 +52,7 @@ export default function TrackPengabdianReviewerPage() {
       <div className="custom mb-14 flex flex-col gap-3 rounded-lg p-4 shadow-custom">
         {currentTab === "dokumen" || !currentTab ? (
           <>
-            <InnerTabs tabActive={innerTab || innerTabActive} />
+            <InnerTabsReviewer tabActive={innerTab || innerTabActive} />
             <div className="flex flex-col gap-4">
               {(innerTab === "Identitas Usulan" || !innerTab) && (
                 <DetailIdentitasUsulan data={data} />
@@ -65,6 +66,9 @@ export default function TrackPengabdianReviewerPage() {
               )}
               {innerTab === "Jadwal" && <DetailRincianKegiatan data={data} />}
               {innerTab === "Berkas" && <DetailBerkasReviewer data={data} />}
+              {innerTab === "Penilaian" && (
+                <DetailPenilaianReviewer data={data} />
+              )}
             </div>
           </>
         ) : (

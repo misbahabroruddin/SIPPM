@@ -66,6 +66,12 @@ export const useVerifikasiProposalReviewer = (reset, router) => {
       queryClient.invalidateQueries({
         queryKey: ["verfikasiReviewer", id],
       });
+      queryClient.invalidateQueries({
+        queryKey: ["getFormPenilaianReviewer"],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ["detailPenelitianReviewer", id],
+      });
       queryClient.resetQueries({ queryKey: ["trackDosenReviewer", id] });
     },
   });
