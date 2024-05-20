@@ -89,7 +89,7 @@ export const authOptions = {
         };
       },
       httpOptions: {
-        timeout: 1000,
+        timeout: 10000,
       },
     },
   ],
