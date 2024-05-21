@@ -5,8 +5,6 @@ import { useState } from "react";
 
 import { BasePageTitle } from "@/components/base-page-title";
 import { capitalFirtsLatter } from "@/lib/utils/capitalizeFirstLetter";
-import { Tabs } from "../tabs";
-import { InnerTabs } from "../inner-tabs";
 import { useQueryDetailPengabdian } from "@/handlers/lppm/pengabdian/query-get-detail-pengabdian";
 import { DetailIdentitasUsulan } from "../detail-identitas-usulan";
 import { Timeline } from "@/components/timeline";
@@ -18,6 +16,8 @@ import { DetailRencanaAnggaran } from "@/components/proposal/track/detail-rencan
 import { DetailRincianKegiatan } from "@/components/proposal/track/detail-rincian-kegiatan";
 import { DetailBerkas } from "@/components/proposal/track/detail-berkas";
 import { DetailAnggota } from "@/components/proposal/track/detail-anggota";
+import { InnerTabsLppm } from "@/components/proposal/track/inner-tabs-lppm";
+import { Tabs } from "@/components/proposal/track/tabs";
 
 export default function TrackPengabdianLPPMPage() {
   const [tabActive] = useState("dokumen");
@@ -43,7 +43,7 @@ export default function TrackPengabdianLPPMPage() {
       <div className="custom mb-14 flex flex-col gap-3 rounded-lg p-4 shadow-custom">
         {currentTab === "dokumen" || !currentTab ? (
           <>
-            <InnerTabs tabActive={innerTab || innerTabActive} />
+            <InnerTabsLppm tabActive={innerTab || innerTabActive} />
             <div className="flex flex-col gap-4">
               {(innerTab === "Identitas Usulan" || !innerTab) && (
                 <DetailIdentitasUsulan data={data} />

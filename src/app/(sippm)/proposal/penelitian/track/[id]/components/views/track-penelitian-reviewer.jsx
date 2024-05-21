@@ -4,7 +4,6 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 import { BasePageTitle } from "@/components/base-page-title";
 import { capitalFirtsLatter } from "@/lib/utils/capitalizeFirstLetter";
-import { Tabs } from "../tabs";
 import { useState } from "react";
 import { DetailIdentitasUsulan } from "../detail-identitas-usulan";
 import { Timeline } from "@/components/timeline";
@@ -21,7 +20,8 @@ import { DetailRincianKegiatan } from "@/components/proposal/track/detail-rincia
 import { DetailBerkasReviewer } from "@/components/proposal/track/detail-berkas-reviewer";
 import { DetailAnggota } from "@/components/proposal/track/detail-anggota";
 import { DetailPenilaianReviewer } from "@/components/proposal/track/detail-penilaian";
-import { InnerTabsReviewer } from "../inner-tabs-reviewer";
+import { InnerTabsReviewer } from "@/components/proposal/track/inner-tabs-reviewer";
+import { Tabs } from "@/components/proposal/track/tabs";
 
 export default function TrackPenelitianReviewerPage() {
   const [tabActive] = useState("dokumen");

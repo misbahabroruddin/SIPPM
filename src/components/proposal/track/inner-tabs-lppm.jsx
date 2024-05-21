@@ -5,7 +5,7 @@ import { useCallback } from "react";
 
 import { Tab } from "@/components/tab";
 
-export const InnerTabs = ({ tabActive }) => {
+export const InnerTabsLppm = ({ tabActive }) => {
   const pathname = usePathname();
   const tabParams = useSearchParams();
   const router = useRouter();
