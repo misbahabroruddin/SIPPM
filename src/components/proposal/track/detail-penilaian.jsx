@@ -15,7 +15,7 @@ export const DetailPenilaianReviewer = ({ data }) => {
       <div className="flex flex-col gap-2">
         <h4>Form Penilaian</h4>
         <div className="flex gap-2 lg:gap-4">
-          {dataForm ? (
+          {!dataForm ? (
             <>
               <a
                 href="https://drive.google.com/drive/folders/1d8jY-LLLTmcu7VgR5HeDLecY8L-v9YPa?usp=drive_link"
