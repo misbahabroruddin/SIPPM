@@ -136,5 +136,4 @@ export const authOptions = {
       return redirectUrl;
     },
   },
-  debug: true,
 };
