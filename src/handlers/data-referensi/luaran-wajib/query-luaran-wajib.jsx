@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 
 import { useAxios } from "@/lib/hooks/useAxios";
+import { signOut } from "next-auth/react";
 
 export const useQueryLuaranWajib = () => {
   const axios = useAxios();
@@ -16,12 +17,15 @@ export const useQueryLuaranWajib = () => {
       }));
       return result;
     } catch (error) {
-      toast.error(error.message);
+      if (error.response.status === 401) {
+        return signOut();
+      }
+      toast.error(error.response.data.message || "Something went wrong");
     }
   };
 
   const { data, isLoading } = useQuery({
-    queryKey: ["luaranWajibOptions"],
+    queryKey: ["luaran-wajib-options"],
     queryFn: fetchLuaranWajibOptions,
   });
 

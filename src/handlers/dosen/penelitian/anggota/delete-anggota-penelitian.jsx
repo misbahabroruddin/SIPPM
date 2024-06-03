@@ -21,7 +21,7 @@ export const useDeleteAnggotaPenelitian = () => {
       );
       return data;
     } catch (error) {
-      toast.error(error.message);
+      toast.error(error?.message || "Something went wrong");
     }
   };
 
@@ -30,9 +30,11 @@ export const useDeleteAnggotaPenelitian = () => {
     isPending: isLoadingDosen,
   } = useMutation({
     mutationFn: handleDelete,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["anggotaDosen"] });
-      toast.success("Anggota dosen berhasil dihapus");
+    onSuccess: (data) => {
+      if (data) {
+        queryClient.invalidateQueries({ queryKey: ["anggotaDosen"] });
+        toast.success("Anggota dosen berhasil dihapus");
+      }
     },
   });
 

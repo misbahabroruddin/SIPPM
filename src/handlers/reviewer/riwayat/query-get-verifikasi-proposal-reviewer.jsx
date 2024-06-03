@@ -2,6 +2,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 import { notFound, useParams } from "next/navigation";
+import { signOut } from "next-auth/react";
 
 import { useAxios } from "@/lib/hooks/useAxios";
 
@@ -18,7 +19,10 @@ export const useQueryGetRiwayatVerikasiReviewer = () => {
         );
         return data.data;
       } catch (error) {
-        toast.error(error.message);
+        if (error.response.status === 401) {
+          return signOut();
+        }
+        toast.error(error.response.data.message || "Something went wrong");
       }
     },
   });

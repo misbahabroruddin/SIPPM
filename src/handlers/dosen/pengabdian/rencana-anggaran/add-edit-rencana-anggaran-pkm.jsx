@@ -2,9 +2,10 @@
 
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-toastify";
+import { useParams } from "next/navigation";
+import { signOut } from "next-auth/react";
 
 import { useAxios } from "@/lib/hooks/useAxios";
-import { useParams } from "next/navigation";
 
 export const useAddEditRencanaAnggaranPKM = (anggaranId, reset, onClose) => {
   const axios = useAxios();
@@ -44,18 +45,20 @@ export const useAddEditRencanaAnggaranPKM = (anggaranId, reset, onClose) => {
         return data;
       }
     } catch (error) {
-      toast.error(error.message);
+      if (error.response.status === 401) {
+        return signOut();
+      }
+      toast.error(error.response.data.message || "Something went wrong");
     }
   };
 
   const { mutateAsync: addEditRencanaAnggaran, isPending } = useMutation({
     mutationFn: onSubmit,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["rencanaAnggaranPKM"] });
-      onClose();
-    },
-    onError: (error) => {
-      toast.error(error.message);
+    onSuccess: (data) => {
+      if (data) {
+        queryClient.invalidateQueries({ queryKey: ["rencanaAnggaranPKM"] });
+        onClose();
+      }
     },
   });
 

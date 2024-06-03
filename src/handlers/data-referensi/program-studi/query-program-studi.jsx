@@ -1,14 +1,17 @@
 "use client";
-import { useAxios } from "@/lib/hooks/useAxios";
+
 import { useQuery } from "@tanstack/react-query";
+import { signOut } from "next-auth/react";
 import { toast } from "react-toastify";
+
+import { useAxios } from "@/lib/hooks/useAxios";
 
 export const useQueryProgramStudi = () => {
   const axios = useAxios();
   const fetchProgramStudi = async () => {
     try {
       const { data } = await axios.get(
-        "/data-referensis/program-studis/search"
+        "/data-referensis/program-studis/search",
       );
       const result = data.data.map((opt) => ({
         value: opt.id,
@@ -16,7 +19,10 @@ export const useQueryProgramStudi = () => {
       }));
       return result;
     } catch (error) {
-      toast.error(error.message);
+      if (error.response.status === 401) {
+        return signOut();
+      }
+      toast.error(error.response.data.message || "Something went wrong");
     }
   };
 

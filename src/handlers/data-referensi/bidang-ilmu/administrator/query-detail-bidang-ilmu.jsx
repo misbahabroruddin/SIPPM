@@ -1,6 +1,9 @@
 "use client";
-import { useAxios } from "@/lib/hooks/useAxios";
 import { useQuery } from "@tanstack/react-query";
+import { signOut } from "next-auth/react";
+import { toast } from "react-toastify";
+
+import { useAxios } from "@/lib/hooks/useAxios";
 
 export const useQueryGetDetailBidangIlmu = (id) => {
   const axios = useAxios();
@@ -8,8 +11,15 @@ export const useQueryGetDetailBidangIlmu = (id) => {
   const query = useQuery({
     queryKey: ["bidang-ilmu", id],
     queryFn: async () => {
-      const { data } = await axios.get(`/data-referensis/bidang-ilmus/${id}`);
-      return data.data;
+      try {
+        const { data } = await axios.get(`/data-referensis/bidang-ilmus/${id}`);
+        return data.data;
+      } catch (error) {
+        if (error.response.status === 401) {
+          return signOut();
+        }
+        toast.error(error.response.data.message || "Something went wrong");
+      }
     },
     enabled: false,
   });

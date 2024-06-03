@@ -47,7 +47,7 @@ export const useKirimUsulanPenelitian = () => {
         queryKey: ["detailRincianKegiatanPKM"],
       });
     } catch (error) {
-      toast.error(error.message);
+      toast.error(error.response.data.message || "Something went wrong");
     }
   };
 

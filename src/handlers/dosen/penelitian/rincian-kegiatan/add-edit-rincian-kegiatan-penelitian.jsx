@@ -53,7 +53,7 @@ export const useAddEditRincianKegiatanPenelitian = (
         return data;
       }
     } catch (error) {
-      toast.error(error.message);
+      toast.error(error.response.data.message || "Something went wrong");
     }
   };
 
@@ -62,16 +62,18 @@ export const useAddEditRincianKegiatanPenelitian = (
     isPending: isLoadingSubmit,
   } = useMutation({
     mutationFn: onSubmit,
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ["rincianKegiatanPenelitian"],
-      });
-      queryClient.invalidateQueries({
-        queryKey: ["detailRincianKegiatanPenelitian", anggaranId],
-      });
-      setStartDate();
-      setEndDate();
-      onClose();
+    onSuccess: (data) => {
+      if (data) {
+        queryClient.invalidateQueries({
+          queryKey: ["rincianKegiatanPenelitian"],
+        });
+        queryClient.invalidateQueries({
+          queryKey: ["detailRincianKegiatanPenelitian", anggaranId],
+        });
+        setStartDate();
+        setEndDate();
+        onClose();
+      }
     },
   });
 

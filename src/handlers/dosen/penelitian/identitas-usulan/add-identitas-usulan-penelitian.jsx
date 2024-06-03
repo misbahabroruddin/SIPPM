@@ -59,7 +59,7 @@ export const useAddIdentitasUsulanPenelitian = (reset) => {
       if (error.response?.data.message.tahun_usulan) {
         return toast.error(error.response.data.message.tahun_usulan[0]);
       }
-      toast.error(error.message);
+      toast.error(error.response.data.message || "Something went wrong");
     }
   };
 

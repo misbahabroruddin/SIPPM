@@ -35,7 +35,7 @@ export const useQueryIdentitasUsulanPenelitian = (setValue) => {
       if (!step) setCurrentStep(1);
       return data.data;
     } catch (error) {
-      toast.error(error.message);
+      toast.error(error.response.data.message || "Something went wrong");
     }
   };
 

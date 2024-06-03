@@ -3,6 +3,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useParams } from "next/navigation";
 import { toast } from "react-toastify";
+import { signOut } from "next-auth/react";
 
 import { useAxios } from "@/lib/hooks/useAxios";
 
@@ -18,7 +19,10 @@ export const useDeleteAnggotaLaporanHasilPenelitian = () => {
       );
       return data;
     } catch (error) {
-      toast.error(error.message);
+      if (error.response.status === 401) {
+        return signOut();
+      }
+      toast.error(error.response.data.message || "Something went wrong");
     }
   };
 
@@ -27,9 +31,13 @@ export const useDeleteAnggotaLaporanHasilPenelitian = () => {
     isPending: isLoadingDosen,
   } = useMutation({
     mutationFn: handleDelete,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["anggotaDosenLaporanHasil"] });
-      toast.success("Anggota dosen berhasil dihapus");
+    onSuccess: (data) => {
+      if (data) {
+        queryClient.invalidateQueries({
+          queryKey: ["anggotaDosenLaporanHasil"],
+        });
+        toast.success("Anggota dosen berhasil dihapus");
+      }
     },
   });
 
@@ -38,11 +46,13 @@ export const useDeleteAnggotaLaporanHasilPenelitian = () => {
     isPending: isLoadingMahasiswa,
   } = useMutation({
     mutationFn: handleDelete,
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ["anggotaMahasiswaLaporanHasil"],
-      });
-      toast.success("Anggota mahasiswa berhasil dihapus");
+    onSuccess: (data) => {
+      if (data) {
+        queryClient.invalidateQueries({
+          queryKey: ["anggotaMahasiswaLaporanHasil"],
+        });
+        toast.success("Anggota mahasiswa berhasil dihapus");
+      }
     },
   });
 

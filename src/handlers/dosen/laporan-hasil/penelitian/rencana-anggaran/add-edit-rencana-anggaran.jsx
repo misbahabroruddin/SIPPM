@@ -3,6 +3,7 @@
 import { toast } from "react-toastify";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useParams } from "next/navigation";
+import { signOut } from "next-auth/react";
 
 import { useAxios } from "@/lib/hooks/useAxios";
 
@@ -44,7 +45,10 @@ export const useAddEditRencanaAnggaranLaporanHasilPenelitian = (
         return data;
       }
     } catch (error) {
-      toast.error(error.message);
+      if (error.response.status === 401) {
+        return signOut();
+      }
+      toast.error(error.response.data.message || "Something went wrong");
     }
   };
 
@@ -53,14 +57,16 @@ export const useAddEditRencanaAnggaranLaporanHasilPenelitian = (
     isPending: isLoadingRencanaAnggaran,
   } = useMutation({
     mutationFn: onSubmit,
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ["rencanaAnggaranLaporanHasilPenelitian"],
-      });
-      onClose();
+    onSuccess: (data) => {
+      if (data) {
+        queryClient.invalidateQueries({
+          queryKey: ["rencanaAnggaranLaporanHasilPenelitian"],
+        });
+        onClose();
+      }
     },
     onError: (error) => {
-      toast.error(error.message);
+      toast.error(error.response.data.message || "Something went wrong");
     },
   });
 

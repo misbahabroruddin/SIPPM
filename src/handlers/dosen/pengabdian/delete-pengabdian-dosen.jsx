@@ -2,6 +2,7 @@
 
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import Swal from "sweetalert2";
+import { signOut } from "next-auth/react";
 
 import { useAxios } from "@/lib/hooks/useAxios";
 import { useStep } from "@/lib/hooks/useStep";
@@ -20,9 +21,12 @@ export const useDeletePengabdianDosen = () => {
       setCurrentStep(1);
       return data;
     } catch (error) {
+      if (error.response.status === 401) {
+        return signOut();
+      }
       Swal.fire({
         title: "Error",
-        text: error.response.data.message,
+        text: error.response.data.message || "Something went wrong",
         icon: "error",
         confirmButtonText: "Ok",
       });
@@ -33,40 +37,42 @@ export const useDeletePengabdianDosen = () => {
     useMutation({
       mutationFn: handleDelete,
       onSuccess: (data) => {
-        Swal.fire({
-          title: "Success",
-          text: data.message,
-          icon: "success",
-          confirmButtonText: "Ok",
-        });
-        queryClient.invalidateQueries({ queryKey: ["listPengabdian"] });
-        queryClient.invalidateQueries({
-          queryKey: ["listPengabdianDashboardDosen"],
-        });
-        queryClient.resetQueries({
-          queryKey: ["anggotaDosenPKM"],
-        });
-        queryClient.resetQueries({
-          queryKey: ["anggotaMahasiswaPKM"],
-        });
-        queryClient.resetQueries({
-          queryKey: ["rincianKegiatanPKM"],
-        });
-        queryClient.resetQueries({
-          queryKey: ["rencanaAnggaranPKM"],
-        });
-        queryClient.resetQueries({
-          queryKey: ["targetCapaianPKM"],
-        });
-        queryClient.resetQueries({
-          queryKey: ["identitas-usulan-pkm"],
-        });
-        queryClient.resetQueries({
-          queryKey: ["detailRencanaAnggaranPKM"],
-        });
-        queryClient.resetQueries({
-          queryKey: ["detailRincianKegiatanPKM"],
-        });
+        if (data) {
+          Swal.fire({
+            title: "Success",
+            text: data.message,
+            icon: "success",
+            confirmButtonText: "Ok",
+          });
+          queryClient.invalidateQueries({ queryKey: ["listPengabdian"] });
+          queryClient.invalidateQueries({
+            queryKey: ["listPengabdianDashboardDosen"],
+          });
+          queryClient.resetQueries({
+            queryKey: ["anggotaDosenPKM"],
+          });
+          queryClient.resetQueries({
+            queryKey: ["anggotaMahasiswaPKM"],
+          });
+          queryClient.resetQueries({
+            queryKey: ["rincianKegiatanPKM"],
+          });
+          queryClient.resetQueries({
+            queryKey: ["rencanaAnggaranPKM"],
+          });
+          queryClient.resetQueries({
+            queryKey: ["targetCapaianPKM"],
+          });
+          queryClient.resetQueries({
+            queryKey: ["identitas-usulan-pkm"],
+          });
+          queryClient.resetQueries({
+            queryKey: ["detailRencanaAnggaranPKM"],
+          });
+          queryClient.resetQueries({
+            queryKey: ["detailRincianKegiatanPKM"],
+          });
+        }
       },
     });
 

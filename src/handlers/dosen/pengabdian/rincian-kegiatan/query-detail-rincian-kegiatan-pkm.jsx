@@ -1,6 +1,8 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
+import { signOut } from "next-auth/react";
+import { toast } from "react-toastify";
 
 import { useAxios } from "@/lib/hooks/useAxios";
 import { useParams } from "next/navigation";
@@ -32,7 +34,10 @@ export const useQueryDetailRincianKegiatanPKM = (
       setEndDate(dateEnd);
       return result;
     } catch (error) {
-      throw new Error(error.message);
+      if (error.response.status === 401) {
+        return signOut();
+      }
+      toast.error(error.response.data.message || "Something went wrong");
     }
   };
 

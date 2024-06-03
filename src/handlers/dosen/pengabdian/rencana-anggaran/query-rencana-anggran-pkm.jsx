@@ -2,9 +2,10 @@
 
 import { useQuery } from "@tanstack/react-query";
 import { toast } from "react-toastify";
+import { useParams } from "next/navigation";
+import { signOut } from "next-auth/react";
 
 import { useAxios } from "@/lib/hooks/useAxios";
-import { useParams } from "next/navigation";
 
 export const useQueryRencanaAnggranPKM = () => {
   const axios = useAxios();
@@ -17,7 +18,10 @@ export const useQueryRencanaAnggranPKM = () => {
       );
       return data.data;
     } catch (error) {
-      toast.error(error.message);
+      if (error.response.status === 401) {
+        return signOut();
+      }
+      toast.error(error.response.data.message || "Something went wrong");
     }
   };
 

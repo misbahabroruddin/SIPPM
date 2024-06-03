@@ -37,41 +37,43 @@ export const useUploadBerkasPenelitian = (router) => {
       toast.success("Penelitian berhasil diajukan");
       return data;
     } catch (error) {
-      toast.error(error.message);
+      toast.error(error.response.data.message || "Something went wrong");
     }
   };
 
   const { mutateAsync: uploadBerkas, isPending: isLoadingSubmit } = useMutation(
     {
       mutationFn: onSubmit,
-      onSuccess: () => {
-        queryClient.invalidateQueries({
-          queryKey: ["listPenelitian"],
-        });
-        queryClient.resetQueries({
-          queryKey: ["anggotaMahasiswa"],
-        });
-        queryClient.resetQueries({
-          queryKey: ["anggotaDosen"],
-        });
-        queryClient.resetQueries({
-          queryKey: ["rencanaAnggaranPenelitian"],
-        });
-        queryClient.resetQueries({
-          queryKey: ["rincianKegiatanPenelitian"],
-        });
-        queryClient.resetQueries({
-          queryKey: ["detailRencanaAnggaranPenelitian"],
-        });
-        queryClient.resetQueries({
-          queryKey: ["detailRencanaAnggaranPKM"],
-        });
-        queryClient.resetQueries({
-          queryKey: ["detailRincianKegiatanPenelitian"],
-        });
-        queryClient.resetQueries({
-          queryKey: ["detailRincianKegiatanPKM"],
-        });
+      onSuccess: (data) => {
+        if (data) {
+          queryClient.invalidateQueries({
+            queryKey: ["listPenelitian"],
+          });
+          queryClient.resetQueries({
+            queryKey: ["anggotaMahasiswa"],
+          });
+          queryClient.resetQueries({
+            queryKey: ["anggotaDosen"],
+          });
+          queryClient.resetQueries({
+            queryKey: ["rencanaAnggaranPenelitian"],
+          });
+          queryClient.resetQueries({
+            queryKey: ["rincianKegiatanPenelitian"],
+          });
+          queryClient.resetQueries({
+            queryKey: ["detailRencanaAnggaranPenelitian"],
+          });
+          queryClient.resetQueries({
+            queryKey: ["detailRencanaAnggaranPKM"],
+          });
+          queryClient.resetQueries({
+            queryKey: ["detailRincianKegiatanPenelitian"],
+          });
+          queryClient.resetQueries({
+            queryKey: ["detailRincianKegiatanPKM"],
+          });
+        }
       },
     },
   );

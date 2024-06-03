@@ -2,6 +2,7 @@
 
 import { toast } from "react-toastify";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { signOut } from "next-auth/react";
 
 import { useAxios } from "@/lib/hooks/useAxios";
 
@@ -16,13 +17,16 @@ export const useCreateOrUpdateBiodata = () => {
       formData.append("nidn_or_nidk_or_nim", form.nidn_or_nidk_or_nim);
       const date = new Date(form.tanggal_lahir);
       const formattedDate = date.toISOString().split("T")[0];
+
       formData.append("tempat_lahir_id", form.tempat_lahir_id);
-      console.log(formattedDate);
       formData.append("tanggal_lahir", formattedDate);
+
       if (form.pangkat_golongan)
         formData.append("pangkat_golongan", form.pangkat_golongan);
+
       formData.append("jabatan_fungsional_id", form.jabatan_fungsional_id);
       formData.append("program_studi_id", form.program_studi_id);
+
       if (form.email) formData.append("email", form.email);
 
       if (form.alamat) formData.append("alamat", form.alamat);
@@ -39,10 +43,19 @@ export const useCreateOrUpdateBiodata = () => {
 
       return data;
     } catch (error) {
-      if (error.response?.data.message.nik) {
-        return toast.error(error.response?.data.message.nik[0]);
+      if (error?.response?.data.message.nik) {
+        return toast.error(error.response.data.message.nik[0]);
+      } else if (error?.response?.data.message.nidn_or_nidk_or_nim) {
+        return toast.error(error.response.data.message.nidn_or_nidk_or_nim[0]);
+      } else if (error?.response?.data.message.nomor_hp) {
+        return toast.error(error.response.data.message.nomor_hp[0]);
       }
-      toast.error(error.message);
+
+      if (error.response.status === 401) {
+        return signOut();
+      }
+
+      toast.error(error.response.data.message || "Something went wrong");
     }
   };
 

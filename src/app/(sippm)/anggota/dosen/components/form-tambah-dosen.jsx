@@ -39,7 +39,7 @@ export const FormTambahDosen = ({ setOpen }) => {
       await mutateAsync(data);
       setOpen(false);
     } catch (error) {
-      toast.error(error.message);
+      toast.error(error.response.data.message || "Something went wrong");
     }
   };
 

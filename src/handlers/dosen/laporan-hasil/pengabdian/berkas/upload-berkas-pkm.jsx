@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 
 import { useAxios } from "@/lib/hooks/useAxios";
 import { useStep } from "@/lib/hooks/useStep";
+import { signOut } from "next-auth/react";
 
 export const useUploadBerkasLaporanHasilPKM = (router) => {
   const { setCurrentStep } = useStep();
@@ -32,6 +33,10 @@ export const useUploadBerkasLaporanHasilPKM = (router) => {
       toast.success("Laporan Hasil PKM berhasil terkirim");
       return data;
     } catch (error) {
+      if (error.response.status === 401) {
+        return signOut();
+      }
+
       if (error.response?.data.message.file_laporan_hasil) {
         return toast.error(error.response.data.message.file_laporan_hasil[0]);
       } else if (error.response?.data.message.file_pernyataan_mitra) {
@@ -39,36 +44,40 @@ export const useUploadBerkasLaporanHasilPKM = (router) => {
           error.response.data.message.file_pernyataan_mitra[0],
         );
       } else {
-        toast.error(error.message);
+        return toast.error(
+          error.response.data.message || "Something went wrong",
+        );
       }
     }
   };
 
   const { mutateAsync: uploadBerkas, isPending } = useMutation({
     mutationFn: onSubmit,
-    onSuccess: () => {
-      setCurrentStep(1);
-      queryClient.invalidateQueries({
-        queryKey: ["listLaporanHasilPengabdian"],
-      });
-      queryClient.resetQueries({
-        queryKey: ["anggotaDosenLaporanHasilPKM"],
-      });
-      queryClient.resetQueries({
-        queryKey: ["anggotaMahasiswaLaporanHasilPKM"],
-      });
-      queryClient.resetQueries({
-        queryKey: ["rencanaAnggaranLaporanHasilPKM"],
-      });
-      queryClient.resetQueries({
-        queryKey: ["rincianKegiatanLaporanHasilPKM"],
-      });
-      queryClient.resetQueries({
-        queryKey: ["detailRincianKegiatanPenelitian"],
-      });
-      queryClient.resetQueries({
-        queryKey: ["detailRincianKegiatanPKM"],
-      });
+    onSuccess: (data) => {
+      if (data) {
+        setCurrentStep(1);
+        queryClient.invalidateQueries({
+          queryKey: ["listLaporanHasilPengabdian"],
+        });
+        queryClient.resetQueries({
+          queryKey: ["anggotaDosenLaporanHasilPKM"],
+        });
+        queryClient.resetQueries({
+          queryKey: ["anggotaMahasiswaLaporanHasilPKM"],
+        });
+        queryClient.resetQueries({
+          queryKey: ["rencanaAnggaranLaporanHasilPKM"],
+        });
+        queryClient.resetQueries({
+          queryKey: ["rincianKegiatanLaporanHasilPKM"],
+        });
+        queryClient.resetQueries({
+          queryKey: ["detailRincianKegiatanPenelitian"],
+        });
+        queryClient.resetQueries({
+          queryKey: ["detailRincianKegiatanPKM"],
+        });
+      }
     },
   });
 

@@ -3,6 +3,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 import { useParams } from "next/navigation";
+import { signOut } from "next-auth/react";
 
 import { useAxios } from "@/lib/hooks/useAxios";
 
@@ -14,12 +15,12 @@ export const useQueryDetailRencanaAnggaranLaporanHasilPKM = (anggaranId) => {
       const { data } = await axios.get(
         `/laporan-hasils/dosens/pkms/${id}/rencana-anggarans/${anggaranId}`,
       );
-      // const result = data.data;
-      // setValue("rincian", result.rincian);
-      // setValue("biaya", result.biaya);
       return data.data;
     } catch (error) {
-      toast.error(error.message);
+      if (error.response.status === 401) {
+        return signOut();
+      }
+      toast.error(error.response.data.message || "Something went wrong");
     }
   };
 

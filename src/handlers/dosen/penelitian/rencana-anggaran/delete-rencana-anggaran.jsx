@@ -20,7 +20,7 @@ export const useDeleteRencanaAnggaranPenelitian = () => {
       );
       return data;
     } catch (error) {
-      toast.error(error.message);
+      toast.error(error.response.data.message || "Something went wrong");
     }
   };
 
@@ -29,11 +29,13 @@ export const useDeleteRencanaAnggaranPenelitian = () => {
     isPending: isLoadingSubmit,
   } = useMutation({
     mutationFn: handleDelete,
-    onSuccess: () => {
-      toast.success("Rencana anggaran penelitian berhasil dihapus");
-      queryClient.invalidateQueries({
-        queryKey: ["rencanaAnggaranPenelitian"],
-      });
+    onSuccess: (data) => {
+      if (data) {
+        toast.success("Rencana anggaran penelitian berhasil dihapus");
+        queryClient.invalidateQueries({
+          queryKey: ["rencanaAnggaranPenelitian"],
+        });
+      }
     },
   });
 

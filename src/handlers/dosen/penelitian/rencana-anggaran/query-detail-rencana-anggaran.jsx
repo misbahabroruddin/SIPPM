@@ -26,7 +26,7 @@ export const useQueryDetailRencanaAnggaranPenelitian = (
       setValue("biaya", result.biaya);
       return result;
     } catch (error) {
-      toast.error(error.message);
+      toast.error(error.response.data.message || "Something went wrong");
     }
   };
 

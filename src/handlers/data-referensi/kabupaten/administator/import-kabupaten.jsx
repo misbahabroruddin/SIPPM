@@ -2,6 +2,7 @@
 
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-toastify";
+import { signOut } from "next-auth/react";
 
 import { useAxios } from "@/lib/hooks/useAxios";
 
@@ -22,7 +23,10 @@ export const useImportKabupaten = () => {
         toast.success("Data kabupaten berhasil di-import");
         return data;
       } catch (error) {
-        toast.error(error.message);
+        if (error.response.status === 401) {
+          return signOut();
+        }
+        toast.error(error.response.data.message || "Something went wrong");
       }
     },
   });

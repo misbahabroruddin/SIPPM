@@ -1,6 +1,7 @@
 "use client";
 import { useParams } from "next/navigation";
 import { toast } from "react-toastify";
+import { signOut } from "next-auth/react";
 
 import { useAxios } from "@/lib/hooks/useAxios";
 import { useStep } from "@/lib/hooks/useStep";
@@ -28,7 +29,10 @@ export const useNextStep = (payload) => {
         localStorage.setItem("isEdit", false);
       }
     } catch (error) {
-      toast.error(error.message);
+      if (error.response.status === 401) {
+        return signOut();
+      }
+      toast.error(error.response.data.message || "Something went wrong");
     }
   };
 
@@ -50,7 +54,10 @@ export const useNextStep = (payload) => {
         localStorage.setItem("isEdit", false);
       }
     } catch (error) {
-      toast.error(error.message);
+      if (error.response.status === 401) {
+        return signOut();
+      }
+      toast.error(error.response.data.message || "Something went wrong");
     }
   };
 

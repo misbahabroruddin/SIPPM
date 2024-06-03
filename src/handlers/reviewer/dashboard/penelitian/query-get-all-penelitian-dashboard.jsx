@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 
 import { useAxios } from "@/lib/hooks/useAxios";
+import { signOut } from "next-auth/react";
 
 export const useQueryGetAllPenelitianDashboardReviewer = (search, page) => {
   const axios = useAxios();
@@ -30,7 +31,10 @@ export const useQueryGetAllPenelitianDashboardReviewer = (search, page) => {
 
         return data.data;
       } catch (error) {
-        toast.error(error.message);
+        if (error.response.status === 401) {
+          return signOut();
+        }
+        toast.error(error.response.data.message || "Something went wrong");
       }
     },
   });

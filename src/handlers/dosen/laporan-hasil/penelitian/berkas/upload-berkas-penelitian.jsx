@@ -1,6 +1,7 @@
 "use client";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-toastify";
+import { signOut } from "next-auth/react";
 
 import { useAxios } from "@/lib/hooks/useAxios";
 import { useStep } from "@/lib/hooks/useStep";
@@ -32,35 +33,40 @@ export const useUploadBerkasLaporanHasilPenelitian = (router) => {
       toast.success("Laporan Hasil Penelitian berhasil terkirim");
       return data;
     } catch (error) {
-      toast.error(error.message);
+      if (error.response.status === 401) {
+        return signOut();
+      }
+      toast.error(error.response.data.message || "Something went wrong");
     }
   };
 
   const { mutateAsync: uploadBerkas, isPending: isLoadingSubmit } = useMutation(
     {
       mutationFn: onSubmit,
-      onSuccess: () => {
-        queryClient.invalidateQueries({
-          queryKey: ["listLaporanHasilPenelitian"],
-        });
-        queryClient.resetQueries({
-          queryKey: ["anggotaMahasiswaLaporanHasil"],
-        });
-        queryClient.resetQueries({
-          queryKey: ["anggotaDosenLaporanHasil"],
-        });
-        queryClient.resetQueries({
-          queryKey: ["rencanaAnggaranLaporanHasilPenelitian"],
-        });
-        queryClient.resetQueries({
-          queryKey: ["rincianKegiatanLaporanHasilPenelitian"],
-        });
-        queryClient.resetQueries({
-          queryKey: ["detailRincianKegiatanPenelitian"],
-        });
-        queryClient.resetQueries({
-          queryKey: ["detailRincianKegiatanPKM"],
-        });
+      onSuccess: (data) => {
+        if (data) {
+          queryClient.invalidateQueries({
+            queryKey: ["listLaporanHasilPenelitian"],
+          });
+          queryClient.resetQueries({
+            queryKey: ["anggotaMahasiswaLaporanHasil"],
+          });
+          queryClient.resetQueries({
+            queryKey: ["anggotaDosenLaporanHasil"],
+          });
+          queryClient.resetQueries({
+            queryKey: ["rencanaAnggaranLaporanHasilPenelitian"],
+          });
+          queryClient.resetQueries({
+            queryKey: ["rincianKegiatanLaporanHasilPenelitian"],
+          });
+          queryClient.resetQueries({
+            queryKey: ["detailRincianKegiatanPenelitian"],
+          });
+          queryClient.resetQueries({
+            queryKey: ["detailRincianKegiatanPKM"],
+          });
+        }
       },
     },
   );

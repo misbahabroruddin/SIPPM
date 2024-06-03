@@ -2,6 +2,7 @@
 
 import { useQuery } from "@tanstack/react-query";
 import { toast } from "react-toastify";
+import { signOut } from "next-auth/react";
 
 import { useAxios } from "@/lib/hooks/useAxios";
 
@@ -10,7 +11,7 @@ export const useQueryJenisPenelitians = () => {
   const fetchJenisPenelitians = async () => {
     try {
       const { data } = await axios.get(
-        "/data-referensis/jenis-penelitians/search"
+        "/data-referensis/jenis-penelitians/search",
       );
       const result = data.data.map((opt) => ({
         value: opt.id,
@@ -18,7 +19,10 @@ export const useQueryJenisPenelitians = () => {
       }));
       return result;
     } catch (error) {
-      toast.error(error.message);
+      if (error.response.status === 401) {
+        return signOut();
+      }
+      toast.error(error.response.data.message || "Something went wrong");
     }
   };
 

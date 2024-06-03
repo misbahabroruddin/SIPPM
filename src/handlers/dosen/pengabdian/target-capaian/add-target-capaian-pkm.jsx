@@ -2,6 +2,7 @@
 
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "react-toastify";
+import { signOut } from "next-auth/react";
 import { useParams } from "next/navigation";
 
 import { useAxios } from "@/lib/hooks/useAxios";
@@ -36,7 +37,11 @@ export const useAddTargetCapaianPKM = () => {
       if (error.response?.data.message.tahun_capaian) {
         return toast.error(error.response.data.message.tahun_capaian[0]);
       }
-      toast.error(error.message);
+
+      if (error.response.status === 401) {
+        return signOut();
+      }
+      toast.error(error.response.data.message || "Something went wrong");
     }
   };
 

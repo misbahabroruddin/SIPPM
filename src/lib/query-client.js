@@ -13,7 +13,7 @@ export const queryClientConfig = {
     },
     mutations: {
       onError: (error) => {
-        toast.error(error.message);
+        toast.error(error.response.data.message || "Something went wrong");
       },
     },
   },

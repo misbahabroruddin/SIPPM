@@ -3,6 +3,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 import { useParams } from "next/navigation";
+import { signOut } from "next-auth/react";
 
 import { useAxios } from "@/lib/hooks/useAxios";
 
@@ -23,7 +24,10 @@ export const useAddAnggotaPKM = (reset, onClose) => {
       toast.success("Anggota berhasil ditambahkan");
       return data;
     } catch (error) {
-      toast.error(error.message);
+      if (error.response.status === 401) {
+        return signOut();
+      }
+      toast.error(error.response.data.message || "Something went wrong");
     }
   };
 
@@ -38,7 +42,7 @@ export const useAddAnggotaPKM = (reset, onClose) => {
       reset();
       return data;
     } catch (error) {
-      toast.error(error.message);
+      toast.error(error.response.data.message || "Something went wrong");
     }
   };
 
@@ -47,10 +51,12 @@ export const useAddAnggotaPKM = (reset, onClose) => {
     isPending: isLoadingAnggotaDosenPKM,
   } = useMutation({
     mutationFn: onSelectAnggota,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["anggotaDosenPKM"] });
-      onClose();
-      toast.success("Anggota dosen berhasil ditambahkan");
+    onSuccess: (data) => {
+      if (data) {
+        queryClient.invalidateQueries({ queryKey: ["anggotaDosenPKM"] });
+        onClose();
+        toast.success("Anggota dosen berhasil ditambahkan");
+      }
     },
   });
 
@@ -59,10 +65,12 @@ export const useAddAnggotaPKM = (reset, onClose) => {
     isPending: isLoadingAnggotaMahasiswaPKM,
   } = useMutation({
     mutationFn: onSelectAnggota,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["anggotaMahasiswaPKM"] });
-      onClose();
-      toast.success("Anggota mahasiswa berhasil ditambahkan");
+    onSuccess: (data) => {
+      if (data) {
+        queryClient.invalidateQueries({ queryKey: ["anggotaMahasiswaPKM"] });
+        onClose();
+        toast.success("Anggota mahasiswa berhasil ditambahkan");
+      }
     },
   });
 

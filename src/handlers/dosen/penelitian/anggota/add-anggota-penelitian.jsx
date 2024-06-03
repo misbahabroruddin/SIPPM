@@ -23,7 +23,7 @@ export const useAddAnggotaPenelitian = (reset, onClose) => {
       toast.success("Anggota berhasil ditambahkan");
       return data;
     } catch (error) {
-      toast.error(error.message);
+      toast.error(error.response.data.message || "Something went wrong");
     }
   };
 
@@ -38,7 +38,7 @@ export const useAddAnggotaPenelitian = (reset, onClose) => {
       reset();
       return data;
     } catch (error) {
-      toast.error(error.message);
+      toast.error(error.response.data.message || "Something went wrong");
     }
   };
 
@@ -47,10 +47,12 @@ export const useAddAnggotaPenelitian = (reset, onClose) => {
     isPending: isLoadingAnggotaDosenPenelitian,
   } = useMutation({
     mutationFn: onSelectAnggotaPenelitian,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["anggotaDosen"] });
-      onClose();
-      toast.success("Anggota dosen berhasil ditambahkan");
+    onSuccess: (data) => {
+      if (data) {
+        queryClient.invalidateQueries({ queryKey: ["anggotaDosen"] });
+        onClose();
+        toast.success("Anggota dosen berhasil ditambahkan");
+      }
     },
   });
 

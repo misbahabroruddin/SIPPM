@@ -21,7 +21,7 @@ export const useDeleteRincianKegiatanPenelitian = () => {
       toast.success("Rincian Kegiatan berhasil dihapus");
       return data;
     } catch (error) {
-      toast.error(error.message);
+      toast.error(error.response.data.message || "Something went wrong");
     }
   };
 
@@ -30,10 +30,12 @@ export const useDeleteRincianKegiatanPenelitian = () => {
     isPending: isLoadingDelete,
   } = useMutation({
     mutationFn: handleDelete,
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ["rincianKegiatanPenelitian"],
-      });
+    onSuccess: (data) => {
+      if (data) {
+        queryClient.invalidateQueries({
+          queryKey: ["rincianKegiatanPenelitian"],
+        });
+      }
     },
   });
 

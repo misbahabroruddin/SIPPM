@@ -49,7 +49,7 @@ export const useAddEditRencanaAnggaranPenelitian = (
         return data;
       }
     } catch (error) {
-      toast.error(error.message);
+      toast.error(error.response.data.message || "Something went wrong");
     }
   };
 
@@ -58,14 +58,16 @@ export const useAddEditRencanaAnggaranPenelitian = (
     isPending: isLoadingRencanaAnggaran,
   } = useMutation({
     mutationFn: onSubmit,
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ["rencanaAnggaranPenelitian"],
-      });
-      onClose();
+    onSuccess: (data) => {
+      if (data) {
+        queryClient.invalidateQueries({
+          queryKey: ["rencanaAnggaranPenelitian"],
+        });
+        onClose();
+      }
     },
     onError: (error) => {
-      toast.error(error.message);
+      toast.error(error.response.data.message || "Something went wrong");
     },
   });
 

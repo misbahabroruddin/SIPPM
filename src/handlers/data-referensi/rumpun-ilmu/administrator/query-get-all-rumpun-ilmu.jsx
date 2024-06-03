@@ -1,5 +1,6 @@
 "use client";
 import { useQuery } from "@tanstack/react-query";
+import { signOut } from "next-auth/react";
 import { toast } from "react-toastify";
 
 import { useAxios } from "@/lib/hooks/useAxios";
@@ -21,7 +22,10 @@ export const useQueryListingRumpunIlmu = (search, page) => {
 
         return data.data;
       } catch (error) {
-        toast.error(error.message);
+        if (error.response.status === 401) {
+          return signOut();
+        }
+        toast.error(error.response.data.message || "Something went wrong");
       }
     },
   });

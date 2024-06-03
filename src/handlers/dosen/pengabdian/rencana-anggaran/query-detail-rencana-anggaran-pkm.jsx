@@ -1,7 +1,9 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
+import { signOut } from "next-auth/react";
 import { useParams } from "next/navigation";
+import { toast } from "react-toastify";
 
 import { useAxios } from "@/lib/hooks/useAxios";
 
@@ -21,7 +23,10 @@ export const useQueryDetailRencanaAnggaranPKM = (setValue, anggaranId) => {
       setValue("biaya", result.biaya);
       return result;
     } catch (error) {
-      throw new Error(error.message);
+      if (error.response.status === 401) {
+        return signOut();
+      }
+      toast.error(error.response.data.message || "Something went wrong");
     }
   };
 
