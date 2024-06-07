@@ -73,7 +73,7 @@ export const ProfileMenuNavbar = () => {
             <div
               onClick={() =>
                 signOut({ redirect: false }).then(() => {
-                  window.location.href = "https://sso.unsia.ac.id/home";
+                  window.location.href = "https://sso.dev-unsia.id/home";
                 })
               }
               className="flex items-center gap-2 rounded-lg"
