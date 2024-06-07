@@ -77,8 +77,6 @@ export default function DashboardReviewer() {
         <ListPenelitianDashboardReviewer
           penelitian={penelitian}
           isLoading={isLoadingPenelitian}
-          currentTab={currentTab}
-          tabActive={tabActive}
           handlePageChange={handlePageChangePenelitian}
         />
       ) : (

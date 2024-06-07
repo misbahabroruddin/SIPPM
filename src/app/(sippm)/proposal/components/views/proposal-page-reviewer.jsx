@@ -74,8 +74,6 @@ export default function ProposalPageReviewer() {
           <ListPenelitianProposalReviewer
             penelitian={penelitian}
             isLoading={isLoadingPenelitian}
-            currentTab={currentTab}
-            tabActive={tabActive}
             jumlahPenelitianDisetujui={
               totalProposalPenelitian?.data?.status_reviewer?.diterima
             }

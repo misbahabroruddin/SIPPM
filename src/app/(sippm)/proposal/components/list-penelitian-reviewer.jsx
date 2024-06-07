@@ -11,8 +11,6 @@ import { convertDate } from "@/lib/utils/convertDate";
 
 export const ListPenelitianProposalReviewer = ({
   penelitian,
-  currentTab,
-  tabActive,
   isLoading,
   jumlahPenelitianDisetujui,
   jumlahPenelitianRevisi,
@@ -31,14 +29,7 @@ export const ListPenelitianProposalReviewer = ({
         {penelitian?.data?.length ? (
           penelitian?.data
             ?.filter((item) => item.status !== "Draft")
-            .map((proposal) => (
-              <ListItem
-                data={proposal}
-                currentTab={currentTab}
-                key={proposal?.id}
-                tabActive={tabActive}
-              />
-            ))
+            .map((proposal) => <ListItem data={proposal} key={proposal?.id} />)
         ) : (
           <EmptyState />
         )}
@@ -55,7 +46,7 @@ export const ListPenelitianProposalReviewer = ({
   );
 };
 
-const ListItem = ({ data, currentTab, tabActive }) => {
+const ListItem = ({ data }) => {
   return (
     <div className="rounded-lg px-6 py-4 shadow-custom">
       <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between">
@@ -106,11 +97,8 @@ const ListItem = ({ data, currentTab, tabActive }) => {
             <p>Reviewer</p>
             <ButtonStatus status={data?.status_reviewer} />
           </div>
-          <Link href={`/proposal/${currentTab || tabActive}/track/${data?.id}`}>
-            <button
-              className="rounded-lg bg-primary px-7 py-2 text-white disabled:cursor-not-allowed disabled:bg-gray-500"
-              // disabled={data?.status_lppm === "Pending"}
-            >
+          <Link href={`/proposal/penelitian/detail/reviewer/${data?.id}`}>
+            <button className="rounded-lg bg-primary px-7 py-2 text-white disabled:cursor-not-allowed disabled:bg-gray-500">
               Detail
             </button>
           </Link>
