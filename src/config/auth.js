@@ -55,9 +55,6 @@ export const authOptions = {
       name: "sso",
       type: "oauth",
       version: "2.0",
-      state: true,
-      protection: "state",
-      params: { grant_type: "authorization_code" },
       authorization: {
         url: `${process.env.NEXT_PUBLIC_SSO_BASE_URL}/oauth/authorize`,
         params: { scope: "" },
@@ -87,9 +84,6 @@ export const authOptions = {
           roles: profile.data.roles,
           accessToken: response?.data?.token,
         };
-      },
-      httpOptions: {
-        timeout: 10000,
       },
     },
   ],
