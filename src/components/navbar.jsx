@@ -1,10 +1,11 @@
 "use client";
 
-import { useSidebar } from "@/lib/hooks/useSidebar";
-import { signOut } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { twMerge } from "tailwind-merge";
+
+import { useSidebar } from "@/lib/hooks/useSidebar";
+import { ProfileMenuNavbar } from "./profile-menu-navbar";
 
 const Path = (props) => (
   <path
@@ -52,10 +53,10 @@ const Chevron = ({ onClick, ...props }) => {
       onClick={onClick}
     >
       <svg
-        height="18"
+        height="14"
         id="chevron-left"
         viewBox="0 0 32 32"
-        width="18"
+        width="14"
         xmlns="http://www.w3.org/2000/svg"
       >
         <path d="M20 1 L24 5 L14 16 L24 27 L20 31 L6 16 z" />
@@ -66,6 +67,7 @@ const Chevron = ({ onClick, ...props }) => {
 
 export const Navbar = () => {
   const { isOpen, toggleSidebar } = useSidebar();
+
   return (
     <nav className="r-0  fixed top-0 z-[999] hidden w-full bg-white shadow lg:block">
       <div className="flex items-center justify-between px-7 py-4">
@@ -110,63 +112,8 @@ export const Navbar = () => {
             </>
           )}
         </div>
-        <div className="mr-[7px] block">
-          <div className="flex items-center justify-between p-2">
-            <button
-              onClick={() =>
-                signOut({ redirect: false }).then(() => {
-                  window.location.href = "https://sso.unsia.ac.id/home";
-                })
-              }
-              className="flex items-center  gap-2 rounded-lg border border-primary px-2 py-1 "
-            >
-              <Image
-                src="/icons/menu.svg"
-                width={22}
-                height={22}
-                alt="menu"
-                className="bg-white"
-              />
-              <span>Menu</span>
-            </button>
-            <div className="cursor-pointer px-1 py-[2px]">
-              <Image
-                className="hidden w-auto"
-                src="/icons/notif.svg"
-                width={19}
-                height={16}
-                alt="notif"
-              />
-            </div>
-            <div className="mx-4 flex cursor-pointer gap-1 px-1 py-[2px] ">
-              <Image
-                className="hidden w-auto"
-                src="/icons/globe.svg"
-                width={19}
-                height={16}
-                alt="notif"
-              />
-              <div className=" hidden items-center">
-                <p className="text-xl font-[500] text-[#666666]">EN</p>
-              </div>
-              <Image
-                src="/icons/arrow.svg"
-                width={12}
-                height={7}
-                alt="notif"
-                className="hidden"
-              />
-            </div>
-            <div className="cursor-pointer px-1 py-[2px]">
-              <Image
-                className="hidden w-auto"
-                src="/icons/setting.svg"
-                width={19}
-                height={16}
-                alt="notif"
-              />
-            </div>
-          </div>
+        <div className="mr-8 block">
+          <ProfileMenuNavbar />
         </div>
       </div>
     </nav>

@@ -5,7 +5,6 @@ import Image from "next/image";
 import { usePathname, useSelectedLayoutSegments } from "next/navigation";
 import { useEffect, useState } from "react";
 
-import { ProfileSidebar } from "./profile-sidebar";
 import { useSidebar } from "@/lib/hooks/useSidebar";
 import { useSession } from "next-auth/react";
 import { useSidebarMenu } from "@/lib/hooks/useMenuSidebar";
@@ -38,7 +37,6 @@ export const SidebarMobile = () => {
       `}
     >
       <div className="flex flex-col gap-2 px-3 py-4 lg:p-4">
-        <ProfileSidebar />
         <ul className="flex flex-col gap-1">
           {menus?.map((menu) =>
             menu.children ? (

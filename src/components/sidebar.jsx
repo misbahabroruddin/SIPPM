@@ -7,7 +7,6 @@ import { twMerge } from "tailwind-merge";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 
-import { ProfileSidebar } from "./profile-sidebar";
 import { useSidebar } from "@/lib/hooks/useSidebar";
 import { useSidebarMenu } from "@/lib/hooks/useMenuSidebar";
 
@@ -38,7 +37,6 @@ export const Sidebar = () => {
       `}
     >
       <div className="flex flex-col gap-2 p-4">
-        <ProfileSidebar />
         <ul className="flex flex-col gap-1">
           {menus?.map((menu) =>
             menu.children ? (
