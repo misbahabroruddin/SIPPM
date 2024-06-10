@@ -1,6 +1,6 @@
 "use client";
 
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 
 import { BasePageTitle } from "@/components/base-page-title";
@@ -11,7 +11,7 @@ import { useQueryGetRiwayatVerikasiReviewer } from "@/handlers/reviewer/riwayat/
 import { SectionHeaderDetailProposal } from "@/components/proposal/track/section-header-detail-proposal";
 import { Tabs } from "@/components/proposal/track/tabs";
 import { InnerTabsReviewer } from "@/components/proposal/track/inner-tabs-reviewer";
-import { DetailIdentitasUsulan } from "../../components/detail-identitas-usulan";
+import { DetailIdentitasUsulanPenelitian } from "../../components/detail-identitas-usulan-penelitian";
 import { DetailAnggota } from "@/components/proposal/track/detail-anggota";
 import { DetailTargetCapaian } from "@/components/proposal/track/track-detail-target-capaian";
 import { DetailRencanaAnggaran } from "@/components/proposal/track/detail-rencana-anggaran";
@@ -53,7 +53,7 @@ export default function DetailPenelitianPage() {
               <InnerTabsReviewer tabActive={innerTab || innerTabActive} />
               <div className="flex flex-col gap-4">
                 {(innerTab === "Identitas Usulan" || !innerTab) && (
-                  <DetailIdentitasUsulan data={data} />
+                  <DetailIdentitasUsulanPenelitian data={data} />
                 )}
                 {innerTab === "anggota" && <DetailAnggota data={data} />}
                 {innerTab === "Luaran dan Target Capaian" && (
