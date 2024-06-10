@@ -1,6 +1,6 @@
 "use client";
 
-export const DetailIdentitasUsulan = ({ data }) => {
+export const DetailIdentitasUsulanPenelitian = ({ data }) => {
   return (
     <div className="flex flex-col gap-4">
       <h4 className="text-lg font-[500]">Identitas Usulan</h4>
