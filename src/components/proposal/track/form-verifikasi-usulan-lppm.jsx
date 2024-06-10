@@ -74,6 +74,7 @@ export const FormVerifikasiUsulan = () => {
         placeholder="Status"
         spanEmptyClass="hidden"
         id={id}
+        maxMenuHeight={400}
       />
       <div
         className={twMerge(

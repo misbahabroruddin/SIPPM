@@ -46,23 +46,6 @@ export const FormVerifikasiUsulanReviewer = () => {
   ];
   return (
     <form className="flex flex-col gap-4" onSubmit={handleSubmit(onSubmit)}>
-      {/* <div className="flex flex-col gap-2">
-        <Label
-          htmlFor={"dana_yang_disetujui"}
-          text={"Dana yang disetujui"}
-          required
-        />
-        <Input
-          containerClass="items-start"
-          placeholder="Dana yang disetujui"
-          type="number"
-          register={register("dana_yang_disetujui", {
-            required: "Dana yang disetujui harus diisi",
-          })}
-          errors={errors.dana_yang_disetujui}
-          spanEmptyClass="hidden"
-        />
-      </div> */}
       <SingleSelect
         Controller={Controller}
         control={control}
@@ -73,6 +56,7 @@ export const FormVerifikasiUsulanReviewer = () => {
         placeholder="Status"
         spanEmptyClass="hidden"
         id={id}
+        maxMenuHeight={400}
       />
       <div
         className={twMerge(
