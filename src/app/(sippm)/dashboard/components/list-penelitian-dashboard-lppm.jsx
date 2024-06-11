@@ -103,7 +103,7 @@ const ListItem = ({ data, currentTab, tabActive }) => {
         </div>
         <div className="flex items-end gap-4">
           <Link
-            href={`/proposal/${currentTab || tabActive}/track/${data?.id}`}
+            href={`/proposal/penelitian/detail/lppm/${data?.id}`}
             className="w-full lg:w-fit"
           >
             <button className="w-full rounded-lg bg-primary px-7 py-2 text-white disabled:cursor-not-allowed disabled:bg-gray-500">
