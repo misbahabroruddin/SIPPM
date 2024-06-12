@@ -34,7 +34,7 @@ export const RiwayatPesanLPPM = ({ riwayatId, status, catatan, index }) => {
           <div className="mt-4 flex flex-col gap-1" key={riwayat?.id}>
             <div
               className={`flex ${
-                riwayat?.user_id === session?.user?.id
+                riwayat?.user?.name === session?.user?.name
                   ? "justify-end"
                   : "justify-start"
               } items-center gap-3 text-dark-09`}
@@ -59,7 +59,7 @@ export const RiwayatPesanLPPM = ({ riwayatId, status, catatan, index }) => {
               </div>
               <p className="text-sm">
                 (
-                {riwayat?.user_id === session?.user?.id
+                {riwayat?.user?.name === session?.user?.name
                   ? "Saya"
                   : riwayat?.user?.name || "NAMA REVIEWER"}
                 )
@@ -67,7 +67,7 @@ export const RiwayatPesanLPPM = ({ riwayatId, status, catatan, index }) => {
             </div>
             <div
               className={`h-16 w-full rounded ${
-                riwayat?.user_id === session?.user?.id
+                riwayat?.user?.name === session?.user?.name
                   ? "bg-green-09 text-end"
                   : "bg-sky text-start"
               } p-2`}
