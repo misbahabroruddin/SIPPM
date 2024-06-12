@@ -1,9 +1,11 @@
 import { getToken } from "next-auth/jwt";
 import { NextResponse } from "next/server";
 
-import { ADMINISTRATOR, DOSEN } from "./lib/constants/role";
-import { DOSEN_PATHS } from "./lib/datas/dosen-path";
+import { ADMINISTRATOR, DOSEN, LPPM, REVIEWER } from "./lib/constants/role";
+import { matchesDosenPath } from "./lib/datas/dosen-path";
 import { ADMINISTRATOR_PATHS } from "./lib/datas/administrator-path";
+import { matchesLppmPath } from "./lib/datas/lppm-path";
+import { matchesReviewerPath } from "./lib/datas/reviewer-path";
 
 const middleware = async (request) => {
   try {
@@ -20,11 +22,19 @@ const middleware = async (request) => {
 
     const role = token?.roles[0].name;
 
-    if (role !== DOSEN && DOSEN_PATHS.includes(path)) {
+    if (role !== DOSEN && matchesDosenPath(path)) {
       return NextResponse.redirect(new URL("/dashboard", request.url));
     }
 
     if (role !== ADMINISTRATOR && ADMINISTRATOR_PATHS.includes(path)) {
+      return NextResponse.redirect(new URL("/dashboard", request.url));
+    }
+
+    if (role !== LPPM && matchesLppmPath(path)) {
+      return NextResponse.redirect(new URL("/dashboard", request.url));
+    }
+
+    if (role !== REVIEWER && matchesReviewerPath(path)) {
       return NextResponse.redirect(new URL("/dashboard", request.url));
     }
 
