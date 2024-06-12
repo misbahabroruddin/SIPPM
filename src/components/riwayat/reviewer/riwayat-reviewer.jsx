@@ -54,7 +54,7 @@ export const TrackRiwayatReviewer = ({ data, isLoading }) => {
           </div>
           <div className="mt-8 flex flex-col gap-2">
             {data?.length ? (
-              data?.map((item) => (
+              data?.map((item, index) => (
                 <div
                   className="overflow-hidden rounded-lg px-4 py-3 shadow-custom transition-all"
                   key={item.id}
@@ -128,6 +128,7 @@ export const TrackRiwayatReviewer = ({ data, isLoading }) => {
                       riwayatId={item?.id}
                       status={item?.status}
                       catatan={item?.catatan}
+                      index={index}
                     />
                   </div>
                 </div>
