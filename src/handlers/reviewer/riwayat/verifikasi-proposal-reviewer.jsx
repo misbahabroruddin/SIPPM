@@ -2,7 +2,7 @@
 
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { signOut } from "next-auth/react";
-import { useParams } from "next/navigation";
+import { useParams, usePathname } from "next/navigation";
 import { toast } from "react-toastify";
 
 import { useAxios } from "@/lib/hooks/useAxios";
@@ -11,6 +11,8 @@ export const useVerifikasiProposalReviewer = (reset, router) => {
   const axios = useAxios();
   const queryClient = useQueryClient();
   const { id } = useParams();
+  const pathname = usePathname();
+  const path = pathname.split("/");
 
   const onSubmit = async (form) => {
     try {
@@ -27,9 +29,16 @@ export const useVerifikasiProposalReviewer = (reset, router) => {
           },
         },
       );
+
+      if (form.status === "Diterima") {
+        router.push(`/proposal/${path[2]}/detail/reviewer/${id}/penilaian`);
+      } else {
+        router.push("/proposal");
+      }
+
       toast.success("Proposal berhasil diupdate");
       reset();
-      router.push("/proposal");
+
       return data;
     } catch (error) {
       if (error.response.status === 401) {
@@ -70,6 +79,9 @@ export const useVerifikasiProposalReviewer = (reset, router) => {
       });
       queryClient.invalidateQueries({
         queryKey: ["verfikasiReviewer", id],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ["verfikasiReviewerLppm", id],
       });
       queryClient.invalidateQueries({
         queryKey: ["getFormPenilaianReviewer"],
