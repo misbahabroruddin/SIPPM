@@ -120,7 +120,7 @@ export const ListPengabdianKontrakLppm = ({
           )
         ) : null}
       </div>
-      {pengabdian?.data?.length ? (
+      {pengabdian?.last_page > 1 ? (
         <Pagination
           perPage={pengabdian?.per_page}
           onPageChange={handlePageChange}

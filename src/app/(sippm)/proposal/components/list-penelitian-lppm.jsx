@@ -30,7 +30,7 @@ export const ListPenelitianProposalLPPM = ({
         <CardDashboard status="Ditolak" jumlah={jumlahPenelitianDitolak || 0} />
       </div>
       <div className="flex h-[570px] flex-col gap-4 overflow-auto p-1 pb-8">
-        {penelitian?.data?.length ? (
+        {penelitian?.last_page > 1 ? (
           penelitian?.data
             ?.filter((item) => item.status !== "Draft")
             .map((proposal) => (

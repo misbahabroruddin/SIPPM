@@ -45,7 +45,7 @@ export const ListPengabdianProposalLPPM = ({
           <EmptyState />
         )}
       </div>
-      {pengabdian?.data?.length ? (
+      {pengabdian?.last_page > 1 ? (
         <Pagination
           perPage={pengabdian?.per_page}
           onPageChange={handlePagePengabdianChange}

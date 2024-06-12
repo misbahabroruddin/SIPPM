@@ -121,7 +121,7 @@ export const ListPenelitianKontrakLppm = ({
           )
         ) : null}
       </div>
-      {penelitian?.data?.length ? (
+      {penelitian?.last_page > 1 ? (
         <Pagination
           perPage={penelitian?.per_page}
           onPageChange={handlePageChange}
