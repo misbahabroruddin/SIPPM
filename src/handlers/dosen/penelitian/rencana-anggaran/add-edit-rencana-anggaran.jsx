@@ -14,6 +14,7 @@ export const useAddEditRencanaAnggaranPenelitian = (
   const axios = useAxios();
   const queryClient = useQueryClient();
   const { id } = useParams();
+
   const onSubmit = async (form) => {
     try {
       const penelitianId = localStorage.getItem("penelitianId");
@@ -36,19 +37,29 @@ export const useAddEditRencanaAnggaranPenelitian = (
           },
         );
         toast.success("Rencana anggaran penelitian berhasil diubah");
+        queryClient.invalidateQueries({
+          queryKey: ["rencanaAnggaranPenelitian"],
+        });
+        queryClient.invalidateQueries({
+          queryKey: ["detailRencanaAnggaranPenelitian", anggaranId],
+        });
         return data;
       } else {
         const { data } = await axios.post(
           `/proposals/dosens/penelitians/${
-            penelitianId || id
+            id || penelitianId
           }/rencana-anggarans`,
           formData,
         );
         reset();
         toast.success("Rencana anggaran penelitian berhasil ditambahkan");
+        queryClient.invalidateQueries({
+          queryKey: ["rencanaAnggaranPenelitian"],
+        });
         return data;
       }
     } catch (error) {
+      console.log(error);
       toast.error(error.response.data.message || "Something went wrong");
     }
   };
@@ -60,14 +71,8 @@ export const useAddEditRencanaAnggaranPenelitian = (
     mutationFn: onSubmit,
     onSuccess: (data) => {
       if (data) {
-        queryClient.invalidateQueries({
-          queryKey: ["rencanaAnggaranPenelitian"],
-        });
         onClose();
       }
-    },
-    onError: (error) => {
-      toast.error(error.response.data.message || "Something went wrong");
     },
   });
 
