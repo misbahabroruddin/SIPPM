@@ -3,12 +3,12 @@
 import { useForm } from "react-hook-form";
 
 import { Input } from "@/components/input/input";
-import { ButtonCancel } from "@/components/button/button-cancel";
-import { ButtonSave } from "@/components/button/button-save";
 import { useQueryDetailRencanaAnggaranPenelitian } from "@/handlers/dosen/penelitian/rencana-anggaran/query-detail-rencana-anggaran";
 import { useAddEditRencanaAnggaranPenelitian } from "@/handlers/dosen/penelitian/rencana-anggaran/add-edit-rencana-anggaran";
+import { Save } from "@/components/svgs/save";
+import { Close } from "@/components/svgs/close";
 
-export const FormRencanaAnggaran = ({ onClose, id }) => {
+export const FormRencanaAnggaranPenelitian = ({ onClose, id }) => {
   const {
     register,
     handleSubmit,
@@ -22,48 +22,52 @@ export const FormRencanaAnggaran = ({ onClose, id }) => {
     useAddEditRencanaAnggaranPenelitian(id, reset, onClose);
 
   return (
-    <form
-      className="flex flex-col gap-3 px-3"
-      onSubmit={handleSubmit(onSubmitRencanaAnggaran)}
-    >
-      <Input
-        containerClass="flex-col items-start gap-2 lg:flex-col lg:items-start lg:gap-2"
-        labelClass="text-start"
-        label="Rincian"
-        name={"rincian"}
-        placeholder="Rincian"
-        register={register("rincian", {
-          required: "harus diisi",
-        })}
-        errors={errors.rincian}
-        required
-        defaultValue={data?.rincian}
-        spanEmptyClass="hidden"
-      />
-      <Input
-        containerClass="flex-col items-start gap-2 lg:flex-col lg:items-start lg:gap-2"
-        labelClass="text-start"
-        type="number"
-        label="Biaya"
-        name="biaya"
-        placeholder="Biaya"
-        register={register("biaya", {
-          required: "harus diisi",
-        })}
-        errors={errors.biaya}
-        required
-        defaultValue={data?.biaya}
-        spanEmptyClass="hidden"
-      />
-      <div className="my-2 flex justify-center gap-4">
-        <ButtonCancel className="w-36 lg:w-40" iconLeft onClick={onClose} />
-        <ButtonSave
-          className="w-36 lg:w-40"
-          iconLeft
-          disabled={isLoadingRencanaAnggaran}
-          isLoading={isLoadingRencanaAnggaran}
+    <tr>
+      <td className="hidden px-2 lg:table-cell lg:w-8 "></td>
+      <td className="px-2">
+        <Input
+          containerClass="flex-col items-start gap-2 lg:flex-col lg:items-start lg:gap-2"
+          labelClass="hidden"
+          name={"rincian"}
+          placeholder="Rincian"
+          register={register("rincian", {
+            required: "harus diisi",
+          })}
+          errors={errors.rincian}
+          required
+          spanEmptyClass="hidden"
+          defaultValue={data?.rincian}
         />
-      </div>
-    </form>
+      </td>
+      <td className="px-2">
+        <Input
+          containerClass="flex-col items-start gap-2 lg:flex-col lg:items-start lg:gap-2"
+          labelClass="hidden"
+          type="number"
+          label="Biaya"
+          name="biaya"
+          placeholder="Biaya"
+          register={register("biaya", {
+            required: "harus diisi",
+          })}
+          errors={errors.biaya}
+          required
+          spanEmptyClass="hidden"
+          defaultValue={data?.biaya}
+        />
+      </td>
+      <td className="mx-auto w-7 py-2 text-center lg:py-3">
+        <button title="Save">
+          <Save
+            width={26}
+            height={26}
+            onClick={handleSubmit(onSubmitRencanaAnggaran)}
+          />
+        </button>
+        <button onClick={onClose} title="Cancel">
+          <Close />
+        </button>
+      </td>
+    </tr>
   );
 };

@@ -9,7 +9,6 @@ import { useStep } from "@/lib/hooks/useStep";
 import { useQueryRencanaAnggaranPenelitian } from "@/handlers/dosen/penelitian/rencana-anggaran/query-rencana-anggaran";
 import { useNextStep } from "@/handlers/step";
 import { TableRencanaAnggaran } from "@/components/proposal/pengajuan/penelitian/step4/table-rencana-anggaran";
-import { ModalTambahRencanaAnggaran } from "@/components/proposal/pengajuan/penelitian/step4/modal-tambah-rencana-anggaran";
 
 export const RencanaAnggaran = () => {
   const { currentStep, setCurrentStep } = useStep();
@@ -34,7 +33,6 @@ export const RencanaAnggaran = () => {
         <h1 className="order-2 text-base font-semibold text-primary md:order-none lg:text-lg">
           Rincian Biaya
         </h1>
-        <ModalTambahRencanaAnggaran />
       </div>
       <TableRencanaAnggaran data={data} />
       <div className="absolute -bottom-16 left-0 mt-4 flex w-full items-center justify-between">
