@@ -34,7 +34,6 @@ export const RincianKegiatan = () => {
         <h1 className="order-2 text-base font-semibold text-primary md:order-none lg:text-lg">
           Rincian Kegiatan
         </h1>
-        <ModalTambahRincianKegiatan />
       </div>
       <TableRincianKegiatan data={rincianKegiatanPenelitian} />
       <div className="absolute -bottom-16 left-0 mt-4 flex w-full items-center justify-between">
