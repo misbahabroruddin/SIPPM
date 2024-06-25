@@ -71,6 +71,18 @@ export const useAddIdentitasUsulanPKM = (reset) => {
       mutationFn: onSubmit,
       onSuccess: () => {
         queryClient.invalidateQueries({ queryKey: ["listPengabdian"] });
+        queryClient.invalidateQueries({
+          queryKey: ["listPengabdianDashboardDosen"],
+        });
+        queryClient.invalidateQueries({
+          queryKey: ["listPenelitianDashboardDosen"],
+        });
+        queryClient.resetQueries({
+          queryKey: ["infoProposalPenelitianDosenDashboard"],
+        });
+        queryClient.resetQueries({
+          queryKey: ["infoProposalPengabdianDosenDashboard"],
+        });
       },
     });
 

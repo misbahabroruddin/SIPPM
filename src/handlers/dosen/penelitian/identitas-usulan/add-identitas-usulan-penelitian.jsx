@@ -70,6 +70,18 @@ export const useAddIdentitasUsulanPenelitian = (reset) => {
     mutationFn: onSubmit,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["listPenelitian"] });
+      queryClient.invalidateQueries({
+        queryKey: ["listPengabdianDashboardDosen"],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ["listPenelitianDashboardDosen"],
+      });
+      queryClient.resetQueries({
+        queryKey: ["infoProposalPenelitianDosenDashboard"],
+      });
+      queryClient.resetQueries({
+        queryKey: ["infoProposalPengabdianDosenDashboard"],
+      });
     },
   });
 

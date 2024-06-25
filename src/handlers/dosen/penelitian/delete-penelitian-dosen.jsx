@@ -81,6 +81,12 @@ export const useDeletePenelitianDosen = () => {
           queryClient.resetQueries({
             queryKey: ["detailRincianKegiatanPKM"],
           });
+          queryClient.resetQueries({
+            queryKey: ["infoProposalPenelitianDosenDashboard"],
+          });
+          queryClient.resetQueries({
+            queryKey: ["infoProposalPengabdianDosenDashboard"],
+          });
         }
       },
     });
