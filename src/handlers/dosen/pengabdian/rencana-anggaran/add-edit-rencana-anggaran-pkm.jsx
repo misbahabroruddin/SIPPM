@@ -57,6 +57,9 @@ export const useAddEditRencanaAnggaranPKM = (anggaranId, reset, onClose) => {
     onSuccess: (data) => {
       if (data) {
         queryClient.invalidateQueries({ queryKey: ["rencanaAnggaranPKM"] });
+        queryClient.invalidateQueries({
+          queryKey: ["detailRencanaAnggaranPKM", anggaranId],
+        });
         onClose();
       }
     },
