@@ -2,13 +2,18 @@
 
 import Image from "next/image";
 import { Typography } from "@material-tailwind/react";
+import { useState } from "react";
 import { twMerge } from "tailwind-merge";
 
 import { useDeleteRencanaAnggaranPKM } from "@/handlers/dosen/pengabdian/rencana-anggaran/delete-rencana-anggaran-pkm";
-import { ModalEditRencanaAnggaran } from "./modal-edit-rencana-anggaran";
+import { FormRencanaAnggaranPKM } from "./form-rencana-anggaran";
 
 export const TableRencanaAnggaran = ({ data }) => {
   const header = ["No", "Rincian", "Biaya", "Action"];
+
+  const [isOpenEmptyData, setisOpenEmptyData] = useState(false);
+  const [isOpenHasData, setisOpenHasData] = useState(false);
+  const [editingDataId, setEditingDataId] = useState();
 
   const { deleteRencanaAnggaranPKM, isPending } = useDeleteRencanaAnggaranPKM();
 
@@ -24,6 +29,7 @@ export const TableRencanaAnggaran = ({ data }) => {
                 index === 0 && "hidden lg:table-cell",
                 index === 1 && "w-20 sm:w-fit",
                 index === 2 && "w-32 sm:w-fit  xl:w-[550px]",
+                index === 3 && "w-14",
               )}
             >
               <Typography
@@ -41,7 +47,12 @@ export const TableRencanaAnggaran = ({ data }) => {
         {data?.data.length ? (
           <>
             {data?.data.map((row, index) => {
-              return (
+              return editingDataId === row.id ? (
+                <FormRencanaAnggaranPKM
+                  id={row.id}
+                  onClose={() => setEditingDataId()}
+                />
+              ) : (
                 <tr key={row.id} className="text-base even:bg-sky">
                   <td className="hidden p-2 lg:table-cell lg:w-8 lg:p-3">
                     <Typography
@@ -65,7 +76,14 @@ export const TableRencanaAnggaran = ({ data }) => {
                     </Typography>
                   </td>
                   <td className="mx-auto w-7 py-2 text-center lg:py-3">
-                    <ModalEditRencanaAnggaran id={row.id} />
+                    <button onClick={() => setEditingDataId(row.id)}>
+                      <Image
+                        src="/icons/edit.svg"
+                        width={24}
+                        height={24}
+                        alt="edit"
+                      />
+                    </button>
                     <button
                       className="rounded-lg disabled:cursor-not-allowed disabled:opacity-60"
                       onClick={() => deleteRencanaAnggaranPKM(row.id)}
@@ -82,6 +100,27 @@ export const TableRencanaAnggaran = ({ data }) => {
                 </tr>
               );
             })}
+            {isOpenHasData ? (
+              <FormRencanaAnggaranPKM onClose={() => setisOpenHasData(false)} />
+            ) : (
+              <tr>
+                <td colSpan={4}>
+                  <div className="my-2 flex">
+                    <button
+                      className="ml-auto flex gap-2 rounded bg-green px-4 py-2 text-white hover:bg-green/80"
+                      onClick={() => setisOpenHasData(true)}
+                    >
+                      <Image
+                        src="/icons/plus-circle-white.svg"
+                        width={24}
+                        height={24}
+                        alt="plus"
+                      />
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            )}
             <tr className="border-t border-primary">
               <td className="hidden lg:table-cell"></td>
               <td className="p-3">Total</td>
@@ -98,11 +137,38 @@ export const TableRencanaAnggaran = ({ data }) => {
             </tr>
           </>
         ) : (
-          <tr>
-            <td className="p-4 text-center" colSpan={4}>
-              Tidak ada data
-            </td>
-          </tr>
+          <>
+            {isOpenEmptyData ? (
+              <FormRencanaAnggaranPKM
+                onClose={() => setisOpenEmptyData(false)}
+              />
+            ) : (
+              <>
+                <tr>
+                  <td className="p-2 text-center" colSpan={4}>
+                    Tidak ada data
+                  </td>
+                </tr>
+                <tr>
+                  <td colSpan={4}>
+                    <div className="flex">
+                      <button
+                        className="ml-auto flex gap-2 rounded bg-green px-4 py-2 text-white hover:bg-green/80"
+                        onClick={() => setisOpenEmptyData(true)}
+                      >
+                        <Image
+                          src="/icons/plus-circle-white.svg"
+                          width={24}
+                          height={24}
+                          alt="plus"
+                        />
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              </>
+            )}
+          </>
         )}
       </tbody>
     </table>

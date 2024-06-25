@@ -8,7 +8,6 @@ import { ButtonNext } from "@/components/button/button-next";
 import { useStep } from "@/lib/hooks/useStep";
 import { useQueryRincianKegiatanPenelitian } from "@/handlers/dosen/penelitian/rincian-kegiatan/query-rincian-kegiatan-penelitian";
 import { useNextStep } from "@/handlers/step";
-import { ModalTambahRincianKegiatan } from "@/components/proposal/pengajuan/penelitian/step5/modal-tambah-rincian-kegiatan";
 import { TableRincianKegiatan } from "@/components/proposal/pengajuan/penelitian/step5/table-rincian-kegiatan";
 
 export const RincianKegiatan = () => {

@@ -8,7 +8,6 @@ import { ButtonNext } from "@/components/button/button-next";
 import { useStep } from "@/lib/hooks/useStep";
 import { useQueryRincianKegiatanPKM } from "@/handlers/dosen/pengabdian/rincian-kegiatan/query-rincian-kegiatan-pkm";
 import { useNextStep } from "@/handlers/step";
-import { ModalTambahRincianKegiatan } from "@/components/proposal/pengajuan/pengabdian/step5/modal-tambah-rincian-kegiatan";
 import { TableRincianKegiatan } from "@/components/proposal/pengajuan/pengabdian/step5/table-rincian-kegiatan";
 
 export const RincianKegiatanPKM = () => {
@@ -31,7 +30,6 @@ export const RincianKegiatanPKM = () => {
         <h1 className="order-2 text-base font-semibold text-primary md:order-none lg:text-lg">
           Rincian Kegiatan
         </h1>
-        <ModalTambahRincianKegiatan />
       </div>
       <TableRincianKegiatan data={data} />
       <div className="absolute -bottom-16 left-0 mt-4 flex w-full items-center justify-between">

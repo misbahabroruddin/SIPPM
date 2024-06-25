@@ -8,7 +8,6 @@ import { ButtonNext } from "@/components/button/button-next";
 import { useStep } from "@/lib/hooks/useStep";
 import { useQueryRencanaAnggranPKM } from "@/handlers/dosen/pengabdian/rencana-anggaran/query-rencana-anggran-pkm";
 import { useNextStep } from "@/handlers/step";
-import { ModalTambahRencanaAnggaranPKM } from "@/components/proposal/pengajuan/pengabdian/step4/modal-tambah-rencana-anggaran";
 import { TableRencanaAnggaran } from "@/components/proposal/pengajuan/pengabdian/step4/table-rencana-anggaran";
 
 export const RencanaAnggaranPKM = () => {
@@ -34,7 +33,6 @@ export const RencanaAnggaranPKM = () => {
         <h1 className="order-2 text-base font-semibold text-primary md:order-none lg:text-lg">
           Rincian Biaya
         </h1>
-        <ModalTambahRencanaAnggaranPKM />
       </div>
       <TableRencanaAnggaran data={data} />
       <div className="absolute -bottom-16 left-0 mt-4 flex w-full items-center justify-between">

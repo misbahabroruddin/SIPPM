@@ -10,7 +10,7 @@ import { useDeleteRincianKegiatanPenelitian } from "@/handlers/dosen/penelitian/
 import { FormRincianKegiatan } from "./form-rincian-kegiatan";
 
 export const TableRincianKegiatan = ({ data }) => {
-  const [isOpenEmptyData, setisOpenEmptyData] = useState(false);
+  const [isOpenEmptyData, setIsOpenEmptyData] = useState(false);
   const [isOpenHasData, setisOpenHasData] = useState(false);
   const [editingDataId, setEditingDataId] = useState();
 
@@ -122,7 +122,7 @@ export const TableRincianKegiatan = ({ data }) => {
         ) : (
           <>
             {isOpenEmptyData ? (
-              <FormRincianKegiatan onClose={() => setisOpenEmptyData(false)} />
+              <FormRincianKegiatan onClose={() => setIsOpenEmptyData(false)} />
             ) : (
               <>
                 <tr>
@@ -135,7 +135,7 @@ export const TableRincianKegiatan = ({ data }) => {
                     <div className="flex">
                       <button
                         className="ml-auto flex gap-2 rounded bg-green px-4 py-2 text-white hover:bg-green/80"
-                        onClick={() => setisOpenEmptyData(true)}
+                        onClick={() => setIsOpenEmptyData(true)}
                       >
                         <Image
                           src="/icons/plus-circle-white.svg"
