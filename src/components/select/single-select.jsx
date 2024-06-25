@@ -22,10 +22,12 @@ export const SingleSelect = ({
   hideSelectedOptions,
   spanEmptyClass,
   maxMenuHeight = 100,
+  backgroundColor = "white",
+  borderColor = "#eeeeee",
   ...props
 }) => {
   return (
-    <div className="flex flex-col">
+    <div className="flex w-full flex-col">
       <div className="flex flex-col items-start gap-1 lg:flex-row lg:items-center lg:gap-0">
         {label && (
           <Label
@@ -59,6 +61,7 @@ export const SingleSelect = ({
                   control: (base) => ({
                     ...base,
                     paddingInline: "2px",
+                    backgroundColor: backgroundColor,
                   }),
                 }}
                 className={`w-full ${errors ? "required" : ""}`}
