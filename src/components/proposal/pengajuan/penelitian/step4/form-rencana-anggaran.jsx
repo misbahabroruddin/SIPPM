@@ -43,7 +43,6 @@ export const FormRencanaAnggaranPenelitian = ({ onClose, id }) => {
         <Input
           containerClass="flex-col items-start gap-2 lg:flex-col lg:items-start lg:gap-2"
           type="number"
-          label="Biaya"
           name="biaya"
           placeholder="Biaya"
           register={register("biaya", {
