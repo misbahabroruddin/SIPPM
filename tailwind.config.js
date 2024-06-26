@@ -37,6 +37,7 @@ module.exports = withMT({
         gray1: "#F1F1F1",
         "black-06": "#333333",
         "black-07": "#666666",
+        "black-09": "#999999",
       },
       colors: {
         primary: "#333333",
@@ -51,6 +52,7 @@ module.exports = withMT({
         "dark-09": "#444F5C",
         "dark-80": "#65768B",
         "black-07": "#666666",
+        "black-09": "#999999",
         "blue-primary": "#10487A",
         "blue-09": "#CFDAE4",
         "blue-04": "#0D3A62",
