@@ -9,6 +9,7 @@ import { ContainerContent } from "@/components/container-content";
 import { InputFile } from "@/components/input/input-file";
 import { useStep } from "@/lib/hooks/useStep";
 import { useUploadBerkasPenelitian } from "@/handlers/dosen/penelitian/berkas/upload-berkas-penelitian";
+import { ModalUploadDokumen } from "@/components/proposal/pengajuan/penelitian/step6/modal-upload-dokumen";
 
 export const Berkas = () => {
   const router = useRouter();
@@ -31,11 +32,22 @@ export const Berkas = () => {
 
   return (
     <ContainerContent className="relative">
-      <form
+      {/* <form
         className="flex flex-col gap-4"
         onSubmit={handleSubmit(uploadBerkas)}
-      >
-        <div className="flex flex-col gap-4">
+      > */}
+      <div className="flex w-1/2 flex-col gap-6">
+        <h1 className="text-base font-semibold text-primary lg:text-lg">
+          Dokumen Pendukung
+        </h1>
+        <div className="flex items-center justify-between">
+          <h3 className="font-base text-base text-primary lg:text-lg">
+            Unggah Dokumen
+          </h3>
+          <ModalUploadDokumen />
+        </div>
+      </div>
+      {/* <div className="flex flex-col gap-4">
           <h1 className="text-base font-semibold text-primary lg:text-lg">
             File Proposal
           </h1>
@@ -106,19 +118,19 @@ export const Berkas = () => {
             resetField={resetField}
             errors={errors.file_cv}
           />
-        </div>
-        <div className="flex justify-between">
-          <ButtonPrev
-            onClick={handlePrevStep}
-            className="w-[120px] lg:w-[200px]"
-          />
-          <ButtonSave
-            disabled={isLoadingSubmit}
-            isLoading={isLoadingSubmit}
-            className="w-[120px] lg:w-[200px]"
-          />
-        </div>
-      </form>
+        </div> */}
+      <div className="flex justify-between rounded-lg p-4 shadow">
+        <ButtonPrev
+          onClick={handlePrevStep}
+          className="w-[120px] lg:w-[200px]"
+        />
+        <ButtonSave
+          disabled={isLoadingSubmit}
+          isLoading={isLoadingSubmit}
+          className="w-[120px] lg:w-[200px]"
+        />
+      </div>
+      {/* </form> */}
     </ContainerContent>
   );
 };
