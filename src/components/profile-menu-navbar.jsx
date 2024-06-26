@@ -39,7 +39,7 @@ export const ProfileMenuNavbar = () => {
               alt="Profile"
               className="h-8 w-8"
             />
-            <div className="flex">
+            <div className="flex items-center">
               <div className="line-clamp-1 min-w-fit max-w-28 text-[14px] font-[500]">
                 <p>{session?.user.name}</p>
               </div>
