@@ -49,6 +49,13 @@ export default function ProposalPageDosen() {
   const { data: pengabdian, isLoading: isLoadingPengabdian } =
     useQueryGetAllPengabdian(searchPengabdian, pagePengabdian);
 
+  const pengabdianDraft = pengabdian?.data.filter(
+    (proposal) => proposal.status === "Draft",
+  );
+  const penelitianDraft = penelitian?.data.filter(
+    (proposal) => proposal.status === "Draft",
+  );
+
   return (
     <ContainerPage>
       <div className="flex flex-col gap-4">
@@ -60,7 +67,8 @@ export default function ProposalPageDosen() {
           <div className="flex flex-wrap items-center justify-between gap-2 lg:justify-start lg:gap-4">
             <Tabs
               tabActive={currentTab || tabActive}
-              setSearch={setSearchPenelitian}
+              penelitianDraft={penelitianDraft}
+              pengabdianDraft={pengabdianDraft}
             />
             <SearchInput
               onChange={(e) => {
