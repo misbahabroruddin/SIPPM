@@ -4,11 +4,11 @@ export const MENU_SIDEBAR_ADMIN = [
     icon: "/icons/dashboard.svg",
     link: "/dashboard",
   },
-  // {
-  //   label: "Biodata",
-  //   icon: "/icons/biodata.svg",
-  //   link: "/biodata",
-  // },
+  {
+    label: "Proposal",
+    icon: "/icons/proposal.svg",
+    link: "/proposal",
+  },
   {
     label: "Anggota",
     icon: "/icons/anggota.svg",
