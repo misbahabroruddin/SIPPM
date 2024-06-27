@@ -21,12 +21,12 @@ export const RiwayatPesanReviewer = ({ riwayatId, status, catatan, index }) => {
     <>
       <div className="mb-2 mt-3 flex flex-col">
         <label className="text-sm font-semibold">Catatan :</label>
-        <div className="border-black-09 h-16 rounded-lg border p-2">
+        <div className="sm:[400px] w-[300px] rounded-lg border border-black-09 p-2 md:w-[900px] lg:w-[1100px] xl:w-[1300px]">
           <p className="text">{catatan}</p>
         </div>
       </div>
       <div
-        className={`border-black-09 rounded-lg border p-2 ${
+        className={`rounded-lg border border-black-09 p-2 ${
           data?.length > 0 ? "" : "hidden"
         }`}
       >
@@ -66,7 +66,7 @@ export const RiwayatPesanReviewer = ({ riwayatId, status, catatan, index }) => {
               </p>
             </div>
             <div
-              className={`h-16 w-full rounded ${
+              className={`w-full rounded ${
                 riwayat?.user?.name === session?.user?.name
                   ? "bg-green-09 text-end"
                   : "bg-sky text-start"

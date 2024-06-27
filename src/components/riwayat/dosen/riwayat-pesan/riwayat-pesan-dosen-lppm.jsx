@@ -26,12 +26,12 @@ export const RiwayatPesanDosenLPPM = ({
     <>
       <div className="mb-2 mt-3 flex flex-col">
         <label className="text-sm font-semibold">Catatan :</label>
-        <div className="border-black-09 h-16 rounded-lg border p-2">
+        <div className="rounded-lg border border-black-09 p-2">
           <p className="text">{catatan}</p>
         </div>
       </div>
       <div
-        className={`border-black-09 rounded-lg border p-2 ${
+        className={`rounded-lg border border-black-09 p-2 ${
           data?.length > 0 ? "" : "hidden"
         }`}
       >
@@ -71,7 +71,7 @@ export const RiwayatPesanDosenLPPM = ({
               </p>
             </div>
             <div
-              className={`h-16 w-full rounded ${
+              className={`w-full rounded ${
                 riwayat?.user_id === session?.user?.id
                   ? "bg-green-09 text-end"
                   : "bg-sky text-start"
