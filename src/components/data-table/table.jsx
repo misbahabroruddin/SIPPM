@@ -106,18 +106,22 @@ const DataTable = ({
         </tbody>
       </table>
       <div className="mt-2 flex items-center justify-between">
-        <div className="flex gap-2 text-primary">
-          <p>Data</p>
-          <p>{data?.to}</p>
-          <p>of</p>
-          <p>{total}</p>
-        </div>
-        <Pagination
-          perPage={pagination.pageSize}
-          pageCount={pageCount}
-          pageOffset={pagination.pageIndex}
-          onPageChange={handlePageChange}
-        />
+        {total > 0 && (
+          <>
+            <div className="flex gap-2 text-primary">
+              <p>Data</p>
+              <p>{data?.to}</p>
+              <p>of</p>
+              <p>{total}</p>
+            </div>
+            <Pagination
+              perPage={pagination.pageSize}
+              pageCount={pageCount}
+              pageOffset={pagination.pageIndex}
+              onPageChange={handlePageChange}
+            />
+          </>
+        )}
       </div>
     </>
   );
