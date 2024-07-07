@@ -15,7 +15,7 @@ export const useCreateListingJabatanFungsional = (onClose, reset) => {
     if (form.keterangan) formData.append("keterangan", form.keterangan);
     try {
       const response = await axios.post(
-        "/data-referensis/jabatan-fungsionals",
+        "/data-referensi/jabatan-fungsionals",
         formData,
       );
       queryClient.invalidateQueries({

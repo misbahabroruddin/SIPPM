@@ -12,7 +12,7 @@ export const useRestoreBidangIlmu = () => {
 
   const restoreBidangIlmu = async (id) => {
     try {
-      await axios.put(`/data-referensis/bidang-ilmus/trashs/${id}`);
+      await axios.put(`/data-referensi/bidang-ilmus/trashs/${id}`);
 
       queryClient.invalidateQueries({
         queryKey: ["bidang-ilmu"],

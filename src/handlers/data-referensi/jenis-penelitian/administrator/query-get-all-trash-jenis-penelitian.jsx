@@ -18,7 +18,7 @@ export const useQueryTrashListingJenisPenelitian = (search, page) => {
     queryFn: async () => {
       try {
         const { data } = await axios.get(
-          "/data-referensis/jenis-penelitians/trashs",
+          "/data-referensi/jenis-penelitians/trashs",
           { params },
         );
 

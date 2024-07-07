@@ -22,7 +22,7 @@ export const useQueryEditKabupaten = (id) => {
 
     try {
       const { data } = await axios.put(
-        `/data-referensis/kabupatens/${id}`,
+        `/data-referensi/kabupatens/${id}`,
         reqBody,
         {
           headers: {

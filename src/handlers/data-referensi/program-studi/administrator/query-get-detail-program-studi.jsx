@@ -14,7 +14,7 @@ export const useQueryGetDetailProgramStudi = (id) => {
     queryFn: async () => {
       try {
         const { data } = await axios.get(
-          `/data-referensis/program-studis/${id}`,
+          `/data-referensi/program-studis/${id}`,
         );
         return data.data;
       } catch (error) {

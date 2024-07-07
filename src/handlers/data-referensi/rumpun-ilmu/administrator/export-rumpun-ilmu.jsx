@@ -14,7 +14,7 @@ export const useExportRumpunIlmu = () => {
     queryFn: async () => {
       try {
         const { data } = await axios.get(
-          "/data-referensis/rumpun-ilmus/export",
+          "/data-referensi/rumpun-ilmus/export",
           {
             responseType: "blob",
           },

@@ -16,7 +16,7 @@ export const useQueryListingKabupaten = (search, page) => {
     queryKey: ["kabupaten", search, page],
     queryFn: async () => {
       try {
-        const { data } = await axios.get("/data-referensis/kabupatens", {
+        const { data } = await axios.get("/data-referensi/kabupatens", {
           params,
         });
 

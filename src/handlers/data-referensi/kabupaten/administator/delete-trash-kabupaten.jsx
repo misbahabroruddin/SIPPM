@@ -12,7 +12,7 @@ export const useDeleteTrashKabupaten = () => {
 
   const deleteTrashKabupaten = async (id) => {
     try {
-      await axios.delete(`/data-referensis/kabupatens/trashs/${id}`);
+      await axios.delete(`/data-referensi/kabupatens/trashs/${id}`);
 
       queryClient.invalidateQueries({
         queryKey: ["trash-kabupaten"],

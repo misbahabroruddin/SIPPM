@@ -14,7 +14,7 @@ export const useExportJabatanFungsional = () => {
     queryFn: async () => {
       try {
         const { data } = await axios.get(
-          "/data-referensis/jabatan-fungsionals/export",
+          "/data-referensi/jabatan-fungsionals/export",
           {
             responseType: "blob",
           },

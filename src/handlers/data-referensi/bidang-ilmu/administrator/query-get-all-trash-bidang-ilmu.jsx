@@ -17,7 +17,7 @@ export const useQueryTrashListingBidangIlmu = (search, page) => {
     queryFn: async () => {
       try {
         const { data } = await axios.get(
-          "/data-referensis/bidang-ilmus/trashs",
+          "/data-referensi/bidang-ilmus/trashs",
           { params },
         );
 

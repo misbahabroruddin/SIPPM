@@ -21,7 +21,7 @@ export const useQueryEditBidangIlmu = (id) => {
 
     try {
       const { data } = await axios.put(
-        `/data-referensis/bidang-ilmus/${id}`,
+        `/data-referensi/bidang-ilmus/${id}`,
         reqBody,
         {
           headers: {

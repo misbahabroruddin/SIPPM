@@ -16,7 +16,7 @@ export const useQueryListingLuaranWajib = (search, page) => {
     queryKey: ["luaran-wajib", search, page],
     queryFn: async () => {
       try {
-        const { data } = await axios.get("/data-referensis/luaran-wajibs", {
+        const { data } = await axios.get("/data-referensi/luaran-wajibs", {
           params,
         });
 

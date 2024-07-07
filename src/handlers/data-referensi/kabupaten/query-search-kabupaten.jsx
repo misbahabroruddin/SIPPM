@@ -11,7 +11,7 @@ export const useQuerySearchKabupaten = () => {
   const fetchSearchKabupaten = async () => {
     try {
       const { data } = await axios.get(
-        "/data-referensis/kabupatens/search?limit=1000",
+        "/data-referensi/kabupatens/search?limit=1000",
       );
       const result = data.data.map((opt) => ({
         value: opt.id,

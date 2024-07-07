@@ -21,7 +21,7 @@ export const useQueryEditJabatanFungsional = (id) => {
 
     try {
       const { data } = await axios.put(
-        `/data-referensis/jabatan-fungsionals/${id}`,
+        `/data-referensi/jabatan-fungsionals/${id}`,
         reqBody,
         {
           headers: {

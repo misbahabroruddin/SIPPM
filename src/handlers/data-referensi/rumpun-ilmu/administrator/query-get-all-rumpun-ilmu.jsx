@@ -16,7 +16,7 @@ export const useQueryListingRumpunIlmu = (search, page) => {
     queryKey: ["rumpun-ilmu", search, page],
     queryFn: async () => {
       try {
-        const { data } = await axios.get("/data-referensis/rumpun-ilmus", {
+        const { data } = await axios.get("/data-referensi/rumpun-ilmus", {
           params,
         });
 

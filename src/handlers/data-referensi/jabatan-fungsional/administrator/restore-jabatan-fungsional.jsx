@@ -12,7 +12,7 @@ export const useRestoreJabatanFungsional = () => {
 
   const restoreJabatanFungsional = async (id) => {
     try {
-      await axios.put(`/data-referensis/jabatan-fungsionals/trashs/${id}`);
+      await axios.put(`/data-referensi/jabatan-fungsionals/trashs/${id}`);
 
       queryClient.invalidateQueries({
         queryKey: ["jabatan-fungsional"],

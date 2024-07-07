@@ -12,7 +12,7 @@ export const useRestoreProgramStudi = () => {
 
   const restoreProgramStudi = async (id) => {
     try {
-      await axios.put(`/data-referensis/program-studis/trashs/${id}`);
+      await axios.put(`/data-referensi/program-studis/trashs/${id}`);
 
       queryClient.invalidateQueries({
         queryKey: ["program-studi"],

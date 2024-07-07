@@ -10,9 +10,7 @@ export const useQueryProgramStudi = () => {
   const axios = useAxios();
   const fetchProgramStudi = async () => {
     try {
-      const { data } = await axios.get(
-        "/data-referensis/program-studis/search",
-      );
+      const { data } = await axios.get("/data-referensi/program-studis/search");
       const result = data.data.map((opt) => ({
         value: opt.id,
         label: opt.nama,

@@ -12,7 +12,7 @@ export const useRestoreRumpunIlmu = () => {
 
   const restoreRumpunIlmu = async (id) => {
     try {
-      await axios.put(`/data-referensis/rumpun-ilmus/trashs/${id}`);
+      await axios.put(`/data-referensi/rumpun-ilmus/trashs/${id}`);
 
       queryClient.invalidateQueries({
         queryKey: ["rumpun-ilmu"],

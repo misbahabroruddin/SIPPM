@@ -16,7 +16,7 @@ export const useCreateJenisPenelitian = (onClose, reset) => {
     if (form.keterangan) formData.append("keterangan", form.keterangan);
     try {
       const response = await axios.post(
-        "/data-referensis/jenis-penelitians",
+        "/data-referensi/jenis-penelitians",
         formData,
       );
       queryClient.invalidateQueries({

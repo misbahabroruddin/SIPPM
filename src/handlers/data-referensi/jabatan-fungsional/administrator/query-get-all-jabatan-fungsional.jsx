@@ -17,7 +17,7 @@ export const useQueryListingJabatanFungsional = (search, page) => {
     queryFn: async () => {
       try {
         const { data } = await axios.get(
-          "/data-referensis/jabatan-fungsionals",
+          "/data-referensi/jabatan-fungsionals",
           { params },
         );
 

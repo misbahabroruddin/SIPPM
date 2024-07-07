@@ -12,7 +12,7 @@ export const useRestoreJenisPenelitian = () => {
 
   const restoreJenisPenelitian = async (id) => {
     try {
-      await axios.put(`/data-referensis/jenis-penelitians/trashs/${id}`);
+      await axios.put(`/data-referensi/jenis-penelitians/trashs/${id}`);
 
       queryClient.invalidateQueries({
         queryKey: ["jenis-penelitian"],

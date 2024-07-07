@@ -18,7 +18,7 @@ export const useQueryTrashListingRumpunIlmu = (search, page) => {
     queryFn: async () => {
       try {
         const { data } = await axios.get(
-          "/data-referensis/rumpun-ilmus/trashs",
+          "/data-referensi/rumpun-ilmus/trashs",
           { params },
         );
 

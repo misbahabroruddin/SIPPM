@@ -16,7 +16,7 @@ export const useImportLuaranWajib = () => {
       formData.append("file_import", form);
       try {
         const { data } = await axios.post(
-          "/data-referensis/luaran-wajibs/import",
+          "/data-referensi/luaran-wajibs/import",
           formData,
         );
         queryClient.invalidateQueries({ queryKey: ["luaran-wajib"] });

@@ -14,7 +14,7 @@ export const useExportBidangIlmu = () => {
     queryFn: async () => {
       try {
         const { data } = await axios.get(
-          "/data-referensis/bidang-ilmus/export",
+          "/data-referensi/bidang-ilmus/export",
           {
             responseType: "blob",
           },

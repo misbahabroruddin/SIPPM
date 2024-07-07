@@ -16,7 +16,7 @@ export const useQueryListingBidangIlmu = (search, page) => {
     queryKey: ["bidang-ilmu", search, page],
     queryFn: async () => {
       try {
-        const { data } = await axios.get("/data-referensis/bidang-ilmus", {
+        const { data } = await axios.get("/data-referensi/bidang-ilmus", {
           params,
         });
 

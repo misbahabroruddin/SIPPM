@@ -16,7 +16,7 @@ export const useImportRumpunIlmu = () => {
       formData.append("file_import", form);
       try {
         const { data } = await axios.post(
-          "/data-referensis/rumpun-ilmus/import",
+          "/data-referensi/rumpun-ilmus/import",
           formData,
         );
         queryClient.invalidateQueries({ queryKey: ["rumpun-ilmu"] });

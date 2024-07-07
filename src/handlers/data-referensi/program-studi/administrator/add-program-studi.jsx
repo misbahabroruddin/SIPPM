@@ -16,7 +16,7 @@ export const useCreateProgramStudi = (onClose, reset) => {
     if (form.keterangan) formData.append("keterangan", form.keterangan);
     try {
       const response = await axios.post(
-        "/data-referensis/program-studis",
+        "/data-referensi/program-studis",
         formData,
       );
       queryClient.invalidateQueries({

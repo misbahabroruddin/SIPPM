@@ -12,7 +12,7 @@ export const useDeleteTrashJenisPenelitian = () => {
 
   const deleteTrashJenisPenelitian = async (id) => {
     try {
-      await axios.delete(`/data-referensis/jenis-penelitians/trashs/${id}`);
+      await axios.delete(`/data-referensi/jenis-penelitians/trashs/${id}`);
 
       queryClient.invalidateQueries({
         queryKey: ["trash-jenis-penelitian"],

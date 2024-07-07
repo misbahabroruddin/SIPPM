@@ -10,7 +10,7 @@ export const useQueryLuaranWajib = () => {
   const axios = useAxios();
   const fetchLuaranWajibOptions = async () => {
     try {
-      const { data } = await axios.get("/data-referensis/luaran-wajibs/search");
+      const { data } = await axios.get("/data-referensi/luaran-wajibs/search");
       const result = data?.data.map((opt) => ({
         value: opt.id,
         label: opt.nama,

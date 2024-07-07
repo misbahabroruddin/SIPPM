@@ -11,7 +11,7 @@ export const useQueryJenisPenelitians = () => {
   const fetchJenisPenelitians = async () => {
     try {
       const { data } = await axios.get(
-        "/data-referensis/jenis-penelitians/search",
+        "/data-referensi/jenis-penelitians/search",
       );
       const result = data.data.map((opt) => ({
         value: opt.id,

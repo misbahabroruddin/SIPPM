@@ -21,7 +21,7 @@ export const useQueryEditRumpunIlmu = (id) => {
 
     try {
       const { data } = await axios.put(
-        `/data-referensis/rumpun-ilmus/${id}`,
+        `/data-referensi/rumpun-ilmus/${id}`,
         reqBody,
         {
           headers: {

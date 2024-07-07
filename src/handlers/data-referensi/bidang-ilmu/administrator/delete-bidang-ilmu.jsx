@@ -12,7 +12,7 @@ export const useDeleteBidangIlmu = () => {
 
   const deleteBidangIlmu = async (id) => {
     try {
-      await axios.delete(`/data-referensis/bidang-ilmus/${id}`);
+      await axios.delete(`/data-referensi/bidang-ilmus/${id}`);
       queryClient.invalidateQueries({
         queryKey: ["bidang-ilmu"],
       });

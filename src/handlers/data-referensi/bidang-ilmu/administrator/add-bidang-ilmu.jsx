@@ -15,7 +15,7 @@ export const useCreateListingBidangIlmu = (onClose, reset) => {
     if (form.keterangan) formData.append("keterangan", form.keterangan);
     try {
       const response = await axios.post(
-        "/data-referensis/bidang-ilmus",
+        "/data-referensi/bidang-ilmus",
         formData,
       );
       queryClient.invalidateQueries({

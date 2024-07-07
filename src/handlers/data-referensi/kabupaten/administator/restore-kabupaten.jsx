@@ -12,7 +12,7 @@ export const useRestoreKabupaten = () => {
 
   const restoreKabupaten = async (id) => {
     try {
-      await axios.put(`/data-referensis/kabupatens/trashs/${id}`);
+      await axios.put(`/data-referensi/kabupatens/trashs/${id}`);
 
       queryClient.invalidateQueries({
         queryKey: ["kabupaten"],

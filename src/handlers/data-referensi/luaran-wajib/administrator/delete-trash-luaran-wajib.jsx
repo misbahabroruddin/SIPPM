@@ -12,7 +12,7 @@ export const useDeleteTrashLuaranWajib = () => {
 
   const deleteTrashLuaranWajib = async (id) => {
     try {
-      await axios.delete(`/data-referensis/luaran-wajibs/trashs/${id}`);
+      await axios.delete(`/data-referensi/luaran-wajibs/trashs/${id}`);
 
       queryClient.invalidateQueries({
         queryKey: ["trash-luaran-wajib"],

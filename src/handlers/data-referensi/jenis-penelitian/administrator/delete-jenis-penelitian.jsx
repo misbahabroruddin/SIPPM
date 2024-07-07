@@ -12,7 +12,7 @@ export const useDeleteJenisPenelitian = () => {
 
   const deleteJenisPenelitian = async (id) => {
     try {
-      await axios.delete(`/data-referensis/jenis-penelitians/${id}`);
+      await axios.delete(`/data-referensi/jenis-penelitians/${id}`);
       queryClient.invalidateQueries({
         queryKey: ["jenis-penelitian"],
       });

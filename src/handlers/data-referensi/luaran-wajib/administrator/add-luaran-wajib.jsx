@@ -16,7 +16,7 @@ export const useCreateLuaranWajib = (onClose, reset) => {
     if (form.keterangan) formData.append("keterangan", form.keterangan);
     try {
       const response = await axios.post(
-        "/data-referensis/luaran-wajibs",
+        "/data-referensi/luaran-wajibs",
         formData,
       );
       queryClient.invalidateQueries({

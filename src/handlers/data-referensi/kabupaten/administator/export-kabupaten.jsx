@@ -13,7 +13,7 @@ export const useExportKabupaten = () => {
     queryKey: ["exportKabupaten"],
     queryFn: async () => {
       try {
-        const { data } = await axios.get("/data-referensis/kabupatens/export", {
+        const { data } = await axios.get("/data-referensi/kabupatens/export", {
           responseType: "blob",
         });
 

@@ -17,7 +17,7 @@ export const useQueryTrashListingJabatanFungsional = (search, page) => {
     queryFn: async () => {
       try {
         const { data } = await axios.get(
-          "/data-referensis/jabatan-fungsionals/trashs",
+          "/data-referensi/jabatan-fungsionals/trashs",
           { params },
         );
 

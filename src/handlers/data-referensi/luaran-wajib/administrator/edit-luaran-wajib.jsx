@@ -21,7 +21,7 @@ export const useQueryEditLuaranWajib = (id) => {
 
     try {
       const { data } = await axios.put(
-        `/data-referensis/luaran-wajibs/${id}`,
+        `/data-referensi/luaran-wajibs/${id}`,
         reqBody,
         {
           headers: {

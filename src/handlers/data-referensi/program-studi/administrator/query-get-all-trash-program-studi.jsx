@@ -18,7 +18,7 @@ export const useQueryTrashListingProgramStudi = (search, page) => {
     queryFn: async () => {
       try {
         const { data } = await axios.get(
-          "/data-referensis/program-studis/trashs",
+          "/data-referensi/program-studis/trashs",
           { params },
         );
 

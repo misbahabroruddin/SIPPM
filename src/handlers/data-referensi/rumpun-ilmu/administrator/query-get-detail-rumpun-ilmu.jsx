@@ -13,7 +13,7 @@ export const useQueryGetDetailRumpunIlmu = (id) => {
     queryKey: ["rumpun-ilmu", id],
     queryFn: async () => {
       try {
-        const { data } = await axios.get(`/data-referensis/rumpun-ilmus/${id}`);
+        const { data } = await axios.get(`/data-referensi/rumpun-ilmus/${id}`);
         return data.data;
       } catch (error) {
         if (error.response.status === 401) {

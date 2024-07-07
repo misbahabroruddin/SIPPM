@@ -16,7 +16,7 @@ export const useImportBidangIlmu = () => {
       formData.append("file_import", form);
       try {
         const { data } = await axios.post(
-          "/data-referensis/bidang-ilmus/import",
+          "/data-referensi/bidang-ilmus/import",
           formData,
         );
         queryClient.invalidateQueries({ queryKey: ["bidang-ilmu"] });

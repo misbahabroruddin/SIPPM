@@ -16,7 +16,7 @@ export const useImportJabatanFungsional = () => {
       formData.append("file_import", form);
       try {
         const { data } = await axios.post(
-          "/data-referensis/jabatan-fungsionals/import",
+          "/data-referensi/jabatan-fungsionals/import",
           formData,
         );
         queryClient.invalidateQueries({ queryKey: ["jabatan-fungsional"] });

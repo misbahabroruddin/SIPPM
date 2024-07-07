@@ -18,7 +18,7 @@ export const useQueryTrashListingLuaranWajib = (search, page) => {
     queryFn: async () => {
       try {
         const { data } = await axios.get(
-          "/data-referensis/luaran-wajibs/trashs",
+          "/data-referensi/luaran-wajibs/trashs",
           { params },
         );
 

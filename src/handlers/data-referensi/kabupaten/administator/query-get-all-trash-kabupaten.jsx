@@ -16,7 +16,7 @@ export const useQueryTrashListingKabupaten = (search, page) => {
     queryKey: ["trash-kabupaten", search, page],
     queryFn: async () => {
       try {
-        const { data } = await axios.get("/data-referensis/kabupatens/trashs", {
+        const { data } = await axios.get("/data-referensi/kabupatens/trashs", {
           params,
         });
 

@@ -21,7 +21,7 @@ export const useQueryEditProgramStudi = (id) => {
 
     try {
       const { data } = await axios.put(
-        `/data-referensis/program-studis/${id}`,
+        `/data-referensi/program-studis/${id}`,
         reqBody,
         {
           headers: {

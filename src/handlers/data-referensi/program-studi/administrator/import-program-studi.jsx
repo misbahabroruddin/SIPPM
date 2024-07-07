@@ -16,7 +16,7 @@ export const useImportProgramStudi = () => {
       formData.append("file_import", form);
       try {
         const { data } = await axios.post(
-          "/data-referensis/program-studis/import",
+          "/data-referensi/program-studis/import",
           formData,
         );
         queryClient.invalidateQueries({ queryKey: ["program-studi"] });

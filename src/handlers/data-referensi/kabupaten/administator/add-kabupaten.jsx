@@ -15,10 +15,7 @@ export const useCreateListingKabupaten = (onClose, reset) => {
     formData.append("nama", form.nama);
     if (form.provinsi_id) formData.append("provinsi_id", form.provinsi_id);
     try {
-      const response = await axios.post(
-        "/data-referensis/kabupatens",
-        formData,
-      );
+      const response = await axios.post("/data-referensi/kabupatens", formData);
       queryClient.invalidateQueries({
         queryKey: ["kabupaten"],
       });

@@ -16,7 +16,7 @@ export const useImportKabupaten = () => {
       formData.append("file_import", form);
       try {
         const { data } = await axios.post(
-          "/data-referensis/kabupatens/import",
+          "/data-referensi/kabupatens/import",
           formData,
         );
         queryClient.invalidateQueries({ queryKey: ["kabupaten"] });

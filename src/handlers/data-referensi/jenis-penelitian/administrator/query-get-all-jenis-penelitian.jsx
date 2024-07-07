@@ -16,7 +16,7 @@ export const useQueryListingJenisPenelitian = (search, page) => {
     queryKey: ["jenis-penelitian", search, page],
     queryFn: async () => {
       try {
-        const { data } = await axios.get("/data-referensis/jenis-penelitians", {
+        const { data } = await axios.get("/data-referensi/jenis-penelitians", {
           params,
         });
 

@@ -16,7 +16,7 @@ export const useImportJenisPenelitian = () => {
       formData.append("file_import", form);
       try {
         const { data } = await axios.post(
-          "/data-referensis/jenis-penelitians/import",
+          "/data-referensi/jenis-penelitians/import",
           formData,
         );
         queryClient.invalidateQueries({ queryKey: ["jenis-penelitian"] });

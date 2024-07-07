@@ -12,7 +12,7 @@ export const useDeleteKabupaten = () => {
 
   const deleteKabupaten = async (id) => {
     try {
-      await axios.delete(`/data-referensis/kabupatens/${id}`);
+      await axios.delete(`/data-referensi/kabupatens/${id}`);
       queryClient.invalidateQueries({
         queryKey: ["kabupaten"],
       });

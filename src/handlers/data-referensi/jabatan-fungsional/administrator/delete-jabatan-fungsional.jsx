@@ -12,7 +12,7 @@ export const useDeleteJabatanFungsional = () => {
 
   const deleteJabatanFungsional = async (id) => {
     try {
-      await axios.delete(`/data-referensis/jabatan-fungsionals/${id}`);
+      await axios.delete(`/data-referensi/jabatan-fungsionals/${id}`);
       queryClient.invalidateQueries({
         queryKey: ["jabatan-fungsional"],
       });

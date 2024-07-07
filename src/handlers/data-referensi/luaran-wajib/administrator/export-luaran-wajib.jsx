@@ -14,7 +14,7 @@ export const useExportLuaranWajib = () => {
     queryFn: async () => {
       try {
         const { data } = await axios.get(
-          "/data-referensis/luaran-wajibs/export",
+          "/data-referensi/luaran-wajibs/export",
           {
             responseType: "blob",
           },

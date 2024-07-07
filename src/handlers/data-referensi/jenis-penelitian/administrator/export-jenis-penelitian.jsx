@@ -14,7 +14,7 @@ export const useExportJenisPenelitian = () => {
     queryFn: async () => {
       try {
         const { data } = await axios.get(
-          "/data-referensis/jenis-penelitians/export",
+          "/data-referensi/jenis-penelitians/export",
           {
             responseType: "blob",
           },

@@ -21,7 +21,7 @@ export const useQueryEditJenisPenelitian = (id) => {
 
     try {
       const { data } = await axios.put(
-        `/data-referensis/jenis-penelitians/${id}`,
+        `/data-referensi/jenis-penelitians/${id}`,
         reqBody,
         {
           headers: {

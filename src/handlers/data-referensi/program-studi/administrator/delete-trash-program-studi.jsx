@@ -12,7 +12,7 @@ export const useDeleteTrashProgramStudi = () => {
 
   const deleteTrashProgramStudi = async (id) => {
     try {
-      await axios.delete(`/data-referensis/program-studis/trashs/${id}`);
+      await axios.delete(`/data-referensi/program-studis/trashs/${id}`);
 
       queryClient.invalidateQueries({
         queryKey: ["trash-program-studi"],

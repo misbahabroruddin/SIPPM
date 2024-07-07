@@ -17,7 +17,7 @@ export const useQueryListingProgramStudi = (search, page) => {
     queryKey: ["program-studi", search, page],
     queryFn: async () => {
       try {
-        const { data } = await axios.get("/data-referensis/program-studis", {
+        const { data } = await axios.get("/data-referensi/program-studis", {
           params,
         });
 

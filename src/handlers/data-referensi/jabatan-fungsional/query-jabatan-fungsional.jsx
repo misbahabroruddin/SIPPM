@@ -11,7 +11,7 @@ export const useQueryJabatanFungsional = () => {
   const fetchJabatanFungsional = async () => {
     try {
       const { data } = await axios.get(
-        "/data-referensis/jabatan-fungsionals/search?limit=1000",
+        "/data-referensi/jabatan-fungsionals/search?limit=1000",
       );
       const result = data.data.map((opt) => ({
         value: opt.id,

@@ -12,7 +12,7 @@ export const useDeleteRumpunIlmu = () => {
 
   const deleteRumpunIlmu = async (id) => {
     try {
-      await axios.delete(`/data-referensis/rumpun-ilmus/${id}`);
+      await axios.delete(`/data-referensi/rumpun-ilmus/${id}`);
       queryClient.invalidateQueries({
         queryKey: ["rumpun-ilmu"],
       });

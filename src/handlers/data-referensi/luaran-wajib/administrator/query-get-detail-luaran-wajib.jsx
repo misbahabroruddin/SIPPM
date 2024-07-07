@@ -12,9 +12,7 @@ export const useQueryGetDetailLuaranWajib = (id) => {
     queryKey: ["luaran-wajib", id],
     queryFn: async () => {
       try {
-        const { data } = await axios.get(
-          `/data-referensis/luaran-wajibs/${id}`,
-        );
+        const { data } = await axios.get(`/data-referensi/luaran-wajibs/${id}`);
         return data.data;
       } catch (error) {
         if (error.response.status === 401) {

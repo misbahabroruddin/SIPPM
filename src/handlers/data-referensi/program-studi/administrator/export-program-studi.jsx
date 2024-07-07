@@ -14,7 +14,7 @@ export const useExportProgramStudi = () => {
     queryFn: async () => {
       try {
         const { data } = await axios.get(
-          "/data-referensis/program-studis/export",
+          "/data-referensi/program-studis/export",
           {
             responseType: "blob",
           },

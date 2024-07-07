@@ -12,7 +12,7 @@ export const useRestoreLuaranWajib = () => {
 
   const restoreLuaranWajib = async (id) => {
     try {
-      await axios.put(`/data-referensis/luaran-wajibs/trashs/${id}`);
+      await axios.put(`/data-referensi/luaran-wajibs/trashs/${id}`);
 
       queryClient.invalidateQueries({
         queryKey: ["luaran-wajib"],

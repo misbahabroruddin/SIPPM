@@ -12,7 +12,7 @@ export const useDeleteLuaranWajib = () => {
 
   const deleteLuaranWajib = async (id) => {
     try {
-      await axios.delete(`/data-referensis/luaran-wajibs/${id}`);
+      await axios.delete(`/data-referensi/luaran-wajibs/${id}`);
       queryClient.invalidateQueries({
         queryKey: ["luaran-wajib"],
       });
