@@ -9,7 +9,7 @@ import { useAxios } from "@/lib/hooks/useAxios";
 export const useQueryTrashListingRincianBiaya = (search, page) => {
   const axios = useAxios();
   const params = {
-    nama: search,
+    rincian: search,
     page: page,
   };
 
