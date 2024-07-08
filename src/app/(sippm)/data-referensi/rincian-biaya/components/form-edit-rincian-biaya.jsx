@@ -34,7 +34,7 @@ export const FormEditRincianBiaya = ({ id, setOpen, data, isLoading }) => {
         label="Rincian"
         name="rincian"
         containerClass="flex-col items-start gap-1"
-        spanEmptyClass="hidden"
+        spanEmptyClass="hidden lg:block"
         placeholder="Rincian Biaya"
         register={register("rincian", {
           required: "Wajib diisi",
@@ -48,12 +48,13 @@ export const FormEditRincianBiaya = ({ id, setOpen, data, isLoading }) => {
         label="Anggaran"
         name="anggaran"
         containerClass="flex-col items-start gap-1"
-        spanEmptyClass="hidden"
-        placeholder="Anggaran Program Studi"
+        spanEmptyClass="hidden lg:block"
+        placeholder="Anggaran"
         register={register("anggaran")}
         errors={errors.anggaran}
         defaultValue={data?.anggaran}
         disabled={isLoading}
+        required
       />
       <div className="mt-3 flex gap-4">
         <ButtonCancel

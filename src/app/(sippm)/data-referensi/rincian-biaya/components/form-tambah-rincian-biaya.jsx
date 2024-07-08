@@ -27,7 +27,7 @@ export const FormTambahRincianBiaya = ({ setOpen }) => {
         label="Rincian"
         name="rincian"
         containerClass="flex-col items-start gap-1"
-        spanEmptyClass="hidden"
+        spanEmptyClass="hidden lg:block"
         placeholder="Rincian Biaya"
         register={register("rincian", {
           required: "Wajib diisi",
@@ -39,7 +39,7 @@ export const FormTambahRincianBiaya = ({ setOpen }) => {
         label="Anggaran"
         name="anggaran"
         containerClass="flex-col items-start gap-1"
-        spanEmptyClass="hidden"
+        spanEmptyClass="hidden lg:block"
         placeholder="Anggaran"
         register={register("anggaran", {
           required: "Wajib diisi",
