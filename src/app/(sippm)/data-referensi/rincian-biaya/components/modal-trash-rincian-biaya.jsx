@@ -52,7 +52,7 @@ export const ModalTrashRincianBiaya = () => {
       >
         <div className="flex flex-col gap-4">
           <h1 className="text-center text-lg font-[500]">
-            Trash Program Studi
+            Trash Rincian Biaya
           </h1>
           <TableTrashRincianBiaya onClose={() => setOpen(false)} />
         </div>
