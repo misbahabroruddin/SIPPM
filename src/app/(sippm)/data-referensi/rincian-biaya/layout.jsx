@@ -1,5 +1,5 @@
 export const metadata = {
-  title: "Luaran Wajib",
+  title: "Rincian Biaya",
 };
 
 export default function RincianBiayaLayout({ children }) {
