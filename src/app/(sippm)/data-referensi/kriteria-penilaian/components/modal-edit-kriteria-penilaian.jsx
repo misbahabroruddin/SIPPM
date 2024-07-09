@@ -28,7 +28,9 @@ export const ModalEditKriteriaPenilaian = ({ id }) => {
         containerClassName={"lg:w-[500px]"}
       >
         <div className="flex flex-col gap-4">
-          <h1 className="text-center text-lg font-[500]">Edit Rincian Biaya</h1>
+          <h1 className="text-center text-lg font-[500]">
+            Edit Kriteria Penilaian
+          </h1>
           <FormEditKriteriaPenilaian
             id={id}
             setOpen={setOpen}
