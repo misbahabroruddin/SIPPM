@@ -10,7 +10,6 @@ export const CloseIcon = ({
     <i
       className={twMerge("block cursor-pointer", props.className)}
       onClick={props.onClick}
-      title="Close"
     >
       <svg
         width={width}

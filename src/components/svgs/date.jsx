@@ -5,7 +5,6 @@ export const DateIcon = ({ height = 24, width = 24, ...props }) => {
     <i
       className={twMerge("block cursor-pointer", props.className)}
       onClick={props.onClick}
-      title="Date"
     >
       <svg
         width={width}
