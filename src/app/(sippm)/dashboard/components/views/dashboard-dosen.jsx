@@ -2,16 +2,18 @@
 
 import { useSearchParams } from "next/navigation";
 import { useState } from "react";
-import { useDebouncedCallback } from "use-debounce";
 
-import { SearchInput } from "@/components/input/search-input";
-import { Tabs } from "../tabs";
 import { ListPenelitian } from "../list-penelitian-dashboard-dosen";
 import { ListPengabdian } from "../list-pengabdian-dashboard-dosen";
 import { useQueryGetAllPenelitianDashboardDosen } from "@/handlers/dosen/penelitian/dashboard/query-get-all-penelitian-dashboard";
 import { useQueryInfoProposalPenelitianDashboardDosen } from "@/handlers/dosen/penelitian/dashboard/query-get-info-dashboard";
 import { useQueryGetAllPengabdianDashboardDosen } from "@/handlers/dosen/pengabdian/dashboard/query-get-all-pengabdian-dashboard";
 import { useQueryInfoProposalPengabdianDashboardDosen } from "@/handlers/dosen/pengabdian/dashboard/query-get-info-pengabdian-dashboard";
+import { PieChartDosen } from "../pie-chart-dosen";
+
+const Loading = () => {
+  return <p>Loading....</p>;
+};
 
 export default function DashboardDosen() {
   const [tabActive] = useState("penelitian");
@@ -29,48 +31,71 @@ export default function DashboardDosen() {
     setPagePengabdian(event.selected + 1);
   };
 
-  const debounced = useDebouncedCallback((value) => {
-    setSearchPenelitian(value);
-  }, 1000);
-  const debouncedSearchPengabdian = useDebouncedCallback((value) => {
-    setSearchPengabdian(value);
-  }, 1000);
-
   const { data: penelitian, isLoading: isLoadingPenelitian } =
     useQueryGetAllPenelitianDashboardDosen(searchPenelitian, pagePenelitian);
   const { data: pengabdian, isLoading: isLoadingPengabdian } =
     useQueryGetAllPengabdianDashboardDosen(searchPengabdian, pagePengabdian);
 
-  const { data: infoPenelitian } =
+  const { data: infoPenelitian, isLoading } =
     useQueryInfoProposalPenelitianDashboardDosen();
 
   const { data: infoPengabdian } =
     useQueryInfoProposalPengabdianDashboardDosen();
 
+  const proposalPengabdianDitolak =
+    infoPengabdian?.data?.status_reviewer?.ditolak;
+
+  const proposalPengabdianDisetujui =
+    infoPengabdian?.data?.status_reviewer?.diterima;
+
+  const proposalPengabdianRevisi =
+    infoPengabdian?.data?.status_reviewer?.revisi;
+
+  const proposalPenelitianDitolak =
+    infoPenelitian?.data?.status_reviewer?.ditolak;
+
+  const proposalPenelitianDisetujui =
+    infoPenelitian?.data?.status_reviewer?.diterima;
+
+  const proposalPenelitianRevisi =
+    infoPenelitian?.data?.status_reviewer?.revisi;
+
   return (
     <div className="flex flex-col gap-4">
-      <div className="flex justify-between">
+      <div className="flex gap-4">
+        {isLoading ? (
+          <Loading />
+        ) : (
+          <>
+            <PieChartDosen
+              textHeader={"Proposal Penelitian"}
+              totalProposal={infoPenelitian?.data?.total}
+              proposalDisetujui={proposalPenelitianDisetujui}
+              proposalDitolak={proposalPenelitianDitolak}
+              proposalRevisi={proposalPenelitianRevisi}
+            />
+            <PieChartDosen
+              textHeader={"Proposal Pengabdian"}
+              totalProposal={infoPengabdian?.data?.total}
+              proposalDisetujui={proposalPengabdianDisetujui}
+              proposalDitolak={proposalPengabdianDitolak}
+              proposalRevisi={proposalPengabdianRevisi}
+            />
+          </>
+        )}
+      </div>
+      {/* <div className="flex justify-between">
         <div className="flex flex-wrap items-center justify-between gap-2 lg:justify-start lg:gap-4">
           <Tabs tabActive={currentTab || tabActive} />
-          {/* <SearchInput
-            onChange={(e) => {
-              currentTab === "pengabdian"
-                ? debouncedSearchPengabdian(e.target.value)
-                : debounced(e.target.value);
-            }}
-            defaultValue={
-              currentTab === "pengabdian" ? searchPengabdian : searchPenelitian
-            }
-          /> */}
         </div>
-      </div>
+      </div> */}
+
       {currentTab === "penelitian" || !currentTab ? (
         <ListPenelitian
           penelitian={penelitian}
           currentTab={currentTab}
           tabActive={tabActive}
           isLoading={isLoadingPenelitian}
-          totalProposal={infoPenelitian}
           handlePageChange={handlePageChangePenelitian}
         />
       ) : (
@@ -79,7 +104,6 @@ export default function DashboardDosen() {
           currentTab={currentTab}
           tabActive={tabActive}
           isLoading={isLoadingPengabdian}
-          totalProposal={infoPengabdian}
           handlePageChange={handlePageChangePengabdian}
         />
       )}

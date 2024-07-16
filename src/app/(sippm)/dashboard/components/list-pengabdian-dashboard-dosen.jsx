@@ -12,7 +12,6 @@ import { useDeletePengabdianDosen } from "@/handlers/dosen/pengabdian/delete-pen
 import { useStep } from "@/lib/hooks/useStep";
 import { SkeletonListingProposal } from "@/components/skeleton/skeleton-listing-proposal";
 import { EmptyState } from "@/components/empty-state";
-import ListCardPengabdianDashboardDosen from "./list-card-pengabdian-dashboard-dosen";
 import { Pagination } from "@/components/pagination";
 
 export const ListPengabdian = ({
@@ -20,24 +19,13 @@ export const ListPengabdian = ({
   currentTab,
   tabActive,
   isLoading,
-  totalProposal,
   handlePageChange,
 }) => {
   if (isLoading) return <SkeletonListingProposal />;
 
-  const totalPengabdianDisetujui =
-    totalProposal?.data.status_reviewer?.diterima;
-
-  const totalPengabdianDitolak = totalProposal?.data.status_reviewer?.ditolak;
-
   return (
     <div className="flex flex-col gap-4">
-      <ListCardPengabdianDashboardDosen
-        jumlahPengabdian={totalProposal?.data.total || 0}
-        jumlahPengabdianDisetujui={totalPengabdianDisetujui}
-        jumlahPengabdianDitolak={totalPengabdianDitolak}
-      />
-      <div className="flex h-[480px] flex-col gap-4 overflow-auto p-1">
+      <div className="flex h-[300px] flex-col gap-4 overflow-auto p-1">
         {pengabdian?.data?.length ? (
           pengabdian?.data?.map((proposal) => (
             <ListItem
@@ -51,7 +39,7 @@ export const ListPengabdian = ({
           <EmptyState />
         )}
       </div>
-      {pengabdian?.data?.length ? (
+      {pengabdian?.last_page > 1 ? (
         <Pagination
           perPage={pengabdian?.per_page}
           onPageChange={handlePageChange}
