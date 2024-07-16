@@ -4,7 +4,7 @@ import { Controller, useForm } from "react-hook-form";
 
 import { ButtonCancel } from "@/components/button/button-cancel";
 import { ButtonSave } from "@/components/button/button-save";
-import { useQueryAnggotaDosen } from "@/handlers/anggota/query-anggota-dosen";
+import { useQueryOptionsAnggotaDosen } from "@/handlers/anggota/query-anggota-dosen";
 import { SingleSelect } from "@/components/select/single-select";
 import { useAddAnggotaPenelitianLaporanHasil } from "@/handlers/dosen/laporan-hasil/penelitian/anggota/add-anggota-penelitian";
 import { useQueryAnggotaDosenLaporanHasilPenelitian } from "@/handlers/dosen/laporan-hasil/penelitian/anggota/query-anggota-dosen-penelitian";
@@ -19,7 +19,7 @@ export const SelectDosen = ({ onClose }) => {
 
   const id = useId();
 
-  const { data, isLoading } = useQueryAnggotaDosen();
+  const { data, isLoading } = useQueryOptionsAnggotaDosen();
 
   const { onSubmitAnggotaDosenPenelitian, isLoadingAnggotaDosenPenelitian } =
     useAddAnggotaPenelitianLaporanHasil(reset, onClose);
