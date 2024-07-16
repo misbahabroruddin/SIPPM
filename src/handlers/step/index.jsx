@@ -16,7 +16,7 @@ export const useNextStep = (payload) => {
       const penelitianId = localStorage.getItem("penelitianId");
       const isEdit = JSON.parse(localStorage.getItem("isEdit"));
       const { data } = await axios.put(
-        `/proposals/dosens/penelitians/${penelitianId || id}`,
+        `/proposal/penelitians/update-step/${penelitianId || id}`,
         {
           step: payload,
         },
@@ -41,7 +41,7 @@ export const useNextStep = (payload) => {
       const pengabdianId = localStorage.getItem("pengabdianId");
       const isEdit = JSON.parse(localStorage.getItem("isEdit"));
       const { data } = await axios.put(
-        `/proposals/dosens/pkms/${pengabdianId || id}`,
+        `/proposal/pengabdians/update-step/${pengabdianId || id}`,
         {
           step: payload,
         },
