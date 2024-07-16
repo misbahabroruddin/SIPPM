@@ -5,7 +5,6 @@ import { ButtonSave } from "@/components/button/button-save";
 import { ContainerContent } from "@/components/container-content";
 import { ModalUploadDokumen } from "@/components/proposal/pengajuan/penelitian/step6/modal-upload-dokumen";
 import { useQueryGetDokumenPendukungProposal } from "@/handlers/dosen/proposal/dokumen-pendukung/query-get-dokumen-pendukung";
-import { useDeleteDokumenPendukungProposal } from "@/handlers/dosen/proposal/dokumen-pendukung/delete-dokumen-pendukung";
 import { useKirimUsulanPenelitian } from "@/handlers/dosen/penelitian/kirim-usulan/kirim-usulan-penelitian";
 import { ListDokumenPendukungProposal } from "@/components/proposal/pengajuan/penelitian/step6/list-dokumen-pendukung";
 
@@ -13,11 +12,6 @@ export const Berkas = () => {
   const { data: dokumenPendukung } = useQueryGetDokumenPendukungProposal();
 
   const { kirimUsulan, isLoadingSubmit } = useKirimUsulanPenelitian();
-
-  const {
-    mutateAsync: onDeleteDokumenPendukung,
-    isPending: isLoadingDokumenPendukung,
-  } = useDeleteDokumenPendukungProposal();
 
   const handlePrevStep = () => {
     setCurrentStep(5);
