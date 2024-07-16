@@ -59,3 +59,10 @@ export const convertToDateNumeric = (data) => {
   const result = `${parts[0]}${separator}${parts[1]}${separator}${parts[2]}`;
   return result;
 };
+
+export function convertToTimestamp(strDate) {
+  const datum = Date.parse(strDate);
+  const formattedDate = new Date(datum);
+
+  return formattedDate;
+}

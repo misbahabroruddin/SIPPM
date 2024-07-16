@@ -33,7 +33,6 @@ export const authOptions = {
             name: data?.name,
             username: data?.username,
             email: data?.email,
-            emailVerifiedAt: data?.email_verified_at,
             biodataId: data?.biodata_id,
             avatar: data?.avatar,
             roles: data?.roles,
@@ -130,4 +129,5 @@ export const authOptions = {
       return redirectUrl;
     },
   },
+  debug: true,
 };

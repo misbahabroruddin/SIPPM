@@ -66,6 +66,26 @@ export const MENU_SIDEBAR_ADMIN = [
         icon: "/icons/sub-menu.svg",
         link: "/data-referensi/kabupaten",
       },
+      {
+        label: "Rincian Biaya",
+        icon: "/icons/sub-menu.svg",
+        link: "/data-referensi/rincian-biaya",
+      },
+      {
+        label: "Jenis Dokumen",
+        icon: "/icons/sub-menu.svg",
+        link: "/data-referensi/jenis-dokumen",
+      },
+      {
+        label: "Kriteria Penilaian",
+        icon: "/icons/sub-menu.svg",
+        link: "/data-referensi/kriteria-penilaian",
+      },
+      {
+        label: "Komponen Penilaian",
+        icon: "/icons/sub-menu.svg",
+        link: "/data-referensi/komponen-penilaian",
+      },
     ],
   },
 ];
