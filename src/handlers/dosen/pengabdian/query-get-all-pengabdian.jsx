@@ -25,7 +25,7 @@ export const useQueryGetAllPengabdian = (search, page) => {
         };
       }
       try {
-        const { data } = await axios.get("/proposals/dosens/pkms", {
+        const { data } = await axios.get("/proposal/pengabdians/role/dosen", {
           params: params,
         });
         return data.data;

@@ -18,19 +18,25 @@ export const useAddIdentitasUsulanPenelitian = (reset) => {
       const isEdit = JSON.parse(localStorage.getItem("isEdit"));
       const penelitianId = localStorage.getItem("penelitianId");
 
-      const formData = new FormData();
-      formData.append("jenis_penelitian_id", data.jenis_penelitian_id);
-      formData.append("rumpun_ilmu_id", data.rumpun_ilmu_id);
-      formData.append("judul", data.judul);
-      formData.append("bidang_fokus", data.bidang_fokus);
-      formData.append("tahun_usulan", data.tahun_usulan);
-      formData.append("jangka_waktu", data.jangka_waktu);
-      formData.append("ringkasan", data.ringkasan);
+      const form = {
+        jenis_penelitian_id: data.jenis_penelitian_id,
+        rumpun_ilmu_id: data.rumpun_ilmu_id,
+        judul: data.judul,
+        bidang_fokus: data.bidang_fokus,
+        tahun_usulan: data.tahun_usulan,
+        jangka_waktu: data.jangka_waktu,
+        ringkasan: data.ringkasan,
+      };
 
       if (isEdit && currentStep === 1) {
-        const response = await axios.post(
-          `proposals/dosens/penelitians/${penelitianId || id}/identitas-usulan`,
-          formData,
+        const response = await axios.put(
+          `/proposal/penelitians/update/${penelitianId || id}`,
+          form,
+          {
+            headers: {
+              "Content-Type": "application/x-www-form-urlencoded",
+            },
+          },
         );
         if (response.data.data) {
           setCurrentStep(2);
@@ -43,10 +49,11 @@ export const useAddIdentitasUsulanPenelitian = (reset) => {
           reset();
         }
       } else {
-        const response = await axios.post(
-          "/proposals/dosens/penelitians",
-          formData,
-        );
+        const response = await axios.post("/proposal/penelitians", form, {
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+          },
+        });
         if (response.data.data) {
           setCurrentStep(2);
           localStorage.setItem("step", 2);

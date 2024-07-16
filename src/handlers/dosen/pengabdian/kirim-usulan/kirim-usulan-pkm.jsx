@@ -14,9 +14,7 @@ export const useKirimUsulanPKM = () => {
 
   const onSubmit = async () => {
     try {
-      await axios.post(
-        `/proposals/dosens/pkms/${pengabdianId || id}/kirim-usulan`,
-      );
+      await axios.post(`/proposal/pengabdians/kirim/${pengabdianId || id}`);
       queryClient.invalidateQueries({
         queryKey: ["listPengabdian"],
       });

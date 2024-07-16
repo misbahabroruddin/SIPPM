@@ -12,7 +12,9 @@ export const useQueryInfoProposalPenelitianLPPM = () => {
     queryKey: ["infoProposalPenelitianLPPM"],
     queryFn: async () => {
       try {
-        const { data } = await axios.get("/proposals/lppms/penelitians/info");
+        const { data } = await axios.get(
+          "/proposal/penelitians/statistik/role/lppm",
+        );
 
         return data;
       } catch (error) {

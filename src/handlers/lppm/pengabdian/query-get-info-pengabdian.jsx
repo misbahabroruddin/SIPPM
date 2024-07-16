@@ -12,7 +12,9 @@ export const useQueryInfoProposalPengabdianLPPM = () => {
     queryKey: ["infoProposalPengabdianLPPM"],
     queryFn: async () => {
       try {
-        const { data } = await axios.get("/proposals/lppms/pkms/info");
+        const { data } = await axios.get(
+          "/proposal/pengabdians/statistik/role/lppm",
+        );
 
         return data;
       } catch (error) {

@@ -6,17 +6,14 @@ import { toast } from "react-toastify";
 
 import { useAxios } from "@/lib/hooks/useAxios";
 
-export const useQueryAnggotaMahasiswa = () => {
+export const useQueryRincianBiayaOptions = () => {
   const axios = useAxios();
-
-  const fetchListMahasiswa = async () => {
+  const fetchRincianBiaya = async () => {
     try {
-      const { data } = await axios.get(
-        "/anggotas/search?jenis_anggota=Mahasiswa&limit=1000",
-      );
-      const result = data?.data.map((opt) => ({
+      const { data } = await axios.get("/data-referensi/rincian-biayas/search");
+      const result = data.data.map((opt) => ({
         value: opt.id,
-        label: opt.nama,
+        label: opt.rincian,
       }));
       return result;
     } catch (error) {
@@ -26,13 +23,13 @@ export const useQueryAnggotaMahasiswa = () => {
       toast.error(error.response.data.message || "Something went wrong");
     }
   };
-  const { data, isLoading } = useQuery({
-    queryKey: ["listMahasiswa"],
-    queryFn: fetchListMahasiswa,
+
+  const query = useQuery({
+    queryKey: ["rincianBiayaOptions"],
+    queryFn: fetchRincianBiaya,
   });
 
   return {
-    data,
-    isLoading,
+    ...query,
   };
 };

@@ -2,6 +2,7 @@
 
 import { useQuery } from "@tanstack/react-query";
 import { toast } from "react-toastify";
+import { signOut } from "next-auth/react";
 import { useParams } from "next/navigation";
 
 import { useAxios } from "@/lib/hooks/useAxios";
@@ -17,7 +18,7 @@ export const useQueryIdentitasUsulanPenelitian = (setValue) => {
       const penelitianId = localStorage.getItem("penelitianId");
       const step = localStorage.getItem("step");
       const { data } = await axios.get(
-        `proposals/dosens/penelitians/${penelitianId || id}/identitas-usulan`,
+        `/proposal/penelitians/detail/${penelitianId || id}`,
       );
       setValue("judul", data?.data.judul);
       setValue("jenis_penelitian_id", data?.data.jenis_penelitian.id, {
@@ -35,6 +36,9 @@ export const useQueryIdentitasUsulanPenelitian = (setValue) => {
       if (!step) setCurrentStep(1);
       return data.data;
     } catch (error) {
+      if (error.response.status === 401) {
+        return signOut();
+      }
       toast.error(error.response.data.message || "Something went wrong");
     }
   };

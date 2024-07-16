@@ -1,52 +1,60 @@
 "use client";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
+import { toast } from "react-toastify";
+import { signOut } from "next-auth/react";
 
 import { useAxios } from "@/lib/hooks/useAxios";
-import { toast } from "react-toastify";
 
 export const useKirimUsulanPenelitian = () => {
   const axios = useAxios();
   const { id } = useParams();
   const queryClient = useQueryClient();
+  const router = useRouter();
   const penelitianId = localStorage.getItem("penelitianId");
 
   const onSubmit = async () => {
     try {
-      await axios.post(
-        `/proposals/dosens/penelitians/${penelitianId || id}/kirim-usulan`,
-      );
+      await axios.post(`/proposal/penelitians/kirim/${penelitianId || id}`);
       queryClient.invalidateQueries({
         queryKey: ["listPenelitian"],
       });
       queryClient.invalidateQueries({
         queryKey: ["listPenelitianDashboardDosen"],
       });
-      queryClient.resetQueries({
+      queryClient.removeQueries({
+        queryKey: ["identitas-usulan-penelitian"],
+      });
+      queryClient.removeQueries({
         queryKey: ["anggotaMahasiswa"],
       });
-      queryClient.resetQueries({
+      queryClient.removeQueries({
         queryKey: ["anggotaDosen"],
       });
-      queryClient.resetQueries({
-        queryKey: ["rencanaAnggaranPenelitian"],
+      queryClient.removeQueries({
+        queryKey: ["targetCapaian"],
       });
-      queryClient.resetQueries({
-        queryKey: ["rincianKegiatanPenelitian"],
+      queryClient.removeQueries({
+        queryKey: ["rencanaAnggaran"],
       });
-      queryClient.resetQueries({
-        queryKey: ["detailRencanaAnggaranPenelitian"],
+      queryClient.removeQueries({
+        queryKey: ["rincianKegiatan"],
       });
-      queryClient.resetQueries({
-        queryKey: ["detailRencanaAnggaranPKM"],
+      queryClient.removeQueries({
+        queryKey: ["detailRencanaAnggaran"],
       });
-      queryClient.resetQueries({
-        queryKey: ["detailRincianKegiatanPenelitian"],
+      queryClient.removeQueries({
+        queryKey: ["detailRincianKegiatan"],
       });
-      queryClient.resetQueries({
-        queryKey: ["detailRincianKegiatanPKM"],
+      queryClient.removeQueries({
+        queryKey: ["dokumenPendukungProposal"],
       });
+      toast.success("Proposal penelitian berhasil diajukan");
+      router.push("/proposal");
     } catch (error) {
+      if (error.response.status === 401) {
+        return signOut();
+      }
       toast.error(error.response.data.message || "Something went wrong");
     }
   };

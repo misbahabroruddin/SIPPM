@@ -17,7 +17,6 @@ export const useAdministratorCreateAnggotaMahasiswa = (reset) => {
       formData.append("nama_lengkap", form.nama_lengkap);
       formData.append("perguruan_tinggi", form.perguruan_tinggi);
       formData.append("nidn_or_nidk_or_nim", form.nidn_or_nidk_or_nim);
-      formData.append("jabatan_fungsional_id", form.jabatan_fungsional_id);
       formData.append("program_studi_id", form.program_studi_id);
       formData.append("email", form.email);
       formData.append("nomor_hp", form.nomor_hp);

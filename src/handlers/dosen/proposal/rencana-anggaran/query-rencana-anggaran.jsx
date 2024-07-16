@@ -1,21 +1,26 @@
 "use client";
 
+import { toast } from "react-toastify";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "next/navigation";
-import { toast } from "react-toastify";
 import { signOut } from "next-auth/react";
 
 import { useAxios } from "@/lib/hooks/useAxios";
 
-export const useQueryDetailPengabdian = () => {
+export const useQueryRencanaAnggaran = () => {
   const axios = useAxios();
   const { id } = useParams();
 
-  const fetchDetailPengabdian = async () => {
+  const fetchRencanaAnggaran = async () => {
     try {
-      const { data } = await axios.get(`/proposal/pengabdians/detail/${id}`);
+      const penelitianId = localStorage.getItem("penelitianId");
+      const pengabdianId = localStorage.getItem("pengabdianId");
 
-      return data;
+      const { data } = await axios.get(
+        `/proposal/${penelitianId || pengabdianId || id}/rencana-anggarans`,
+      );
+
+      return data.data;
     } catch (error) {
       if (error.response.status === 401) {
         return signOut();
@@ -25,8 +30,8 @@ export const useQueryDetailPengabdian = () => {
   };
 
   const query = useQuery({
-    queryKey: ["detailPengabdianLPPM", id],
-    queryFn: fetchDetailPengabdian,
+    queryKey: ["rencanaAnggaran"],
+    queryFn: fetchRencanaAnggaran,
   });
 
   return { ...query };

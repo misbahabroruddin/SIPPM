@@ -5,16 +5,17 @@ import { toast } from "react-toastify";
 import { useAxios } from "@/lib/hooks/useAxios";
 import { signOut } from "next-auth/react";
 
-export const useQueryGetPenelitianLPPM = (search, page) => {
+export const useQueryGetPenelitianLPPM = (search, page, limit) => {
   const axios = useAxios();
 
   const query = useQuery({
-    queryKey: ["listingPenelitianLPPM", search, page],
+    queryKey: ["listingPenelitianLPPM", search, page, limit],
     queryFn: async () => {
       let params;
       if (search) {
         params = {
           judul: search,
+          limit,
         };
       }
 
@@ -25,7 +26,7 @@ export const useQueryGetPenelitianLPPM = (search, page) => {
         };
       }
       try {
-        const { data } = await axios.get("/proposals/lppms/penelitians", {
+        const { data } = await axios.get(`/proposal/penelitians/role/lppm`, {
           params: params,
         });
         return data?.data;

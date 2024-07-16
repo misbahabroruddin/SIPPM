@@ -1,30 +1,24 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
-import { signOut } from "next-auth/react";
 import { toast } from "react-toastify";
 import { useParams } from "next/navigation";
+import { signOut } from "next-auth/react";
 
 import { useAxios } from "@/lib/hooks/useAxios";
 
-export const useQueryIdentitasUsulanPKM = (setValue) => {
+export const useQueryRincianKegiatanProposal = () => {
   const axios = useAxios();
   const { id } = useParams();
 
-  const fetchIdentitasUsulan = async () => {
+  const fetchRincianKegiatan = async () => {
     try {
+      const penelitianId = localStorage.getItem("penelitianId");
       const pengabdianId = localStorage.getItem("pengabdianId");
-      const { data } = await axios.get(
-        `/proposal/penelitians/detail/${pengabdianId}`,
-      );
-      setValue("rumpun_ilmu_id", data?.data.rumpun_ilmu.id, {
-        shouldValidate: true,
-      });
-      setValue("judul", data?.data.judul);
-      setValue("tahun_usulan", data?.data.tahun_usulan);
-      setValue("jangka_waktu", data?.data.jangka_waktu);
-      setValue("ringkasan", data?.data.ringkasan);
 
+      const { data } = await axios.get(
+        `/proposal/${penelitianId || pengabdianId || id}/rincian-kegiatans`,
+      );
       return data.data;
     } catch (error) {
       if (error.response.status === 401) {
@@ -35,9 +29,8 @@ export const useQueryIdentitasUsulanPKM = (setValue) => {
   };
 
   const query = useQuery({
-    queryKey: ["identitas-usulan-pkm"],
-    queryFn: fetchIdentitasUsulan,
-    enabled: false,
+    queryKey: ["rincianKegiatan"],
+    queryFn: fetchRincianKegiatan,
   });
 
   return {

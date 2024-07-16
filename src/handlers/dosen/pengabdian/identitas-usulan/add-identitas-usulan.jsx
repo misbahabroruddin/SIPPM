@@ -3,6 +3,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { signOut } from "next-auth/react";
 import { toast } from "react-toastify";
+import { useParams } from "next/navigation";
 
 import { useAxios } from "@/lib/hooks/useAxios";
 import { useStep } from "@/lib/hooks/useStep";
@@ -11,6 +12,7 @@ export const useAddIdentitasUsulanPKM = (reset) => {
   const axios = useAxios();
   const queryClient = useQueryClient();
   const { currentStep, setCurrentStep } = useStep();
+  const { id } = useParams();
 
   const onSubmit = async (data) => {
     try {
@@ -26,7 +28,7 @@ export const useAddIdentitasUsulanPKM = (reset) => {
 
       if (isEdit && currentStep === 1) {
         const response = await axios.post(
-          `proposals/dosens/pkms/${pengabdianId}/identitas-usulan`,
+          `/proposal/pengabdians/update/${pengabdianId || id}`,
           formData,
         );
         if (response.data.data) {
@@ -41,7 +43,7 @@ export const useAddIdentitasUsulanPKM = (reset) => {
           reset();
         }
       } else {
-        const response = await axios.post("/proposals/dosens/pkms", formData);
+        const response = await axios.post("/proposal/pengabdians", formData);
         if (response.data.data) {
           setCurrentStep(2);
           localStorage.setItem("step", 2);

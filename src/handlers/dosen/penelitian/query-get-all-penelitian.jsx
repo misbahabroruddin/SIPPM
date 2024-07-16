@@ -6,15 +6,16 @@ import { signOut } from "next-auth/react";
 
 import { useAxios } from "@/lib/hooks/useAxios";
 
-export const useQueryGetAllPenelitian = (search, page) => {
+export const useQueryGetAllPenelitian = (search, page, limit) => {
   const axios = useAxios();
   const query = useQuery({
-    queryKey: ["listPenelitian", search, page],
+    queryKey: ["listPenelitian", search, page, limit],
     queryFn: async () => {
       let params;
       if (search) {
         params = {
           judul: search,
+          limit,
         };
       }
 
@@ -25,7 +26,7 @@ export const useQueryGetAllPenelitian = (search, page) => {
         };
       }
       try {
-        const { data } = await axios.get(`/proposals/dosens/penelitians`, {
+        const { data } = await axios.get(`/proposal/penelitians/role/dosen`, {
           params: params,
         });
 

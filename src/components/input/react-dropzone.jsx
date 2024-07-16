@@ -1,12 +1,15 @@
 "use client";
+
 import { useDropzone } from "react-dropzone";
 import Image from "next/image";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import { twMerge } from "tailwind-merge";
 import { useForm } from "react-hook-form";
 
 import { UploadCloudIcon } from "../svgs/upload-cloud";
 import { WindowCloseIcon } from "../svgs/window-close";
+import { useUploadDokumenPendukungProposal } from "@/handlers/dosen/proposal/dokumen-pendukung/upload-dokumen-pendukung";
+import { useQueryJenisDokumenOptions } from "@/handlers/data-referensi/jenis-dokumen/query-get-option-jenis-dokumen";
 
 const ReactDropzone = ({ onClose }) => {
   const [insertedFiles, setInsertedFiles] = useState([]);
@@ -17,26 +20,18 @@ const ReactDropzone = ({ onClose }) => {
     setValue,
   } = useForm();
 
-  const onDrop = useCallback((acceptedFiles) => {
-    // acceptedFiles.forEach((file) => {
-    //   const reader = new FileReader();
+  const { mutateAsync: handleUpload } =
+    useUploadDokumenPendukungProposal(onClose);
 
-    //   reader.onabort = () => console.log("file reading was aborted");
-    //   reader.onerror = () => console.log("file reading has failed");
-    //   reader.onload = () => {
-    //     const binaryStr = reader.result;
-    //   };
-    //   reader.readAsArrayBuffer(file);
-    // });
+  const { data: jenisDokumenOptions, isLoading: isLoadingJenisDokumen } =
+    useQueryJenisDokumenOptions();
+
+  const onDrop = useCallback((acceptedFiles) => {
     setInsertedFiles([...insertedFiles, ...acceptedFiles]);
     const newFiles =
       (!!files?.length && [...files].concat(acceptedFiles)) || acceptedFiles;
     setValue("files", newFiles, { shouldValidate: true });
   }, []);
-
-  const onSubmit = (data) => {
-    console.log(data);
-  };
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     accept: {
@@ -52,9 +47,15 @@ const ReactDropzone = ({ onClose }) => {
     newFiles.splice(newFiles.indexOf(file), 1);
     setInsertedFiles(newFiles);
     setValue("files", newFiles, { shouldValidate: true });
+    console.log(newFiles.indexOf(file), "<<<<");
   };
 
-  const files = insertedFiles.map((file) => (
+  const handleOnClose = () => {
+    setInsertedFiles([]);
+    onClose();
+  };
+
+  const files = insertedFiles.map((file, index) => (
     <li key={file.path} className="my-2">
       <div className="flex justify-between">
         <div
@@ -72,30 +73,40 @@ const ReactDropzone = ({ onClose }) => {
           </div>
           <WindowCloseIcon onClick={removeFile(file)} />
         </div>
-        <div className="grid h-10 w-1/4 place-items-center overflow-hidden rounded-lg border border-black-07">
-          <select
-            name="jenis_dokumen"
-            id="jenis_dokumen"
-            className="h-full w-full border border-r-8 border-transparent bg-transparent pl-3 focus:outline-none"
-            defaultValue={""}
+        <div className="flex w-1/4 flex-col">
+          <div
+            className={`grid h-10 w-full place-items-center overflow-hidden rounded-lg border ${errors.jenis_dokumen ? "border-red-500" : "border-black-07"}`}
           >
-            <option value="" disabled>
-              Pilih dokumen
-            </option>
-            <option value="cv">CV</option>
-            <option value="pernyataan_mitra">Pernyataan Mitra</option>
-          </select>
+            <select
+              name={`jenis_dokumen[${index}]`}
+              id={`jenis_dokumen[${index}]`}
+              className="h-full w-full border border-r-8 border-transparent bg-transparent pl-3 focus:outline-none"
+              defaultValue={""}
+              {...register(`jenis_dokumen[${index}]`, {
+                required: "Harus dipilih",
+              })}
+              disabled={isLoadingJenisDokumen}
+            >
+              <option value="" disabled>
+                Pilih dokumen
+              </option>
+              {jenisDokumenOptions?.map((item) => (
+                <option value={item.value} key={item.value}>
+                  {item.label}
+                </option>
+              ))}
+            </select>
+          </div>
+          {errors.jenis_dokumen && (
+            <span className="text-red-500">* Harus dipilih</span>
+          )}
         </div>
       </div>
     </li>
   ));
 
-  useEffect(() => {
-    console.log(insertedFiles[0]);
-  }, [insertedFiles]);
-
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit(handleUpload)}>
       <div
         {...getRootProps({
           className: twMerge(
@@ -104,11 +115,7 @@ const ReactDropzone = ({ onClose }) => {
           ),
         })}
       >
-        <input
-          {...getInputProps()}
-          {...register("files")}
-          onChange={(e) => setInsertedFiles(e.target?.files[0])}
-        />
+        <input {...getInputProps()} />
         <UploadCloudIcon height={32} width={32} />
 
         <p>Drag and Drop File or Chose On Pc</p>
@@ -120,7 +127,8 @@ const ReactDropzone = ({ onClose }) => {
             <div className="flex justify-end gap-4">
               <button
                 className="rounded-lg border border-blue-primary bg-transparent px-4 py-[6px] text-blue-primary"
-                onClick={onClose}
+                onClick={handleOnClose}
+                type="button"
               >
                 Cancel
               </button>

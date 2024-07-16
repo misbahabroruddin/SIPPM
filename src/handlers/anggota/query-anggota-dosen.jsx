@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 
 import { useAxios } from "@/lib/hooks/useAxios";
 
-export const useQueryAnggotaDosen = () => {
+export const useQueryOptionsAnggotaDosen = () => {
   const axios = useAxios();
 
   const fetchListDosen = async () => {
@@ -16,7 +16,7 @@ export const useQueryAnggotaDosen = () => {
       );
       const result = data?.data.map((opt) => ({
         value: opt.id,
-        label: `${opt.nama_lengkap} (${opt.nidn_or_nidk_or_nim})`,
+        label: opt.nama,
       }));
       return result;
     } catch (error) {
@@ -26,13 +26,12 @@ export const useQueryAnggotaDosen = () => {
       toast.error(error.response.data.message || "Something went wrong");
     }
   };
-  const { data, isLoading } = useQuery({
+  const query = useQuery({
     queryKey: ["listDosen"],
     queryFn: fetchListDosen,
   });
 
   return {
-    data,
-    isLoading,
+    ...query,
   };
 };
