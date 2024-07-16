@@ -16,7 +16,10 @@ export const ListDokumenPendukungProposal = ({ dokumenPendukung }) => {
     <div className="rounded-lg bg-sky px-4 py-2">
       <div className="flex flex-col gap-[10px]">
         {dokumenPendukung?.data.map((doc) => (
-          <div className="flex items-center justify-between text-black-07">
+          <div
+            key={doc.id}
+            className="flex items-center justify-between text-black-07"
+          >
             <p>{doc.jenis_dokumen.nama}</p>
             <div className="flex w-[360px] items-center justify-between rounded-lg bg-white p-2">
               <div className="flex gap-1">
