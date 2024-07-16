@@ -6,13 +6,13 @@ import { ContainerContent } from "@/components/container-content";
 import { ButtonPrev } from "@/components/button/button-prev";
 import { ButtonNext } from "@/components/button/button-next";
 import { useStep } from "@/lib/hooks/useStep";
-import { useQueryRincianKegiatanPKM } from "@/handlers/dosen/pengabdian/rincian-kegiatan/query-rincian-kegiatan-pkm";
 import { useNextStep } from "@/handlers/step";
 import { TableRincianKegiatan } from "@/components/proposal/pengajuan/pengabdian/step5/table-rincian-kegiatan";
+import { useQueryRincianKegiatanProposal } from "@/handlers/dosen/proposal/rincian-kegiatan/query-rincian-kegiatan";
 
 export const RincianKegiatanPKM = () => {
   const { currentStep, setCurrentStep } = useStep();
-  const { data, refetch } = useQueryRincianKegiatanPKM();
+  const { data, refetch } = useQueryRincianKegiatanProposal();
   const { handleNextStepPKM } = useNextStep(6);
 
   const handlePrevStep = () => {

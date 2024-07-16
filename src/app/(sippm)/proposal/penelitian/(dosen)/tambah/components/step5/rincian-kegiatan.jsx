@@ -6,15 +6,20 @@ import { ContainerContent } from "@/components/container-content";
 import { ButtonPrev } from "@/components/button/button-prev";
 import { ButtonNext } from "@/components/button/button-next";
 import { useStep } from "@/lib/hooks/useStep";
-import { useQueryRincianKegiatanPenelitian } from "@/handlers/dosen/penelitian/rincian-kegiatan/query-rincian-kegiatan-penelitian";
 import { useNextStep } from "@/handlers/step";
 import { TableRincianKegiatan } from "@/components/proposal/pengajuan/penelitian/step5/table-rincian-kegiatan";
+import { useQueryRincianKegiatanProposal } from "@/handlers/dosen/proposal/rincian-kegiatan/query-rincian-kegiatan";
 
 export const RincianKegiatan = () => {
   const { currentStep, setCurrentStep } = useStep();
-  const { rincianKegiatanPenelitian, refetchRincianKegiatanPenelitian } =
-    useQueryRincianKegiatanPenelitian();
+
+  const {
+    data: rincianKegiatanPenelitian,
+    refetch: refetchRincianKegiatanPenelitian,
+  } = useQueryRincianKegiatanProposal();
+
   const { handleNextStep } = useNextStep(6);
+
   const handlePrevStep = () => {
     setCurrentStep(4);
     localStorage.setItem("step", 4);

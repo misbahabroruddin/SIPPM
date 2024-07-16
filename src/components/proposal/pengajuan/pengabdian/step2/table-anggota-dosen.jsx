@@ -5,7 +5,7 @@ import { Typography } from "@material-tailwind/react";
 import { twMerge } from "tailwind-merge";
 
 import { ModalDetailAnggotaDosen } from "./modal-detail-anggota-dosen";
-import { useDeleteAnggotaPKM } from "@/handlers/dosen/pengabdian/anggota/delete-anggota-pkm";
+import { useDeleteAnggotaProposal } from "@/handlers/dosen/proposal/anggota/delete-anggota";
 
 export const TableAnggotaDosenPKM = ({ data }) => {
   const header = [
@@ -18,7 +18,7 @@ export const TableAnggotaDosenPKM = ({ data }) => {
     "Action",
   ];
 
-  const { onDeleteAnggotaDosenPKM, isLoadingDosenPKM } = useDeleteAnggotaPKM();
+  const { onDeleteAnggotaDosen, isLoadingDosen } = useDeleteAnggotaProposal();
 
   return (
     <table className="w-full min-w-max table-auto overflow-hidden rounded-t-lg text-left !font-poppins">
@@ -91,8 +91,8 @@ export const TableAnggotaDosenPKM = ({ data }) => {
                   <ModalDetailAnggotaDosen id={row.id} />
                   <button
                     className="rounded-lg disabled:cursor-not-allowed disabled:opacity-50"
-                    onClick={() => onDeleteAnggotaDosenPKM(row.id)}
-                    disabled={isLoadingDosenPKM}
+                    onClick={() => onDeleteAnggotaDosen(row.id)}
+                    disabled={isLoadingDosen}
                   >
                     <Image
                       src="/icons/delete.svg"

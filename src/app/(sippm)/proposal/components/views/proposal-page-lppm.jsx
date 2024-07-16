@@ -51,6 +51,9 @@ export default function ProposalPageLPPM() {
   const { data: totalProposalPengabdian } =
     useQueryInfoProposalPengabdianLPPM();
 
+  console.log(totalProposalPenelitian);
+  console.log(totalProposalPengabdian);
+
   return (
     <ContainerPage>
       <div className="flex flex-col gap-4">

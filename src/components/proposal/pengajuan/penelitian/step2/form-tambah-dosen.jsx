@@ -9,18 +9,11 @@ import { ButtonSave } from "@/components/button/button-save";
 import { useQueryJabatanFungsional } from "@/handlers/data-referensi/jabatan-fungsional/query-jabatan-fungsional";
 import { useQueryProgramStudi } from "@/handlers/data-referensi/program-studi/query-program-studi";
 import { EMAIL_REGEX } from "@/lib/constants/regex";
-import { useAddAnggotaPenelitian } from "@/handlers/dosen/penelitian/anggota/add-anggota-penelitian";
 import { useCreateAnggotaDosen } from "@/handlers/anggota/create-anggota-dosen";
 import { SingleSelect } from "@/components/select/single-select";
+import { useAddAnggotaProposal } from "@/handlers/dosen/proposal/anggota/add-anggota";
 
 export const FormTambahDosen = ({ onClose }) => {
-  const {
-    data: jabatanFungsionalOptions,
-    isLoading: isLoadingJabatanFungsionalOptions,
-  } = useQueryJabatanFungsional();
-
-  const { data: programStudiOptions, isLoading: isLoadingProgramStudiOptions } =
-    useQueryProgramStudi();
   const {
     register,
     reset,
@@ -28,12 +21,23 @@ export const FormTambahDosen = ({ onClose }) => {
     control,
     formState: { errors },
   } = useForm();
+
+  const {
+    data: jabatanFungsionalOptions,
+    isLoading: isLoadingJabatanFungsionalOptions,
+  } = useQueryJabatanFungsional();
+
+  const { data: programStudiOptions, isLoading: isLoadingProgramStudiOptions } =
+    useQueryProgramStudi();
+
   const id = useId();
-  const { handleAddNewAnggotaPenelitian } = useAddAnggotaPenelitian();
+
+  const { handleAddNewAnggota } = useAddAnggotaProposal();
+
   const { onCreateAnggotaDosen, isPending } = useCreateAnggotaDosen(
     reset,
     onClose,
-    handleAddNewAnggotaPenelitian,
+    handleAddNewAnggota,
   );
   return (
     <div className="max-h-[calc(100vh-400px)] overflow-y-scroll p-2 lg:h-auto lg:overflow-auto">

@@ -1,15 +1,15 @@
 "use client";
 
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 
 import { Input } from "@/components/input/input";
-import { ButtonCancel } from "@/components/button/button-cancel";
-import { ButtonSave } from "@/components/button/button-save";
-import { useQueryDetailRencanaAnggaranPKM } from "@/handlers/dosen/pengabdian/rencana-anggaran/query-detail-rencana-anggaran-pkm";
-import { useAddEditRencanaAnggaranPKM } from "@/handlers/dosen/pengabdian/rencana-anggaran/add-edit-rencana-anggaran-pkm";
 import { SaveIcon } from "@/components/svgs/save";
 import { CloseIcon } from "@/components/svgs/close";
 import { Spinner } from "@material-tailwind/react";
+import { SingleSelect } from "@/components/select/single-select";
+import { useAddEditRencanaAnggaran } from "@/handlers/dosen/proposal/rencana-anggaran/add-edit-rencana-anggaran";
+import { useQueryDetailRencanaAnggaran } from "@/handlers/dosen/proposal/rencana-anggaran/query-detail-rencana-anggaran";
+import { useQueryRincianBiayaOptions } from "@/handlers/data-referensi/rincian-biaya/query-get-option-rincian-biaya";
 
 export const FormRencanaAnggaranPKM = ({ onClose, id }) => {
   const {
@@ -18,33 +18,35 @@ export const FormRencanaAnggaranPKM = ({ onClose, id }) => {
     reset,
     setValue,
     formState: { errors },
+    control,
   } = useForm();
 
-  const { data, isLoading } = useQueryDetailRencanaAnggaranPKM(setValue, id);
+  const { data: rincianBiayaOptions, isLoading: isLoadingRincianBiaya } =
+    useQueryRincianBiayaOptions();
 
-  const { addEditRencanaAnggaran, isPending } = useAddEditRencanaAnggaranPKM(
-    id,
-    reset,
-    onClose,
-  );
+  console.log(rincianBiayaOptions);
+
+  const { data, isLoading } = useQueryDetailRencanaAnggaran(setValue, id);
+
+  const { mutateAsync: addEditRencanaAnggaran, isPending } =
+    useAddEditRencanaAnggaran(id, reset, onClose);
 
   return (
     <tr className="border-1 border border-black-09 ">
       <td className="hidden px-2 lg:table-cell lg:w-8"></td>
       <td className="px-2 py-1">
-        <Input
-          containerClass="flex-col items-start gap-2 lg:flex-col lg:items-start lg:gap-2"
-          labelClass="hidden"
-          name={"rincian"}
-          placeholder="Rincian"
-          register={register("rincian", {
-            required: "harus diisi",
-          })}
-          errors={errors.rincian}
-          required
-          defaultValue={data?.rincian}
+        <SingleSelect
+          Controller={Controller}
+          control={control}
+          options={rincianBiayaOptions}
+          placeholder={"Rincian Biaya"}
+          name="rincian_biaya_id"
+          errors={errors.rincian_biaya_id}
+          rules={{ required: "harus diisi" }}
+          id={id}
+          isLoading={isLoadingRincianBiaya}
+          maxMenuHeight={180}
           spanEmptyClass="hidden"
-          disabled={isLoading}
         />
       </td>
       <td className="px-2">

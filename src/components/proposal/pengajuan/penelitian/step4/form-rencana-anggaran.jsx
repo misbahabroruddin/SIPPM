@@ -1,13 +1,15 @@
 "use client";
 
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import { Spinner } from "@material-tailwind/react";
 
 import { Input } from "@/components/input/input";
-import { useQueryDetailRencanaAnggaranPenelitian } from "@/handlers/dosen/penelitian/rencana-anggaran/query-detail-rencana-anggaran";
-import { useAddEditRencanaAnggaranPenelitian } from "@/handlers/dosen/penelitian/rencana-anggaran/add-edit-rencana-anggaran";
 import { SaveIcon } from "@/components/svgs/save";
 import { CloseIcon } from "@/components/svgs/close";
+import { useAddEditRencanaAnggaran } from "@/handlers/dosen/proposal/rencana-anggaran/add-edit-rencana-anggaran";
+import { useQueryDetailRencanaAnggaran } from "@/handlers/dosen/proposal/rencana-anggaran/query-detail-rencana-anggaran";
+import { useQueryRincianBiayaOptions } from "@/handlers/data-referensi/rincian-biaya/query-get-option-rincian-biaya";
+import { SingleSelect } from "@/components/select/single-select";
 
 export const FormRencanaAnggaranPenelitian = ({ onClose, id }) => {
   const {
@@ -16,27 +18,35 @@ export const FormRencanaAnggaranPenelitian = ({ onClose, id }) => {
     reset,
     setValue,
     formState: { errors },
+    control,
   } = useForm();
-  const { data } = useQueryDetailRencanaAnggaranPenelitian(setValue, id);
 
-  const { onSubmitRencanaAnggaran, isLoadingRencanaAnggaran } =
-    useAddEditRencanaAnggaranPenelitian(id, reset, onClose);
+  const { data: rincianBiayaOptions, isLoading: isLoadingRincianBiaya } =
+    useQueryRincianBiayaOptions();
+
+  const { data } = useQueryDetailRencanaAnggaran(setValue, id);
+
+  const {
+    mutateAsync: onSubmitRencanaAnggaran,
+    isPending: isLoadingRencanaAnggaran,
+  } = useAddEditRencanaAnggaran(id, reset, onClose);
 
   return (
     <tr className="border-1 border border-black-09">
       <td className="hidden px-2 lg:table-cell lg:w-8 "></td>
       <td className="px-2">
-        <Input
-          containerClass="flex-col items-start gap-2 lg:flex-col lg:items-start lg:gap-2"
-          name={"rincian"}
-          placeholder="Rincian"
-          register={register("rincian", {
-            required: "harus diisi",
-          })}
-          errors={errors.rincian}
-          required
+        <SingleSelect
+          Controller={Controller}
+          control={control}
+          options={rincianBiayaOptions}
+          placeholder={"Rincian Biaya"}
+          name="rincian_biaya_id"
+          errors={errors.rincian_biaya_id}
+          rules={{ required: "harus diisi" }}
+          id={id}
+          isLoading={isLoadingRincianBiaya}
+          maxMenuHeight={180}
           spanEmptyClass="hidden"
-          defaultValue={data?.rincian}
         />
       </td>
       <td className="px-2">

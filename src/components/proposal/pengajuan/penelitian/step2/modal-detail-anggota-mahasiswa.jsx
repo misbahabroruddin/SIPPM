@@ -5,11 +5,11 @@ import { useState } from "react";
 
 import { Modal } from "@/components/modal";
 import { Input } from "@/components/input/input";
-import { useQueryDetailAnggotaMahasiswaPenelitian } from "@/handlers/dosen/penelitian/anggota/query-detail-anggota-mahasiswa";
+import { useQueryDetailAnggotaProposal } from "@/handlers/dosen/proposal/anggota/query-detail-anggota";
 
 export const ModalDetailAnggotaMahasiswa = ({ id }) => {
   const [openModal, setOpenModal] = useState(false);
-  const { detail } = useQueryDetailAnggotaMahasiswaPenelitian(id);
+  const { data: detail } = useQueryDetailAnggotaProposal(id);
 
   const handleOpenModal = () => setOpenModal(true);
 

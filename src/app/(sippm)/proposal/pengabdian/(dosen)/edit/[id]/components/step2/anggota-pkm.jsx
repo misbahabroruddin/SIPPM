@@ -5,24 +5,23 @@ import { useEffect } from "react";
 import { ButtonPrev } from "@/components/button/button-prev";
 import { ButtonNext } from "@/components/button/button-next";
 import { ContainerContent } from "@/components/container-content";
-import { useAxios } from "@/lib/hooks/useAxios";
 import { useStep } from "@/lib/hooks/useStep";
-import { useQueryAnggotaDosenPKM } from "@/handlers/dosen/pengabdian/anggota/query-anggota-dosen-pkm";
-import { useQueryAnggotaMahasiswaPKM } from "@/handlers/dosen/pengabdian/anggota/query-anggota-mahasiswa-pkm";
 import { useNextStep } from "@/handlers/step";
 import { ModalTambahAnggota } from "@/components/proposal/pengajuan/pengabdian/step2/modal-tambah-anggota";
 import { TableAnggotaDosenPKM } from "@/components/proposal/pengajuan/pengabdian/step2/table-anggota-dosen";
 import { TableAnggotaMahasiswaPKM } from "@/components/proposal/pengajuan/pengabdian/step2/table-anggota-mahasiswa";
+import { useQueryAnggotaMahasiswaProposal } from "@/handlers/dosen/proposal/anggota/query-anggota-mahasiswa";
+import { useQueryAnggotaDosenProposal } from "@/handlers/dosen/proposal/anggota/query-anggota-dosen";
 
 export const AnggotaPKM = () => {
   const { currentStep, setCurrentStep } = useStep();
-  const axios = useAxios();
   const { handleNextStepPKM } = useNextStep(3);
 
-  const { listAnggotaDosenPKM, refetchDosen } = useQueryAnggotaDosenPKM();
+  const { data: listAnggotaDosenPKM, refetch: refetchDosen } =
+    useQueryAnggotaDosenProposal();
 
-  const { listAnggotaMahasiswaPKM, refetchMahasiswa } =
-    useQueryAnggotaMahasiswaPKM();
+  const { data: listAnggotaMahasiswaPKM, refetch: refetchMahasiswa } =
+    useQueryAnggotaMahasiswaProposal();
 
   const handlePrevStep = () => {
     setCurrentStep(1);

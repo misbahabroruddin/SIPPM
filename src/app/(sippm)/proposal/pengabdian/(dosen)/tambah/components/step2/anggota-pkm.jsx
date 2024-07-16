@@ -6,20 +6,21 @@ import { ButtonPrev } from "@/components/button/button-prev";
 import { ButtonNext } from "@/components/button/button-next";
 import { ContainerContent } from "@/components/container-content";
 import { useStep } from "@/lib/hooks/useStep";
-import { useQueryAnggotaDosenPKM } from "@/handlers/dosen/pengabdian/anggota/query-anggota-dosen-pkm";
-import { useQueryAnggotaMahasiswaPKM } from "@/handlers/dosen/pengabdian/anggota/query-anggota-mahasiswa-pkm";
 import { useNextStep } from "@/handlers/step";
 import { TableAnggotaDosenPKM } from "@/components/proposal/pengajuan/pengabdian/step2/table-anggota-dosen";
 import { TableAnggotaMahasiswaPKM } from "@/components/proposal/pengajuan/pengabdian/step2/table-anggota-mahasiswa";
 import { ModalTambahAnggota } from "@/components/proposal/pengajuan/pengabdian/step2/modal-tambah-anggota";
+import { useQueryAnggotaMahasiswaProposal } from "@/handlers/dosen/proposal/anggota/query-anggota-mahasiswa";
+import { useQueryAnggotaDosenProposal } from "@/handlers/dosen/proposal/anggota/query-anggota-dosen";
 
 export const AnggotaPKM = () => {
   const { currentStep, setCurrentStep } = useStep();
 
-  const { listAnggotaDosenPKM, refetchDosen } = useQueryAnggotaDosenPKM();
+  const { data: listAnggotaMahasiswa, refetch: refetchAnggotaMahasiswa } =
+    useQueryAnggotaMahasiswaProposal();
 
-  const { listAnggotaMahasiswaPKM, refetchMahasiswa } =
-    useQueryAnggotaMahasiswaPKM();
+  const { data: listAnggotaDosen, refetch: refetchAnggotaDosen } =
+    useQueryAnggotaDosenProposal();
 
   const { handleNextStepPKM } = useNextStep(3);
 
@@ -30,8 +31,8 @@ export const AnggotaPKM = () => {
   };
 
   useEffect(() => {
-    refetchDosen();
-    refetchMahasiswa();
+    refetchAnggotaDosen();
+    refetchAnggotaMahasiswa();
   }, [currentStep]);
 
   return (
@@ -42,13 +43,13 @@ export const AnggotaPKM = () => {
         </h1>
         <ModalTambahAnggota />
       </div>
-      <TableAnggotaDosenPKM data={listAnggotaDosenPKM} />
+      <TableAnggotaDosenPKM data={listAnggotaDosen} />
       <div className="flex items-center justify-between">
         <h1 className="text-base font-semibold text-primary lg:text-lg">
           Identitas Anggota Mahasiswa
         </h1>
       </div>
-      <TableAnggotaMahasiswaPKM data={listAnggotaMahasiswaPKM} />
+      <TableAnggotaMahasiswaPKM data={listAnggotaMahasiswa} />
       <div className="absolute -bottom-16 left-0 mt-4 flex w-full flex-wrap items-center justify-between gap-2">
         <ButtonPrev
           onClick={handlePrevStep}
@@ -56,7 +57,6 @@ export const AnggotaPKM = () => {
         />
         <ButtonNext
           onClick={handleNextStepPKM}
-          disabled={listAnggotaDosenPKM?.data?.length === 0}
           className="w-[120px] lg:w-[200px]"
         />
       </div>

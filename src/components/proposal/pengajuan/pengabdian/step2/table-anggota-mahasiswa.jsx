@@ -5,7 +5,7 @@ import { Typography } from "@material-tailwind/react";
 import { twMerge } from "tailwind-merge";
 
 import { ModalDetailAnggotaMahasiswa } from "./modal-detail-anggota-mahasiswa";
-import { useDeleteAnggotaPKM } from "@/handlers/dosen/pengabdian/anggota/delete-anggota-pkm";
+import { useDeleteAnggotaProposal } from "@/handlers/dosen/proposal/anggota/delete-anggota";
 
 export const TableAnggotaMahasiswaPKM = ({ data }) => {
   const header = [
@@ -18,8 +18,8 @@ export const TableAnggotaMahasiswaPKM = ({ data }) => {
     "Action",
   ];
 
-  const { onDeleteAnggotaMahasiswaPKM, isLoadingMahasiswaPKM } =
-    useDeleteAnggotaPKM();
+  const { onDeleteAnggotaMahasiswa, isLoadingMahasiswa } =
+    useDeleteAnggotaProposal();
 
   return (
     <table className="w-full min-w-max table-auto overflow-hidden rounded-t-lg text-left !font-poppins">
@@ -92,8 +92,8 @@ export const TableAnggotaMahasiswaPKM = ({ data }) => {
                   <ModalDetailAnggotaMahasiswa id={row.id} />
                   <button
                     className="rounded-lg disabled:cursor-not-allowed disabled:opacity-50"
-                    onClick={() => onDeleteAnggotaMahasiswaPKM(row.id)}
-                    disabled={isLoadingMahasiswaPKM}
+                    onClick={() => onDeleteAnggotaMahasiswa(row.id)}
+                    disabled={isLoadingMahasiswa}
                   >
                     <Image
                       src="/icons/delete.svg"

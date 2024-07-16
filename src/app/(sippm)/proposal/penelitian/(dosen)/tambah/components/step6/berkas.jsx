@@ -1,27 +1,20 @@
 "use client";
 
-import { useForm } from "react-hook-form";
-import { useRouter } from "next/navigation";
-
 import { ButtonPrev } from "@/components/button/button-prev";
 import { ButtonSave } from "@/components/button/button-save";
 import { ContainerContent } from "@/components/container-content";
 import { useStep } from "@/lib/hooks/useStep";
-import { useUploadBerkasPenelitian } from "@/handlers/dosen/penelitian/berkas/upload-berkas-penelitian";
 import { ModalUploadDokumen } from "@/components/proposal/pengajuan/penelitian/step6/modal-upload-dokumen";
+import { useQueryGetDokumenPendukungProposal } from "@/handlers/dosen/proposal/dokumen-pendukung/query-get-dokumen-pendukung";
+import { useKirimUsulanPenelitian } from "@/handlers/dosen/penelitian/kirim-usulan/kirim-usulan-penelitian";
+import { ListDokumenPendukungProposal } from "@/components/proposal/pengajuan/penelitian/step6/list-dokumen-pendukung";
 
 export const Berkas = () => {
-  const router = useRouter();
   const { setCurrentStep } = useStep();
-  const { uploadBerkas, isLoadingSubmit } = useUploadBerkasPenelitian(router);
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    watch,
-    resetField,
-  } = useForm();
+  const { data: dokumenPendukung } = useQueryGetDokumenPendukungProposal();
+
+  const { kirimUsulan, isLoadingSubmit } = useKirimUsulanPenelitian();
 
   const handlePrevStep = () => {
     setCurrentStep(5);
@@ -41,6 +34,7 @@ export const Berkas = () => {
           </h3>
           <ModalUploadDokumen />
         </div>
+        <ListDokumenPendukungProposal dokumenPendukung={dokumenPendukung} />
       </div>
       <div className="flex justify-between rounded-lg p-4 shadow">
         <ButtonPrev
@@ -48,6 +42,7 @@ export const Berkas = () => {
           className="w-[120px] lg:w-[200px]"
         />
         <ButtonSave
+          onClick={kirimUsulan}
           disabled={isLoadingSubmit}
           isLoading={isLoadingSubmit}
           className="w-[120px] lg:w-[200px]"

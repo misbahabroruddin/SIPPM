@@ -9,10 +9,10 @@ import { ButtonNext } from "@/components/button/button-next";
 import { ContainerContent } from "@/components/container-content";
 import { useStep } from "@/lib/hooks/useStep";
 import { useQueryLuaranWajib } from "@/handlers/data-referensi/luaran-wajib/query-luaran-wajib";
-import { useQueryTargetCapaianPKM } from "@/handlers/dosen/pengabdian/target-capaian/query-target-capaian-pkm";
-import { useAddTargetCapaianPKM } from "@/handlers/dosen/pengabdian/target-capaian/add-target-capaian-pkm";
 import { SingleSelect } from "@/components/select/single-select";
 import { styles } from "@/lib/utils/style-react-select";
+import { useQueryTargetCapaianProposal } from "@/handlers/dosen/proposal/target-capaian/query-target-capaian";
+import { useAddTargetCapaianProposal } from "@/handlers/dosen/proposal/target-capaian/add-target-capaian";
 
 export const TargetCapaianPKM = () => {
   const {
@@ -29,7 +29,11 @@ export const TargetCapaianPKM = () => {
 
   const { data: luaranWajibOptions, isLoading } = useQueryLuaranWajib();
 
-  const { data, refetch } = useQueryTargetCapaianPKM(setValue);
+  const {
+    data,
+    refetch,
+    isLoading: isLoadingTargetCapaian,
+  } = useQueryTargetCapaianProposal(setValue);
 
   useEffect(() => {
     if (currentStep === 3) {
@@ -37,7 +41,8 @@ export const TargetCapaianPKM = () => {
     }
   }, [currentStep]);
 
-  const { addTargetCapaianPKM, isPending } = useAddTargetCapaianPKM();
+  const { mutateAsync: addTargetCapaianPKM, isPending } =
+    useAddTargetCapaianProposal();
 
   const handlePrevStep = () => {
     setCurrentStep(2);
@@ -57,13 +62,13 @@ export const TargetCapaianPKM = () => {
               Controller={Controller}
               control={control}
               options={luaranWajibOptions}
-              placeholder={data?.data?.luaran_wajib.nama || "Luaran Wajib"}
+              placeholder={data?.data?.luaran_wajib?.nama || "Luaran Wajib"}
               name="luaran_wajib_id"
               errors={errors.luaran_wajib_id}
               rules={{ required: "Wajib diisi" }}
               id={id}
               isLoading={isLoading}
-              styles={styles(data?.data?.luaran_wajib.nama)}
+              styles={styles(data?.data?.luaran_wajib?.nama)}
             />
             <Input
               type="number"
@@ -98,6 +103,7 @@ export const TargetCapaianPKM = () => {
               })}
               errors={errors.nama_jurnal_penerbit}
               required
+              disabled={isLoadingTargetCapaian}
             />
           </div>
         </div>

@@ -1,27 +1,20 @@
 "use client";
 
-import { useForm } from "react-hook-form";
-import { useRouter } from "next/navigation";
-
 import { ButtonPrev } from "@/components/button/button-prev";
 import { ButtonSave } from "@/components/button/button-save";
 import { ContainerContent } from "@/components/container-content";
-import { useUploadBerkasPKM } from "@/handlers/dosen/pengabdian/berkas/upload-berkas";
 import { useStep } from "@/lib/hooks/useStep";
 import { ModalUploadDokumenPKM } from "@/components/proposal/pengajuan/pengabdian/step6/modal-upload-dokumen";
+import { useQueryGetDokumenPendukungProposal } from "@/handlers/dosen/proposal/dokumen-pendukung/query-get-dokumen-pendukung";
+import { ListDokumenPendukungProposal } from "@/components/proposal/pengajuan/penelitian/step6/list-dokumen-pendukung";
+import { useKirimUsulanPKM } from "@/handlers/dosen/pengabdian/kirim-usulan/kirim-usulan-pkm";
 
 export const BerkasPKM = () => {
   const { setCurrentStep } = useStep();
-  const { push } = useRouter();
-  const { uploadBerkas, isPending } = useUploadBerkasPKM({ push });
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    watch,
-    resetField,
-  } = useForm();
+  const { data: dokumenPendukung } = useQueryGetDokumenPendukungProposal();
+
+  const { kirimUsulan, isLoadingSubmit } = useKirimUsulanPKM();
 
   const handlePrevStep = () => {
     setCurrentStep(5);
@@ -41,6 +34,7 @@ export const BerkasPKM = () => {
           </h3>
           <ModalUploadDokumenPKM />
         </div>
+        <ListDokumenPendukungProposal dokumenPendukung={dokumenPendukung} />
       </div>
       <div className="flex justify-between rounded-lg p-4 shadow">
         <ButtonPrev
@@ -48,8 +42,9 @@ export const BerkasPKM = () => {
           className="w-[120px] lg:w-[200px]"
         />
         <ButtonSave
-          disabled={isPending}
-          isLoading={isPending}
+          onClick={kirimUsulan}
+          disabled={isLoadingSubmit}
+          isLoading={isLoadingSubmit}
           className="w-[120px] lg:w-[200px]"
         />
       </div>

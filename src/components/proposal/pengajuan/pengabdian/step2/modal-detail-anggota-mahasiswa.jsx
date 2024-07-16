@@ -5,14 +5,14 @@ import { useState } from "react";
 
 import { Modal } from "@/components/modal";
 import { Input } from "@/components/input/input";
-import { useQueryDetailAnggotaMahasiswaPKM } from "@/handlers/dosen/pengabdian/anggota/query-detail-anggota-mahasiswa";
+import { useQueryDetailAnggotaProposal } from "@/handlers/dosen/proposal/anggota/query-detail-anggota";
 
 export const ModalDetailAnggotaMahasiswa = ({ id }) => {
   const [openModal, setOpenModal] = useState(false);
 
   const handleOpenModal = () => setOpenModal(true);
 
-  const { data: detail } = useQueryDetailAnggotaMahasiswaPKM(id);
+  const { data: detail } = useQueryDetailAnggotaProposal(id);
   return (
     <>
       <button className="rounded-lg" onClick={handleOpenModal}>

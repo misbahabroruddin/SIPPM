@@ -5,8 +5,9 @@ import { Controller, useForm } from "react-hook-form";
 import { ButtonCancel } from "@/components/button/button-cancel";
 import { ButtonSave } from "@/components/button/button-save";
 import { useQueryAnggotaMahasiswa } from "@/handlers/anggota/query-anggota-mahasiswa";
-import { useAddAnggotaPenelitian } from "@/handlers/dosen/penelitian/anggota/add-anggota-penelitian";
 import { SingleSelect } from "@/components/select/single-select";
+import { useAddAnggotaProposal } from "@/handlers/dosen/proposal/anggota/add-anggota";
+import { useQueryAnggotaMahasiswaProposal } from "@/handlers/dosen/proposal/anggota/query-anggota-mahasiswa";
 
 export const SelectMahasiswa = ({ onClose }) => {
   const {
@@ -20,21 +21,27 @@ export const SelectMahasiswa = ({ onClose }) => {
 
   const { data, isLoading } = useQueryAnggotaMahasiswa();
 
-  const {
-    onSubmitAnggotaMahasiswaPenelitian,
-    isLoadingAnggotaMahasiswaPenelitian,
-  } = useAddAnggotaPenelitian(reset, onClose);
+  const { onSubmitAnggotaMahasiswa, isLoadingAnggotaMahasiswa } =
+    useAddAnggotaProposal(reset, onClose);
+
+  const { data: listAnggotaMahasiswaPenelitian } =
+    useQueryAnggotaMahasiswaProposal();
 
   return (
     <form
       className="flex flex-col gap-6"
-      onSubmit={handleSubmit(onSubmitAnggotaMahasiswaPenelitian)}
+      onSubmit={handleSubmit(onSubmitAnggotaMahasiswa)}
     >
       <SingleSelect
         label={"Nama Mahasiswa"}
         Controller={Controller}
         control={control}
-        options={data}
+        options={data?.filter(
+          (anggota) =>
+            !listAnggotaMahasiswaPenelitian?.data.find(
+              (a) => a.anggota_id === anggota.value,
+            ),
+        )}
         placeholder={"Nama Mahasiswa"}
         name="anggota_id"
         errors={errors.anggota_id}
@@ -47,8 +54,8 @@ export const SelectMahasiswa = ({ onClose }) => {
         <ButtonCancel iconLeft onClick={onClose} />
         <ButtonSave
           iconLeft
-          disabled={isLoadingAnggotaMahasiswaPenelitian}
-          isLoading={isLoadingAnggotaMahasiswaPenelitian}
+          disabled={isLoadingAnggotaMahasiswa}
+          isLoading={isLoadingAnggotaMahasiswa}
         />
       </div>
     </form>

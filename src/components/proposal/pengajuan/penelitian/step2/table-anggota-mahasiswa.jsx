@@ -5,11 +5,11 @@ import { Typography } from "@material-tailwind/react";
 import { twMerge } from "tailwind-merge";
 
 import { ModalDetailAnggotaMahasiswa } from "./modal-detail-anggota-mahasiswa";
-import { useDeleteAnggotaPenelitian } from "@/handlers/dosen/penelitian/anggota/delete-anggota-penelitian";
+import { useDeleteAnggotaProposal } from "@/handlers/dosen/proposal/anggota/delete-anggota";
 
 export const TableAnggotaMahasiswa = ({ data }) => {
-  const { onDeleteAnggotaMahasiswaPenelitian, isLoadingMahasiswa } =
-    useDeleteAnggotaPenelitian();
+  const { onDeleteAnggotaMahasiswa, isLoadingMahasiswa } =
+    useDeleteAnggotaProposal();
 
   const header = [
     "No",
@@ -91,7 +91,7 @@ export const TableAnggotaMahasiswa = ({ data }) => {
                   <ModalDetailAnggotaMahasiswa id={row.id} />
                   <button
                     className="rounded-lg disabled:cursor-not-allowed disabled:opacity-50"
-                    onClick={() => onDeleteAnggotaMahasiswaPenelitian(row.id)}
+                    onClick={() => onDeleteAnggotaMahasiswa(row.id)}
                     disabled={isLoadingMahasiswa}
                   >
                     <Image

@@ -10,18 +10,10 @@ import { useQueryJabatanFungsional } from "@/handlers/data-referensi/jabatan-fun
 import { useQueryProgramStudi } from "@/handlers/data-referensi/program-studi/query-program-studi";
 import { EMAIL_REGEX } from "@/lib/constants/regex";
 import { useCreateAnggotaDosen } from "@/handlers/anggota/create-anggota-dosen";
-import { useAddAnggotaPKM } from "@/handlers/dosen/pengabdian/anggota/add-anggota-pkm";
 import { SingleSelect } from "@/components/select/single-select";
+import { useAddAnggotaProposal } from "@/handlers/dosen/proposal/anggota/add-anggota";
 
 export const FormTambahDosen = ({ onClose }) => {
-  const {
-    data: jabatanFungsionalOptions,
-    isLoading: isLoadingJabatanFungsionalOptions,
-  } = useQueryJabatanFungsional();
-
-  const { data: programStudiOptions, isLoading: isLoadingProgramStudiOptions } =
-    useQueryProgramStudi();
-
   const {
     register,
     reset,
@@ -30,14 +22,22 @@ export const FormTambahDosen = ({ onClose }) => {
     formState: { errors },
   } = useForm();
 
+  const {
+    data: jabatanFungsionalOptions,
+    isLoading: isLoadingJabatanFungsionalOptions,
+  } = useQueryJabatanFungsional();
+
+  const { data: programStudiOptions, isLoading: isLoadingProgramStudiOptions } =
+    useQueryProgramStudi();
+
   const id = useId();
 
-  const { handleAddNewAnggotaPKM } = useAddAnggotaPKM();
+  const { handleAddNewAnggota } = useAddAnggotaProposal();
 
   const { onCreateAnggotaDosen, isPending } = useCreateAnggotaDosen(
     reset,
     onClose,
-    handleAddNewAnggotaPKM,
+    handleAddNewAnggota,
   );
 
   return (

@@ -10,14 +10,9 @@ import { useQueryProgramStudi } from "@/handlers/data-referensi/program-studi/qu
 import { EMAIL_REGEX } from "@/lib/constants/regex";
 import { useCreateAnggotaMahasiswa } from "@/handlers/anggota/create-anggota-mahasiswa";
 import { SingleSelect } from "@/components/select/single-select";
-import { useAddAnggotaPKM } from "@/handlers/dosen/pengabdian/anggota/add-anggota-pkm";
+import { useAddAnggotaProposal } from "@/handlers/dosen/proposal/anggota/add-anggota";
 
 export const FormTambahMahasiswa = ({ onClose }) => {
-  const id = useId();
-
-  const { data: programStudiOptions, isLoading: isLoadingProgramStudiOptions } =
-    useQueryProgramStudi();
-
   const {
     register,
     reset,
@@ -26,12 +21,17 @@ export const FormTambahMahasiswa = ({ onClose }) => {
     formState: { errors },
   } = useForm();
 
-  const { handleAddNewAnggotaPKM } = useAddAnggotaPKM();
+  const id = useId();
+
+  const { data: programStudiOptions, isLoading: isLoadingProgramStudiOptions } =
+    useQueryProgramStudi();
+
+  const { handleAddNewAnggota } = useAddAnggotaProposal();
 
   const { onCreateAnggotaMahasiswa, isPending } = useCreateAnggotaMahasiswa(
     reset,
     onClose,
-    handleAddNewAnggotaPKM,
+    handleAddNewAnggota,
   );
   return (
     <div className="max-h-[calc(100vh-400px)] overflow-y-scroll p-2 lg:h-auto lg:overflow-auto">

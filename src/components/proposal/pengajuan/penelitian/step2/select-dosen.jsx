@@ -4,10 +4,10 @@ import { Controller, useForm } from "react-hook-form";
 
 import { ButtonCancel } from "@/components/button/button-cancel";
 import { ButtonSave } from "@/components/button/button-save";
-import { useQueryAnggotaDosen } from "@/handlers/anggota/query-anggota-dosen";
-import { useAddAnggotaPenelitian } from "@/handlers/dosen/penelitian/anggota/add-anggota-penelitian";
+import { useQueryOptionsAnggotaDosen } from "@/handlers/anggota/query-anggota-dosen";
 import { SingleSelect } from "@/components/select/single-select";
-import { useQueryAnggotaDosenPenelitian } from "@/handlers/dosen/penelitian/anggota/query-anggota-dosen-penelitian";
+import { useAddAnggotaProposal } from "@/handlers/dosen/proposal/anggota/add-anggota";
+import { useQueryAnggotaDosenProposal } from "@/handlers/dosen/proposal/anggota/query-anggota-dosen";
 
 export const SelectDosen = ({ onClose }) => {
   const {
@@ -19,17 +19,19 @@ export const SelectDosen = ({ onClose }) => {
 
   const id = useId();
 
-  const { data, isLoading } = useQueryAnggotaDosen();
+  const { data, isLoading } = useQueryOptionsAnggotaDosen();
 
-  const { onSubmitAnggotaDosenPenelitian, isLoadingAnggotaDosenPenelitian } =
-    useAddAnggotaPenelitian(reset, onClose);
+  const { onSubmitAnggotaDosen, isLoadingAnggotaDosen } = useAddAnggotaProposal(
+    reset,
+    onClose,
+  );
 
-  const { listAnggotaDosenPenelitian } = useQueryAnggotaDosenPenelitian();
+  const { data: listAnggotaDosenPenelitian } = useQueryAnggotaDosenProposal();
 
   return (
     <form
       className="flex flex-col gap-6"
-      onSubmit={handleSubmit(onSubmitAnggotaDosenPenelitian)}
+      onSubmit={handleSubmit(onSubmitAnggotaDosen)}
     >
       <SingleSelect
         label={"Nama Dosen"}
@@ -53,8 +55,8 @@ export const SelectDosen = ({ onClose }) => {
         <ButtonCancel iconLeft onClick={onClose} />
         <ButtonSave
           iconLeft
-          disabled={isLoadingAnggotaDosenPenelitian}
-          isLoading={isLoadingAnggotaDosenPenelitian}
+          disabled={isLoadingAnggotaDosen}
+          isLoading={isLoadingAnggotaDosen}
         />
       </div>
     </form>

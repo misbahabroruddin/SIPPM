@@ -5,8 +5,8 @@ import { twMerge } from "tailwind-merge";
 import { Typography } from "@material-tailwind/react";
 import { useState } from "react";
 
-import { useDeleteRencanaAnggaranPenelitian } from "@/handlers/dosen/penelitian/rencana-anggaran/delete-rencana-anggaran";
 import { FormRencanaAnggaranPenelitian } from "./form-rencana-anggaran";
+import { useDeleteRencanaAnggaran } from "@/handlers/dosen/proposal/rencana-anggaran/delete-rencana-anggaran";
 
 export const TableRencanaAnggaran = ({ data }) => {
   const header = ["No", "Rincian", "Biaya", "Action"];
@@ -15,20 +15,23 @@ export const TableRencanaAnggaran = ({ data }) => {
   const [isOpenHasData, setisOpenHasData] = useState(false);
   const [editingDataId, setEditingDataId] = useState();
 
-  const { deleteRencanaAnggaranPenelitian, isLoadingSubmit } =
-    useDeleteRencanaAnggaranPenelitian();
+  const {
+    mutateAsync: deleteRencanaAnggaranPenelitian,
+    isPending: isLoadingSubmit,
+  } = useDeleteRencanaAnggaran();
   return (
-    <table className="w-full min-w-max table-auto overflow-hidden rounded-t-lg text-left">
-      <thead className="rounded-lg">
+    <table className="w-full min-w-max table-auto text-left">
+      <thead className="rounded-tr-lg">
         <tr>
           {header.map((head, index) => (
             <th
               key={head}
               className={twMerge(
                 "bg-primary p-4",
-                index === 0 && "hidden lg:table-cell",
+                index === 0 && "hidden rounded-tl-lg lg:table-cell",
                 index === 1 && "w-20 sm:w-fit",
                 index === 2 && "w-32 sm:w-fit  xl:w-[550px]",
+                index === header.length - 1 && "rounded-tr-lg",
               )}
             >
               <Typography
@@ -63,7 +66,7 @@ export const TableRencanaAnggaran = ({ data }) => {
                   </td>
                   <td className="w-20 break-all p-2 sm:w-fit lg:p-3 ">
                     <Typography color="blue-gray" className="font-normal">
-                      {row.rincian}
+                      {row.rincian_biaya.rincian}
                     </Typography>
                   </td>
                   <td className="w-32 break-all p-2 sm:w-fit lg:p-3 xl:w-[550px] ">

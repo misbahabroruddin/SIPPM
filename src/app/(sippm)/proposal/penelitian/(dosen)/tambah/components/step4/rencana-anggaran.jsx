@@ -6,13 +6,13 @@ import { ContainerContent } from "@/components/container-content";
 import { ButtonPrev } from "@/components/button/button-prev";
 import { ButtonNext } from "@/components/button/button-next";
 import { useStep } from "@/lib/hooks/useStep";
-import { useQueryRencanaAnggaranPenelitian } from "@/handlers/dosen/penelitian/rencana-anggaran/query-rencana-anggaran";
 import { useNextStep } from "@/handlers/step";
 import { TableRencanaAnggaran } from "@/components/proposal/pengajuan/penelitian/step4/table-rencana-anggaran";
+import { useQueryRencanaAnggaran } from "@/handlers/dosen/proposal/rencana-anggaran/query-rencana-anggaran";
 
 export const RencanaAnggaran = () => {
   const { currentStep, setCurrentStep } = useStep();
-  const { data, refetch } = useQueryRencanaAnggaranPenelitian();
+  const { data, refetch } = useQueryRencanaAnggaran();
   const { handleNextStep } = useNextStep(5);
 
   const handlePrevStep = () => {

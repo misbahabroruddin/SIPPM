@@ -6,21 +6,23 @@ import { ButtonPrev } from "@/components/button/button-prev";
 import { ButtonNext } from "@/components/button/button-next";
 import { ContainerContent } from "@/components/container-content";
 import { useStep } from "@/lib/hooks/useStep";
-import { useQueryAnggotaMahasiswaPenelitian } from "@/handlers/dosen/penelitian/anggota/query-anggota-mahasiswa-penelitian";
-import { useQueryAnggotaDosenPenelitian } from "@/handlers/dosen/penelitian/anggota/query-anggota-dosen-penelitian";
 import { useNextStep } from "@/handlers/step";
 import { ModalTambahAnggota } from "@/components/proposal/pengajuan/penelitian/step2/modal-tambah-anggota";
 import { TableAnggotaMahasiswa } from "@/components/proposal/pengajuan/penelitian/step2/table-anggota-mahasiswa";
 import { TableAnggotaDosen } from "@/components/proposal/pengajuan/penelitian/step2/table-anggota-dosen";
+import { useQueryAnggotaMahasiswaProposal } from "@/handlers/dosen/proposal/anggota/query-anggota-mahasiswa";
+import { useQueryAnggotaDosenProposal } from "@/handlers/dosen/proposal/anggota/query-anggota-dosen";
 
 export const Anggota = () => {
   const { currentStep, setCurrentStep } = useStep();
 
-  const { listAnggotaMahasiswaPenelitian, refetchAnggotaMahasiswaPenelitan } =
-    useQueryAnggotaMahasiswaPenelitian();
+  const {
+    data: listAnggotaMahasiswaPenelitian,
+    refetch: refetchAnggotaMahasiswaPenelitan,
+  } = useQueryAnggotaMahasiswaProposal();
 
-  const { listAnggotaDosenPenelitian, refetchAnggotaDosenPenelitan } =
-    useQueryAnggotaDosenPenelitian();
+  const { data: listAnggotaDosen, refetch: refetchAnggotaDosen } =
+    useQueryAnggotaDosenProposal();
 
   const { handleNextStep } = useNextStep(3);
 
@@ -31,7 +33,7 @@ export const Anggota = () => {
   };
 
   useEffect(() => {
-    refetchAnggotaDosenPenelitan();
+    refetchAnggotaDosen();
     refetchAnggotaMahasiswaPenelitan();
   }, [currentStep]);
 
@@ -43,7 +45,7 @@ export const Anggota = () => {
         </h1>
         <ModalTambahAnggota />
       </div>
-      <TableAnggotaDosen data={listAnggotaDosenPenelitian} />
+      <TableAnggotaDosen data={listAnggotaDosen} />
       <div className="flex items-center justify-between">
         <h1 className="text-base font-semibold text-primary lg:text-lg">
           Identitas Anggota Mahasiswa

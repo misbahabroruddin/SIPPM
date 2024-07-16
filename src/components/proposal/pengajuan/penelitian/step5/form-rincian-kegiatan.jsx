@@ -5,12 +5,12 @@ import ReactDatePicker from "react-datepicker";
 import { useEffect, useState } from "react";
 
 import { Input } from "@/components/input/input";
-import { useQueryDetailRincianKegiatanPenelitian } from "@/handlers/dosen/penelitian/rincian-kegiatan/query-detail-rincian-kegiatan-penelitian";
-import { useAddEditRincianKegiatanPenelitian } from "@/handlers/dosen/penelitian/rincian-kegiatan/add-edit-rincian-kegiatan-penelitian";
 import { SaveIcon } from "@/components/svgs/save";
 import { CloseIcon } from "@/components/svgs/close";
 import { DateIcon } from "@/components/svgs/date";
 import { Spinner } from "@material-tailwind/react";
+import { useAddEditRincianKegiatan } from "@/handlers/dosen/proposal/rincian-kegiatan/add-edit-rincian-kegiatan";
+import { useQueryDetailRincianKegiatan } from "@/handlers/dosen/proposal/rincian-kegiatan/query-detail-rincian-kegiatan";
 
 export const FormRincianKegiatan = ({ onClose, id }) => {
   const [startDate, setStartDate] = useState();
@@ -28,22 +28,15 @@ export const FormRincianKegiatan = ({ onClose, id }) => {
     formState: { errors },
   } = useForm();
 
-  const { detailRincianKegiatanPenelitian } =
-    useQueryDetailRincianKegiatanPenelitian(
-      id,
-      setStartDate,
-      setEndDate,
-      setValue,
-    );
+  const { data: detailRincianKegiatan } = useQueryDetailRincianKegiatan(
+    id,
+    setStartDate,
+    setEndDate,
+    setValue,
+  );
 
-  const { onSubmitRincianKegiatanPenelitian, isLoadingSubmit } =
-    useAddEditRincianKegiatanPenelitian(
-      id,
-      setStartDate,
-      setEndDate,
-      reset,
-      onClose,
-    );
+  const { mutateAsync: onSubmitRincianKegiatan, isPending: isLoadingSubmit } =
+    useAddEditRincianKegiatan(id, setStartDate, setEndDate, reset, onClose);
 
   const handleClose = () => {
     onClose();
@@ -61,18 +54,21 @@ export const FormRincianKegiatan = ({ onClose, id }) => {
   }, [isDisabled]);
 
   // set date range when get detail data
-  useEffect(() => {
-    const dateRangeArr = detailRincianKegiatanPenelitian?.waktu.split(",");
+  // useEffect(() => {
+  //   const dateRangeArr = [];
+  //   const dateStart = convertToTimestamp(detailRincianKegiatan?.tanggal_awal);
+  //   const dateEnd = convertToTimestamp(detailRincianKegiatan?.tanggal_akhir);
+  //   dateRangeArr.push(dateStart, dateEnd);
 
-    setValue("waktu", detailRincianKegiatanPenelitian?.waktu);
+  //   setValue("waktu", dateRangeArr);
 
-    if (dateRangeArr) {
-      const dateStart = new Date(dateRangeArr[0]);
-      const dateEnd = new Date(dateRangeArr[1]);
-      setStartDate(dateStart);
-      setEndDate(dateEnd);
-    }
-  }, [detailRincianKegiatanPenelitian]);
+  //   console.log(detailRincianKegiatan?.tanggal_awal);
+
+  //   if (dateRangeArr) {
+  //     setStartDate(dateStart);
+  //     setEndDate(dateEnd);
+  //   }
+  // }, [detailRincianKegiatan]);
 
   return (
     <tr className="border-1 border border-black-09">
@@ -87,7 +83,7 @@ export const FormRincianKegiatan = ({ onClose, id }) => {
           })}
           errors={errors.kegiatan}
           required
-          defaultValue={detailRincianKegiatanPenelitian?.kegiatan}
+          defaultValue={detailRincianKegiatan?.kegiatan}
           spanEmptyClass="hidden"
         />
       </td>
@@ -116,7 +112,7 @@ export const FormRincianKegiatan = ({ onClose, id }) => {
                 startDate={startDate}
                 endDate={endDate}
                 selectsRange
-                dateFormat="dd MMM yyyy"
+                dateFormat="dd MMMM yyyy"
                 wrapperClassName="w-full flex items-center outline outline-1 h-10 outline-secondary-200 rounded-md focus:outline-none focus:ring-1 focus:ring-primary focus:border-transparent placeholder:text-sm overflow-hidden"
                 className="ml-12 !p-0 focus:outline-none"
                 isClearable
@@ -142,7 +138,7 @@ export const FormRincianKegiatan = ({ onClose, id }) => {
             <SaveIcon
               width={26}
               height={26}
-              onClick={handleSubmit(onSubmitRincianKegiatanPenelitian)}
+              onClick={handleSubmit(onSubmitRincianKegiatan)}
             />
           )}
         </button>

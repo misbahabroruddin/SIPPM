@@ -5,8 +5,8 @@ import { Typography } from "@material-tailwind/react";
 import { useState } from "react";
 import { twMerge } from "tailwind-merge";
 
-import { useDeleteRencanaAnggaranPKM } from "@/handlers/dosen/pengabdian/rencana-anggaran/delete-rencana-anggaran-pkm";
 import { FormRencanaAnggaranPKM } from "./form-rencana-anggaran";
+import { useDeleteRencanaAnggaran } from "@/handlers/dosen/proposal/rencana-anggaran/delete-rencana-anggaran";
 
 export const TableRencanaAnggaran = ({ data }) => {
   const header = ["No", "Rincian", "Biaya", "Action"];
@@ -15,10 +15,11 @@ export const TableRencanaAnggaran = ({ data }) => {
   const [isOpenHasData, setisOpenHasData] = useState(false);
   const [editingDataId, setEditingDataId] = useState();
 
-  const { deleteRencanaAnggaranPKM, isPending } = useDeleteRencanaAnggaranPKM();
+  const { mutateAsync: deleteRencanaAnggaranPKM, isPending } =
+    useDeleteRencanaAnggaran();
 
   return (
-    <table className="w-full min-w-max table-auto overflow-hidden rounded-t-lg text-left">
+    <table className="w-full min-w-max table-auto rounded-t-lg text-left">
       <thead className="rounded-lg">
         <tr>
           {header.map((head, index) => (
@@ -64,7 +65,7 @@ export const TableRencanaAnggaran = ({ data }) => {
                   </td>
                   <td className="w-20 break-all p-2 sm:w-fit lg:p-3 ">
                     <Typography color="blue-gray" className="font-normal">
-                      {row.rincian}
+                      {row.rincian_biaya.rincian}
                     </Typography>
                   </td>
                   <td className="w-32 break-all p-2 sm:w-fit lg:p-3 xl:w-[550px] ">

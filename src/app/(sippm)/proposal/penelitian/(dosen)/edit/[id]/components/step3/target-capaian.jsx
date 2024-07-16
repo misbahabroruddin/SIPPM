@@ -8,11 +8,11 @@ import { ButtonPrev } from "@/components/button/button-prev";
 import { ButtonNext } from "@/components/button/button-next";
 import { ContainerContent } from "@/components/container-content";
 import { useQueryLuaranWajib } from "@/handlers/data-referensi/luaran-wajib/query-luaran-wajib";
-import { useQueryTargetCapaianPenelitian } from "@/handlers/dosen/penelitian/target-capaian/query-target-capaian-penelitian";
-import { useAddTargetCapaianPenelitian } from "@/handlers/dosen/penelitian/target-capaian/add-target-capaian-penelitian";
 import { useStep } from "@/lib/hooks/useStep";
 import { SingleSelect } from "@/components/select/single-select";
 import { styles } from "@/lib/utils/style-react-select";
+import { useQueryTargetCapaianProposal } from "@/handlers/dosen/proposal/target-capaian/query-target-capaian";
+import { useAddTargetCapaianProposal } from "@/handlers/dosen/proposal/target-capaian/add-target-capaian";
 
 export const TargetCapaian = () => {
   const { currentStep, setCurrentStep } = useStep();
@@ -31,10 +31,10 @@ export const TargetCapaian = () => {
     data,
     refetch,
     isLoading: isLoadingTargetCapaian,
-  } = useQueryTargetCapaianPenelitian(setValue);
+  } = useQueryTargetCapaianProposal(setValue);
 
-  const { addTargetCapaianPenelitian, isLoadingSubmit } =
-    useAddTargetCapaianPenelitian();
+  const { mutateAsync: addTargetCapaian, isLoading: isLoadingSubmit } =
+    useAddTargetCapaianProposal();
 
   useEffect(() => {
     const isEdit = JSON.parse(localStorage.getItem("isEdit"));
@@ -53,7 +53,7 @@ export const TargetCapaian = () => {
       <h1 className="text-base font-semibold text-primary lg:text-lg">
         Luaran dan Target Capaian
       </h1>
-      <form onSubmit={handleSubmit(addTargetCapaianPenelitian)}>
+      <form onSubmit={handleSubmit(addTargetCapaian)}>
         <div className="flex flex-wrap gap-2 lg:flex-nowrap lg:gap-4">
           <div className="max-w-1/2 flex w-full flex-col gap-4 ">
             <SingleSelect
@@ -61,13 +61,13 @@ export const TargetCapaian = () => {
               Controller={Controller}
               control={control}
               options={luaranWajibOptions}
-              placeholder={data?.data?.luaran_wajib.nama || "Luaran Wajib"}
+              placeholder={data?.data?.luaran_wajib?.nama || "Luaran Wajib"}
               name="luaran_wajib_id"
               errors={errors.luaran_wajib_id}
               rules={{ required: "Wajib diisi" }}
               id={id}
               isLoading={isLoading}
-              styles={styles(data?.data?.luaran_wajib.nama)}
+              styles={styles(data?.data?.luaran_wajib?.nama)}
             />
             <Input
               type="number"

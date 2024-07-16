@@ -11,11 +11,9 @@ import { EMAIL_REGEX } from "@/lib/constants/regex";
 import { useAddAnggotaPenelitian } from "@/handlers/dosen/penelitian/anggota/add-anggota-penelitian";
 import { useCreateAnggotaMahasiswa } from "@/handlers/anggota/create-anggota-mahasiswa";
 import { SingleSelect } from "@/components/select/single-select";
+import { useAddAnggotaProposal } from "@/handlers/dosen/proposal/anggota/add-anggota";
 
 export const FormTambahMahasiswa = ({ onClose }) => {
-  const { data: programStudiOptions, isLoading: isLoadingProgramStudiOptions } =
-    useQueryProgramStudi();
-
   const {
     register,
     reset,
@@ -23,12 +21,18 @@ export const FormTambahMahasiswa = ({ onClose }) => {
     control,
     formState: { errors },
   } = useForm();
+
   const id = useId();
-  const { handleAddNewAnggotaPenelitian } = useAddAnggotaPenelitian();
+
+  const { data: programStudiOptions, isLoading: isLoadingProgramStudiOptions } =
+    useQueryProgramStudi();
+
+  const { handleAddNewAnggota } = useAddAnggotaProposal();
+
   const { onCreateAnggotaMahasiswa, isPending } = useCreateAnggotaMahasiswa(
     reset,
     onClose,
-    handleAddNewAnggotaPenelitian,
+    handleAddNewAnggota,
   );
 
   return (

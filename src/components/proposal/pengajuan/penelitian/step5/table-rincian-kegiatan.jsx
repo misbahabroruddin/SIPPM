@@ -5,17 +5,19 @@ import { Typography } from "@material-tailwind/react";
 import { twMerge } from "tailwind-merge";
 import { useState } from "react";
 
-import { converDateRange } from "@/lib/utils/convertDate";
-import { useDeleteRincianKegiatanPenelitian } from "@/handlers/dosen/penelitian/rincian-kegiatan/delete-rincian-kegiatan";
+import { convertDate } from "@/lib/utils/convertDate";
 import { FormRincianKegiatan } from "./form-rincian-kegiatan";
+import { useDeleteRincianKegiatanProposal } from "@/handlers/dosen/proposal/rincian-kegiatan/delete-rincian-kegiatan";
 
 export const TableRincianKegiatan = ({ data }) => {
   const [isOpenEmptyData, setIsOpenEmptyData] = useState(false);
   const [isOpenHasData, setisOpenHasData] = useState(false);
   const [editingDataId, setEditingDataId] = useState();
 
-  const { deleteRincianKegiatanPenelitian, isLoadingDelete } =
-    useDeleteRincianKegiatanPenelitian();
+  const {
+    mutateAsync: deleteRincianKegiatanPenelitian,
+    isPending: isLoadingDelete,
+  } = useDeleteRincianKegiatanProposal();
   const header = ["No", "Kegiatan", "Rentang Waktu", "Action"];
 
   return (
@@ -69,7 +71,7 @@ export const TableRincianKegiatan = ({ data }) => {
                   </td>
                   <td className="w-32 break-all p-2 sm:w-fit lg:p-3 xl:w-[550px] ">
                     <Typography color="blue-gray" className="font-normal">
-                      {converDateRange(row.waktu)}
+                      {`${convertDate(row.tanggal_awal, " ")} - ${convertDate(row.tanggal_akhir, " ")}`}
                     </Typography>
                   </td>
                   <td className="mx-auto w-7 py-2 text-center lg:py-3">

@@ -5,11 +5,10 @@ import { Typography } from "@material-tailwind/react";
 import { twMerge } from "tailwind-merge";
 
 import { ModalDetailAnggotaDosen } from "./modal-detail-anggota-dosen";
-import { useDeleteAnggotaPenelitian } from "@/handlers/dosen/penelitian/anggota/delete-anggota-penelitian";
+import { useDeleteAnggotaProposal } from "@/handlers/dosen/proposal/anggota/delete-anggota";
 
 export const TableAnggotaDosen = ({ data }) => {
-  const { onDeleteAnggotaDosenPenelitian, isLoadingDosen } =
-    useDeleteAnggotaPenelitian();
+  const { onDeleteAnggotaDosen, isLoadingDosen } = useDeleteAnggotaProposal();
 
   const header = [
     "No",
@@ -50,7 +49,7 @@ export const TableAnggotaDosen = ({ data }) => {
         </tr>
       </thead>
       <tbody>
-        {data?.data.length ? (
+        {data?.data?.length ? (
           data?.data.map((row, index) => {
             return (
               <tr key={row.id} className="text-base even:bg-sky">
@@ -91,7 +90,7 @@ export const TableAnggotaDosen = ({ data }) => {
                   <ModalDetailAnggotaDosen id={row.id} />
                   <button
                     className="rounded-lg disabled:cursor-not-allowed disabled:opacity-50"
-                    onClick={() => onDeleteAnggotaDosenPenelitian(row.id)}
+                    onClick={() => onDeleteAnggotaDosen(row.id)}
                     disabled={isLoadingDosen}
                   >
                     <Image

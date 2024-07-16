@@ -4,10 +4,10 @@ import { Controller, useForm } from "react-hook-form";
 
 import { ButtonCancel } from "@/components/button/button-cancel";
 import { ButtonSave } from "@/components/button/button-save";
-import { useQueryAnggotaDosen } from "@/handlers/anggota/query-anggota-dosen";
-import { useAddAnggotaPKM } from "@/handlers/dosen/pengabdian/anggota/add-anggota-pkm";
+import { useQueryOptionsAnggotaDosen } from "@/handlers/anggota/query-anggota-dosen";
 import { SingleSelect } from "@/components/select/single-select";
-import { useQueryAnggotaDosenPKM } from "@/handlers/dosen/pengabdian/anggota/query-anggota-dosen-pkm";
+import { useAddAnggotaProposal } from "@/handlers/dosen/proposal/anggota/add-anggota";
+import { useQueryAnggotaDosenProposal } from "@/handlers/dosen/proposal/anggota/query-anggota-dosen";
 
 export const SelectDosen = ({ onClose }) => {
   const {
@@ -18,15 +18,17 @@ export const SelectDosen = ({ onClose }) => {
   } = useForm();
   const id = useId();
 
-  const { data, isLoading } = useQueryAnggotaDosen();
-  const { onSubmitAnggotaDosenPKM, isLoadingAnggotaDosenPKM } =
-    useAddAnggotaPKM(reset, onClose);
-  const { listAnggotaDosenPKM } = useQueryAnggotaDosenPKM();
+  const { data, isLoading } = useQueryOptionsAnggotaDosen();
+
+  const { onSubmitAnggotaDosen, isLoadingAnggotaDosenPKM } =
+    useAddAnggotaProposal(reset, onClose);
+
+  const { data: listAnggotaDosenPKM } = useQueryAnggotaDosenProposal();
 
   return (
     <form
       className="flex flex-col gap-6"
-      onSubmit={handleSubmit(onSubmitAnggotaDosenPKM)}
+      onSubmit={handleSubmit(onSubmitAnggotaDosen)}
     >
       <SingleSelect
         label={"Nama Dosen"}

@@ -6,11 +6,11 @@ import { Spinner } from "@material-tailwind/react";
 import { useEffect, useState } from "react";
 
 import { Input } from "@/components/input/input";
-import { useQueryDetailRincianKegiatanPKM } from "@/handlers/dosen/pengabdian/rincian-kegiatan/query-detail-rincian-kegiatan-pkm";
-import { useAddEditRincianKegiatanPKM } from "@/handlers/dosen/pengabdian/rincian-kegiatan/add-edit-rincian-kegiatan-pkm";
 import { DateIcon } from "@/components/svgs/date";
 import { SaveIcon } from "@/components/svgs/save";
 import { CloseIcon } from "@/components/svgs/close";
+import { useAddEditRincianKegiatan } from "@/handlers/dosen/proposal/rincian-kegiatan/add-edit-rincian-kegiatan";
+import { useQueryDetailRincianKegiatan } from "@/handlers/dosen/proposal/rincian-kegiatan/query-detail-rincian-kegiatan";
 
 export const FormRincianKegiatanPKM = ({ onClose, id }) => {
   const [startDate, setStartDate] = useState();
@@ -28,20 +28,15 @@ export const FormRincianKegiatanPKM = ({ onClose, id }) => {
     formState: { errors },
   } = useForm();
 
-  const { data } = useQueryDetailRincianKegiatanPKM(
+  const { data } = useQueryDetailRincianKegiatan(
     setValue,
     setStartDate,
     setEndDate,
     id,
   );
 
-  const { addEditRincianKegiatan, isPending } = useAddEditRincianKegiatanPKM(
-    setStartDate,
-    setEndDate,
-    id,
-    reset,
-    onClose,
-  );
+  const { mutateAsync: addEditRincianKegiatan, isPending } =
+    useAddEditRincianKegiatan(id, setStartDate, setEndDate, reset, onClose);
 
   const handleClose = () => {
     onClose();
@@ -58,18 +53,18 @@ export const FormRincianKegiatanPKM = ({ onClose, id }) => {
     }
   }, [isDisabled]);
 
-  useEffect(() => {
-    const dateRangeArr = data?.waktu.split(",");
+  // useEffect(() => {
+  //   const dateRangeArr = data?.waktu.split(",");
 
-    setValue("waktu", data?.waktu);
+  //   setValue("waktu", data?.waktu);
 
-    if (dateRangeArr) {
-      const dateStart = new Date(dateRangeArr[0]);
-      const dateEnd = new Date(dateRangeArr[1]);
-      setStartDate(dateStart);
-      setEndDate(dateEnd);
-    }
-  }, [data]);
+  //   if (dateRangeArr) {
+  //     const dateStart = new Date(dateRangeArr[0]);
+  //     const dateEnd = new Date(dateRangeArr[1]);
+  //     setStartDate(dateStart);
+  //     setEndDate(dateEnd);
+  //   }
+  // }, [data]);
 
   return (
     <tr className="border-1 border border-black-09">
