@@ -12,7 +12,7 @@ export const useAdministratorDeleteAnggota = () => {
 
   const handleDeleteAnggota = async (id) => {
     try {
-      const { data } = await axios.delete(`/anggotas/${id}`);
+      const { data } = await axios.delete(`/anggotas/delete/${id}`);
       queryClient.invalidateQueries({
         queryKey: ["anggotaDosenAdministrator"],
       });
