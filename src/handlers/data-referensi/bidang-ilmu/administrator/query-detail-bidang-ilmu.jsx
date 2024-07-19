@@ -12,7 +12,9 @@ export const useQueryGetDetailBidangIlmu = (id) => {
     queryKey: ["bidang-ilmu", id],
     queryFn: async () => {
       try {
-        const { data } = await axios.get(`/data-referensi/bidang-ilmus/${id}`);
+        const { data } = await axios.get(
+          `/data-referensi/bidang-ilmus/detail/${id}`,
+        );
         return data.data;
       } catch (error) {
         if (error.response.status === 401) {

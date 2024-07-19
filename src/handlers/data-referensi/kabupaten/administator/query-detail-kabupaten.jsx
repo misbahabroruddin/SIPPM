@@ -12,7 +12,9 @@ export const useQueryGetDetailKabupaten = (id) => {
     queryKey: ["kabupaten", id],
     queryFn: async () => {
       try {
-        const { data } = await axios.get(`/data-referensi/kabupatens/${id}`);
+        const { data } = await axios.get(
+          `/data-referensi/kabupatens/detail/${id}`,
+        );
         return data.data;
       } catch (error) {
         if (error.response.status === 401) {

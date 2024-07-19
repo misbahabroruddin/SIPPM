@@ -13,7 +13,7 @@ export const useQueryGetDetailJabatanFungsional = (id) => {
     queryFn: async () => {
       try {
         const { data } = await axios.get(
-          `/data-referensi/jabatan-fungsionals/${id}`,
+          `/data-referensi/jabatan-fungsionals/detail/${id}`,
         );
         return data.data;
       } catch (error) {

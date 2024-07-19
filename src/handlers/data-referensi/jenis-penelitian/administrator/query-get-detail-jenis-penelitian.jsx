@@ -14,7 +14,7 @@ export const useQueryGetDetailJenisPenelitian = (id) => {
     queryFn: async () => {
       try {
         const { data } = await axios.get(
-          `/data-referensi/jenis-penelitians/${id}`,
+          `/data-referensi/jenis-penelitians/detail/${id}`,
         );
         return data.data;
       } catch (error) {
