@@ -37,7 +37,7 @@ export const useColumnTableKriteriaPenilaian = () => {
       cell: (info) => (
         <ul style={{ listStyleType: "lower-alpha" }}>
           {info.getValue().map((c) => (
-            <li>{c.nama}</li>
+            <li key={c.id}>{c.nama}</li>
           ))}
         </ul>
       ),
