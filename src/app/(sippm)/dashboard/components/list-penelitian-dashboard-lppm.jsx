@@ -19,13 +19,11 @@ export const ListPenelitianDashboardLPPM = ({
   totalPenelitianDisetujui,
   totalPenelitianDitolak,
   totalPenelitianPending,
-  totalProposal,
 }) => {
   if (isLoading) return <SkeletonListingProposal />;
   return (
     <div className="flex flex-col gap-4">
       <div className="flex flex-wrap gap-2 lg:flex-nowrap">
-        <CardDashboard jumlah={totalProposal} status="Total" />
         <CardDashboard jumlah={totalPenelitianPending} status="Pending" />
         <CardDashboard jumlah={totalPenelitianDisetujui} />
         <CardDashboard status="Ditolak" jumlah={totalPenelitianDitolak} />
@@ -47,7 +45,7 @@ export const ListPenelitianDashboardLPPM = ({
           <EmptyState />
         )}
       </div>
-      {penelitian?.data?.length ? (
+      {penelitian?.data?.last_page > 1 ? (
         <Pagination
           perPage={penelitian?.per_page}
           onPageChange={handlePageChange}

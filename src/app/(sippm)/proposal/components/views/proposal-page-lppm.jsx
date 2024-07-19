@@ -46,13 +46,11 @@ export default function ProposalPageLPPM() {
   const { data: pengabdian, isLoading: isLoadingPengabdian } =
     useQueryGetPengabdianLPPM(searchPengabdian, pagePengabdian);
 
-  const { data: totalProposalPenelitian } =
+  const { data: dataStatistikPenelitianLppm } =
     useQueryInfoProposalPenelitianLPPM();
-  const { data: totalProposalPengabdian } =
-    useQueryInfoProposalPengabdianLPPM();
 
-  console.log(totalProposalPenelitian);
-  console.log(totalProposalPengabdian);
+  const { data: dataStatistikPengabdianLppm } =
+    useQueryInfoProposalPengabdianLPPM();
 
   return (
     <ContainerPage>
@@ -82,16 +80,16 @@ export default function ProposalPageLPPM() {
             currentTab={currentTab}
             tabActive={tabActive}
             jumlahPenelitianDisetujui={
-              totalProposalPenelitian?.data?.status_lppm?.diterima
+              dataStatistikPenelitianLppm?.data?.status_lppm?.Diterima
             }
             jumlahPenelitianDitolak={
-              totalProposalPenelitian?.data?.status_lppm?.ditolak
+              dataStatistikPenelitianLppm?.data?.status_lppm?.Ditolak
             }
             jumlahPenelitianRevisi={
-              totalProposalPenelitian?.data?.status_lppm?.revisi
+              dataStatistikPenelitianLppm?.data?.status_lppm?.Revisi
             }
             jumlahPenelitianPending={
-              totalProposalPenelitian?.data?.status_lppm?.pending
+              dataStatistikPenelitianLppm?.data?.status_lppm?.Pending
             }
             handlePageChange={handlePageChangePenelitian}
           />
@@ -102,16 +100,16 @@ export default function ProposalPageLPPM() {
             currentTab={currentTab}
             tabActive={tabActive}
             jumlahPengabdianDisetujui={
-              totalProposalPengabdian?.data?.status_lppm?.diterima
+              dataStatistikPengabdianLppm?.data?.status_lppm?.Diterima
             }
             jumlahPengabdianRevisi={
-              totalProposalPengabdian?.data?.status_lppm?.revisi
+              dataStatistikPengabdianLppm?.data?.status_lppm?.Revisi
             }
             jumlahPengabdianDitolak={
-              totalProposalPengabdian?.data?.status_lppm?.ditolak
+              dataStatistikPengabdianLppm?.data?.status_lppm?.Ditolak
             }
             jumlahPengabdianPending={
-              totalProposalPengabdian?.data?.status_lppm?.pending
+              dataStatistikPengabdianLppm?.data?.status_lppm?.Pending
             }
             handlePagePengabdianChange={handlePageChangePengabdian}
           />

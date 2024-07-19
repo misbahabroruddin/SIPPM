@@ -26,7 +26,7 @@ export const useAdministratorUpdateAnggotaDosen = (id) => {
         jenis_anggota: "Dosen",
       };
 
-      const { data } = await axios.put(`/anggotas/${id}`, formData, {
+      const { data } = await axios.put(`/anggotas/update/${id}`, formData, {
         headers: {
           "Content-Type": "application/x-www-form-urlencoded",
         },

@@ -4,7 +4,6 @@ import { PieChart } from "@/components/charts/pie-chart";
 
 export const PieChartReviewer = ({
   textHeader,
-  totalProposal = 0,
   proposalPending = 0,
   proposalDitolak = 0,
   proposalDisetujui = 0,
@@ -40,7 +39,6 @@ export const PieChartReviewer = ({
   return (
     <div className="flex flex-col gap-2 rounded-lg border border-gray1 px-6 py-4 shadow">
       <h2 className="text-lg font-[500]">{textHeader}</h2>
-      <p className="text-2xl font-[500] text-blue-primary">{totalProposal}</p>
       <PieChart data={data} />
     </div>
   );

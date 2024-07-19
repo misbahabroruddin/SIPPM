@@ -19,11 +19,12 @@ export const useQueryDetailRencanaAnggaran = (setValue, anggaranId) => {
       const { data } = await axios.get(
         `/proposal/${
           penelitianId || pengabdianId || id
-        }/rencana-anggarans/${anggaranId}`,
+        }/rencana-anggarans/detail/${anggaranId}`,
       );
 
       const result = data.data;
-      setValue("rincian", result.rincian);
+      console.log(result, "<<<<<");
+      setValue("rincian_biaya_id", result.rincian_biaya_id);
       setValue("biaya", result.biaya);
 
       return result;

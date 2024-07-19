@@ -1,7 +1,7 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { useQueryDetailPenelitian } from "@/handlers/lppm/penelitian/query-get-detail-penelitian";
 import { useQueryGetRiwayatVerikasiLPPM } from "@/handlers/lppm/riwayat/query-get-verifikasi-proposal-lppm";
@@ -18,6 +18,12 @@ import { DetailBerkas } from "@/components/proposal/track/detail-berkas";
 import { Timeline } from "@/components/timeline";
 import { TrackRiwayatLPPM } from "@/components/riwayat/lppm/riwayat-lppm";
 import { ContainerPage } from "@/components/container-page";
+import { useQueryAnggotaDosenProposal } from "@/handlers/proposal/anggota/query-anggota-dosen";
+import { useQueryTargetCapaianProposal } from "@/handlers/proposal/target-capaian/query-target-capaian";
+import { useQueryRencanaAnggaran } from "@/handlers/proposal/rencana-anggaran/query-rencana-anggaran";
+import { useQueryRincianKegiatanProposal } from "@/handlers/proposal/rincian-kegiatan/query-rincian-kegiatan";
+import { useQueryGetDokumenPendukungProposal } from "@/handlers/proposal/dokumen-pendukung/query-get-dokumen-pendukung";
+import { useQueryGetFile } from "@/handlers/file-storage/query-get-file";
 
 export default function DetailPenelitianLPPMPage() {
   const [tabActive] = useState("dokumen");
@@ -29,6 +35,30 @@ export default function DetailPenelitianLPPMPage() {
   const { data } = useQueryDetailPenelitian();
   const { data: dataTrackDosenLPPM, isLoading: isLoadingTrackDosenLPPM } =
     useQueryGetRiwayatVerikasiLPPM();
+
+  console.log(data, "<<<<");
+
+  const { data: dataAnggotaProposal } = useQueryAnggotaDosenProposal();
+
+  const { data: dataTargetCapaianProposal } = useQueryTargetCapaianProposal();
+
+  const { data: dataRencanaAnggaran } = useQueryRencanaAnggaran();
+
+  const { data: dataRincianKegiatan } = useQueryRincianKegiatanProposal();
+
+  const { data: dataDokumenPendukung } = useQueryGetDokumenPendukungProposal();
+
+  // const [pdfString, setPdfString] = useState("");
+  // const { fetchFile } = useQueryGetFile();
+
+  // useEffect(() => {
+  //   const getFile = async () => {
+  //     const res = await fetchFile(dataDokumenPendukung?.data[0]?.path);
+  //     console.log(res);
+  //     setPdfString(res);
+  //   };
+  //   getFile();
+  // }, [dataDokumenPendukung]);
 
   return (
     <ContainerPage>
@@ -44,15 +74,24 @@ export default function DetailPenelitianLPPMPage() {
                 {(innerTab === "Identitas Usulan" || !innerTab) && (
                   <DetailIdentitasUsulanPenelitian data={data} />
                 )}
-                {innerTab === "anggota" && <DetailAnggota data={data} />}
+                {innerTab === "anggota" && (
+                  <DetailAnggota data={dataAnggotaProposal} />
+                )}
                 {innerTab === "Luaran dan Target Capaian" && (
-                  <DetailTargetCapaian data={data} />
+                  <DetailTargetCapaian data={dataTargetCapaianProposal} />
                 )}
                 {innerTab === "Rencana Anggaran" && (
-                  <DetailRencanaAnggaran data={data} />
+                  <DetailRencanaAnggaran data={dataRencanaAnggaran} />
                 )}
-                {innerTab === "Jadwal" && <DetailRincianKegiatan data={data} />}
-                {innerTab === "Berkas" && <DetailBerkas data={data} />}
+                {innerTab === "Jadwal" && (
+                  <DetailRincianKegiatan data={dataRincianKegiatan} />
+                )}
+                {innerTab === "Berkas" && (
+                  <DetailBerkas
+                    data={dataDokumenPendukung}
+                    statusLppm={data?.data?.status_lppm}
+                  />
+                )}
               </div>
             </>
           ) : (

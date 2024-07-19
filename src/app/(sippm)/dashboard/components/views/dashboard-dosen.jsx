@@ -42,23 +42,25 @@ export default function DashboardDosen() {
   const { data: infoPengabdian } =
     useQueryInfoProposalPengabdianDashboardDosen();
 
+  console.log(infoPengabdian, "<<<<<");
+
   const proposalPengabdianDitolak =
-    infoPengabdian?.data?.status_reviewer?.ditolak;
+    infoPengabdian?.data?.status_reviewer?.Ditolak;
 
   const proposalPengabdianDisetujui =
-    infoPengabdian?.data?.status_reviewer?.diterima;
+    infoPengabdian?.data?.status_reviewer?.Diterima;
 
   const proposalPengabdianRevisi =
-    infoPengabdian?.data?.status_reviewer?.revisi;
+    infoPengabdian?.data?.status_reviewer?.Revisi;
 
   const proposalPenelitianDitolak =
-    infoPenelitian?.data?.status_reviewer?.ditolak;
+    infoPenelitian?.data?.status_reviewer?.Ditolak;
 
   const proposalPenelitianDisetujui =
-    infoPenelitian?.data?.status_reviewer?.diterima;
+    infoPenelitian?.data?.status_reviewer?.Diterima;
 
   const proposalPenelitianRevisi =
-    infoPenelitian?.data?.status_reviewer?.revisi;
+    infoPenelitian?.data?.status_reviewer?.Revisi;
 
   return (
     <div className="flex flex-col gap-4">
@@ -69,7 +71,6 @@ export default function DashboardDosen() {
           <>
             <PieChartDosen
               textHeader={"Proposal Penelitian"}
-              totalProposal={infoPenelitian?.data?.total}
               proposalDisetujui={proposalPenelitianDisetujui}
               proposalDitolak={proposalPenelitianDitolak}
               proposalRevisi={proposalPenelitianRevisi}
@@ -90,7 +91,7 @@ export default function DashboardDosen() {
         </div>
       </div> */}
 
-      {currentTab === "penelitian" || !currentTab ? (
+      {/* {currentTab === "penelitian" || !currentTab ? (
         <ListPenelitian
           penelitian={penelitian}
           currentTab={currentTab}
@@ -106,7 +107,7 @@ export default function DashboardDosen() {
           isLoading={isLoadingPengabdian}
           handlePageChange={handlePageChangePengabdian}
         />
-      )}
+      )} */}
     </div>
   );
 }

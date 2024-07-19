@@ -10,10 +10,10 @@ import { SearchInput } from "@/components/input/search-input";
 import { useDebouncedCallback } from "use-debounce";
 import { ListPengabdianProposalReviewer } from "../list-pengabdian-reviewer";
 import { useQueryGetPengabdianReviewer } from "@/handlers/reviewer/pengabdian/query-get-listing-pengabdian";
-import { useQueryGetPenelitianReviewer } from "@/handlers/reviewer/penelitian/query-get-listing-penelitian";
 import { ListPenelitianProposalReviewer } from "../list-penelitian-reviewer";
 import { useQueryInfoProposalPenelitianReviewer } from "@/handlers/reviewer/penelitian/query-get-info-proposal-penelitian";
 import { useQueryInfoProposalPengabdianReviewer } from "@/handlers/reviewer/pengabdian/query-get-info-proposal-pengabdian";
+import { useQueryGetPenelitianReviewer } from "@/handlers/reviewer/penelitian/query-get-listing-penelitian-reviewer";
 
 export default function ProposalPageReviewer() {
   const [tabActive] = useState("penelitian");

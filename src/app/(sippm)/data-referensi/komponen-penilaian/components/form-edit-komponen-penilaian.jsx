@@ -9,6 +9,7 @@ import { Input } from "@/components/input/input";
 import { useQueryEditKomponenPenilaian } from "@/handlers/data-referensi/komponen-penilaian/administrator/edit-komponen-penilaian";
 import { useQueryKriteriaPenilaian } from "@/handlers/data-referensi/kriteria-penilaian/query-kriteria-penelitian";
 import { SingleSelect } from "@/components/select/single-select";
+import { styles } from "@/lib/utils/style-react-select";
 
 export const FormEditKomponenPenilaian = ({ id, setOpen, data, isLoading }) => {
   const {
@@ -40,7 +41,6 @@ export const FormEditKomponenPenilaian = ({ id, setOpen, data, isLoading }) => {
   useEffect(() => {
     setValue("kriteria_penilaian_id", data?.kriteria_penilaian_id);
     setValue("nama", data?.nama);
-    console.log(data, "<<<<<");
   }, [data]);
 
   return (
@@ -61,6 +61,7 @@ export const FormEditKomponenPenilaian = ({ id, setOpen, data, isLoading }) => {
         id={idSelect}
         isLoading={isLoadingKriteriaPenilaian}
         maxMenuHeight={180}
+        styles={styles(selectedKriteriaPenilaian?.value)}
       />
       <Input
         label="Nama"

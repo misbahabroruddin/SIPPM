@@ -59,7 +59,6 @@ export const Anggota = () => {
         />
         <ButtonNext
           onClick={handleNextStep}
-          disabled={listAnggotaDosenPenelitian?.data?.length === 0}
           className="w-[120px] lg:w-[200px]"
         />
       </div>

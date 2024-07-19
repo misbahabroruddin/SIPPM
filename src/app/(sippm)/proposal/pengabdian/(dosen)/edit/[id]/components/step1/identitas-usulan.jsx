@@ -31,7 +31,7 @@ export const IdentitasUsulanPKM = () => {
   const {
     data: identitasUsulan,
     isLoading: isLoadingIdentitasUsulan,
-    refetch: refetch,
+    refetch,
   } = useQueryIdentitasUsulanOnUpdate(setValue);
 
   const { onEditIdentitasUsulan, isLoadingEdit } =

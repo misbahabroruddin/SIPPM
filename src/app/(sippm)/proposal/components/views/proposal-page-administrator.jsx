@@ -17,6 +17,8 @@ import { useQueryGetAllPenelitian } from "@/handlers/dosen/penelitian/query-get-
 import { useQueryGetAllPengabdian } from "@/handlers/dosen/pengabdian/query-get-all-pengabdian";
 import { useStep } from "@/lib/hooks/useStep";
 import { ListPengabdianAdministrator } from "../list-pengabdian-administrator";
+import { useQueryGetPenelitianAdmin } from "@/handlers/admin-sippm/proposal/query-get-penelitian";
+import { useQueryGetPengabdianAdmin } from "@/handlers/admin-sippm/proposal/query-get-pengabdian";
 
 export default function ProposalPageAdministrator() {
   const [tabActive] = useState("penelitian");
@@ -28,120 +30,12 @@ export default function ProposalPageAdministrator() {
   const currentTab = tabParams.get("tab");
   const { setCurrentStep } = useStep();
 
-  const penelitian = {
-    response: {
-      code: 200,
-      status: "OK",
-    },
-    error: false,
-    data: {
-      current_page: 1,
-      data: [
-        {
-          id: "d2dd471f-3501-48af-9dd0-f285618e4226",
-          jenis_penelitian_id: "484ba855-4664-4c7e-9433-79b7d5a3fe35",
-          judul: "tes",
-          rumpun_ilmu_id: "bc4057b5-60b0-44f9-a07f-cecf834f2aae",
-          bidang_fokus: "fokus",
-          tahun_usulan: "2023",
-          jangka_waktu: "1 tahun",
-          ringkasan: "ringkasan",
-          file_proposal: {
-            nama: "Kyle_G_redacted.pdf",
-            path: "proposal/penelitian/proposal/k5JZXWVnD6DrUIMUJJI5odvfqKJxUDFV96DxRrv4.pdf",
-            url: "https://sippm-backend.dev-unsia.id/storage/proposal/penelitian/proposal/k5JZXWVnD6DrUIMUJJI5odvfqKJxUDFV96DxRrv4.pdf",
-          },
-          file_pernyataan_mitra: null,
-          file_cv: {
-            nama: "Kyle_G_redacted.pdf",
-            path: "proposal/penelitian/cv/pxggA50L5H7esVnyl0uz9NuBv7BZMkoHGKTlZu90.pdf",
-            url: "https://sippm-backend.dev-unsia.id/storage/proposal/penelitian/cv/pxggA50L5H7esVnyl0uz9NuBv7BZMkoHGKTlZu90.pdf",
-          },
-          file_laporan_hasil: null,
-          status: "Terkirim",
-          status_lppm: "Diterima",
-          status_reviewer: "Diterima",
-          step: 6,
-          user_id: "1435ce01-aef7-4b2c-b0cb-ccb5ff669c21",
-          deleted_at: null,
-          created_at: "2024-06-12 13:44:29",
-          updated_at: "2024-06-13 09:27:34",
-          jenis_penelitian: {
-            id: "484ba855-4664-4c7e-9433-79b7d5a3fe35",
-            nama: "Kerjasama",
-            keterangan: null,
-            created_at: "2024-03-14 11:54:10",
-            updated_at: "2024-03-14 11:54:10",
-          },
-          rumpun_ilmu: {
-            id: "bc4057b5-60b0-44f9-a07f-cecf834f2aae",
-            nama: "AGAMA DAN FILSAFAT",
-            keterangan: null,
-            created_at: "2024-03-14 11:54:15",
-            updated_at: "2024-03-14 11:54:15",
-          },
-          user: {
-            id: "1435ce01-aef7-4b2c-b0cb-ccb5ff669c21",
-            name: "dosen",
-            username: "dosen",
-            email: "dosen@gmail.com",
-            email_verified_at: null,
-            avatar:
-              "https://ui-avatars.com/api/?background=0D8ABC&color=fff&name=dosen",
-            biodata_id: null,
-            biodata: null,
-            roles: [
-              {
-                id: "1d082bfb-bd37-4786-91e5-461bb84fbe1f",
-                name: "dosen",
-                guard_name: "api",
-                level: 2,
-                description: "Dosen",
-              },
-            ],
-          },
-          dokumen_sk: null,
-          dokumen_kontrak: null,
-        },
-      ],
-      first_page_url:
-        "https://sippm-backend.dev-unsia.id/api/proposals/dosens/penelitians?page=1",
-      from: 1,
-      last_page: 1,
-      last_page_url:
-        "https://sippm-backend.dev-unsia.id/api/proposals/dosens/penelitians?page=1",
-      links: [
-        {
-          url: null,
-          label: "&laquo; Sebelumnya",
-          active: false,
-        },
-        {
-          url: "https://sippm-backend.dev-unsia.id/api/proposals/dosens/penelitians?page=1",
-          label: "1",
-          active: true,
-        },
-        {
-          url: null,
-          label: "Berikutnya &raquo;",
-          active: false,
-        },
-      ],
-      next_page_url: null,
-      path: "https://sippm-backend.dev-unsia.id/api/proposals/dosens/penelitians",
-      per_page: 10,
-      prev_page_url: null,
-      to: 1,
-      total: 1,
-    },
+  const handlePageChangePenelitian = (event) => {
+    setPagePenelitian(event.selected + 1);
   };
-
-  // const handlePageChangePenelitian = (event) => {
-  //   setPagePenelitian(event.selected + 1);
-  // };
-  // const handlePageChangePengabdian = (event) => {
-  //   setPagePengabdian(event.selected + 1);
-  // };
+  const handlePageChangePengabdian = (event) => {
+    setPagePengabdian(event.selected + 1);
+  };
 
   const debounced = useDebouncedCallback((value) => {
     setSearchPenelitian(value);
@@ -153,10 +47,17 @@ export default function ProposalPageAdministrator() {
     setPagePengabdian(1);
   }, 1000);
 
-  // const { data: penelitian, isLoading: isLoadingPenelitian } =
-  //   useQueryGetAllPenelitian(searchPenelitian, pagePenelitian);
-  // const { data: pengabdian, isLoading: isLoadingPengabdian } =
-  //   useQueryGetAllPengabdian(searchPengabdian, pagePengabdian);
+  const {
+    data: penelitian,
+    isLoading: isLoadingPenelitian,
+    refetch: refecthPenelitian,
+  } = useQueryGetPenelitianAdmin(searchPenelitian, pagePenelitian);
+
+  const {
+    data: pengabdian,
+    isLoading: isLoadingPengabdian,
+    refetch: refecthPengabdian,
+  } = useQueryGetPengabdianAdmin(searchPengabdian, pagePengabdian);
 
   // const pengabdianDraft = pengabdian?.data.filter(
   //   (proposal) => proposal.status === "Draft",
@@ -210,21 +111,21 @@ export default function ProposalPageAdministrator() {
         {currentTab === "penelitian" || !currentTab ? (
           <ListPenelitianAdministrator
             penelitian={penelitian}
-            // currentTab={currentTab}
-            // tabActive={tabActive}
-            // isLoading={isLoadingPenelitian}
-            // handlePageChange={handlePageChangePenelitian}
+            currentTab={currentTab}
+            tabActive={tabActive}
+            isLoading={isLoadingPenelitian}
+            handlePageChange={handlePageChangePenelitian}
+            refetch={refecthPenelitian}
           />
         ) : (
-          // <></>
           <ListPengabdianAdministrator
-            pengabdian={penelitian}
-            // currentTab={currentTab}
-            // tabActive={tabActive}
-            // isLoading={isLoadingPengabdian}
-            // handlePageChange={handlePageChangePengabdian}
+            pengabdian={pengabdian}
+            currentTab={currentTab}
+            tabActive={tabActive}
+            isLoading={isLoadingPengabdian}
+            handlePageChange={handlePageChangePengabdian}
+            refetch={refecthPengabdian}
           />
-          // <></>
         )}
       </div>
     </ContainerPage>

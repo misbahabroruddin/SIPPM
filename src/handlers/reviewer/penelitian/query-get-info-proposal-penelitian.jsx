@@ -13,7 +13,7 @@ export const useQueryInfoProposalPenelitianReviewer = () => {
     queryFn: async () => {
       try {
         const { data } = await axios.get(
-          "/proposals/reviewers/penelitians/info",
+          "/proposal/penelitians/statistik/role/reviewer",
         );
 
         return data;

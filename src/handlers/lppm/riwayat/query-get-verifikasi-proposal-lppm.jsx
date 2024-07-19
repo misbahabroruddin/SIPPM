@@ -10,13 +10,11 @@ export const useQueryGetRiwayatVerikasiLPPM = () => {
   const axios = useAxios();
   const { id } = useParams();
 
-  const { data, status, isLoading, refetch } = useQuery({
+  const query = useQuery({
     queryKey: ["verfikasiLPPM", id],
     queryFn: async () => {
       try {
-        const { data } = await axios.get(
-          `/proposals/lppms/proposals/${id}/verifikasis`,
-        );
+        const { data } = await axios.get(`/proposal/${id}/verifikasi-lppms`);
         return data.data;
       } catch (error) {
         if (error.response.status === 401) {
@@ -27,12 +25,9 @@ export const useQueryGetRiwayatVerikasiLPPM = () => {
     },
   });
 
-  if (status === "error") return notFound();
+  if (query.status === "error") return notFound();
 
   return {
-    data,
-    isLoading,
-    status,
-    refetch,
+    ...query,
   };
 };

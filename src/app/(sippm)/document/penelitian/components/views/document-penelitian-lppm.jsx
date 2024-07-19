@@ -6,8 +6,8 @@ import { useSearchParams } from "next/navigation";
 import { Tabs } from "../tabs";
 import { ListPenelitianKontrakLppm } from "../lppm/list-document-kontrak-lppm";
 import { ListPenelitianSKLppm } from "../lppm/list-document-sk-lppm";
-import { useQueryGetListSKPenelitianLPPM } from "@/handlers/lppm/dokumen/penelitian/sk/query-get-sk-penelitian";
-import { useQueryGetListKontrakPenelitianLPPM } from "@/handlers/lppm/dokumen/penelitian/kontrak/query-get-kontrak-penelitian";
+import { useQueryGetListKontrakLppm } from "@/handlers/dokumen/kontrak/query-get-kontrak-lppm";
+import { useQueryGetListSKLppm } from "@/handlers/dokumen/sk/query-get-sk-lppm";
 
 export default function DocumentPenelitianLppm() {
   const [tabActive] = useState("SK");
@@ -15,11 +15,10 @@ export default function DocumentPenelitianLppm() {
   const currentTab = tabParams.get("tab");
   const id = useId();
 
-  const { data: dataSK, isLoading: isLoadingSK } =
-    useQueryGetListSKPenelitianLPPM();
+  const { data: dataSK, isLoading: isLoadingSK } = useQueryGetListSKLppm();
 
   const { data: dataKontrak, isLoading: isLoadingKontrak } =
-    useQueryGetListKontrakPenelitianLPPM();
+    useQueryGetListKontrakLppm();
 
   return (
     <div className="flex flex-col gap-4">

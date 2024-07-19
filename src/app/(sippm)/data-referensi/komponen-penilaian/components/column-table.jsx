@@ -21,10 +21,10 @@ export const useColumnTableKomponenPenilaian = () => {
       },
       maxSize: 1,
     }),
-    columnHelper.accessor("kriteria_penilaian_id", {
-      id: "kriteria_penilaian_id",
+    columnHelper.accessor("kriteria_penilaian.nama", {
+      id: "kriteria_penilaian.nama",
       cell: (info) => info.getValue(),
-      header: () => <span>Kriteria Penilaian ID</span>,
+      header: () => <span>Kriteria Penilaian</span>,
       size: 5,
     }),
     columnHelper.accessor("nama", {

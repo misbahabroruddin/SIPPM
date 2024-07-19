@@ -52,6 +52,7 @@ export const TableRincianKegiatan = ({ data }) => {
                 <FormRincianKegiatanPKM
                   id={row.id}
                   onClose={() => setEditingDataId()}
+                  key={row.id}
                 />
               ) : (
                 <tr key={index} className="text-base even:bg-sky">

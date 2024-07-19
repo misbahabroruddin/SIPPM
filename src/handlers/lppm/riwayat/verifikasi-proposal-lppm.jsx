@@ -15,7 +15,7 @@ export const useVerifikasiProposalLppm = (reset, router) => {
   const onSubmit = async (form) => {
     try {
       const { data } = await axios.post(
-        `/proposals/lppms/proposals/${id}/verifikasis`,
+        `/proposal/${id}/verifikasi-lppms`,
         {
           dana_yang_disetujui: form.dana_yang_disetujui,
           status: form.status,
@@ -71,7 +71,7 @@ export const useVerifikasiProposalLppm = (reset, router) => {
       queryClient.invalidateQueries({
         queryKey: ["verfikasiLPPM", id],
       });
-      queryClient.resetQueries({ queryKey: ["trackDosenLPPM", id] });
+      queryClient.resetQueries({ queryKey: ["detailPenelitianLPPM", id] });
     },
   });
 

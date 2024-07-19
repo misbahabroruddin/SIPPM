@@ -1,18 +1,18 @@
 "use client";
 import { useQuery } from "@tanstack/react-query";
-import { toast } from "react-toastify";
 import { signOut } from "next-auth/react";
+import { toast } from "react-toastify";
 
 import { useAxios } from "@/lib/hooks/useAxios";
 
-export const useQueryGetListSKPengabdianDosen = () => {
+export const useQueryGetListSKDosen = () => {
   const axios = useAxios();
 
   const query = useQuery({
-    queryKey: ["getSKPengabdianDosen"],
+    queryKey: ["dokumen-sk-dosen"],
     queryFn: async () => {
       try {
-        const { data } = await axios.get("/dokumens/dosens/pkms/sks");
+        const { data } = await axios.get("/dokumen/sks/role/dosen");
         return data;
       } catch (error) {
         if (error.response.status === 401) {

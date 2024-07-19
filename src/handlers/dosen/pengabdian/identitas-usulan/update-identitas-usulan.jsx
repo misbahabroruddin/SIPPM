@@ -17,17 +17,23 @@ export const useEditIdentitasUsulanPKM = (reset) => {
     try {
       const isEdit = JSON.parse(localStorage.getItem("isEdit"));
 
-      const formData = new FormData();
-      formData.append("judul", data.judul);
-      formData.append("rumpun_ilmu_id", data.rumpun_ilmu_id);
-      formData.append("tahun_usulan", data.tahun_usulan);
-      formData.append("jangka_waktu", data.jangka_waktu);
-      formData.append("ringkasan", data.ringkasan);
+      const formData = {
+        judul: data.judul,
+        rumpun_ilmu_id: data.rumpun_ilmu_id,
+        tahun_usulan: data.tahun_usulan,
+        jangka_waktu: data.jangka_waktu,
+        ringkasan: data.ringkasan,
+      };
 
       if (isEdit && currentStep === 1) {
-        const response = await axios.post(
-          `proposals/dosens/pkms/${id}/identitas-usulan`,
+        const response = await axios.put(
+          `/proposal/pengabdians/update/${id}`,
           formData,
+          {
+            headers: {
+              "Content-Type": "application/x-www-form-urlencoded",
+            },
+          },
         );
         if (response.data.data) {
           setCurrentStep(2);
@@ -36,7 +42,11 @@ export const useEditIdentitasUsulanPKM = (reset) => {
           reset();
         }
       } else {
-        const response = await axios.post("/proposals/dosens/pkms", formData);
+        const response = await axios.post("/proposal/pengabdians", formData, {
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+          },
+        });
         if (response.data.data) {
           setCurrentStep(2);
           localStorage.setItem("step", 2);
@@ -61,6 +71,15 @@ export const useEditIdentitasUsulanPKM = (reset) => {
       mutationFn: handleEditIdentitasUsulan,
       onSuccess: () => {
         queryClient.invalidateQueries({ queryKey: ["listPengabdian"] });
+        queryClient.resetQueries({
+          queryKey: ["rencanaAnggaran"],
+        });
+        queryClient.resetQueries({
+          queryKey: ["rincianKegiatan"],
+        });
+        queryClient.resetQueries({
+          queryKey: ["dokumenPendukungProposal"],
+        });
       },
     });
 

@@ -37,7 +37,7 @@ export const useCreateOrUpdateBiodata = () => {
       if (form.google_scholar_id)
         formData.append("google_scholar_id", form.google_scholar_id);
 
-      const { data } = await axios.post("/biodata", formData);
+      const { data } = await axios.post("/biodatas/me", formData);
 
       toast.success(data?.message);
 

@@ -38,7 +38,7 @@ export const TrackRiwayatReviewerLPPM = ({ data, isLoading }) => {
     <TimelineItem
       date={updatedData ? convertDate(updatedData?.updated_at, " ") : ""}
     >
-      <TimelineHeader status={updatedData?.proposal?.status_lppm} />
+      <TimelineHeader status={updatedData?.status} />
       <TimelineContent isLoading={isLoading} className={"pb-4"}>
         <ContainerContent className="p-4">
           <div className="flex w-full flex-col  justify-between gap-2">
@@ -49,7 +49,7 @@ export const TrackRiwayatReviewerLPPM = ({ data, isLoading }) => {
               <div className="flex grow items-center justify-between">
                 <p className="text-dark-09">{updatedData?.user?.name}</p>
                 <ButtonStatus
-                  status={updatedData?.proposal?.status_lppm}
+                  status={updatedData?.status}
                   className="px-2 py-1 text-xs font-[500]"
                 />
               </div>
@@ -76,11 +76,11 @@ export const TrackRiwayatReviewerLPPM = ({ data, isLoading }) => {
                         />
                         <Link
                           target="_blank"
-                          href={item.file_proposal.url || ""}
+                          href={item.file_proposal?.url || ""}
                           className="hover:underline"
                         >
                           <p className="text-dark-09">
-                            {item.file_proposal.nama ||
+                            {item.file_proposal?.nama ||
                               "Klik untuk lebih detail"}
                           </p>
                         </Link>

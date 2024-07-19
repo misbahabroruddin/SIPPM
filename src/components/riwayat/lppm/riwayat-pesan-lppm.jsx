@@ -21,12 +21,14 @@ export const RiwayatPesanLPPM = ({ riwayatId, status, catatan, index }) => {
     <>
       <div className="mb-2 mt-3 flex flex-col">
         <label className="text-sm font-semibold">Catatan :</label>
-        <div className="border-black-09 h-16 rounded-lg border p-2">
-          <p className="text">{catatan}</p>
+        <div
+          className={`rounded-lg border border-black-09 p-2 ${catatan ? "h-fit" : "h-16 text-gray-500"}`}
+        >
+          <p>{catatan || "Tidak ada catatan"}</p>
         </div>
       </div>
       <div
-        className={`border-black-09 rounded-lg border p-2 ${
+        className={`rounded-lg border border-black-09 p-2 ${
           data?.length > 0 ? "" : "hidden"
         }`}
       >

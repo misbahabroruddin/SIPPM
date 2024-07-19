@@ -32,6 +32,18 @@ export const useColumnTableKriteriaPenilaian = () => {
       header: () => <span>Bobot</span>,
       size: 5,
     }),
+    columnHelper.accessor("komponen_penilaians", {
+      id: "komponen_penilaians",
+      cell: (info) => (
+        <ul style={{ listStyleType: "lower-alpha" }}>
+          {info.getValue().map((c) => (
+            <li>{c.nama}</li>
+          ))}
+        </ul>
+      ),
+      header: () => <span>Komponen Penilaian</span>,
+      size: 5,
+    }),
     columnHelper.accessor("id", {
       id: "id",
       header: () => <span>Action</span>,

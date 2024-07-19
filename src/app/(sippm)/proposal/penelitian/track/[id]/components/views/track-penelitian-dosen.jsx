@@ -7,16 +7,16 @@ import { capitalFirtsLatter } from "@/lib/utils/capitalizeFirstLetter";
 import { Timeline } from "@/components/timeline";
 import { TrackDosenReviewer } from "@/components/riwayat/dosen/track-dosen-reviewer";
 import { TrackDosenLPPM } from "@/components/riwayat/dosen/track-dosen-lppm";
-import { useQueryGetRiwayatTrackDosenLPPM } from "@/handlers/dosen/riwayat/query-get-riwayat-lppm";
-import { useQueryGetRiwayatTrackDosenReviewer } from "@/handlers/dosen/riwayat/query-get-riwayat-reviewer";
+import { useQueryGetRiwayatVerikasiLPPM } from "@/handlers/lppm/riwayat/query-get-verifikasi-proposal-lppm";
+import { useQueryGetRiwayatVerikasiReviewer } from "@/handlers/reviewer/riwayat/query-get-verifikasi-proposal-reviewer";
 
 export default function TrackPenelitianDosenPage() {
   const { data: dataTrackDosenLPPM, isLoading: isLoadingTrackDosenLPPM } =
-    useQueryGetRiwayatTrackDosenLPPM();
+    useQueryGetRiwayatVerikasiLPPM();
   const {
     data: dataTrackDosenReviewer,
     isLoading: isLoadingTrackDosenReviewer,
-  } = useQueryGetRiwayatTrackDosenReviewer();
+  } = useQueryGetRiwayatVerikasiReviewer();
   const path = usePathname();
   const pathArr = path.split("/");
   return (

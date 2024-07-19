@@ -12,6 +12,8 @@ export const ModalEditKomponenPenilaian = ({ id }) => {
 
   const { data, refetch, isLoading } = useQueryGetDetailKomponenPenilaian(id);
 
+  console.log(data, "<<<<<<");
+
   const handleOpenModal = () => {
     setOpen(true);
     refetch();

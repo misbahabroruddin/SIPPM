@@ -12,7 +12,6 @@ import {
   TimelineHeader,
   TimelineItem,
 } from "@/components/timeline";
-import { useStep } from "@/lib/hooks/useStep";
 import { SkeletonRiwayat } from "@/components/skeleton/skeleton-riwayat";
 import {
   convertDate,
@@ -37,7 +36,7 @@ export const TrackRiwayatReviewer = ({ data, isLoading }) => {
       )}
     >
       <TimelineConnector />
-      <TimelineHeader status={updatedData?.proposal?.status_reviewer} />
+      <TimelineHeader status={updatedData?.status} />
       <TimelineContent>
         <ContainerContent className="p-4">
           <div className="flex w-full flex-col justify-between gap-2 ">
@@ -47,7 +46,7 @@ export const TrackRiwayatReviewer = ({ data, isLoading }) => {
             <div className="flex grow items-center justify-between">
               <p className="text-dark-09">{updatedData?.user?.name}</p>
               <ButtonStatus
-                status={updatedData?.proposal?.status_reviewer}
+                status={updatedData?.status}
                 className="px-2 py-1 text-xs font-[500]"
               />
             </div>
@@ -69,11 +68,12 @@ export const TrackRiwayatReviewer = ({ data, isLoading }) => {
                       />
                       <Link
                         target="_blank"
-                        href={item.file_proposal.url || ""}
+                        href={item.file_proposal?.url || ""}
                         className="hover:underline"
                       >
                         <p className="text-dark-09">
-                          {item.file_proposal.nama || "Klik untuk lebih detail"}
+                          {item.file_proposal?.nama ||
+                            "Klik untuk lebih detail"}
                         </p>
                       </Link>
                     </div>

@@ -24,7 +24,7 @@ export const useAdministratorUpdateAnggotaMahasiswa = (id) => {
         google_scholar_id: form.google_scholar_id,
         jenis_anggota: "Mahasiswa",
       };
-      const { data } = await axios.put(`/anggotas/${id}`, formData);
+      const { data } = await axios.put(`/anggotas/update/${id}`, formData);
       return data;
     } catch (error) {
       if (error.response?.data.message.nik) {

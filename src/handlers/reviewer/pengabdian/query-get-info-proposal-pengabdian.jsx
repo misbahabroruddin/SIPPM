@@ -12,7 +12,9 @@ export const useQueryInfoProposalPengabdianReviewer = () => {
     queryKey: ["infoProposalPengabdianReviewer"],
     queryFn: async () => {
       try {
-        const { data } = await axios.get("/proposals/reviewers/pkms/info");
+        const { data } = await axios.get(
+          "/proposal/pengabdians/statistik/role/reviewer",
+        );
 
         return data;
       } catch (error) {

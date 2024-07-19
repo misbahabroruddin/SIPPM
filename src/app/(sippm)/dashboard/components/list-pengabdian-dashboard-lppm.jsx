@@ -19,13 +19,11 @@ export const ListPengabdianDashboardLPPM = ({
   totalPengabdianDisetujui,
   totalPengabdianDitolak,
   totalPengabdianPending,
-  totalProposal,
 }) => {
   if (isLoading) return <SkeletonListingProposal />;
   return (
     <div className="flex flex-col gap-4">
       <div className="flex flex-wrap gap-2 lg:flex-nowrap">
-        <CardDashboard jumlah={totalProposal} status="Total" />
         <CardDashboard jumlah={totalPengabdianPending} status="Pending" />
         <CardDashboard jumlah={totalPengabdianDisetujui} />
         <CardDashboard status="Ditolak" jumlah={totalPengabdianDitolak} />
@@ -47,7 +45,7 @@ export const ListPengabdianDashboardLPPM = ({
           <EmptyState />
         )}
       </div>
-      {pengabdian?.data?.length ? (
+      {pengabdian?.data?.last_page > 1 ? (
         <Pagination
           onPageChange={handlePageChange}
           pageCount={pengabdian?.last_page}

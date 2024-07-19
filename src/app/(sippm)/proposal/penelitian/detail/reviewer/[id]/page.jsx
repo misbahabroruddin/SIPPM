@@ -22,6 +22,11 @@ import { Timeline } from "@/components/timeline";
 import { TrackRiwayatReviewer } from "@/components/riwayat/reviewer/riwayat-reviewer";
 import { TrackRiwayatReviewerLPPM } from "@/components/riwayat/reviewer/riwayat-reviewer-lppm";
 import { ButtonBeranda } from "@/components/button/button-beranda";
+import { useQueryAnggotaDosenProposal } from "@/handlers/proposal/anggota/query-anggota-dosen";
+import { useQueryTargetCapaianProposal } from "@/handlers/proposal/target-capaian/query-target-capaian";
+import { useQueryRincianKegiatanProposal } from "@/handlers/proposal/rincian-kegiatan/query-rincian-kegiatan";
+import { useQueryGetDokumenPendukungProposal } from "@/handlers/proposal/dokumen-pendukung/query-get-dokumen-pendukung";
+import { useQueryRencanaAnggaran } from "@/handlers/proposal/rencana-anggaran/query-rencana-anggaran";
 
 export default function DetailPenelitianPage() {
   const [tabActive] = useState("dokumen");
@@ -41,6 +46,16 @@ export default function DetailPenelitianPage() {
     isLoading: isLoadingTrackDosenReviewer,
   } = useQueryGetRiwayatVerikasiReviewer();
 
+  const { data: dataAnggotaProposal } = useQueryAnggotaDosenProposal();
+
+  const { data: dataTargetCapaianProposal } = useQueryTargetCapaianProposal();
+
+  const { data: dataRencanaAnggaran } = useQueryRencanaAnggaran();
+
+  const { data: dataRincianKegiatan } = useQueryRincianKegiatanProposal();
+
+  const { data: dataDokumenPendukung } = useQueryGetDokumenPendukungProposal();
+
   return (
     <ContainerPage>
       <div className="flex flex-col gap-2">
@@ -50,20 +65,29 @@ export default function DetailPenelitianPage() {
         <div className="custom mb-14 flex flex-col gap-3 rounded-lg p-4 shadow-custom">
           {currentTab === "dokumen" || !currentTab ? (
             <>
-              <InnerTabsReviewer tabActive={innerTab || innerTabActive} />
+              <InnerTabsReviewer
+                tabActive={innerTab || innerTabActive}
+                data={data}
+              />
               <div className="flex flex-col gap-4">
                 {(innerTab === "Identitas Usulan" || !innerTab) && (
                   <DetailIdentitasUsulanPenelitian data={data} />
                 )}
-                {innerTab === "anggota" && <DetailAnggota data={data} />}
+                {innerTab === "anggota" && (
+                  <DetailAnggota data={dataAnggotaProposal} />
+                )}
                 {innerTab === "Luaran dan Target Capaian" && (
-                  <DetailTargetCapaian data={data} />
+                  <DetailTargetCapaian data={dataTargetCapaianProposal} />
                 )}
                 {innerTab === "Rencana Anggaran" && (
-                  <DetailRencanaAnggaran data={data} />
+                  <DetailRencanaAnggaran data={dataRencanaAnggaran} />
                 )}
-                {innerTab === "Jadwal" && <DetailRincianKegiatan data={data} />}
-                {innerTab === "Berkas" && <DetailBerkasReviewer data={data} />}
+                {innerTab === "Jadwal" && (
+                  <DetailRincianKegiatan data={dataRincianKegiatan} />
+                )}
+                {innerTab === "Berkas" && (
+                  <DetailBerkasReviewer data={dataDokumenPendukung} />
+                )}
                 {innerTab === "Penilaian" && (
                   <DetailPenilaianReviewer data={data} />
                 )}

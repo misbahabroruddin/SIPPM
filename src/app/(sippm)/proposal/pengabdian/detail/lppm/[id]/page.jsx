@@ -18,6 +18,7 @@ import { DetailRincianKegiatan } from "@/components/proposal/track/detail-rincia
 import { DetailBerkas } from "@/components/proposal/track/detail-berkas";
 import { Timeline } from "@material-tailwind/react";
 import { TrackRiwayatLPPM } from "@/components/riwayat/lppm/riwayat-lppm";
+import { useQueryAnggotaDosenProposal } from "@/handlers/proposal/anggota/query-anggota-dosen";
 
 export default function DetailPengabdianLPPMPage() {
   const [tabActive] = useState("dokumen");
@@ -27,8 +28,11 @@ export default function DetailPengabdianLPPMPage() {
   const innerTab = tabParams.get("tab2");
 
   const { data } = useQueryDetailPengabdian();
+  const { data: dataAnggotaProposal } = useQueryAnggotaDosenProposal();
   const { data: dataTrackDosenLPPM, isLoading: isLoadingTrackDosenLPPM } =
     useQueryGetRiwayatVerikasiLPPM();
+
+  console.log(dataAnggotaProposal, "<<<<");
 
   return (
     <ContainerPage>
@@ -44,7 +48,9 @@ export default function DetailPengabdianLPPMPage() {
                 {(innerTab === "Identitas Usulan" || !innerTab) && (
                   <DetailIdentitasUsulanPengabdian data={data} />
                 )}
-                {innerTab === "anggota" && <DetailAnggota data={data} />}
+                {innerTab === "anggota" && (
+                  <DetailAnggota data={dataAnggotaProposal} />
+                )}
                 {innerTab === "Luaran dan Target Capaian" && (
                   <DetailTargetCapaian data={data} />
                 )}

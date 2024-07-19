@@ -5,8 +5,8 @@ import { useForm } from "react-hook-form";
 import { ButtonCancel } from "@/components/button/button-cancel";
 import { ButtonUpload } from "@/components/button/button-upload";
 import { Modal } from "@/components/modal";
-import { useUploadKontrakPenelitian } from "@/handlers/lppm/dokumen/penelitian/kontrak/upload-kontrak-penelitian";
 import { InputFileDokumen } from "@/components/input/input-file-dokumen";
+import { useUploadKontrakLppm } from "@/handlers/dokumen/kontrak/upload-kontrak-lppm";
 
 export const ModalUploadKontrakPenelitian = ({ penelitianId }) => {
   const [open, setOpen] = useState(false);
@@ -18,7 +18,7 @@ export const ModalUploadKontrakPenelitian = ({ penelitianId }) => {
     formState: { errors },
   } = useForm();
 
-  const { mutateAsync, isPending } = useUploadKontrakPenelitian(penelitianId);
+  const { mutateAsync, isPending } = useUploadKontrakLppm(penelitianId);
 
   const handleOpenModal = () => setOpen(true);
   const handleClosModal = () => {

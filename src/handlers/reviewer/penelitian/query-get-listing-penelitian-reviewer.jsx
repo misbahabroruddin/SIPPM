@@ -5,19 +5,19 @@ import { signOut } from "next-auth/react";
 
 import { useAxios } from "@/lib/hooks/useAxios";
 
-export const useQueryGetPenelitianReviewer = (search, page) => {
+export const useQueryGetPenelitianReviewer = (search, page, limit) => {
   const axios = useAxios();
 
   const query = useQuery({
-    queryKey: ["listingPenelitianReviewer", search, page],
+    queryKey: ["listingPenelitianReviewer", search, page, limit],
     queryFn: async () => {
       let params;
       if (search) {
         params = {
           judul: search,
+          limit,
         };
       }
-
       if (page) {
         params = {
           ...params,
@@ -25,9 +25,12 @@ export const useQueryGetPenelitianReviewer = (search, page) => {
         };
       }
       try {
-        const { data } = await axios.get("/proposals/reviewers/penelitians", {
-          params: params,
-        });
+        const { data } = await axios.get(
+          "/proposal/penelitians/role/reviewer",
+          {
+            params: params,
+          },
+        );
         return data?.data;
       } catch (error) {
         if (error.response.status === 401) {

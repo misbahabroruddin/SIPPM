@@ -5,10 +5,12 @@ import { useCallback } from "react";
 
 import { Tab } from "@/components/tab";
 
-export const InnerTabsReviewer = ({ tabActive }) => {
+export const InnerTabsReviewer = ({ tabActive, data }) => {
   const pathname = usePathname();
   const tabParams = useSearchParams();
   const router = useRouter();
+
+  const statusReviewer = data?.data?.status_reviewer === "Diterima";
 
   const tabs = [
     {
@@ -47,6 +49,10 @@ export const InnerTabsReviewer = ({ tabActive }) => {
       func: () => handleTabClick("Penilaian"),
     },
   ];
+
+  if (statusReviewer) {
+    tabs.pop();
+  }
 
   const createQueryTab = useCallback(
     (name, value) => {

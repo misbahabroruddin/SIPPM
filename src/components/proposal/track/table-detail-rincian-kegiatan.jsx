@@ -1,6 +1,6 @@
 "use client";
 
-import { converDateRange } from "@/lib/utils/convertDate";
+import { converDateRange, convertDate } from "@/lib/utils/convertDate";
 import { Typography } from "@material-tailwind/react";
 
 export const TableDetailRincianKegiatan = ({ data }) => {
@@ -27,8 +27,8 @@ export const TableDetailRincianKegiatan = ({ data }) => {
         </tr>
       </thead>
       <tbody>
-        {data?.data?.rincian_kegiatans?.length ? (
-          data?.data?.rincian_kegiatans?.map((row, index) => (
+        {data?.data?.length ? (
+          data?.data?.map((row, index) => (
             <tr key={row.id} className="text-base even:bg-sky">
               <td className="w-8 p-2 lg:p-3">
                 <Typography
@@ -51,7 +51,8 @@ export const TableDetailRincianKegiatan = ({ data }) => {
                   color="blue-gray"
                   className="text-sm font-normal lg:text-base"
                 >
-                  {converDateRange(row.waktu)}
+                  {`${convertDate(row.tanggal_awal, " ")} - ${convertDate(row.tanggal_akhir, " ")}`}
+                  {/* {converDateRange(row.waktu)} */}
                 </Typography>
               </td>
             </tr>

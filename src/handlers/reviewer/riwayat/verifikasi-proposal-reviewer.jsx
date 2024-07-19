@@ -17,9 +17,8 @@ export const useVerifikasiProposalReviewer = (reset, router) => {
   const onSubmit = async (form) => {
     try {
       const { data } = await axios.post(
-        `/proposals/reviewers/proposals/${id}/verifikasis`,
+        `/proposal/${id}/approve-reviewers`,
         {
-          dana_yang_disetujui: 0,
           status: form.status,
           catatan: form.catatan,
         },
@@ -32,11 +31,12 @@ export const useVerifikasiProposalReviewer = (reset, router) => {
 
       if (form.status === "Diterima") {
         router.push(`/proposal/${path[2]}/detail/reviewer/${id}/penilaian`);
+        toast.success("Proposal berhasil diupdate");
       } else {
         router.push("/proposal");
+        toast.error("Proposal tidak dapat diubah status");
       }
 
-      toast.success("Proposal berhasil diupdate");
       reset();
 
       return data;

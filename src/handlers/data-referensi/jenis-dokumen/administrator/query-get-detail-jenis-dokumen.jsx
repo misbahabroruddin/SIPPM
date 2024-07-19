@@ -14,7 +14,7 @@ export const useQueryGetDetailJenisDokumen = (id) => {
     queryFn: async () => {
       try {
         const { data } = await axios.get(
-          `/data-referensi/jenis-dokumens/${id}`,
+          `/data-referensi/jenis-dokumens/detail/${id}`,
         );
         return data.data;
       } catch (error) {

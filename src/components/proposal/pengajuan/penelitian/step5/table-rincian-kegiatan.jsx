@@ -8,6 +8,7 @@ import { useState } from "react";
 import { convertDate } from "@/lib/utils/convertDate";
 import { FormRincianKegiatan } from "./form-rincian-kegiatan";
 import { useDeleteRincianKegiatanProposal } from "@/handlers/dosen/proposal/rincian-kegiatan/delete-rincian-kegiatan";
+import { FormAddRincianKegiatan } from "./form-rincian-kegiatan-add";
 
 export const TableRincianKegiatan = ({ data }) => {
   const [isOpenEmptyData, setIsOpenEmptyData] = useState(false);
@@ -53,9 +54,10 @@ export const TableRincianKegiatan = ({ data }) => {
                 <FormRincianKegiatan
                   id={row.id}
                   onClose={() => setEditingDataId()}
+                  key={row.id}
                 />
               ) : (
-                <tr key={index} className="text-base even:bg-sky">
+                <tr key={row.id} className="text-base even:bg-sky">
                   <td className="hidden p-2 lg:table-cell lg:w-8 lg:p-3">
                     <Typography
                       color="blue-gray"
@@ -100,7 +102,7 @@ export const TableRincianKegiatan = ({ data }) => {
               );
             })}
             {isOpenHasData ? (
-              <FormRincianKegiatan onClose={() => setisOpenHasData(false)} />
+              <FormAddRincianKegiatan onClose={() => setisOpenHasData(false)} />
             ) : (
               <tr>
                 <td colSpan={4}>
@@ -124,7 +126,9 @@ export const TableRincianKegiatan = ({ data }) => {
         ) : (
           <>
             {isOpenEmptyData ? (
-              <FormRincianKegiatan onClose={() => setIsOpenEmptyData(false)} />
+              <FormAddRincianKegiatan
+                onClose={() => setIsOpenEmptyData(false)}
+              />
             ) : (
               <>
                 <tr>

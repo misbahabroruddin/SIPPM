@@ -53,6 +53,7 @@ export const TableRencanaAnggaran = ({ data }) => {
                 <FormRencanaAnggaranPenelitian
                   id={row.id}
                   onClose={() => setEditingDataId()}
+                  key={row.id}
                 />
               ) : (
                 <tr key={row.id} className="text-base even:bg-sky">

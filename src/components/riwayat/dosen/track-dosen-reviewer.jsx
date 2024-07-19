@@ -40,7 +40,7 @@ export const TrackDosenReviewer = ({ data, isLoading }) => {
       date={updatedData ? convertDate(updatedData?.updated_at, " ") : ""}
     >
       <TimelineConnector />
-      <TimelineHeader status={updatedData?.proposal?.status_reviewer} />
+      <TimelineHeader status={updatedData?.status} />
       <TimelineContent isLoading={isLoading}>
         <ContainerContent className="p-3 md:p-4">
           <div className="flex w-full flex-col  justify-between gap-2">
@@ -53,7 +53,7 @@ export const TrackDosenReviewer = ({ data, isLoading }) => {
                   {updatedData?.user?.name}
                 </p>
                 <ButtonStatus
-                  status={updatedData?.proposal?.status_reviewer}
+                  status={updatedData?.status}
                   className="px-2 py-1 text-xs font-[500]"
                 />
               </div>
@@ -68,7 +68,7 @@ export const TrackDosenReviewer = ({ data, isLoading }) => {
                     <div className="flex justify-between">
                       <div
                         className="flex max-w-[200px] items-center overflow-hidden sm:max-w-[400px] md:max-w-[600px] lg:max-w-[800px]"
-                        title={item?.file_proposal.nama}
+                        title={item?.file_proposal?.nama}
                       >
                         <Image
                           src="/icons/file.svg"
@@ -78,11 +78,11 @@ export const TrackDosenReviewer = ({ data, isLoading }) => {
                         />
                         <Link
                           target="_blank"
-                          href={item.file_proposal.url || ""}
+                          href={item.file_proposal?.url || ""}
                           className="hover:underline"
                         >
                           <p className="text-sm text-dark-09 lg:text-base">
-                            {item.file_proposal.nama ||
+                            {item.file_proposal?.nama ||
                               "Klik untuk lebih detail"}
                           </p>
                         </Link>

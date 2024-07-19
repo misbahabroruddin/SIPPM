@@ -11,6 +11,7 @@ import { DateIcon } from "@/components/svgs/date";
 import { Spinner } from "@material-tailwind/react";
 import { useAddEditRincianKegiatan } from "@/handlers/dosen/proposal/rincian-kegiatan/add-edit-rincian-kegiatan";
 import { useQueryDetailRincianKegiatan } from "@/handlers/dosen/proposal/rincian-kegiatan/query-detail-rincian-kegiatan";
+import { convertToTimestamp } from "@/lib/utils/convertDate";
 
 export const FormRincianKegiatan = ({ onClose, id }) => {
   const [startDate, setStartDate] = useState();
@@ -54,21 +55,19 @@ export const FormRincianKegiatan = ({ onClose, id }) => {
   }, [isDisabled]);
 
   // set date range when get detail data
-  // useEffect(() => {
-  //   const dateRangeArr = [];
-  //   const dateStart = convertToTimestamp(detailRincianKegiatan?.tanggal_awal);
-  //   const dateEnd = convertToTimestamp(detailRincianKegiatan?.tanggal_akhir);
-  //   dateRangeArr.push(dateStart, dateEnd);
+  useEffect(() => {
+    const dateRangeArr = [];
+    const dateStart = convertToTimestamp(detailRincianKegiatan?.tanggal_awal);
+    const dateEnd = convertToTimestamp(detailRincianKegiatan?.tanggal_akhir);
+    dateRangeArr.push(dateStart, dateEnd);
 
-  //   setValue("waktu", dateRangeArr);
+    setValue("waktu", dateRangeArr);
 
-  //   console.log(detailRincianKegiatan?.tanggal_awal);
-
-  //   if (dateRangeArr) {
-  //     setStartDate(dateStart);
-  //     setEndDate(dateEnd);
-  //   }
-  // }, [detailRincianKegiatan]);
+    if (dateRangeArr) {
+      setStartDate(detailRincianKegiatan?.tanggal_awal);
+      setEndDate(detailRincianKegiatan?.tanggal_akhir);
+    }
+  }, [detailRincianKegiatan]);
 
   return (
     <tr className="border-1 border border-black-09">

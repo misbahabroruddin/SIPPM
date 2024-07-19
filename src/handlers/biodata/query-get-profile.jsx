@@ -11,7 +11,7 @@ export const useGetProfile = (setValue) => {
 
   const fetchProfile = async () => {
     try {
-      const { data } = await axios.get("/biodata");
+      const { data } = await axios.get("/biodatas/me");
       if (setValue) {
         setValue("nama_lengkap", data?.data?.nama_lengkap);
         setValue("nik", data?.data?.nik);

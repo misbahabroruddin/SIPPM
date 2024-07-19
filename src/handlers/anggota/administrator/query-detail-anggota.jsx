@@ -12,7 +12,7 @@ export const useQueryAdministratorDetailAnggota = (id) => {
     queryKey: ["detailAnggotaAdministrator", id],
     queryFn: async () => {
       try {
-        const { data } = await axios.get(`/anggotas/${id}`);
+        const { data } = await axios.get(`/anggotas/detail/${id}`);
         return data.data;
       } catch (error) {
         if (error.response.status === 401) {

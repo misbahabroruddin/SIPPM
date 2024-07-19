@@ -10,15 +10,13 @@ import { useStep } from "@/lib/hooks/useStep";
 
 export const useQueryIdentitasUsulanOnUpdate = (setValue) => {
   const axios = useAxios();
-  const params = useParams();
+  const { id } = useParams();
   const { setCurrentStep } = useStep();
 
   const fetchIdentitasUsulanById = async () => {
     try {
       const step = localStorage.getItem("step");
-      const { data } = await axios.get(
-        `proposals/dosens/pkms/${params.id}/identitas-usulan`,
-      );
+      const { data } = await axios.get(`/proposal/pengabdians/detail/${id}`);
 
       setValue("rumpun_ilmu_id", data?.data.rumpun_ilmu.id, {
         shouldValidate: true,

@@ -13,7 +13,9 @@ export const useQueryInfoProposalPenelitianDashboardDosen = () => {
     queryKey: ["infoProposalPenelitianDosenDashboard"],
     queryFn: async () => {
       try {
-        const { data } = await axios.get("/dashboards/dosens/penelitians/info");
+        const { data } = await axios.get(
+          "/proposal/penelitians/statistik/role/dosen",
+        );
 
         return data;
       } catch (error) {

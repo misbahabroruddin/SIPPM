@@ -14,7 +14,7 @@ export const useQueryGetDetailKomponenPenilaian = (id) => {
     queryFn: async () => {
       try {
         const { data } = await axios.get(
-          `/data-referensi/komponen-penilaians/${id}`,
+          `/data-referensi/komponen-penilaians/detail/${id}`,
         );
         return data.data;
       } catch (error) {

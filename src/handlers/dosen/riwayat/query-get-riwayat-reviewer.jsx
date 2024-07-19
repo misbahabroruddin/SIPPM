@@ -2,7 +2,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 import { signOut } from "next-auth/react";
-import { notFound, useParams } from "next/navigation";
+import { useParams } from "next/navigation";
 
 import { useAxios } from "@/lib/hooks/useAxios";
 
@@ -26,8 +26,6 @@ export const useQueryGetRiwayatTrackDosenReviewer = () => {
       }
     },
   });
-
-  if (status === "error") return notFound();
 
   return {
     data,

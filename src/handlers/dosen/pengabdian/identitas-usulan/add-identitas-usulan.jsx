@@ -85,6 +85,15 @@ export const useAddIdentitasUsulanPKM = (reset) => {
         queryClient.resetQueries({
           queryKey: ["infoProposalPengabdianDosenDashboard"],
         });
+        queryClient.resetQueries({
+          queryKey: ["rencanaAnggaran"],
+        });
+        queryClient.resetQueries({
+          queryKey: ["rincianKegiatan"],
+        });
+        queryClient.resetQueries({
+          queryKey: ["dokumenPendukungProposal"],
+        });
       },
     });
 

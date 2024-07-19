@@ -6,7 +6,7 @@ import { ButtonCancel } from "@/components/button/button-cancel";
 import { ButtonUpload } from "@/components/button/button-upload";
 import { InputFileDokumen } from "@/components/input/input-file-dokumen";
 import { Modal } from "@/components/modal";
-import { useUploadSKPengabdian } from "@/handlers/lppm/dokumen/pengabdian/sk/upload-sk-pengabdian";
+import { useUploadSK } from "@/handlers/dokumen/sk/upload-sk";
 
 export const ModalUploadSkPengabdian = ({ pengabdianId, buttonClassName }) => {
   const [open, setOpen] = useState(false);
@@ -17,7 +17,7 @@ export const ModalUploadSkPengabdian = ({ pengabdianId, buttonClassName }) => {
     formState: { errors },
   } = useForm();
 
-  const { mutateAsync, isPending } = useUploadSKPengabdian(pengabdianId);
+  const { mutateAsync, isPending } = useUploadSK(pengabdianId);
 
   const handleOpenModal = () => setOpen(true);
   const handleClosModal = () => {

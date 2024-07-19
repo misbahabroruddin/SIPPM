@@ -14,6 +14,7 @@ export const useQueryRincianBiayaOptions = () => {
       const result = data.data.map((opt) => ({
         value: opt.id,
         label: opt.rincian,
+        anggaran: opt.anggaran,
       }));
       return result;
     } catch (error) {

@@ -57,8 +57,7 @@ export const ListPenelitianProposalLPPM = ({
   );
 };
 
-const ListItem = ({ data, currentTab, tabActive }) => {
-  console.log(data, "<<<<<<");
+const ListItem = ({ data }) => {
   return (
     <div className="rounded-lg p-3 shadow-custom lg:px-6 lg:py-4">
       <div className="flex flex-col gap-2 lg:flex-row lg:items-center lg:justify-between">

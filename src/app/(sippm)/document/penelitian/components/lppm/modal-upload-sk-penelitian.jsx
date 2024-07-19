@@ -1,12 +1,12 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 
 import { ButtonCancel } from "@/components/button/button-cancel";
 import { ButtonUpload } from "@/components/button/button-upload";
 import { InputFileDokumen } from "@/components/input/input-file-dokumen";
 import { Modal } from "@/components/modal";
-import { useUploadSKPenelitian } from "@/handlers/lppm/dokumen/penelitian/sk/upload-sk-penelitian";
+import { useUploadSK } from "@/handlers/dokumen/sk/upload-sk";
 
 export const ModalUploadSkPenelitian = ({ penelitianId, buttonClassName }) => {
   const [open, setOpen] = useState(false);
@@ -17,7 +17,7 @@ export const ModalUploadSkPenelitian = ({ penelitianId, buttonClassName }) => {
     formState: { errors },
   } = useForm();
 
-  const { mutateAsync, isPending } = useUploadSKPenelitian(penelitianId);
+  const { mutateAsync, isPending } = useUploadSK(penelitianId);
 
   const handleOpenModal = () => setOpen(true);
   const handleClosModal = () => {

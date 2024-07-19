@@ -14,7 +14,7 @@ export const useQueryGetDetailRincianBiaya = (id) => {
     queryFn: async () => {
       try {
         const { data } = await axios.get(
-          `/data-referensi/rincian-biayas/${id}`,
+          `/data-referensi/rincian-biayas/detail/${id}`,
         );
         return data.data;
       } catch (error) {

@@ -13,9 +13,7 @@ export const useQueryDetailPenelitianReviewer = () => {
 
   const fetchDetailPenelitian = async () => {
     try {
-      const { data } = await axios.get(
-        `/proposals/reviewers/penelitians/${id}`,
-      );
+      const { data } = await axios.get(`/proposal/penelitians/detail/${id}`);
 
       return data;
     } catch (error) {

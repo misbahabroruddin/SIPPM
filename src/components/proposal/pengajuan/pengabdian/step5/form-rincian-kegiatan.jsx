@@ -11,6 +11,7 @@ import { SaveIcon } from "@/components/svgs/save";
 import { CloseIcon } from "@/components/svgs/close";
 import { useAddEditRincianKegiatan } from "@/handlers/dosen/proposal/rincian-kegiatan/add-edit-rincian-kegiatan";
 import { useQueryDetailRincianKegiatan } from "@/handlers/dosen/proposal/rincian-kegiatan/query-detail-rincian-kegiatan";
+import { convertToTimestamp } from "@/lib/utils/convertDate";
 
 export const FormRincianKegiatanPKM = ({ onClose, id }) => {
   const [startDate, setStartDate] = useState();
@@ -29,10 +30,10 @@ export const FormRincianKegiatanPKM = ({ onClose, id }) => {
   } = useForm();
 
   const { data } = useQueryDetailRincianKegiatan(
-    setValue,
+    id,
     setStartDate,
     setEndDate,
-    id,
+    setValue,
   );
 
   const { mutateAsync: addEditRincianKegiatan, isPending } =
@@ -53,18 +54,19 @@ export const FormRincianKegiatanPKM = ({ onClose, id }) => {
     }
   }, [isDisabled]);
 
-  // useEffect(() => {
-  //   const dateRangeArr = data?.waktu.split(",");
+  useEffect(() => {
+    const dateRangeArr = [];
+    const dateStart = convertToTimestamp(data?.tanggal_awal);
+    const dateEnd = convertToTimestamp(data?.tanggal_akhir);
+    dateRangeArr.push(dateStart, dateEnd);
 
-  //   setValue("waktu", data?.waktu);
+    setValue("waktu", dateRangeArr);
 
-  //   if (dateRangeArr) {
-  //     const dateStart = new Date(dateRangeArr[0]);
-  //     const dateEnd = new Date(dateRangeArr[1]);
-  //     setStartDate(dateStart);
-  //     setEndDate(dateEnd);
-  //   }
-  // }, [data]);
+    if (dateRangeArr) {
+      setStartDate(data?.tanggal_awal);
+      setEndDate(data?.tanggal_akhir);
+    }
+  }, [data]);
 
   return (
     <tr className="border-1 border border-black-09">

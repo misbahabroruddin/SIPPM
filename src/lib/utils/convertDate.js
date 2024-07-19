@@ -66,3 +66,11 @@ export function convertToTimestamp(strDate) {
 
   return formattedDate;
 }
+
+export const getDateFromString = (str) => {
+  const dateFormat = new Date(str);
+  const [date, time] = dateFormat.split(" ");
+  // reformat string into YYYY-MM-DDTHH:mm:ss.sssZ
+  str = `${date}T${time}.000Z`;
+  return new Date(str);
+};

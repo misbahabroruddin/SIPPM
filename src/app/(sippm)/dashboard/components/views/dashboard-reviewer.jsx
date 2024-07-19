@@ -11,6 +11,9 @@ import { useQueryGetAllPenelitianDashboardReviewer } from "@/handlers/reviewer/d
 import { useQueryGetAllPengabdianDashboardReviewer } from "@/handlers/reviewer/dashboard/pengabdian/query-get-all-pengabdian-dashboard";
 import { useQueryInfoProposalPenelitianDashboardReviewer } from "@/handlers/reviewer/dashboard/penelitian/query-get-info-penelitian-dashboard";
 import { useQueryInfoProposalPengabdianDashboardReviewer } from "@/handlers/reviewer/dashboard/pengabdian/query-get-info-pengabdian-dashboard";
+import { PieChartReviewer } from "../pie-chart-reviewer";
+import { useQueryInfoProposalPenelitianReviewer } from "@/handlers/reviewer/penelitian/query-get-info-proposal-penelitian";
+import { useQueryInfoProposalPengabdianReviewer } from "@/handlers/reviewer/pengabdian/query-get-info-proposal-pengabdian";
 
 export default function DashboardReviewer() {
   const [tabActive] = useState("penelitian");
@@ -24,26 +27,12 @@ export default function DashboardReviewer() {
   const { data: pengabdian, isLoading: isLoadingPengabdian } =
     useQueryGetAllPengabdianDashboardReviewer("", pagePengabdian);
 
-  const { data: infoPenelitian } =
-    useQueryInfoProposalPenelitianDashboardReviewer();
-  const { data: infoPengabdian } =
-    useQueryInfoProposalPengabdianDashboardReviewer();
+  const { data: infoPenelitian, isLoading: isLoadingInfoPenelitian } =
+    useQueryInfoProposalPenelitianReviewer();
 
-  const totalPenelitianDisetujui =
-    infoPenelitian?.data?.status_reviewer?.diterima || 0;
+  const { data: infoPengabdian, isLoading: isLoadingInfoPengabdian } =
+    useQueryInfoProposalPengabdianReviewer();
 
-  const totalPeneliatianDitolak =
-    infoPenelitian?.data?.status_reviewer?.ditolak || 0;
-
-  const totalProposal =
-    infoPenelitian?.data?.status_reviewer?.revisi +
-      infoPengabdian?.data?.status_reviewer?.revisi || 0;
-
-  const totalPengabdianDisetujui =
-    infoPengabdian?.data?.status_reviewer?.diterima || 0;
-
-  const totalPengabdianDitolak =
-    infoPengabdian?.data?.status_reviewer?.ditolak || 0;
   const handlePageChangePenelitian = (event) => {
     setPagePenelitian(event.selected + 1);
   };
@@ -52,23 +41,30 @@ export default function DashboardReviewer() {
   };
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="mt-2 flex flex-col gap-4">
       <div className="flex gap-4">
-        <CardDashboard title="Penelitian" jumlah={totalPenelitianDisetujui} />
-        <CardDashboard
-          status="Ditolak"
-          title="Penelitian"
-          jumlah={totalPeneliatianDitolak}
-        />
-        <CardDashboard status="Revisi" title="Semua" jumlah={totalProposal} />
-        <CardDashboard title="Pengabdian" jumlah={totalPengabdianDisetujui} />
-        <CardDashboard
-          status="Ditolak"
-          title="Pengabdian"
-          jumlah={totalPengabdianDitolak}
-        />
+        {isLoadingInfoPenelitian && isLoadingInfoPengabdian ? (
+          <p>Loading....</p>
+        ) : (
+          <>
+            <PieChartReviewer
+              textHeader={"Proposal Penelitian"}
+              proposalDisetujui={infoPenelitian?.data.status_reviewer.Diterima}
+              proposalDitolak={infoPenelitian?.data.status_reviewer.Ditolak}
+              proposalRevisi={infoPenelitian?.data.status_reviewer.Revisi}
+              proposalPending={infoPenelitian?.data.status_reviewer.Pending}
+            />
+            <PieChartReviewer
+              textHeader={"Proposal Pengabdian"}
+              proposalDisetujui={infoPengabdian?.data.status_reviewer.Diterima}
+              proposalDitolak={infoPengabdian?.data.status_reviewer.Ditolak}
+              proposalRevisi={infoPengabdian?.data.status_reviewer.Revisi}
+              proposalPending={infoPengabdian?.data.status_reviewer.Pending}
+            />
+          </>
+        )}
       </div>
-      <div className="flex justify-between">
+      {/* <div className="flex justify-between">
         <div className="flex items-center gap-2 lg:gap-4">
           <Tabs tabActive={currentTab || tabActive} />
         </div>
@@ -87,7 +83,7 @@ export default function DashboardReviewer() {
           tabActive={tabActive}
           handlePageChange={handlePageChangePengabdian}
         />
-      )}
+      )} */}
     </div>
   );
 }

@@ -18,6 +18,7 @@ export const useAddEditRincianKegiatan = (
   const { id } = useParams();
 
   const onSubmit = async (form) => {
+    console.log(form.waktu[0]);
     try {
       const penelitianId = localStorage.getItem("penelitianId");
       const pengabdianId = localStorage.getItem("pengabdianId");
@@ -27,11 +28,11 @@ export const useAddEditRincianKegiatan = (
       formData.append("kegiatan", form.kegiatan);
       formData.append(
         "tanggal_awal",
-        form.waktu[0].toLocaleDateString("fr-CA"),
+        form?.waktu[0]?.toLocaleDateString("fr-CA"),
       );
       formData.append(
         "tanggal_akhir",
-        form.waktu[1].toLocaleDateString("fr-CA"),
+        form?.waktu[1]?.toLocaleDateString("fr-CA"),
       );
 
       if (kegiatanId) {
@@ -40,9 +41,9 @@ export const useAddEditRincianKegiatan = (
             penelitianId || pengabdianId || id
           }/rincian-kegiatans/update/${kegiatanId}`,
           {
-            kegiatan: form.kegiatan,
-            tanggal_awal: form.tanggal_awal.toLocaleDateString("fr-CA"),
-            tanggal_akhir: form.tanggal_akhir.toLocaleDateString("fr-CA"),
+            kegiatan: form?.kegiatan,
+            tanggal_awal: form?.waktu[0]?.toLocaleDateString("fr-CA"),
+            tanggal_akhir: form?.waktu[1]?.toLocaleDateString("fr-CA"),
           },
           {
             headers: {
@@ -65,7 +66,7 @@ export const useAddEditRincianKegiatan = (
       if (error.response.status === 401) {
         return signOut();
       }
-      toast.error(error.response.data.message || "Something went wrong");
+      toast.error(error?.response?.data?.message || "Something went wrong");
     }
   };
 

@@ -15,7 +15,7 @@ export const DetailTargetCapaian = ({ data }) => {
               </p>
               <div className="flex gap-2 lg:gap-3">
                 <span>:</span>
-                <p>{data?.data?.target_capaian?.luaran_wajib?.nama}</p>
+                <p>{data?.data?.luaran_wajib?.nama}</p>
               </div>
             </div>
             <div className="flex gap-2 lg:gap-4">
@@ -24,7 +24,7 @@ export const DetailTargetCapaian = ({ data }) => {
               </p>
               <div className="flex gap-2 lg:gap-3">
                 <span>:</span>
-                <p>{data?.data?.target_capaian?.tahun_capaian}</p>
+                <p>{data?.data?.tahun_capaian}</p>
               </div>
             </div>
             <div className="flex gap-2 lg:gap-4">
@@ -34,9 +34,9 @@ export const DetailTargetCapaian = ({ data }) => {
               <div className="flex gap-3 lg:hidden">
                 <span>:</span>
                 <p>
-                  {data?.data?.target_capaian?.status_capaian === "null"
+                  {data?.data?.status_capaian === "null"
                     ? "-"
-                    : data?.data?.target_capaian?.status_capaian}
+                    : data?.data?.status_capaian}
                 </p>
               </div>
             </div>
@@ -47,7 +47,7 @@ export const DetailTargetCapaian = ({ data }) => {
               <div className="flex flex-col gap-4">
                 <div className="flex gap-3 lg:hidden">
                   <span>:</span>
-                  <p>{data?.data?.target_capaian?.nama_jurnal_penerbit}</p>
+                  <p>{data?.data?.nama_jurnal_penerbit}</p>
                 </div>
               </div>
             </div>
@@ -66,14 +66,14 @@ export const DetailTargetCapaian = ({ data }) => {
             <div className="flex gap-3">
               <span>:</span>
               <p>
-                {data?.data?.target_capaian?.status_capaian === "null"
+                {data?.data?.status_capaian === "null"
                   ? "-"
-                  : data?.data?.target_capaian?.status_capaian}
+                  : data?.data?.status_capaian}
               </p>
             </div>
             <div className="flex gap-3">
               <span>:</span>
-              <p>{data?.data?.target_capaian?.nama_jurnal_penerbit}</p>
+              <p>{data?.data?.nama_jurnal_penerbit}</p>
             </div>
           </div>
         </div>

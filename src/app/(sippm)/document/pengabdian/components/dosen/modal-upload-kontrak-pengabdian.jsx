@@ -6,7 +6,7 @@ import { ButtonCancel } from "@/components/button/button-cancel";
 import { ButtonUpload } from "@/components/button/button-upload";
 import { Modal } from "@/components/modal";
 import { InputFileDokumen } from "@/components/input/input-file-dokumen";
-import { useUploadKontrakPengabdian } from "@/handlers/dosen/dokumen/pengabdian/kontrak/upload-kontrak-pengabdian";
+import { useUploadKontrakDosen } from "@/handlers/dokumen/kontrak/upload-kontrak-dosen";
 
 export const ModalUploadKontrakPengabdian = ({ pengabdianId }) => {
   const [open, setOpen] = useState(false);
@@ -18,7 +18,7 @@ export const ModalUploadKontrakPengabdian = ({ pengabdianId }) => {
     formState: { errors },
   } = useForm();
 
-  const { mutateAsync, isPending } = useUploadKontrakPengabdian(pengabdianId);
+  const { mutateAsync, isPending } = useUploadKontrakDosen(pengabdianId);
 
   const handleOpenModal = () => setOpen(true);
   const handleClosModal = () => {

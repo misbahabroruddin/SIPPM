@@ -9,7 +9,7 @@ import { useId } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { twMerge } from "tailwind-merge";
 
-export const FormVerifikasiUsulanReviewer = () => {
+export const FormVerifikasiUsulanReviewer = ({ data }) => {
   const {
     register,
     handleSubmit,
@@ -21,6 +21,8 @@ export const FormVerifikasiUsulanReviewer = () => {
   } = useForm();
   const id = useId();
   const router = useRouter();
+
+  const statusReviewer = data?.data?.status_reviewer === "Revisi";
 
   const status = watch("status");
 
@@ -57,6 +59,7 @@ export const FormVerifikasiUsulanReviewer = () => {
         spanEmptyClass="hidden"
         id={id}
         maxMenuHeight={400}
+        isDisabled={statusReviewer}
       />
       <div
         className={twMerge(
@@ -84,7 +87,10 @@ export const FormVerifikasiUsulanReviewer = () => {
           </span>
         )}
       </div>
-      <ButtonSubmit className="mx-auto w-fit px-14" disabled={isLoading} />
+      <ButtonSubmit
+        className="mx-auto w-fit px-14"
+        disabled={statusReviewer || isLoading}
+      />
     </form>
   );
 };

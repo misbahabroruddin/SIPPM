@@ -6,19 +6,18 @@ import { useSearchParams } from "next/navigation";
 import { Tabs } from "../tabs";
 import { ListPengabdianSKDosen } from "../dosen/list-document-sk-dosen";
 import { ListPengabdianKontrakDosen } from "../dosen/list-document-kontrak-dosen";
-import { useQueryGetListSKPengabdianDosen } from "@/handlers/dosen/dokumen/pengabdian/sk/query-get-sk-pengabdian";
-import { useQueryGetListKontrakPengabdianDosen } from "@/handlers/dosen/dokumen/pengabdian/kontrak/query-get-kontrak-pengabdian";
+import { useQueryGetListSKDosen } from "@/handlers/dokumen/sk/query-get-sk-dosen";
+import { useQueryGetListKontrakDosen } from "@/handlers/dokumen/kontrak/query-get-kontrak-dosen";
 
 export default function DocumentPengabdianDosen() {
   const [tabActive] = useState("SK");
   const tabParams = useSearchParams();
   const currentTab = tabParams.get("tab");
 
-  const { data: dataSK, isLoading: isLoadingSK } =
-    useQueryGetListSKPengabdianDosen();
+  const { data: dataSK, isLoading: isLoadingSK } = useQueryGetListSKDosen();
 
   const { data: dataKontrak, isLoading: isLoadingKontrak } =
-    useQueryGetListKontrakPengabdianDosen();
+    useQueryGetListKontrakDosen();
 
   return (
     <div className="flex flex-col gap-4">

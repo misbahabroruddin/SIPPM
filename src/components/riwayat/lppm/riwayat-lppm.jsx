@@ -22,6 +22,7 @@ import { convertToRupiah } from "@/lib/utils/convertToRupiah";
 import { SkeletonRiwayat } from "@/components/skeleton/skeleton-riwayat";
 
 export const TrackRiwayatLPPM = ({ data, isLoading }) => {
+  console.log(data, "TRACKING");
   const [isOpen, setIsOpen] = useState();
 
   const updatedData = data ? data[0] : undefined;
@@ -38,7 +39,7 @@ export const TrackRiwayatLPPM = ({ data, isLoading }) => {
     <TimelineItem
       date={updatedData ? convertDate(updatedData?.updated_at, " ") : ""}
     >
-      <TimelineHeader status={updatedData?.proposal?.status_lppm} />
+      <TimelineHeader status={updatedData?.status} />
       <TimelineContent isLoading={isLoading} className={"pb-4"}>
         <ContainerContent className="p-4">
           <div className="flex w-full flex-col  justify-between gap-2">
@@ -49,7 +50,7 @@ export const TrackRiwayatLPPM = ({ data, isLoading }) => {
               <div className="flex grow items-center justify-between">
                 <p className="text-dark-09">{updatedData?.user?.name}</p>
                 <ButtonStatus
-                  status={updatedData?.proposal?.status_lppm}
+                  status={updatedData?.status}
                   className="px-2 py-1 text-xs font-[500]"
                 />
               </div>
@@ -74,7 +75,7 @@ export const TrackRiwayatLPPM = ({ data, isLoading }) => {
                           height={24}
                           alt="file"
                         />
-                        <Link
+                        {/* <Link
                           target="_blank"
                           href={item.file_proposal.url || ""}
                           className="hover:underline"
@@ -83,7 +84,7 @@ export const TrackRiwayatLPPM = ({ data, isLoading }) => {
                             {item.file_proposal.nama ||
                               "Klik untuk lebih detail"}
                           </p>
-                        </Link>
+                        </Link> */}
                       </div>
                       <div
                         className="flex grow items-center justify-end gap-2 text-dark-09"
