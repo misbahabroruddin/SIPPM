@@ -84,6 +84,10 @@ export const FormRencanaAnggaranPKM = ({ onClose, id }) => {
           placeholder="Biaya"
           register={register("biaya", {
             required: "harus diisi",
+            max: {
+              value: selectedRincianBiayaWhenAdd?.anggaran,
+              message: `Biaya maksimal ${convertToRupiah(selectedRincianBiayaWhenAdd?.anggaran)}`,
+            },
           })}
           errors={errors.biaya}
           required
