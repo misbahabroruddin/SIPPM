@@ -14,10 +14,11 @@ export default function DocumentPengabdianDosen() {
   const tabParams = useSearchParams();
   const currentTab = tabParams.get("tab");
 
-  const { data: dataSK, isLoading: isLoadingSK } = useQueryGetListSKDosen();
+  const { data: dataSK, isLoading: isLoadingSK } =
+    useQueryGetListSKDosen("pengabdian");
 
   const { data: dataKontrak, isLoading: isLoadingKontrak } =
-    useQueryGetListKontrakDosen();
+    useQueryGetListKontrakDosen("pengabdian");
 
   return (
     <div className="flex flex-col gap-4">

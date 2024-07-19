@@ -27,6 +27,7 @@ export const ModalUploadKontrakPengabdian = ({ pengabdianId }) => {
   };
 
   const onSubmit = async (form) => {
+    console.log(form, "<<<<");
     await mutateAsync(form);
     handleClosModal();
   };
@@ -47,12 +48,12 @@ export const ModalUploadKontrakPengabdian = ({ pengabdianId }) => {
             Kirim Kontrak Pengabdian
           </h2>
           <InputFileDokumen
-            name={"file_kontrak"}
-            register={register("file_kontrak", {
+            name={"file"}
+            register={register("file", {
               required: "harus diisi",
             })}
             watch={watch}
-            errors={errors.file_kontrak}
+            errors={errors.file}
             label={"Upload File Kontrak"}
           />
           <div className="flex justify-evenly">

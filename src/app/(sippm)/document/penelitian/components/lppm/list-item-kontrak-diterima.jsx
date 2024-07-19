@@ -57,7 +57,7 @@ export const ListItemKontrakDiterima = ({ data }) => {
         <div className="flex items-end justify-center gap-4">
           {data?.dokumen_kontrak?.status === "Diterima" ? (
             <Link
-              href={data?.dokumen_kontrak?.file_kontrak?.url}
+              href={data?.dokumen_kontrak?.url || "#"}
               target="_blank"
               className="flex w-full items-center justify-center gap-2 rounded-lg bg-primary px-2 py-1 text-white disabled:cursor-not-allowed disabled:bg-gray-500 md:px-4 md:py-2 lg:w-fit"
             >

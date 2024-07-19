@@ -15,10 +15,11 @@ export default function DocumentPenelitianLppm() {
   const currentTab = tabParams.get("tab");
   const id = useId();
 
-  const { data: dataSK, isLoading: isLoadingSK } = useQueryGetListSKLppm();
+  const { data: dataSK, isLoading: isLoadingSK } =
+    useQueryGetListSKLppm("penelitian");
 
   const { data: dataKontrak, isLoading: isLoadingKontrak } =
-    useQueryGetListKontrakLppm();
+    useQueryGetListKontrakLppm("penelitian");
 
   return (
     <div className="flex flex-col gap-4">

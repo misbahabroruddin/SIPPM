@@ -59,7 +59,7 @@ export const ListItemKontrakDibalas = ({ data }) => {
         <div className="flex flex-wrap items-end gap-4 lg:flex-nowrap">
           <ModalUploadKontrakPenelitian penelitianId={data?.id} />
           <Link
-            href={data?.dokumen_kontrak?.file_kontrak?.url}
+            href={data?.dokumen_kontrak?.url || "#"}
             target="_blank"
             className="flex w-full items-center justify-center gap-2 rounded-lg bg-primary text-white disabled:cursor-not-allowed disabled:bg-gray-500 lg:w-fit"
           >

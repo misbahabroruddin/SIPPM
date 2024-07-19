@@ -50,12 +50,12 @@ export const ModalUploadKontrakPenelitian = ({ penelitianId }) => {
             Kirim Kontrak Penelitian
           </h2>
           <InputFileDokumen
-            name={"file_kontrak"}
-            register={register("file_kontrak", {
+            name={"file"}
+            register={register("file", {
               required: "harus diisi",
             })}
             watch={watch}
-            errors={errors.file_kontrak}
+            errors={errors.file}
             label={"File Kontrak Penelitian"}
           />
           <div className="flex justify-evenly">

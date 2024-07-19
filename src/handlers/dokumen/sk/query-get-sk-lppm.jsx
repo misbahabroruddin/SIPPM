@@ -5,14 +5,16 @@ import { toast } from "react-toastify";
 
 import { useAxios } from "@/lib/hooks/useAxios";
 
-export const useQueryGetListSKLppm = () => {
+export const useQueryGetListSKLppm = (jenisProposal) => {
   const axios = useAxios();
 
   const query = useQuery({
     queryKey: ["dokumen-sk-lppm"],
     queryFn: async () => {
       try {
-        const { data } = await axios.get("/dokumen/sks/role/lppm");
+        const { data } = await axios.get(
+          `/dokumen/sks/role/lppm?proposal=${jenisProposal}`,
+        );
         return data;
       } catch (error) {
         if (error.response.status === 401) {

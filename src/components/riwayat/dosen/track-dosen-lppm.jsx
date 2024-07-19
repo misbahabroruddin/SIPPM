@@ -89,7 +89,7 @@ export const TrackDosenLPPM = ({ data, isLoading }) => {
                         />
                         <Link
                           target="_blank"
-                          href={item?.file_proposal?.url || ""}
+                          href={item?.url || ""}
                           className="hover:underline"
                         >
                           <p className="text-sm text-dark-09 lg:text-base">

@@ -15,10 +15,11 @@ export default function DocumentPengabdianLppm() {
   const currentTab = tabParams.get("tab");
   const id = useId();
 
-  const { data: dataSK, isLoading: isLoadingSK } = useQueryGetListSKLppm();
+  const { data: dataSK, isLoading: isLoadingSK } =
+    useQueryGetListSKLppm("pengabdian");
 
   const { data: dataKontrak, isLoading: isLoadingKontrak } =
-    useQueryGetListKontrakLppm();
+    useQueryGetListKontrakLppm("pengabdian");
 
   return (
     <div className="flex flex-col gap-4">

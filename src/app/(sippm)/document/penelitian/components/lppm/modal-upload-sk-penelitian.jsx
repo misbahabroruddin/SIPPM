@@ -26,6 +26,7 @@ export const ModalUploadSkPenelitian = ({ penelitianId, buttonClassName }) => {
   };
 
   const onSubmit = async (form) => {
+    console.log(form);
     await mutateAsync(form);
     handleClosModal();
   };
@@ -46,11 +47,11 @@ export const ModalUploadSkPenelitian = ({ penelitianId, buttonClassName }) => {
             Kirim SK Penelitian
           </h2>
           <InputFileDokumen
-            name={"file_sk"}
-            register={register("file_sk", {
+            name={"file"}
+            register={register("file", {
               required: "harus diisi",
             })}
-            errors={errors.file_sk}
+            errors={errors.file}
             label={"Upload file SK"}
           />
           <div className="flex flex-wrap justify-evenly gap-2">
