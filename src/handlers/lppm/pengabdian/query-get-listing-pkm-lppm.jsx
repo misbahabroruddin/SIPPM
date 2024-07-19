@@ -24,7 +24,7 @@ export const useQueryGetPengabdianLPPM = (search, page) => {
         };
       }
       try {
-        const { data } = await axios.get("/proposals/lppms/pkms", {
+        const { data } = await axios.get("/proposal/lppms/pkms", {
           params: params,
         });
         return data?.data;
