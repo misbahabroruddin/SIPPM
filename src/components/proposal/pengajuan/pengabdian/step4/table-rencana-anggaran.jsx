@@ -27,10 +27,11 @@ export const TableRencanaAnggaran = ({ data }) => {
               key={head}
               className={twMerge(
                 "bg-primary p-4",
-                index === 0 && "hidden lg:table-cell",
+                index === 0 && "hidden rounded-tl-lg lg:table-cell",
                 index === 1 && "w-20 sm:w-fit",
                 index === 2 && "w-32 sm:w-fit  xl:w-[550px]",
                 index === 3 && "w-14",
+                index === header.length - 1 && "rounded-tr-lg",
               )}
             >
               <Typography

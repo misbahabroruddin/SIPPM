@@ -30,7 +30,10 @@ export const FormRencanaAnggaranPenelitian = ({ onClose, id }) => {
   const { data: rincianBiayaOptions, isLoading: isLoadingRincianBiaya } =
     useQueryRincianBiayaOptions();
 
-  const { data, refetch } = useQueryDetailRencanaAnggaran(setValue, id);
+  const { data, refetch, isLoading } = useQueryDetailRencanaAnggaran(
+    setValue,
+    id,
+  );
 
   const {
     mutateAsync: onSubmitRencanaAnggaran,
@@ -50,7 +53,6 @@ export const FormRencanaAnggaranPenelitian = ({ onClose, id }) => {
       setValue("rincian_biaya_id", selectedRincianBiayaWhenAdd?.value);
       setValue("biaya", selectedRincianBiayaWhenAdd?.anggaran);
     }
-    console.log(id, "<<<<<");
   }, [rincianBiayaId]);
 
   useEffect(() => {
@@ -110,6 +112,7 @@ export const FormRencanaAnggaranPenelitian = ({ onClose, id }) => {
           required
           spanEmptyClass="hidden"
           defaultValue={data?.biaya || selectedRincianBiayaWhenAdd?.biaya}
+          disabled={isLoading}
         />
       </td>
       <td className="mx-auto w-7 py-2 text-center lg:py-3">

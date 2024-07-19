@@ -10,6 +10,8 @@ import { SingleSelect } from "@/components/select/single-select";
 import { useAddEditRencanaAnggaran } from "@/handlers/dosen/proposal/rencana-anggaran/add-edit-rencana-anggaran";
 import { useQueryDetailRencanaAnggaran } from "@/handlers/dosen/proposal/rencana-anggaran/query-detail-rencana-anggaran";
 import { useQueryRincianBiayaOptions } from "@/handlers/data-referensi/rincian-biaya/query-get-option-rincian-biaya";
+import { useEffect } from "react";
+import { styles } from "@/lib/utils/style-react-select";
 
 export const FormRencanaAnggaranPKM = ({ onClose, id }) => {
   const {
@@ -19,17 +21,40 @@ export const FormRencanaAnggaranPKM = ({ onClose, id }) => {
     setValue,
     formState: { errors },
     control,
+    watch,
   } = useForm();
+
+  const rincianBiayaId = watch("rincian_biaya_id");
 
   const { data: rincianBiayaOptions, isLoading: isLoadingRincianBiaya } =
     useQueryRincianBiayaOptions();
 
-  console.log(rincianBiayaOptions);
-
-  const { data, isLoading } = useQueryDetailRencanaAnggaran(setValue, id);
+  const { data, isLoading, refetch } = useQueryDetailRencanaAnggaran(
+    setValue,
+    id,
+  );
 
   const { mutateAsync: addEditRencanaAnggaran, isPending } =
     useAddEditRencanaAnggaran(id, reset, onClose);
+
+  const selectedRincianBiaya = rincianBiayaOptions?.find(
+    (c) => c.value === data?.rincian_biaya_id,
+  );
+
+  const selectedRincianBiayaWhenAdd = rincianBiayaOptions?.find(
+    (c) => c.value === rincianBiayaId,
+  );
+
+  useEffect(() => {
+    if (rincianBiayaId) {
+      setValue("rincian_biaya_id", selectedRincianBiayaWhenAdd?.value);
+      setValue("biaya", selectedRincianBiayaWhenAdd?.anggaran);
+    }
+  }, [rincianBiayaId]);
+
+  useEffect(() => {
+    if (id) refetch();
+  }, [id]);
 
   return (
     <tr className="border-1 border border-black-09 ">
@@ -47,6 +72,7 @@ export const FormRencanaAnggaranPKM = ({ onClose, id }) => {
           isLoading={isLoadingRincianBiaya}
           maxMenuHeight={180}
           spanEmptyClass="hidden"
+          styles={styles(selectedRincianBiaya)}
         />
       </td>
       <td className="px-2">
@@ -61,9 +87,9 @@ export const FormRencanaAnggaranPKM = ({ onClose, id }) => {
           })}
           errors={errors.biaya}
           required
-          defaultValue={data?.biaya}
           spanEmptyClass="hidden"
           disabled={isLoading}
+          defaultValue={data?.biaya || selectedRincianBiayaWhenAdd?.biaya}
         />
       </td>
       <td className="mx-auto my-2 flex w-fit justify-center gap-2">
