@@ -101,7 +101,7 @@ export const FormEditAnggotaMahasiswa = ({
         disabled={isLoading}
       />
       <Input
-        label="NIDN/NIDK"
+        label="NIM"
         name={"nidn_or_nidk_or_nim"}
         placeholder="NIDN/NIDK"
         register={register("nidn_or_nidk_or_nim", { required: "wajib diisi" })}
