@@ -27,7 +27,7 @@ export const RiwayatPesanLPPMReviewer = ({
       <div className="mb-2 mt-3 flex flex-col">
         <label className="text-sm font-semibold">Catatan :</label>
         <div className="sm:[400px] w-[300px] rounded-lg border p-2 md:w-[900px] lg:w-[1100px] xl:w-[1300px]">
-          <p className="text">{catatan}</p>
+          <p className="px-1 py-2">{catatan}</p>
         </div>
       </div>
       <div
@@ -77,7 +77,7 @@ export const RiwayatPesanLPPMReviewer = ({
                   : "bg-sky text-start"
               } p-2`}
             >
-              <p>{riwayat?.chat}</p>
+              <p>{riwayat?.pesan}</p>
             </div>
           </div>
         ))}

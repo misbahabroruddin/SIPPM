@@ -10,9 +10,7 @@ export const useQueryGetRiwayatPesanReviewer = (riwayatId) => {
 
   const fetchRiwayatPesanReviewer = async () => {
     try {
-      const { data } = await axios.get(
-        `/proposals/reviewers/verifikasis/${riwayatId}/chats`,
-      );
+      const { data } = await axios.get(`/proposal/${riwayatId}/chat-reviewers`);
 
       return data.data;
     } catch (error) {

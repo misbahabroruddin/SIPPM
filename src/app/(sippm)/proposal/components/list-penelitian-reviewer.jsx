@@ -34,7 +34,7 @@ export const ListPenelitianProposalReviewer = ({
           <EmptyState />
         )}
       </div>
-      {penelitian?.data?.length ? (
+      {penelitian?.data?.last_page > 1 ? (
         <Pagination
           perPage={penelitian?.per_page}
           onPageChange={handlePageChange}

@@ -10,7 +10,7 @@ export const InnerTabsReviewer = ({ tabActive, data }) => {
   const tabParams = useSearchParams();
   const router = useRouter();
 
-  const statusReviewer = data?.data?.status_reviewer === "Diterima";
+  const statusReviewer = data?.data?.status_reviewer !== "Pending";
 
   const tabs = [
     {

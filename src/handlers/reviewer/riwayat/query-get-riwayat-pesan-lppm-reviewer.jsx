@@ -10,9 +10,7 @@ export const useQueryGetRiwayatPesanReviewerLPPM = (riwayatId) => {
 
   const fetchRiwayatPesanLPPM = async () => {
     try {
-      const { data } = await axios.get(
-        `/proposals/reviewers/verifikasis/${riwayatId}/chats/lppms`,
-      );
+      const { data } = await axios.get(`/proposal/${riwayatId}/chat-lppms`);
 
       return data.data;
     } catch (error) {

@@ -27,6 +27,7 @@ import { useQueryTargetCapaianProposal } from "@/handlers/proposal/target-capaia
 import { useQueryRincianKegiatanProposal } from "@/handlers/proposal/rincian-kegiatan/query-rincian-kegiatan";
 import { useQueryGetDokumenPendukungProposal } from "@/handlers/proposal/dokumen-pendukung/query-get-dokumen-pendukung";
 import { useQueryRencanaAnggaran } from "@/handlers/proposal/rencana-anggaran/query-rencana-anggaran";
+import { useQueryAnggotaMahasiswaProposal } from "@/handlers/proposal/anggota/query-anggota-mahasiswa";
 
 export default function DetailPenelitianPage() {
   const [tabActive] = useState("dokumen");
@@ -46,7 +47,10 @@ export default function DetailPenelitianPage() {
     isLoading: isLoadingTrackDosenReviewer,
   } = useQueryGetRiwayatVerikasiReviewer();
 
-  const { data: dataAnggotaProposal } = useQueryAnggotaDosenProposal();
+  const { data: dataAnggotaDosenProposal } = useQueryAnggotaDosenProposal();
+
+  const { data: dataAnggotaMahasiswaProposal } =
+    useQueryAnggotaMahasiswaProposal();
 
   const { data: dataTargetCapaianProposal } = useQueryTargetCapaianProposal();
 
@@ -74,7 +78,11 @@ export default function DetailPenelitianPage() {
                   <DetailIdentitasUsulanPenelitian data={data} />
                 )}
                 {innerTab === "anggota" && (
-                  <DetailAnggota data={dataAnggotaProposal} />
+                  <DetailAnggota
+                    dataDosen={dataAnggotaDosenProposal}
+                    dataMahasiswa={dataAnggotaMahasiswaProposal}
+                    a
+                  />
                 )}
                 {innerTab === "Luaran dan Target Capaian" && (
                   <DetailTargetCapaian data={dataTargetCapaianProposal} />

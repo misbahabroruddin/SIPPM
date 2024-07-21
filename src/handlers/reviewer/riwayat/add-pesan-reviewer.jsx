@@ -12,9 +12,9 @@ export const useCreatePesanReviewer = (riwayatId, reset) => {
   const onSubmit = async (form) => {
     try {
       const { data } = await axios.post(
-        `/proposals/reviewers/verifikasis/${riwayatId}/chats`,
+        `/proposal/${riwayatId}/chat-reviewers`,
         {
-          chat: form.chat,
+          pesan: form.chat,
         },
         {
           headers: {

@@ -13,7 +13,7 @@ export const useQueryDetailPengabdian = () => {
 
   const fetchDetailPengabdian = async () => {
     try {
-      const { data } = await axios.get(`/proposals/reviewers/pkms/${id}`);
+      const { data } = await axios.get(`/proposal/pengabdians/detail/${id}`);
 
       return data;
     } catch (error) {

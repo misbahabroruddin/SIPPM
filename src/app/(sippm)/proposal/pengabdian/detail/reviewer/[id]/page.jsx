@@ -18,10 +18,16 @@ import { Timeline } from "@/components/timeline";
 import { TrackRiwayatReviewer } from "@/components/riwayat/reviewer/riwayat-reviewer";
 import { TrackRiwayatReviewerLPPM } from "@/components/riwayat/reviewer/riwayat-reviewer-lppm";
 import { ButtonBeranda } from "@/components/button/button-beranda";
-import { useQueryDetailPengabdianReviewer } from "@/handlers/lppm/pengabdian/query-get-detail-pengabdian-reviewer";
 import { useQueryGetRiwayatVerikasiReviewerLppm } from "@/handlers/reviewer/riwayat/query-get-verifikasi-proposal-reviewer-lppm";
 import { useQueryGetRiwayatVerikasiReviewer } from "@/handlers/reviewer/riwayat/query-get-verifikasi-proposal-reviewer";
 import { DetailAnggota } from "@/components/proposal/track/detail-anggota";
+import { useQueryAnggotaDosenProposal } from "@/handlers/proposal/anggota/query-anggota-dosen";
+import { useQueryAnggotaMahasiswaProposal } from "@/handlers/proposal/anggota/query-anggota-mahasiswa";
+import { useQueryTargetCapaianProposal } from "@/handlers/proposal/target-capaian/query-target-capaian";
+import { useQueryRencanaAnggaran } from "@/handlers/proposal/rencana-anggaran/query-rencana-anggaran";
+import { useQueryRincianKegiatanProposal } from "@/handlers/proposal/rincian-kegiatan/query-rincian-kegiatan";
+import { useQueryGetDokumenPendukungProposal } from "@/handlers/proposal/dokumen-pendukung/query-get-dokumen-pendukung";
+import { useQueryDetailPengabdian } from "@/handlers/reviewer/pengabdian/query-get-detail-pengabdian";
 
 export default function DetailPengabdianPage() {
   const [tabActive] = useState("dokumen");
@@ -31,7 +37,7 @@ export default function DetailPengabdianPage() {
   const innerTab = tabParams.get("tab2");
   const router = useRouter();
 
-  const { data } = useQueryDetailPengabdianReviewer();
+  const { data } = useQueryDetailPengabdian();
 
   const { data: dataTrackDosenLPPM, isLoading: isLoadingTrackDosenLPPM } =
     useQueryGetRiwayatVerikasiReviewerLppm();
@@ -40,6 +46,19 @@ export default function DetailPengabdianPage() {
     data: dataTrackDosenReviewer,
     isLoading: isLoadingTrackDosenReviewer,
   } = useQueryGetRiwayatVerikasiReviewer();
+
+  const { data: dataAnggotaDosenProposal } = useQueryAnggotaDosenProposal();
+
+  const { data: dataAnggotaMahasiswaProposal } =
+    useQueryAnggotaMahasiswaProposal();
+
+  const { data: dataTargetCapaianProposal } = useQueryTargetCapaianProposal();
+
+  const { data: dataRencanaAnggaran } = useQueryRencanaAnggaran();
+
+  const { data: dataRincianKegiatan } = useQueryRincianKegiatanProposal();
+
+  const { data: dataDokumenPendukung } = useQueryGetDokumenPendukungProposal();
 
   return (
     <ContainerPage>
@@ -55,15 +74,25 @@ export default function DetailPengabdianPage() {
                 {(innerTab === "Identitas Usulan" || !innerTab) && (
                   <DetailIdentitasUsulanPengabdian data={data} />
                 )}
-                {innerTab === "anggota" && <DetailAnggota data={data} />}
+                {innerTab === "anggota" && (
+                  <DetailAnggota
+                    dataDosen={dataAnggotaDosenProposal}
+                    dataMahasiswa={dataAnggotaMahasiswaProposal}
+                    a
+                  />
+                )}
                 {innerTab === "Luaran dan Target Capaian" && (
-                  <DetailTargetCapaian data={data} />
+                  <DetailTargetCapaian data={dataTargetCapaianProposal} />
                 )}
                 {innerTab === "Rencana Anggaran" && (
-                  <DetailRencanaAnggaran data={data} />
+                  <DetailRencanaAnggaran data={dataRencanaAnggaran} />
                 )}
-                {innerTab === "Jadwal" && <DetailRincianKegiatan data={data} />}
-                {innerTab === "Berkas" && <DetailBerkasReviewer data={data} />}
+                {innerTab === "Jadwal" && (
+                  <DetailRincianKegiatan data={dataRincianKegiatan} />
+                )}
+                {innerTab === "Berkas" && (
+                  <DetailBerkasReviewer data={dataDokumenPendukung} />
+                )}
                 {innerTab === "Penilaian" && (
                   <DetailPenilaianReviewer data={data} />
                 )}

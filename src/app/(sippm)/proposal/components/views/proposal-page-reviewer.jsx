@@ -73,13 +73,13 @@ export default function ProposalPageReviewer() {
             penelitian={penelitian}
             isLoading={isLoadingPenelitian}
             jumlahPenelitianDisetujui={
-              totalProposalPenelitian?.data?.status_reviewer?.diterima
+              totalProposalPenelitian?.data?.status_reviewer?.Diterima
             }
             jumlahPenelitianDitolak={
-              totalProposalPenelitian?.data?.status_reviewer?.ditolak
+              totalProposalPenelitian?.data?.status_reviewer?.Ditolak
             }
             jumlahPenelitianRevisi={
-              totalProposalPenelitian?.data?.status_reviewer?.revisi
+              totalProposalPenelitian?.data?.status_reviewer?.Revisi
             }
             handlePageChange={handlePageChangePenelitian}
           />
@@ -90,13 +90,13 @@ export default function ProposalPageReviewer() {
             currentTab={currentTab}
             tabActive={tabActive}
             jumlahPengabdianDisetujui={
-              totalProposalPengabdian?.data?.status_reviewer?.diterima
+              totalProposalPengabdian?.data?.status_reviewer?.Diterima
             }
             jumlahPengabdianRevisi={
-              totalProposalPengabdian?.data?.status_reviewer?.revisi
+              totalProposalPengabdian?.data?.status_reviewer?.Revisi
             }
             jumlahPengabdianDitolak={
-              totalProposalPengabdian?.data?.status_reviewer?.ditolak
+              totalProposalPengabdian?.data?.status_reviewer?.Ditolak
             }
             handlePagePengabdianChange={handlePageChangePengabdian}
           />
