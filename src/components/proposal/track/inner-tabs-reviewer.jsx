@@ -10,7 +10,9 @@ export const InnerTabsReviewer = ({ tabActive, data }) => {
   const tabParams = useSearchParams();
   const router = useRouter();
 
-  const statusReviewer = data?.data?.status_reviewer !== "Pending";
+  const statusReviewer = data?.data?.status_reviewer;
+
+  console.log(statusReviewer);
 
   const tabs = [
     {
@@ -50,7 +52,7 @@ export const InnerTabsReviewer = ({ tabActive, data }) => {
     },
   ];
 
-  if (statusReviewer) {
+  if (statusReviewer !== "Pending") {
     tabs.pop();
   }
 
