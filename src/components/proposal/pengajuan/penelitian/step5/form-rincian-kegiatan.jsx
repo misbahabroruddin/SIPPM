@@ -1,8 +1,10 @@
 "use client";
 
 import { Controller, useForm } from "react-hook-form";
-import ReactDatePicker from "react-datepicker";
+import ReactDatePicker, { registerLocale } from "react-datepicker";
 import { useEffect, useState } from "react";
+import { id } from "date-fns/locale";
+registerLocale("id", id);
 
 import { Input } from "@/components/input/input";
 import { SaveIcon } from "@/components/svgs/save";
@@ -119,6 +121,7 @@ export const FormRincianKegiatan = ({ onClose, id }) => {
                 showIcon
                 icon={<DateIcon />}
                 monthsShown={2}
+                locale={"id"}
               />
             )}
           />

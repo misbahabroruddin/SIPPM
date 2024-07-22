@@ -1,8 +1,10 @@
 "use client";
 import { useEffect, useId, useState } from "react";
-import ReactDatePicker from "react-datepicker";
+import ReactDatePicker, { registerLocale } from "react-datepicker";
 import { Controller, useForm } from "react-hook-form";
 import { twMerge } from "tailwind-merge";
+import { id } from "date-fns/locale";
+registerLocale("id", id);
 
 import { ButtonSave } from "@/components/button/button-save";
 import { Input } from "@/components/input/input";
@@ -151,6 +153,7 @@ const FormBiodata = () => {
                     showYearDropdown
                     scrollableYearDropdown
                     dropdownMode="select"
+                    locale={"id"}
                   />
                 )}
                 rules={{ required: "Wajib diisi" }}

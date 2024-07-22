@@ -1,9 +1,11 @@
 "use client";
 
 import { Controller, useForm } from "react-hook-form";
-import ReactDatePicker from "react-datepicker";
+import ReactDatePicker, { registerLocale } from "react-datepicker";
 import { Spinner } from "@material-tailwind/react";
 import { useEffect, useState } from "react";
+import { id } from "date-fns/locale";
+registerLocale("id", id);
 
 import { Input } from "@/components/input/input";
 import { DateIcon } from "@/components/svgs/date";
@@ -110,7 +112,7 @@ export const FormRincianKegiatanPKM = ({ onClose, id }) => {
                 startDate={startDate}
                 endDate={endDate}
                 selectsRange
-                dateFormat="dd MMM yyyy"
+                dateFormat="dd MMMM yyyy"
                 wrapperClassName="w-full flex items-center outline outline-1 h-10 outline-secondary-200 rounded-md focus:outline-none focus:ring-1 focus:ring-primary focus:border-transparent placeholder:text-sm overflow-hidden"
                 className="ml-12 !p-0 focus:outline-none"
                 isClearable
@@ -118,6 +120,7 @@ export const FormRincianKegiatanPKM = ({ onClose, id }) => {
                 showIcon
                 icon={<DateIcon />}
                 monthsShown={2}
+                locale={"id"}
               />
             )}
           />

@@ -1,7 +1,9 @@
 "use client";
 
 import { Controller, useForm } from "react-hook-form";
-import ReactDatePicker from "react-datepicker";
+import ReactDatePicker, { registerLocale } from "react-datepicker";
+import { id } from "date-fns/locale";
+registerLocale("id", id);
 import { useEffect, useState } from "react";
 
 import { Input } from "@/components/input/input";
@@ -10,8 +12,6 @@ import { CloseIcon } from "@/components/svgs/close";
 import { DateIcon } from "@/components/svgs/date";
 import { Spinner } from "@material-tailwind/react";
 import { useAddEditRincianKegiatan } from "@/handlers/dosen/proposal/rincian-kegiatan/add-edit-rincian-kegiatan";
-import { useQueryDetailRincianKegiatan } from "@/handlers/dosen/proposal/rincian-kegiatan/query-detail-rincian-kegiatan";
-import { convertToTimestamp } from "@/lib/utils/convertDate";
 
 export const FormAddRincianKegiatan = ({ onClose, id }) => {
   const [startDate, setStartDate] = useState();
@@ -121,6 +121,7 @@ export const FormAddRincianKegiatan = ({ onClose, id }) => {
                 showIcon
                 icon={<DateIcon />}
                 monthsShown={2}
+                locale="id"
               />
             )}
           />
