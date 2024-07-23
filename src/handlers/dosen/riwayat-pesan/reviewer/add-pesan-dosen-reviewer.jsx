@@ -12,9 +12,9 @@ export const useCreatePesanDosenReviewer = (riwayatId, reset) => {
   const onSubmit = async (form) => {
     try {
       const { data } = await axios.post(
-        `/proposals/dosens/chats/${riwayatId}/reviewers`,
+        `/proposal/${riwayatId}/chat-reviewers`,
         {
-          chat: form.chat,
+          pesan: form.chat,
         },
         {
           headers: {

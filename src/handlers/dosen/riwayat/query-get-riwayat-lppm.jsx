@@ -14,9 +14,7 @@ export const useQueryGetRiwayatTrackDosenLPPM = () => {
     queryKey: ["trackDosenLPPM", id],
     queryFn: async () => {
       try {
-        const { data } = await axios.get(
-          `/proposals/dosens/verifikasis/${id}/lppms`,
-        );
+        const { data } = await axios.get(`/proposal/${id}/verifikasi-lppms`);
         return data.data;
       } catch (error) {
         if (error.response.status === 401) {

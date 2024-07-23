@@ -39,48 +39,46 @@ export const TableDetailAnggotaMahasiswa = ({ data }) => {
         </tr>
       </thead>
       <tbody>
-        {data?.data?.anggota_proposals?.length ? (
-          data?.data?.anggota_proposals
-            ?.filter((anggota) => anggota.jenis_anggota === "Mahasiswa")
-            .map((row, index) => {
-              return (
-                <tr key={row.id} className="text-base even:bg-sky">
-                  <td className="p-2 lg:p-3">
-                    <Typography
-                      color="blue-gray"
-                      className="text-center font-normal"
-                    >
-                      {index + 1}
-                    </Typography>
-                  </td>
-                  <td className="p-2 lg:p-3 ">
-                    <Typography color="blue-gray" className="font-normal">
-                      {row.anggota.nama_lengkap}
-                    </Typography>
-                  </td>
-                  <td className="p-2 lg:p-3 ">
-                    <Typography color="blue-gray" className="font-normal">
-                      {row.anggota.perguruan_tinggi}
-                    </Typography>
-                  </td>
-                  <td className="hidden p-2 lg:table-cell lg:p-3">
-                    <Typography color="blue-gray" className="font-normal">
-                      {row.anggota.nidn_or_nidk_or_nim}
-                    </Typography>
-                  </td>
-                  <td className="hidden p-2 lg:table-cell lg:p-3">
-                    <Typography color="blue-gray" className="font-normal">
-                      {row.anggota.program_studi?.nama}
-                    </Typography>
-                  </td>
-                  <td className="hidden p-2 lg:table-cell lg:p-3">
-                    <Typography color="blue-gray" className="font-normal">
-                      {row.anggota.email || "-"}
-                    </Typography>
-                  </td>
-                </tr>
-              );
-            })
+        {data?.data?.length ? (
+          data?.data.map((row, index) => {
+            return (
+              <tr key={row.id} className="text-base even:bg-sky">
+                <td className="p-2 lg:p-3">
+                  <Typography
+                    color="blue-gray"
+                    className="text-center font-normal"
+                  >
+                    {index + 1}
+                  </Typography>
+                </td>
+                <td className="p-2 lg:p-3 ">
+                  <Typography color="blue-gray" className="font-normal">
+                    {row.anggota.nama_lengkap}
+                  </Typography>
+                </td>
+                <td className="p-2 lg:p-3 ">
+                  <Typography color="blue-gray" className="font-normal">
+                    {row.anggota.perguruan_tinggi}
+                  </Typography>
+                </td>
+                <td className="hidden p-2 lg:table-cell lg:p-3">
+                  <Typography color="blue-gray" className="font-normal">
+                    {row.anggota.nidn_or_nidk_or_nim}
+                  </Typography>
+                </td>
+                <td className="hidden p-2 lg:table-cell lg:p-3">
+                  <Typography color="blue-gray" className="font-normal">
+                    {row.anggota.program_studi?.nama}
+                  </Typography>
+                </td>
+                <td className="hidden p-2 lg:table-cell lg:p-3">
+                  <Typography color="blue-gray" className="font-normal">
+                    {row.anggota.email || "-"}
+                  </Typography>
+                </td>
+              </tr>
+            );
+          })
         ) : (
           <tr className="text-base even:bg-sky">
             <td className="p-2 lg:p-3" colSpan={7}>

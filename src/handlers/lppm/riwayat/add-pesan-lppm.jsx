@@ -12,9 +12,9 @@ export const useCreatePesanLPPM = (riwayatId, reset) => {
   const onSubmit = async (form) => {
     try {
       const { data } = await axios.post(
-        `/proposals/lppms/verifikasis/${riwayatId}/chats`,
+        `/proposal/${riwayatId}/chat-lppms`,
         {
-          chat: form.chat,
+          pesan: form.chat,
         },
         {
           headers: {

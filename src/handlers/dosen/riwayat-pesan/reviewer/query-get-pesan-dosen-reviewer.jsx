@@ -10,9 +10,7 @@ export const useQueryGetRiwayatPesanDosenReviewer = (riwayatId) => {
 
   const fetchRiwayatPesanDosenReviewer = async () => {
     try {
-      const { data } = await axios.get(
-        `/proposals/dosens/chats/${riwayatId}/reviewers`,
-      );
+      const { data } = await axios.get(`/proposal/${riwayatId}/chat-reviewers`);
 
       return data.data;
     } catch (error) {

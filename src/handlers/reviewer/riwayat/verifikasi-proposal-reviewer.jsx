@@ -89,6 +89,9 @@ export const useVerifikasiProposalReviewer = (reset, router) => {
       queryClient.invalidateQueries({
         queryKey: ["detailPenelitianReviewer", id],
       });
+      queryClient.invalidateQueries({
+        queryKey: ["detailPengabdianReviewer", id],
+      });
       queryClient.resetQueries({ queryKey: ["trackDosenReviewer", id] });
     },
   });

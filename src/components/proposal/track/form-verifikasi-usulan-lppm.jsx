@@ -1,14 +1,16 @@
 "use client";
 
+import { useRouter } from "next/navigation";
+import { useId } from "react";
+import { Controller, useForm } from "react-hook-form";
+import { twMerge } from "tailwind-merge";
+
 import { ButtonSubmit } from "@/components/button/button-submit";
 import { Input } from "@/components/input/input";
 import { Label } from "@/components/label";
 import { SingleSelect } from "@/components/select/single-select";
 import { useVerifikasiProposalLppm } from "@/handlers/lppm/riwayat/verifikasi-proposal-lppm";
-import { useRouter } from "next/navigation";
-import { useId } from "react";
-import { Controller, useForm } from "react-hook-form";
-import { twMerge } from "tailwind-merge";
+import { CurrencyInput } from "@/components/input/input-currency";
 
 export const FormVerifikasiUsulan = () => {
   const {
@@ -48,18 +50,14 @@ export const FormVerifikasiUsulan = () => {
   return (
     <form className="flex flex-col gap-4" onSubmit={handleSubmit(onSubmit)}>
       <div className="flex flex-col gap-2">
-        <Label
-          htmlFor={"dana_yang_disetujui"}
-          text={"Dana yang disetujui"}
-          required
-        />
-        <Input
-          containerClass="items-start"
+        <CurrencyInput
+          name={"dana_yang_disetujui"}
+          control={control}
+          Controller={Controller}
+          rules={{
+            required: "Dana harus diisi",
+          }}
           placeholder="Dana yang disetujui"
-          type="number"
-          register={register("dana_yang_disetujui", {
-            required: "Dana yang disetujui harus diisi",
-          })}
           errors={errors.dana_yang_disetujui}
           spanEmptyClass="hidden"
         />

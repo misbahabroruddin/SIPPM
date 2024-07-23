@@ -4,6 +4,7 @@ import { Typography } from "@material-tailwind/react";
 import { twMerge } from "tailwind-merge";
 
 export const TableDetailAnggotaDosen = ({ data }) => {
+  console.log(data, "<<<<<<");
   const header = [
     "No",
     "Nama Lengkap",
@@ -39,63 +40,61 @@ export const TableDetailAnggotaDosen = ({ data }) => {
         </tr>
       </thead>
       <tbody>
-        {data?.data?.anggotas?.length ? (
-          data?.data?.anggotas
-            ?.filter((anggota) => anggota.jenis_anggota === "Dosen")
-            .map((row, index) => {
-              return (
-                <tr key={row.id} className="text-base even:bg-sky">
-                  <td className="p-2 lg:p-3">
-                    <Typography
-                      color="blue-gray"
-                      className="text-center text-sm font-normal lg:text-base"
-                    >
-                      {index + 1}
-                    </Typography>
-                  </td>
-                  <td className="w-40 p-2 sm:w-fit lg:p-3">
-                    <Typography
-                      color="blue-gray"
-                      className="text-sm font-normal lg:text-base"
-                    >
-                      {row.anggota.nama_lengkap}
-                    </Typography>
-                  </td>
-                  <td className="w-32 p-2 sm:w-fit lg:p-3">
-                    <Typography
-                      color="blue-gray"
-                      className="text-sm font-normal lg:text-base"
-                    >
-                      {row.anggota.perguruan_tinggi}
-                    </Typography>
-                  </td>
-                  <td className="hidden p-2 lg:table-cell lg:p-3">
-                    <Typography
-                      color="blue-gray"
-                      className="text-sm font-normal lg:text-base"
-                    >
-                      {row.anggota.nidn_or_nidk_or_nim}
-                    </Typography>
-                  </td>
-                  <td className="hidden p-2 lg:table-cell lg:p-3">
-                    <Typography
-                      color="blue-gray"
-                      className="text-sm font-normal lg:text-base"
-                    >
-                      {row.anggota.program_studi?.nama}
-                    </Typography>
-                  </td>
-                  <td className="hidden p-2 lg:table-cell lg:p-3">
-                    <Typography
-                      color="blue-gray"
-                      className="text-sm font-normal lg:text-base"
-                    >
-                      {row.anggota.jabatan_fungsional?.nama || "-"}
-                    </Typography>
-                  </td>
-                </tr>
-              );
-            })
+        {data?.data?.length ? (
+          data?.data?.map((row, index) => {
+            return (
+              <tr key={row.id} className="text-base even:bg-sky">
+                <td className="p-2 lg:p-3">
+                  <Typography
+                    color="blue-gray"
+                    className="text-center text-sm font-normal lg:text-base"
+                  >
+                    {index + 1}
+                  </Typography>
+                </td>
+                <td className="w-40 p-2 sm:w-fit lg:p-3">
+                  <Typography
+                    color="blue-gray"
+                    className="text-sm font-normal lg:text-base"
+                  >
+                    {row.anggota.nama_lengkap}
+                  </Typography>
+                </td>
+                <td className="w-32 p-2 sm:w-fit lg:p-3">
+                  <Typography
+                    color="blue-gray"
+                    className="text-sm font-normal lg:text-base"
+                  >
+                    {row.anggota.perguruan_tinggi}
+                  </Typography>
+                </td>
+                <td className="hidden p-2 lg:table-cell lg:p-3">
+                  <Typography
+                    color="blue-gray"
+                    className="text-sm font-normal lg:text-base"
+                  >
+                    {row.anggota.nidn_or_nidk_or_nim}
+                  </Typography>
+                </td>
+                <td className="hidden p-2 lg:table-cell lg:p-3">
+                  <Typography
+                    color="blue-gray"
+                    className="text-sm font-normal lg:text-base"
+                  >
+                    {row.anggota.program_studi?.nama}
+                  </Typography>
+                </td>
+                <td className="hidden p-2 lg:table-cell lg:p-3">
+                  <Typography
+                    color="blue-gray"
+                    className="text-sm font-normal lg:text-base"
+                  >
+                    {row.anggota.jabatan_fungsional?.nama || "-"}
+                  </Typography>
+                </td>
+              </tr>
+            );
+          })
         ) : (
           <tr className="text-base even:bg-sky">
             <td className="p-2 lg:p-3" colSpan={7}>

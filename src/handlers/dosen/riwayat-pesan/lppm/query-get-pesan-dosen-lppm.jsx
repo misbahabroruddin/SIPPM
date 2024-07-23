@@ -10,9 +10,7 @@ export const useQueryGetRiwayatPesanDosenLPPM = (riwayatId) => {
 
   const fetchRiwayatPesanDosenLPPM = async () => {
     try {
-      const { data } = await axios.get(
-        `/proposals/dosens/chats/${riwayatId}/lppms`,
-      );
+      const { data } = await axios.get(`/proposal/${riwayatId}/chat-lppms`);
 
       return data.data;
     } catch (error) {

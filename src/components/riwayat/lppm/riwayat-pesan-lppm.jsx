@@ -74,7 +74,7 @@ export const RiwayatPesanLPPM = ({ riwayatId, status, catatan, index }) => {
                   : "bg-sky text-start"
               } p-2`}
             >
-              <p>{riwayat?.chat}</p>
+              <p>{riwayat?.pesan}</p>
             </div>
           </div>
         ))}

@@ -14,9 +14,7 @@ export const useQueryGetRiwayatTrackDosenReviewer = () => {
     queryKey: ["trackDosenReviewer", id],
     queryFn: async () => {
       try {
-        const { data } = await axios.get(
-          `/proposals/dosens/verifikasis/${id}/reviewers`,
-        );
+        const { data } = await axios.get(`/proposal/${id}/approve-reviewers`);
         return data.data;
       } catch (error) {
         if (error.response.status === 401) {

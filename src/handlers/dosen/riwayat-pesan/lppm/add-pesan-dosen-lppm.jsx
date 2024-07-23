@@ -12,9 +12,9 @@ export const useCreatePesanDosenLPPM = (riwayatId, reset) => {
   const onSubmit = async (form) => {
     try {
       const { data } = await axios.post(
-        `/proposals/dosens/chats/${riwayatId}/lppms`,
+        `/proposal/${riwayatId}/chat-lppms`,
         {
-          chat: form.chat,
+          pesan: form.chat,
         },
         {
           headers: {

@@ -72,6 +72,7 @@ export const useVerifikasiProposalLppm = (reset, router) => {
         queryKey: ["verfikasiLPPM", id],
       });
       queryClient.resetQueries({ queryKey: ["detailPenelitianLPPM", id] });
+      queryClient.resetQueries({ queryKey: ["detailPengabdianLPPM", id] });
     },
   });
 

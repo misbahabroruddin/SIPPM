@@ -5,10 +5,8 @@ import { toast } from "react-toastify";
 import { signOut } from "next-auth/react";
 
 import { useAxios } from "@/lib/hooks/useAxios";
-import { useState } from "react";
 
 export const useResetPenelitian = () => {
-  const [isLoading, setIsLoading] = useState(false);
   const axios = useAxios();
   const queryClient = useQueryClient();
 
@@ -27,16 +25,12 @@ export const useResetPenelitian = () => {
       });
 
       toast.success("Proposal Berhasil direset");
-      // setIsLoading(false);
 
       return data;
     } catch (error) {
       if (error.response.status === 401) {
-        // setIsLoading(false);
-
         return signOut();
       }
-      // setIsLoading(false);
 
       toast.error(error.response.data.message || "Something went wrong");
     }
