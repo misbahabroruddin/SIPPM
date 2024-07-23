@@ -13,8 +13,6 @@ import { useQueryGetListLaporanHasilPengabdian } from "@/handlers/dosen/laporan-
 import { ListPengabdian } from "./components/list-pengabdian";
 
 export default function LaporanHasilPage() {
-  // const { user } = await getServerSession(authOptions);
-  // const role = user.roles[0].name;
   const [tabActive] = useState("penelitian");
   const [pagePenelitian, setPagePenelitian] = useState(1);
   const [pagePengabdian, setPagePengabdian] = useState(1);
@@ -38,7 +36,6 @@ export default function LaporanHasilPage() {
   const debouncedSearchPengabdian = useDebouncedCallback((value) => {
     setSearchPengabdian(value);
   }, 1000);
-  useQueryGetListLaporanHasilPenelitian;
 
   const { data: penelitian, isLoading: isLoadingPenelitian } =
     useQueryGetListLaporanHasilPenelitian(searchPenelitian, pagePenelitian);
@@ -54,10 +51,7 @@ export default function LaporanHasilPage() {
           title="Laporan Hasil"
         />
         <div className="flex items-center gap-2 lg:gap-4">
-          <Tabs
-            tabActive={currentTab || tabActive}
-            setSearch={setSearchPenelitian}
-          />
+          <Tabs tabActive={currentTab || tabActive} />
           <SearchInput
             onChange={(e) => {
               currentTab === "pengabdian"
