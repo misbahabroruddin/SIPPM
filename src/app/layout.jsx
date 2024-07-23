@@ -42,8 +42,8 @@ export const viewport = {
 export default async function RootLayout({ children }) {
   const session = await getServerSession(authOptions);
   return (
-    <html lang='en'>
-      <body className={`${poppins.className}`}>
+    <html lang="en">
+      <body className={`${poppins.className}`} suppressHydrationWarning={true}>
         <AuthProvider session={session}>
           <SidebarProvider>
             <StepProvider>
