@@ -22,6 +22,12 @@ export const useKirimUsulanPenelitian = () => {
       queryClient.invalidateQueries({
         queryKey: ["listPenelitianDashboardDosen"],
       });
+      queryClient.invalidateQueries({
+        queryKey: ["trackDosenReviewer"],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ["trackDosenReviewer"],
+      });
       queryClient.removeQueries({
         queryKey: ["identitas-usulan-penelitian"],
       });

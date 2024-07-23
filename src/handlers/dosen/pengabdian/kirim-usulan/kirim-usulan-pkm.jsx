@@ -23,6 +23,12 @@ export const useKirimUsulanPKM = () => {
       queryClient.invalidateQueries({
         queryKey: ["listPengabdianDashboardDosen"],
       });
+      queryClient.invalidateQueries({
+        queryKey: ["trackDosenReviewer"],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ["trackDosenReviewer"],
+      });
       queryClient.resetQueries({
         queryKey: ["anggotaMahasiswa"],
       });
