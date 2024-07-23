@@ -99,12 +99,18 @@ const ListItemKontrak = ({ data }) => {
             </div>
           </div>
         </div>
-        <div className="flex flex-wrap items-end justify-center gap-4">
+        <div className="flex flex-wrap items-end justify-center gap-4 lg:flex-nowrap">
+          <div className="order-1 flex flex-col items-center gap-[2px] px-8 font-[500] lg:order-none">
+            <p className="text-sm text-primary">Status</p>
+            <p className={twMerge("rounded-lg px-2 py-1", buttonClass)}>
+              {data?.dokumen_kontrak?.status || "Kontrak Belum Ada"}
+            </p>
+          </div>
           {data?.dokumen_kontrak?.status === "Menunggu" ? (
             <div className="order-2 flex w-full flex-wrap items-center justify-center gap-2 lg:order-none lg:flex-nowrap lg:gap-4">
               <ModalUploadKontrakPenelitian
                 penelitianId={data?.id}
-                buttonClassName="w-full lg:w-fit justify-center px-2 py-1 md:px-4 gap-1 lg:gap-2"
+                buttonClassName="w-full lg:w-fit justify-center px-2 py-1 md:px-4 gap-1 lg:gap-2 md:py-2"
               />
               <Link
                 href={data?.dokumen_kontrak?.url}
@@ -119,7 +125,7 @@ const ListItemKontrak = ({ data }) => {
             <div className="order-2 flex w-full flex-wrap items-center justify-center gap-2 lg:order-none lg:flex-nowrap lg:gap-4">
               <ModalUploadKontrakPenelitian
                 penelitianId={data?.id}
-                buttonClassName="w-full lg:w-fit justify-center px-2 py-1 md:px-4 gap-1 lg:gap-2"
+                buttonClassName="w-full lg:w-fit justify-center px-2 py-1 md:px-4 gap-1 lg:gap-2 md:py-2"
               />
               <Link
                 href={data?.dokumen_kontrak?.url || "#"}
@@ -139,12 +145,6 @@ const ListItemKontrak = ({ data }) => {
               <ButtonDownload className="px-2 py-1 md:px-4 md:py-2" />
             </Link>
           ) : null}
-          <div className="order-1 flex flex-col items-center gap-[2px] px-8 font-[500] lg:order-none">
-            <p className="text-sm text-primary">Status</p>
-            <p className={twMerge("rounded-lg px-2 py-1", buttonClass)}>
-              {data?.dokumen_kontrak?.status || "Kontrak Belum Ada"}
-            </p>
-          </div>
         </div>
       </div>
     </div>
