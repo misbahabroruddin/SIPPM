@@ -67,7 +67,7 @@ export const FormCatatanReviewer = () => {
                       {...register("skor" + index, {
                         required: "Harus diisi",
                         onBlur: async (e) => {
-                          if (e.target.value < 7) {
+                          if (e.target.value <= 7) {
                             setErrorMessage(false);
                             await handleUpdateNilai(id, e.target.value);
                           }
