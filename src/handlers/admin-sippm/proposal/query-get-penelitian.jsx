@@ -12,10 +12,10 @@ export const useQueryGetPenelitianAdmin = (search, page, limit) => {
     queryKey: ["list-penelitian-admin", search, page, limit],
     queryFn: async () => {
       let params;
+
       if (search) {
         params = {
           judul: search,
-          limit,
         };
       }
 
@@ -23,6 +23,13 @@ export const useQueryGetPenelitianAdmin = (search, page, limit) => {
         params = {
           ...params,
           page: page,
+        };
+      }
+
+      if (limit) {
+        params = {
+          ...params,
+          limit,
         };
       }
       try {
