@@ -41,7 +41,10 @@ export const FormCatatanReviewer = () => {
           {dataLaporanHasil?.data?.length ? (
             <>
               {dataLaporanHasil?.data.map((item, index) => (
-                <div className="flex items-center py-2" key={item.id}>
+                <div
+                  className="flex items-center py-2 even:bg-blue-09"
+                  key={item.id}
+                >
                   <p className="basis-28 text-center">{index + 1}</p>
                   <div className="flex grow flex-col py-2">
                     <p>{item.kriteria_penilaian.nama}</p>
@@ -136,7 +139,7 @@ export const FormCatatanReviewer = () => {
         </div>
       </div>
       <form
-        className="flex flex-col gap-4"
+        className="flex flex-col gap-4 bg-blue-09"
         onSubmit={handleSubmit(onSubmitCatatan)}
       >
         <div className="px-6 py-4 text-black-06">
