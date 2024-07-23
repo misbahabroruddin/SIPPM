@@ -30,8 +30,6 @@ export const useUploadDokumenPendukungProposal = (onClose) => {
         queryKey: ["dokumenPendukungProposal"],
       });
 
-      onClose();
-
       return data;
     } catch (error) {
       if (error.response.data.message.jenis_dokumen_id) {

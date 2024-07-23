@@ -10,9 +10,9 @@ import { ContainerContent } from "@/components/container-content";
 import { useQueryRumpunIlmu } from "@/handlers/data-referensi/rumpun-ilmu/query-rumpun-ilmu";
 import { SingleSelect } from "@/components/select/single-select";
 import { styles } from "@/lib/utils/style-react-select";
-import { useQueryIdentitasUsulanLaporanHasilPenelitian } from "@/handlers/dosen/laporan-hasil/penelitian/identitas-usulan/query-identitas-usulan-laporan-hasil-penelitian";
 import { useQueryJenisPenelitians } from "@/handlers/data-referensi/jenis-penelitian/query-jenis-penelitian";
 import { useStep } from "@/lib/hooks/useStep";
+import { useQueryIdentitasUsulanPenelitian } from "@/handlers/dosen/penelitian/identitas-usulan/query-identitas-usulan-penelitian";
 
 export const IdentitasUsulan = () => {
   const id = useId();
@@ -25,7 +25,7 @@ export const IdentitasUsulan = () => {
   const { data: rumpunIlmuOptions } = useQueryRumpunIlmu();
 
   const { identitasUsulanPenelitian, refecthIdentitasUsulanPenelitian } =
-    useQueryIdentitasUsulanLaporanHasilPenelitian();
+    useQueryIdentitasUsulanPenelitian(setValue);
 
   useEffect(() => {
     setValue("judul", identitasUsulanPenelitian?.judul);
@@ -55,6 +55,11 @@ export const IdentitasUsulan = () => {
     (c) => c.value === identitasUsulanPenelitian?.rumpun_ilmu_id,
   );
 
+  const handleNextStep = () => {
+    setCurrentStep(2);
+    localStorage.setItem("step", 2);
+  };
+
   return (
     <ContainerContent className="relative">
       <h1 className="text-lg font-semibold text-primary">Identitas Usulan</h1>
@@ -66,7 +71,7 @@ export const IdentitasUsulan = () => {
             placeholder="Judul Penelitian"
             register={register("judul")}
             required
-            disabled={true}
+            disabled
           />
           <SingleSelect
             label={"Jenis Penelitian"}
@@ -80,7 +85,7 @@ export const IdentitasUsulan = () => {
             }
             name="jenis_penelitian_id"
             id={id}
-            isDisabled={true}
+            isDisabled
             styles={styles(selectedJenisPenelitian)}
           />
           <SingleSelect
@@ -93,9 +98,9 @@ export const IdentitasUsulan = () => {
             }
             name="rumpun_ilmu_id"
             id={id}
-            isDisabled={true}
+            isDisabled
             styles={styles(selectedRumpunIlmu)}
-            disabled={true}
+            disabled
           />
           <Input
             label="Bidang Fokus Penelitian"
@@ -103,7 +108,7 @@ export const IdentitasUsulan = () => {
             placeholder="Bidang Fokus Penelitian"
             register={register("bidang_fokus")}
             required
-            disabled={true}
+            disabled
           />
         </div>
         <div className="flex grow flex-col gap-4">
@@ -114,7 +119,7 @@ export const IdentitasUsulan = () => {
             placeholder="Tahun Usulan"
             register={register("tahun_usulan")}
             required
-            disabled={true}
+            disabled
           />
           <Input
             label="Jangka Waktu Penelitian"
@@ -122,7 +127,7 @@ export const IdentitasUsulan = () => {
             placeholder="Jangka Waktu Penelitian"
             register={register("jangka_waktu")}
             required
-            disabled={true}
+            disabled
           />
           <Input
             label="Ringkasan Penelitian"
@@ -130,12 +135,12 @@ export const IdentitasUsulan = () => {
             placeholder="Ringkasan Penelitian"
             register={register("ringkasan")}
             required
-            disabled={true}
+            disabled
           />
         </div>
       </div>
       <div className="absolute -bottom-16 left-0 flex w-full justify-end">
-        <ButtonNext onClick={() => setCurrentStep(2)} />
+        <ButtonNext onClick={handleNextStep} />
       </div>
     </ContainerContent>
   );

@@ -6,9 +6,8 @@ import { ContainerContent } from "@/components/container-content";
 import { ButtonPrev } from "@/components/button/button-prev";
 import { ButtonNext } from "@/components/button/button-next";
 import { useStep } from "@/lib/hooks/useStep";
-import { useQueryRincianKegiatanLaporanHasilPenelitian } from "@/handlers/dosen/laporan-hasil/penelitian/rincian-kegiatan/query-rincian-kegiatan";
-import { TableRincianKegiatan } from "./table-rincian-kegiatan";
-import { ModalTambahRincianKegiatan } from "./modal-tambah-rincian-kegiatan";
+import { TableRincianKegiatanLaporanHasil } from "@/components/proposal/laporan-hasil/penelitian/step5/table-rincian-kegiatan";
+import { useQueryRincianKegiatanProposal } from "@/handlers/proposal/rincian-kegiatan/query-rincian-kegiatan";
 
 export const RincianKegiatan = () => {
   const { currentStep, setCurrentStep } = useStep();
@@ -16,14 +15,17 @@ export const RincianKegiatan = () => {
   const {
     data: rincianKegiatanPenelitian,
     refetch: refetchRincianKegiatanPenelitian,
-  } = useQueryRincianKegiatanLaporanHasilPenelitian();
+  } = useQueryRincianKegiatanProposal();
 
   const handlePrevStep = () => {
     setCurrentStep(4);
+    localStorage.setItem("step", 4);
+    localStorage.setItem("isEdit", true);
   };
 
   const handleNextStep = () => {
     setCurrentStep(6);
+    localStorage.setItem("step", 6);
   };
 
   useEffect(() => {
@@ -34,9 +36,8 @@ export const RincianKegiatan = () => {
     <ContainerContent className="relative">
       <div className="flex items-center justify-between">
         <h1 className="text-lg font-semibold text-primary">Rincian Kegiatan</h1>
-        <ModalTambahRincianKegiatan />
       </div>
-      <TableRincianKegiatan data={rincianKegiatanPenelitian} />
+      <TableRincianKegiatanLaporanHasil data={rincianKegiatanPenelitian} />
       <div className="absolute -bottom-16 left-0 mt-4 flex w-full items-center justify-between">
         <ButtonPrev onClick={handlePrevStep} />
         <ButtonNext

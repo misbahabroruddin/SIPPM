@@ -14,7 +14,9 @@ export const useQueryIdentitasUsulanPKM = (setValue) => {
   const fetchIdentitasUsulan = async () => {
     try {
       const pengabdianId = localStorage.getItem("pengabdianId");
-      const { data } = await axios.get(`/proposal/penelitians/${pengabdianId}`);
+      const { data } = await axios.get(
+        `/proposal/pengabdians/detail/${id || pengabdianId}`,
+      );
       setValue("rumpun_ilmu_id", data?.data.rumpun_ilmu.id, {
         shouldValidate: true,
       });

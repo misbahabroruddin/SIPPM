@@ -26,9 +26,12 @@ export const useQueryGetListLaporanHasilPenelitian = (search, page) => {
       }
 
       try {
-        const { data } = await axios.get(`/laporan-hasils/dosens/penelitians`, {
-          params: params,
-        });
+        const { data } = await axios.get(
+          `/laporan-hasils?proposal=penelitian`,
+          {
+            params: params,
+          },
+        );
 
         return data.data;
       } catch (error) {

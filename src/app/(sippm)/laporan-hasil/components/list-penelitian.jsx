@@ -38,6 +38,12 @@ export const ListPenelitian = ({ penelitian, isLoading, handlePageChange }) => {
 
 const ListItemPenelitian = ({ data }) => {
   const { setCurrentStep } = useStep();
+  const handleStep = () => {
+    setCurrentStep(1);
+    localStorage.removeItem("penelitianId");
+    localStorage.removeItem("pengabdianId");
+    localStorage.removeItem("step");
+  };
   return (
     <div className="rounded-lg px-6 py-4 shadow-custom" key={data?.id}>
       <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between">
@@ -79,14 +85,15 @@ const ListItemPenelitian = ({ data }) => {
         </div>
         <div className="flex items-end gap-10">
           <div className="flex flex-col items-center gap-1">
-            <p>Status Penelitian</p>
+            <p>Status Proposal</p>
             <ButtonStatus status="Diterima" />
           </div>
           <Link href={`/laporan-hasil/edit/penelitian/${data?.id}`}>
             <ButtonUpdate
-              className="bg-primary"
+              className="bg-primary disabled:bg-gray-600"
               text="Perbarui"
-              onClick={() => setCurrentStep(1)}
+              onClick={handleStep}
+              disabled={data?.is_done}
             />
           </Link>
         </div>

@@ -58,7 +58,7 @@ export const TrackDosenLPPM = ({ data, isLoading }) => {
                   {updatedData?.user?.name}
                 </p>
                 <ButtonStatus
-                  status={updatedData?.status}
+                  status={updatedData?.proposal?.status_lppm}
                   className="px-2 py-1 text-xs font-[500]"
                 />
               </div>

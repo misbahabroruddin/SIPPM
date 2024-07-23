@@ -5,28 +5,30 @@ import { useEffect } from "react";
 import { ButtonPrev } from "@/components/button/button-prev";
 import { ButtonNext } from "@/components/button/button-next";
 import { ContainerContent } from "@/components/container-content";
-import { ModalTambahAnggota } from "./modal-tambah-anggota";
-import { TableAnggotaMahasiswaPKM } from "./table-anggota-mahasiswa-pkm";
 import { useStep } from "@/lib/hooks/useStep";
-import { useQueryAnggotaDosenLaporanHasilPKM } from "@/handlers/dosen/laporan-hasil/pengabdian/anggota/query-anggota-dosen-pkm";
-import { useQueryAnggotaMahasiswaLaporanHasilPKM } from "@/handlers/dosen/laporan-hasil/pengabdian/anggota/query-anggota-mahasiswa-pkm";
-import { TableAnggotaDosenPKM } from "./table-anggota-dosen-pkm";
+import { ModalTambahAnggotaLaporanHasil } from "@/components/proposal/laporan-hasil/penelitian/step2/modal-tambah-anggota";
+import { TableAnggotaDosenLaporanHasil } from "@/components/proposal/laporan-hasil/penelitian/step2/table-anggota-dosen";
+import { TableAnggotaMahasiswaLaporanHasil } from "@/components/proposal/laporan-hasil/penelitian/step2/table-anggota-mahasiswa";
+import { useQueryAnggotaMahasiswaProposal } from "@/handlers/proposal/anggota/query-anggota-mahasiswa";
+import { useQueryAnggotaDosenProposal } from "@/handlers/proposal/anggota/query-anggota-dosen";
 
 export const AnggotaPKM = () => {
   const { currentStep, setCurrentStep } = useStep();
 
-  const { listAnggotaDosenPKM, refetchDosen } =
-    useQueryAnggotaDosenLaporanHasilPKM();
+  const { data: listAnggotaDosenPKM, refetch: refetchDosen } =
+    useQueryAnggotaDosenProposal();
 
-  const { listAnggotaMahasiswaPKM, refetchMahasiswa } =
-    useQueryAnggotaMahasiswaLaporanHasilPKM();
+  const { data: listAnggotaMahasiswaPKM, refetch: refetchMahasiswa } =
+    useQueryAnggotaMahasiswaProposal();
 
   const handlePrevStep = () => {
     setCurrentStep(1);
+    localStorage.setItem("step", 1);
   };
 
   const handleNextStep = () => {
     setCurrentStep(3);
+    localStorage.setItem("step", 3);
   };
 
   useEffect(() => {
@@ -40,15 +42,15 @@ export const AnggotaPKM = () => {
         <h1 className="text-lg font-semibold text-primary">
           Identitas Anggota Dosen
         </h1>
-        <ModalTambahAnggota />
+        <ModalTambahAnggotaLaporanHasil />
       </div>
-      <TableAnggotaDosenPKM data={listAnggotaDosenPKM} />
+      <TableAnggotaDosenLaporanHasil data={listAnggotaDosenPKM} />
       <div className="flex items-center justify-between">
         <h1 className="text-lg font-semibold text-primary">
           Identitas Anggota Mahasiswa
         </h1>
       </div>
-      <TableAnggotaMahasiswaPKM data={listAnggotaMahasiswaPKM} />
+      <TableAnggotaMahasiswaLaporanHasil data={listAnggotaMahasiswaPKM} />
       <div className="absolute -bottom-16 left-0 mt-4 flex w-full items-center justify-between">
         <ButtonPrev onClick={handlePrevStep} />
         <ButtonNext onClick={handleNextStep} />

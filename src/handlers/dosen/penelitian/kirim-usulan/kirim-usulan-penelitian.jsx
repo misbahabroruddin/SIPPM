@@ -1,6 +1,6 @@
 "use client";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useParams, useRouter } from "next/navigation";
+import { useParams, usePathname, useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 import { signOut } from "next-auth/react";
 
@@ -12,6 +12,8 @@ export const useKirimUsulanPenelitian = () => {
   const queryClient = useQueryClient();
   const router = useRouter();
   const penelitianId = localStorage.getItem("penelitianId");
+  const pathname = usePathname();
+  const path = pathname?.split("/");
 
   const onSubmit = async () => {
     try {
@@ -21,6 +23,12 @@ export const useKirimUsulanPenelitian = () => {
       });
       queryClient.invalidateQueries({
         queryKey: ["listPenelitianDashboardDosen"],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ["listLaporanHasilPenelitian"],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ["listLaporanHasilPengabdian"],
       });
       queryClient.invalidateQueries({
         queryKey: ["trackDosenReviewer"],
@@ -55,8 +63,8 @@ export const useKirimUsulanPenelitian = () => {
       queryClient.removeQueries({
         queryKey: ["dokumenPendukungProposal"],
       });
-      toast.success("Proposal penelitian berhasil diajukan");
-      router.push("/proposal");
+      toast.success("Proposal penelitian berhasil disubmit");
+      router.push(`/${path[1]}`);
     } catch (error) {
       if (error.response.status === 401) {
         return signOut();

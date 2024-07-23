@@ -1,87 +1,54 @@
 "use client";
 
-import { useForm } from "react-hook-form";
-import { useRouter } from "next/navigation";
-
 import { ButtonPrev } from "@/components/button/button-prev";
 import { ButtonSave } from "@/components/button/button-save";
 import { ContainerContent } from "@/components/container-content";
-import { InputFile } from "@/components/input/input-file";
+import { ModalUploadDokumen } from "@/components/proposal/pengajuan/penelitian/step6/modal-upload-dokumen";
+import { useQueryGetDokumenPendukungProposal } from "@/handlers/dosen/proposal/dokumen-pendukung/query-get-dokumen-pendukung";
+import { useKirimUsulanPenelitian } from "@/handlers/dosen/penelitian/kirim-usulan/kirim-usulan-penelitian";
 import { useStep } from "@/lib/hooks/useStep";
-import { useUploadBerkasLaporanHasilPenelitian } from "@/handlers/dosen/laporan-hasil/penelitian/berkas/upload-berkas-penelitian";
+import { ListDokumenPendukungProposalLaporanHasil } from "@/components/proposal/laporan-hasil/penelitian/step6/list-dokumen-pendukung";
 
 export const Berkas = () => {
-  const router = useRouter();
   const { setCurrentStep } = useStep();
+  const { data: dokumenPendukung } = useQueryGetDokumenPendukungProposal();
 
-  const { uploadBerkas, isLoadingSubmit } =
-    useUploadBerkasLaporanHasilPenelitian(router);
-
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    watch,
-    resetField,
-  } = useForm();
+  const { kirimUsulan, isLoadingSubmit } = useKirimUsulanPenelitian();
 
   const handlePrevStep = () => {
     setCurrentStep(5);
+    localStorage.setItem("step", 5);
+    localStorage.setItem("isEdit", false);
   };
 
   return (
     <ContainerContent className="relative">
-      <form
-        className="flex flex-col gap-4"
-        onSubmit={handleSubmit(uploadBerkas)}
-      >
-        <div className="flex flex-col gap-4">
-          <h1 className="text-lg font-semibold text-primary">
-            File Laporan Hasil
-          </h1>
-          <InputFile
-            register={register("file_laporan_hasil", {
-              required: "Wajib diisi!",
-              validate: {
-                acceptedFormat: (file) => {
-                  if (!file || !file[0]) {
-                    return "File tidak ditemukan";
-                  }
-                  const acceptedFormats = ["pdf"];
-                  const fileExtension = file[0]?.name
-                    .split(".")
-                    .pop()
-                    .toLowerCase();
-                  if (!acceptedFormats.includes(fileExtension)) {
-                    return "File harus berupa pdf";
-                  }
-                  return true;
-                },
-              },
-            })}
-            name="file_laporan_hasil"
-            watch={watch}
-            resetField={resetField}
-            errors={errors.file_laporan_hasil}
-          />
+      <div className="flex w-1/2 flex-col gap-6">
+        <h1 className="text-base font-semibold text-primary lg:text-lg">
+          Dokumen Pendukung
+        </h1>
+        <div className="flex items-center justify-between">
+          <h3 className="font-base text-base text-primary lg:text-lg">
+            Unggah Dokumen
+          </h3>
+          <ModalUploadDokumen />
         </div>
-        <div className="flex flex-col gap-4">
-          <h1 className="text-lg font-semibold text-primary">
-            Pernyataan Mitra
-          </h1>
-          <InputFile
-            register={register("file_pernyataan_mitra")}
-            name="file_pernyataan_mitra"
-            watch={watch}
-            resetField={resetField}
-            errors={errors.file_pernyataan_mitra}
-          />
-        </div>
-        <div className="flex justify-between">
-          <ButtonPrev onClick={handlePrevStep} />
-          <ButtonSave disabled={isLoadingSubmit} isLoading={isLoadingSubmit} />
-        </div>
-      </form>
+        <ListDokumenPendukungProposalLaporanHasil
+          dokumenPendukung={dokumenPendukung}
+        />
+      </div>
+      <div className="flex justify-between rounded-lg p-4 shadow">
+        <ButtonPrev
+          onClick={handlePrevStep}
+          className="w-[120px] lg:w-[200px]"
+        />
+        <ButtonSave
+          onClick={kirimUsulan}
+          disabled={isLoadingSubmit}
+          isLoading={isLoadingSubmit}
+          className="w-[120px] lg:w-[200px]"
+        />
+      </div>
     </ContainerContent>
   );
 };

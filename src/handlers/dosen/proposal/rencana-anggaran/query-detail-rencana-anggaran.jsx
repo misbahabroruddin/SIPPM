@@ -23,7 +23,6 @@ export const useQueryDetailRencanaAnggaran = (setValue, anggaranId) => {
       );
 
       const result = data.data;
-      console.log(result, "<<<<<");
       setValue("rincian_biaya_id", result.rincian_biaya_id);
       setValue("biaya", result.biaya);
 

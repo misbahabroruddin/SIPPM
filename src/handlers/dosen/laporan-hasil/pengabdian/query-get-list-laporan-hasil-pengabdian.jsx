@@ -26,9 +26,12 @@ export const useQueryGetListLaporanHasilPengabdian = (search, page) => {
       }
 
       try {
-        const { data } = await axios.get(`/laporan-hasils/dosens/pkms`, {
-          params: params,
-        });
+        const { data } = await axios.get(
+          `/laporan-hasils?proposal=pengabdian`,
+          {
+            params: params,
+          },
+        );
 
         return data.data;
       } catch (error) {

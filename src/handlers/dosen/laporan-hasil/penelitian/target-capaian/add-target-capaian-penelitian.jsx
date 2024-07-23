@@ -14,16 +14,23 @@ export const useAddTargetCapaianLaporanHasilPenelitian = () => {
   const { id } = useParams();
   const onSubmit = async (form) => {
     try {
-      const formData = new FormData();
-      formData.append("luaran_wajib_id", form.luaran_wajib_id);
-      formData.append("tahun_capaian", form.tahun_capaian);
-      formData.append("status_capaian", form.status_capaian);
-      formData.append("nama_jurnal_penerbit", form.nama_jurnal_penerbit);
-      const { data } = await axios.post(
-        `/laporan-hasils/dosens/penelitians/${id}/target-capaian`,
+      const formData = {
+        luaran_wajib_id: form.luaran_wajib_id,
+        tahun_capaian: form.tahun_capaian,
+        status_capaian: form.status_capaian,
+        nama_jurnal_penerbit: form.nama_jurnal_penerbit,
+      };
+      const { data } = await axios.put(
+        `/laporan-hasils/target-capaian/${id}`,
         formData,
+        {
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+          },
+        },
       );
       setCurrentStep(4);
+      localStorage.setItem("step", 4);
       return data;
     } catch (error) {
       if (error.response?.data.message.tahun_capaian) {
@@ -32,21 +39,19 @@ export const useAddTargetCapaianLaporanHasilPenelitian = () => {
 
       if (error.response.status === 401) {
         return signOut();
+      } else if (error.response.status === 500) {
+        return toast.error("Internal server error");
       }
 
       toast.error(error.response.data.message || "Something went wrong");
     }
   };
 
-  const {
-    mutateAsync: addTargetCapaianPenelitian,
-    isPending: isLoadingSubmit,
-  } = useMutation({
+  const mutate = useMutation({
     mutationFn: onSubmit,
   });
 
   return {
-    addTargetCapaianPenelitian,
-    isLoadingSubmit,
+    ...mutate,
   };
 };

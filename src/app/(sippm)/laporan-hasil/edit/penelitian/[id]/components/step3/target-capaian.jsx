@@ -11,8 +11,9 @@ import { useStep } from "@/lib/hooks/useStep";
 import { useQueryLuaranWajib } from "@/handlers/data-referensi/luaran-wajib/query-luaran-wajib";
 import { SingleSelect } from "@/components/select/single-select";
 import { styles } from "@/lib/utils/style-react-select";
-import { useAddTargetCapaianLaporanHasilPenelitian } from "@/handlers/dosen/laporan-hasil/penelitian/target-capaian/add-target-capaian-penelitian";
-import { useQueryTargetCapaianLaporanHasilPenelitian } from "@/handlers/dosen/laporan-hasil/penelitian/target-capaian/query-target-capaian-penelitian";
+import { useQueryTargetCapaianProposal } from "@/handlers/proposal/target-capaian/query-target-capaian";
+import { useAddTargetCapaianProposal } from "@/handlers/proposal/target-capaian/add-target-capaian";
+import { STATUS_CAPAIAN_OPTIONS } from "@/lib/datas/proposal";
 
 export const TargetCapaian = () => {
   const { currentStep, setCurrentStep } = useStep();
@@ -33,13 +34,17 @@ export const TargetCapaian = () => {
     data,
     isLoading: isLoadingTargetCapaian,
     refetch,
-  } = useQueryTargetCapaianLaporanHasilPenelitian();
+  } = useQueryTargetCapaianProposal();
 
-  const { addTargetCapaianPenelitian, isLoadingSubmit } =
-    useAddTargetCapaianLaporanHasilPenelitian();
+  const {
+    mutateAsync: addTargetCapaianPenelitian,
+    isPending: isLoadingSubmit,
+  } = useAddTargetCapaianProposal();
 
   const handlePrevStep = () => {
     setCurrentStep(2);
+    localStorage.setItem("step", 2);
+    localStorage.setItem("isEdit", true);
   };
 
   useEffect(() => {
@@ -67,13 +72,15 @@ export const TargetCapaian = () => {
               Controller={Controller}
               control={control}
               options={luaranWajibOptions}
-              placeholder={data?.data?.luaran_wajib.nama || "Luaran Wajib"}
+              placeholder={data?.data?.luaran_wajib?.nama || "Luaran Wajib"}
               name="luaran_wajib_id"
               errors={errors.luaran_wajib_id}
               rules={{ required: "Wajib diisi" }}
               id={id}
               isLoading={isLoading}
-              styles={styles(data?.data?.luaran_wajib.nama)}
+              styles={styles(data?.data?.luaran_wajib?.nama)}
+              disabled={isLoadingTargetCapaian}
+              required
             />
             <Input
               type="number"
@@ -89,16 +96,23 @@ export const TargetCapaian = () => {
             />
           </div>
           <div className="max-w-1/2 flex w-full flex-col gap-4">
-            <Input
-              label="Status Capaian"
-              name="status_capaian"
-              placeholder="Status Capaian"
-              register={register("status_capaian", {
-                required: "Wajib diisi",
-              })}
+            <SingleSelect
+              label={"Status Capaian"}
+              Controller={Controller}
+              control={control}
+              options={STATUS_CAPAIAN_OPTIONS}
+              placeholder={
+                data?.data?.status_capaian
+                  ? data?.data?.status_capaian
+                  : "Status Capaian"
+              }
               errors={errors.status_capaian}
-              required
+              name={"status_capaian"}
+              id={id}
+              rules={{ required: "Wajib diisi" }}
+              styles={styles(data?.data?.status_capaian)}
               disabled={isLoadingTargetCapaian}
+              required
             />
             <Input
               label="Cluster Jurnal Penerbit"

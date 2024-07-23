@@ -18,7 +18,6 @@ export const useAddEditRincianKegiatan = (
   const { id } = useParams();
 
   const onSubmit = async (form) => {
-    console.log(form.waktu[0]);
     try {
       const penelitianId = localStorage.getItem("penelitianId");
       const pengabdianId = localStorage.getItem("pengabdianId");

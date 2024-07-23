@@ -11,8 +11,9 @@ import { useStep } from "@/lib/hooks/useStep";
 import { useQueryLuaranWajib } from "@/handlers/data-referensi/luaran-wajib/query-luaran-wajib";
 import { SingleSelect } from "@/components/select/single-select";
 import { styles } from "@/lib/utils/style-react-select";
-import { useQueryTargetCapaianLaporanHasilPKM } from "@/handlers/dosen/laporan-hasil/pengabdian/target-capaian/query-target-capaian";
-import { useAddTargetCapaianLaporanHasilPKM } from "@/handlers/dosen/laporan-hasil/pengabdian/target-capaian/add-target-capaian-pkm";
+import { STATUS_CAPAIAN_OPTIONS } from "@/lib/datas/proposal";
+import { useQueryTargetCapaianProposal } from "@/handlers/proposal/target-capaian/query-target-capaian";
+import { useAddTargetCapaianProposal } from "@/handlers/proposal/target-capaian/add-target-capaian";
 
 export const TargetCapaianPKM = () => {
   const {
@@ -22,12 +23,18 @@ export const TargetCapaianPKM = () => {
     control,
     formState: { errors },
   } = useForm();
+
   const id = useId();
+
   const { currentStep, setCurrentStep } = useStep();
 
   const { data: luaranWajibOptions, isLoading } = useQueryLuaranWajib();
 
-  const { data, refetch } = useQueryTargetCapaianLaporanHasilPKM();
+  const {
+    data,
+    isLoading: isLoadingTargetCapaian,
+    refetch,
+  } = useQueryTargetCapaianProposal();
 
   useEffect(() => {
     setValue("luaran_wajib_id", data?.data?.luaran_wajib_id);
@@ -41,11 +48,13 @@ export const TargetCapaianPKM = () => {
     refetch();
   }, [data, currentStep]);
 
-  const { addTargetCapaianPKM, isPending } =
-    useAddTargetCapaianLaporanHasilPKM();
+  const { mutateAsync: addTargetCapaianPKM, isPending } =
+    useAddTargetCapaianProposal();
 
   const handlePrevStep = () => {
     setCurrentStep(2);
+    localStorage.setItem("step", 2);
+    localStorage.setItem("isEdit", true);
   };
   return (
     <ContainerContent className="relative">
@@ -60,13 +69,14 @@ export const TargetCapaianPKM = () => {
               Controller={Controller}
               control={control}
               options={luaranWajibOptions}
-              placeholder={data?.data?.luaran_wajib.nama || "Luaran Wajib"}
+              placeholder={data?.data?.luaran_wajib?.nama || "Luaran Wajib"}
               name="luaran_wajib_id"
               errors={errors.luaran_wajib_id}
               rules={{ required: "Wajib diisi" }}
               id={id}
               isLoading={isLoading}
-              styles={styles(data?.data?.luaran_wajib.nama)}
+              styles={styles(data?.data?.luaran_wajib?.nama)}
+              disabled={isLoadingTargetCapaian}
             />
             <Input
               type="number"
@@ -78,18 +88,27 @@ export const TargetCapaianPKM = () => {
               })}
               errors={errors.tahun_capaian}
               required
+              disabled={isLoadingTargetCapaian}
             />
           </div>
           <div className="max-w-1/2 flex w-full flex-col gap-4">
-            <Input
-              label="Status Capaian"
-              name="status_capaian"
-              placeholder="Status Capaian"
-              register={register("status_capaian", {
-                required: "Wajib diisi",
-              })}
+            <SingleSelect
+              label={"Status Capaian"}
+              Controller={Controller}
+              control={control}
+              options={STATUS_CAPAIAN_OPTIONS}
+              placeholder={
+                data?.data?.status_capaian
+                  ? data?.data?.status_capaian
+                  : "Status Capaian"
+              }
               errors={errors.status_capaian}
+              name={"status_capaian"}
+              id={id}
               required
+              rules={{ required: "Wajib diisi" }}
+              disabled={isLoadingTargetCapaian}
+              styles={styles(data?.data?.status_capaian)}
             />
             <Input
               label="Cluster Jurnal Penerbit"
@@ -100,6 +119,7 @@ export const TargetCapaianPKM = () => {
               })}
               errors={errors.nama_jurnal_penerbit}
               required
+              disabled={isLoadingTargetCapaian}
             />
           </div>
         </div>

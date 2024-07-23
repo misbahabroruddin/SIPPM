@@ -38,6 +38,12 @@ export const ListPengabdian = ({ pengabdian, isLoading, handlePageChange }) => {
 
 const ListItemPengabdian = ({ data }) => {
   const { setCurrentStep } = useStep();
+  const handleStep = () => {
+    setCurrentStep(1);
+    localStorage.removeItem("step");
+    localStorage.removeItem("isEdit");
+    localStorage.removeItem("pengabdianId");
+  };
   return (
     <div className="rounded-lg px-6 py-4 shadow-custom" key={data?.id}>
       <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between">
@@ -79,19 +85,15 @@ const ListItemPengabdian = ({ data }) => {
         </div>
         <div className="flex items-end gap-10">
           <div className="flex flex-col items-center gap-1">
-            <p>Status Pengabdian</p>
+            <p>Status Proposal</p>
             <ButtonStatus status="Diterima" />
           </div>
           <Link href={`/laporan-hasil/edit/pengabdian/${data?.id}`}>
             <ButtonUpdate
-              className="bg-primary"
+              className="bg-primary disabled:bg-gray-600"
               text="Perbarui"
-              onClick={() => {
-                setCurrentStep(1);
-                localStorage.removeItem("step");
-                localStorage.removeItem("isEdit");
-                localStorage.removeItem("pengabdianId");
-              }}
+              onClick={handleStep}
+              disabled={data?.is_done}
             />
           </Link>
         </div>

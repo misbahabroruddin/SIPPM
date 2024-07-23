@@ -42,7 +42,7 @@ export const TrackDosenReviewer = ({ data, isLoading }) => {
       date={updatedData ? convertDate(updatedData?.updated_at, " ") : ""}
     >
       <TimelineConnector />
-      <TimelineHeader status={updatedData?.status} />
+      <TimelineHeader status={updatedData?.proposal?.status_reviewer} />
       <TimelineContent isLoading={isLoading}>
         <ContainerContent className="p-3 md:p-4">
           <div className="flex w-full flex-col  justify-between gap-2">
@@ -55,7 +55,7 @@ export const TrackDosenReviewer = ({ data, isLoading }) => {
                   {updatedData?.user?.name}
                 </p>
                 <ButtonStatus
-                  status={updatedData?.status}
+                  status={updatedData?.proposal?.status_reviewer}
                   className="px-2 py-1 text-xs font-[500]"
                 />
               </div>

@@ -10,11 +10,10 @@ import { Label } from "@/components/label";
 import { ContainerContent } from "@/components/container-content";
 import { useStep } from "@/lib/hooks/useStep";
 import { useQueryRumpunIlmu } from "@/handlers/data-referensi/rumpun-ilmu/query-rumpun-ilmu";
-import { useAddIdentitasUsulanPKM } from "@/handlers/dosen/pengabdian/identitas-usulan/add-identitas-usulan";
 import { SingleSelect } from "@/components/select/single-select";
 import { styles } from "@/lib/utils/style-react-select";
-import { useQueryIdentitasUsulanLaporanHasilPKM } from "@/handlers/dosen/laporan-hasil/pengabdian/identitas-usulan/query-identitas-usulan-laporan-hasil-pengabdian";
 import { useParams } from "next/navigation";
+import { useQueryIdentitasUsulanPKM } from "@/handlers/dosen/pengabdian/identitas-usulan/query-identitas-usulan-pkm";
 
 export const IdentitasUsulanPKM = () => {
   const { setCurrentStep } = useStep();
@@ -28,10 +27,11 @@ export const IdentitasUsulanPKM = () => {
   const { data: rumpunIlmuOptions } = useQueryRumpunIlmu();
 
   const { data: identitasUsulan, refetch } =
-    useQueryIdentitasUsulanLaporanHasilPKM();
+    useQueryIdentitasUsulanPKM(setValue);
 
   const handleNextStep = () => {
     setCurrentStep(2);
+    localStorage.setItem("step", 2);
   };
 
   const selectedRumpunIlmu = rumpunIlmuOptions?.find(
@@ -61,7 +61,7 @@ export const IdentitasUsulanPKM = () => {
             defaultValue={identitasUsulan?.judul}
             register={register("judul")}
             required
-            disabled={true}
+            disabled
           />
           <SingleSelect
             label={"Rumpun ilmu"}
@@ -73,7 +73,7 @@ export const IdentitasUsulanPKM = () => {
             }
             name="rumpun_ilmu_id"
             id={id}
-            isDisabled={true}
+            isDisabled
             styles={styles(selectedRumpunIlmu)}
           />
           <Input
@@ -84,7 +84,7 @@ export const IdentitasUsulanPKM = () => {
             defaultValue={identitasUsulan?.tahun_usulan}
             register={register("tahun_usulan")}
             required
-            disabled={true}
+            disabled
           />
         </div>
         <div className="flex grow flex-col gap-4">
@@ -95,7 +95,7 @@ export const IdentitasUsulanPKM = () => {
             defaultValue={identitasUsulan?.jangka_waktu}
             register={register("jangka_waktu")}
             required
-            disabled={true}
+            disabled
           />
           <Input
             label="Ringkasan PKM"
@@ -104,7 +104,7 @@ export const IdentitasUsulanPKM = () => {
             defaultValue={identitasUsulan?.ringkasan}
             register={register("ringkasan")}
             required
-            disabled={true}
+            disabled
           />
         </div>
       </div>
