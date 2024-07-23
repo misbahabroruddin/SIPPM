@@ -8,7 +8,7 @@ export const DetailBerkas = ({ data, statusLppm }) => {
     <div className="flex flex-col gap-3">
       <h4 className="text-lg font-[500]">Berkas</h4>
       <DetailListBerkas data={data} />
-      {statusLppm !== "Diterima" && <FormVerifikasiUsulan />}
+      {statusLppm === "Pending" && <FormVerifikasiUsulan />}
     </div>
   );
 };
