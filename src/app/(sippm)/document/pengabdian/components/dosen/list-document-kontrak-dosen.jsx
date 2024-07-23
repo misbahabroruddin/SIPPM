@@ -104,7 +104,7 @@ const ListItemKontrak = ({ data }) => {
             <>
               <ModalUploadKontrakPengabdian pengabdianId={data?.id} />
               <Link
-                href={data?.dokumen_kontrak?.file_kontrak?.url}
+                href={data?.dokumen_kontrak?.url}
                 target="_blank"
                 className="order-2 flex w-full items-center justify-center gap-2 rounded-lg bg-primary text-white disabled:cursor-not-allowed disabled:bg-gray-500 lg:order-none lg:w-fit"
               >
@@ -116,7 +116,7 @@ const ListItemKontrak = ({ data }) => {
             <div className="flex items-center gap-4">
               <ModalUploadKontrakPengabdian pengabdianId={data?.id} />
               <Link
-                href={data?.dokumen_kontrak?.file_kontrak?.url}
+                href={data?.dokumen_kontrak?.url}
                 target="_blank"
                 className="order-2 flex w-full items-center justify-center gap-2 rounded-lg bg-primary px-4 py-2 text-white disabled:cursor-not-allowed disabled:bg-gray-500 lg:order-none lg:w-fit"
               >
@@ -127,7 +127,7 @@ const ListItemKontrak = ({ data }) => {
           {data?.dokumen_kontrak?.status === "Diterima" ? (
             <Link
               // onClick={handleSaveFile}
-              href={data?.dokumen_kontrak?.file_kontrak?.url}
+              href={data?.dokumen_kontrak?.url || "#"}
               target="_blank"
               className="order-2 flex w-full items-center justify-center gap-2 rounded-lg bg-primary text-white disabled:cursor-not-allowed disabled:bg-gray-500 lg:order-none lg:w-fit"
             >

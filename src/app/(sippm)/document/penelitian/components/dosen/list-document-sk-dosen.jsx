@@ -89,7 +89,7 @@ const ListItemSK = ({ data }) => {
         <div className="flex items-end gap-4">
           {data?.dokumen_sk ? (
             <Link
-              href={data?.dokumen_sk?.file_sk?.url}
+              href={data?.dokumen_sk?.url || "#"}
               target="_blank"
               className="flex w-full items-center justify-center gap-2 rounded-lg bg-primary text-white disabled:cursor-not-allowed disabled:bg-gray-500 md:w-fit"
             >
