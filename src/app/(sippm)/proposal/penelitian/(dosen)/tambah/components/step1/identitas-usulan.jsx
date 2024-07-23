@@ -151,7 +151,7 @@ export const IdentitasUsulan = () => {
             <Input
               label="Jangka Waktu Penelitian"
               name="jangka_waktu"
-              placeholder="Jangka Waktu Penelitian"
+              placeholder="Jangka Waktu Penelitian (Bulan)"
               register={register("jangka_waktu", {
                 required: "Wajib diisi",
               })}

@@ -139,7 +139,7 @@ export const IdentitasUsulan = () => {
               disabled={isLoadingIdentitasUsulanPenelitian}
             />
             <Input
-              label="Jangka Waktu Penelitian"
+              label="Jangka Waktu Penelitian  (Bulan)"
               name="jangka_waktu"
               placeholder="Jangka Waktu Penelitian"
               labelClass={"text-sm font-[500] text-primary w-full lg:w-1/2"}

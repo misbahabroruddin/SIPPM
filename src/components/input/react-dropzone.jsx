@@ -2,7 +2,7 @@
 
 import { useDropzone } from "react-dropzone";
 import Image from "next/image";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { twMerge } from "tailwind-merge";
 import { useForm } from "react-hook-form";
 
@@ -20,8 +20,8 @@ const ReactDropzone = ({ onClose }) => {
     setValue,
   } = useForm();
 
-  const { mutateAsync: handleUpload } =
-    useUploadDokumenPendukungProposal(onClose);
+  const { mutateAsync: handleUpload, isSuccess } =
+    useUploadDokumenPendukungProposal();
 
   const { data: jenisDokumenOptions, isLoading: isLoadingJenisDokumen } =
     useQueryJenisDokumenOptions();
@@ -54,6 +54,13 @@ const ReactDropzone = ({ onClose }) => {
     setInsertedFiles([]);
     onClose();
   };
+
+  useEffect(() => {
+    if (isSuccess) {
+      setInsertedFiles([]);
+      onClose();
+    }
+  }, [isSuccess]);
 
   const files = insertedFiles.map((file, index) => (
     <li key={file.path} className="my-2">

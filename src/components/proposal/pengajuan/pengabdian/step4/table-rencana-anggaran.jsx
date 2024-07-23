@@ -7,6 +7,7 @@ import { twMerge } from "tailwind-merge";
 
 import { FormRencanaAnggaranPKM } from "./form-rencana-anggaran";
 import { useDeleteRencanaAnggaran } from "@/handlers/dosen/proposal/rencana-anggaran/delete-rencana-anggaran";
+import { convertToRupiah } from "@/lib/utils/convertToRupiah";
 
 export const TableRencanaAnggaran = ({ data }) => {
   const header = ["No", "Rincian", "Biaya", "Action"];
@@ -52,6 +53,7 @@ export const TableRencanaAnggaran = ({ data }) => {
               return editingDataId === row.id ? (
                 <FormRencanaAnggaranPKM
                   id={row.id}
+                  key={row.id}
                   onClose={() => setEditingDataId()}
                 />
               ) : (
@@ -71,10 +73,7 @@ export const TableRencanaAnggaran = ({ data }) => {
                   </td>
                   <td className="w-32 break-all p-2 sm:w-fit lg:p-3 xl:w-[550px] ">
                     <Typography color="blue-gray" className="font-normal">
-                      {row.biaya?.toLocaleString("id-ID", {
-                        style: "currency",
-                        currency: "IDR",
-                      })}
+                      {convertToRupiah(row.biaya)}
                     </Typography>
                   </td>
                   <td className="mx-auto w-7 py-2 text-center lg:py-3">
@@ -127,14 +126,11 @@ export const TableRencanaAnggaran = ({ data }) => {
               <td className="hidden lg:table-cell"></td>
               <td className="p-3">Total</td>
               <td colSpan="2" className="p-3">
-                {data?.data
-                  .reduce((total, item) => {
+                {convertToRupiah(
+                  data?.data.reduce((total, item) => {
                     return total + item.biaya;
-                  }, 0)
-                  ?.toLocaleString("id-ID", {
-                    style: "currency",
-                    currency: "IDR",
-                  })}
+                  }, 0),
+                )}
               </td>
             </tr>
           </>

@@ -13,6 +13,7 @@ import { useQueryDetailRencanaAnggaran } from "@/handlers/dosen/proposal/rencana
 import { useQueryRincianBiayaOptions } from "@/handlers/data-referensi/rincian-biaya/query-get-option-rincian-biaya";
 import { useEffect } from "react";
 import { styles } from "@/lib/utils/style-react-select";
+import { CurrencyInput } from "@/components/input/input-currency";
 
 export const FormRencanaAnggaranPKM = ({ onClose, id }) => {
   const {
@@ -26,6 +27,7 @@ export const FormRencanaAnggaranPKM = ({ onClose, id }) => {
   } = useForm();
 
   const rincianBiayaId = watch("rincian_biaya_id");
+  const biaya = watch("biaya");
 
   const { data: rincianBiayaOptions, isLoading: isLoadingRincianBiaya } =
     useQueryRincianBiayaOptions();
@@ -77,24 +79,20 @@ export const FormRencanaAnggaranPKM = ({ onClose, id }) => {
         />
       </td>
       <td className="px-2">
-        <Input
-          containerClass="flex-col items-start gap-2 lg:flex-col lg:items-start lg:gap-2"
-          labelClass="hidden"
-          type="number"
-          name="biaya"
-          placeholder="Biaya"
-          register={register("biaya", {
+        <CurrencyInput
+          name={"biaya"}
+          control={control}
+          Controller={Controller}
+          rules={{
             required: "harus diisi",
             max: {
               value: selectedRincianBiayaWhenAdd?.anggaran,
               message: `Biaya maksimal ${convertToRupiah(selectedRincianBiayaWhenAdd?.anggaran)}`,
             },
-          })}
+          }}
+          placeholder="Biaya"
           errors={errors.biaya}
-          required
           spanEmptyClass="hidden"
-          disabled={isLoading}
-          defaultValue={data?.biaya || selectedRincianBiayaWhenAdd?.biaya}
         />
       </td>
       <td className="mx-auto my-2 flex w-fit justify-center gap-2">

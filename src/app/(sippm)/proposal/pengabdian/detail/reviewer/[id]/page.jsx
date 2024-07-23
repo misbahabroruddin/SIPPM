@@ -69,7 +69,10 @@ export default function DetailPengabdianPage() {
         <div className="custom mb-14 flex flex-col gap-3 rounded-lg p-4 shadow-custom">
           {currentTab === "dokumen" || !currentTab ? (
             <>
-              <InnerTabsReviewer tabActive={innerTab || innerTabActive} />
+              <InnerTabsReviewer
+                tabActive={innerTab || innerTabActive}
+                data={data}
+              />
               <div className="flex flex-col gap-4">
                 {(innerTab === "Identitas Usulan" || !innerTab) && (
                   <DetailIdentitasUsulanPengabdian data={data} />

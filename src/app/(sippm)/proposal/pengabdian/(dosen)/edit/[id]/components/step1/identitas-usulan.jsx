@@ -105,7 +105,7 @@ export const IdentitasUsulanPKM = () => {
           </div>
           <div className="flex grow flex-col gap-4">
             <Input
-              label="Jangka Waktu PKM"
+              label="Jangka Waktu PKM  (Bulan)"
               name="jangka_waktu"
               placeholder="Jangka Waktu PKM"
               labelClass={"text-sm font-[500] text-primary w-full lg:w-1/2"}
@@ -116,6 +116,7 @@ export const IdentitasUsulanPKM = () => {
               })}
               errors={errors.jangka_waktu}
               required
+              type="number"
             />
             <TextArea
               label="Ringkasan PKM"

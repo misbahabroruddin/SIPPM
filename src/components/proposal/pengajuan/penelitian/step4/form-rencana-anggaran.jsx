@@ -13,6 +13,7 @@ import { SingleSelect } from "@/components/select/single-select";
 import { styles } from "@/lib/utils/style-react-select";
 import { useEffect } from "react";
 import { convertToRupiah } from "@/lib/utils/convertToRupiah";
+import { CurrencyInput } from "@/components/input/input-currency";
 
 export const FormRencanaAnggaranPenelitian = ({ onClose, id }) => {
   const {
@@ -96,7 +97,22 @@ export const FormRencanaAnggaranPenelitian = ({ onClose, id }) => {
         />
       </td>
       <td className="px-2">
-        <Input
+        <CurrencyInput
+          name={"biaya"}
+          control={control}
+          Controller={Controller}
+          rules={{
+            required: "harus diisi",
+            max: {
+              value: selectedRincianBiayaWhenAdd?.anggaran,
+              message: `Biaya maksimal ${convertToRupiah(selectedRincianBiayaWhenAdd?.anggaran)}`,
+            },
+          }}
+          placeholder="Biaya"
+          errors={errors.biaya}
+          spanEmptyClass="hidden"
+        />
+        {/* <Input
           containerClass="flex-col items-start gap-2 lg:flex-col lg:items-start lg:gap-2"
           type="number"
           name="biaya"
@@ -113,7 +129,7 @@ export const FormRencanaAnggaranPenelitian = ({ onClose, id }) => {
           spanEmptyClass="hidden"
           defaultValue={data?.biaya || selectedRincianBiayaWhenAdd?.biaya}
           disabled={isLoading}
-        />
+        /> */}
       </td>
       <td className="mx-auto w-7 py-2 text-center lg:py-3">
         <button title="Save" disabled={isLoadingRencanaAnggaran}>

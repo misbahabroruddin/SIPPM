@@ -1,6 +1,6 @@
 "use client";
 
-export const InputFileImport = ({ onChange }) => {
+export const InputFileImport = ({ onChange, ...props }) => {
   return (
     <label
       htmlFor="file_import"
@@ -42,6 +42,7 @@ export const InputFileImport = ({ onChange }) => {
           "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
         }
         onChange={onChange}
+        {...props}
       />
     </label>
   );

@@ -19,6 +19,11 @@ import { DetailBerkas } from "@/components/proposal/track/detail-berkas";
 import { Timeline } from "@material-tailwind/react";
 import { TrackRiwayatLPPM } from "@/components/riwayat/lppm/riwayat-lppm";
 import { useQueryAnggotaDosenProposal } from "@/handlers/proposal/anggota/query-anggota-dosen";
+import { useQueryAnggotaMahasiswaProposal } from "@/handlers/proposal/anggota/query-anggota-mahasiswa";
+import { useQueryTargetCapaianProposal } from "@/handlers/proposal/target-capaian/query-target-capaian";
+import { useQueryRencanaAnggaran } from "@/handlers/proposal/rencana-anggaran/query-rencana-anggaran";
+import { useQueryRincianKegiatanProposal } from "@/handlers/proposal/rincian-kegiatan/query-rincian-kegiatan";
+import { useQueryGetDokumenPendukungProposal } from "@/handlers/proposal/dokumen-pendukung/query-get-dokumen-pendukung";
 
 export default function DetailPengabdianLPPMPage() {
   const [tabActive] = useState("dokumen");
@@ -28,11 +33,21 @@ export default function DetailPengabdianLPPMPage() {
   const innerTab = tabParams.get("tab2");
 
   const { data } = useQueryDetailPengabdian();
-  const { data: dataAnggotaProposal } = useQueryAnggotaDosenProposal();
   const { data: dataTrackDosenLPPM, isLoading: isLoadingTrackDosenLPPM } =
     useQueryGetRiwayatVerikasiLPPM();
 
-  console.log(dataAnggotaProposal, "<<<<");
+  const { data: dataAnggotaDosenProposal } = useQueryAnggotaDosenProposal();
+
+  const { data: dataAnggotaMahasiswaProposal } =
+    useQueryAnggotaMahasiswaProposal();
+
+  const { data: dataTargetCapaianProposal } = useQueryTargetCapaianProposal();
+
+  const { data: dataRencanaAnggaran } = useQueryRencanaAnggaran();
+
+  const { data: dataRincianKegiatan } = useQueryRincianKegiatanProposal();
+
+  const { data: dataDokumenPendukung } = useQueryGetDokumenPendukungProposal();
 
   return (
     <ContainerPage>
@@ -49,16 +64,26 @@ export default function DetailPengabdianLPPMPage() {
                   <DetailIdentitasUsulanPengabdian data={data} />
                 )}
                 {innerTab === "anggota" && (
-                  <DetailAnggota data={dataAnggotaProposal} />
+                  <DetailAnggota
+                    dataDosen={dataAnggotaDosenProposal}
+                    dataMahasiswa={dataAnggotaMahasiswaProposal}
+                  />
                 )}
                 {innerTab === "Luaran dan Target Capaian" && (
-                  <DetailTargetCapaian data={data} />
+                  <DetailTargetCapaian data={dataTargetCapaianProposal} />
                 )}
                 {innerTab === "Rencana Anggaran" && (
-                  <DetailRencanaAnggaran data={data} />
+                  <DetailRencanaAnggaran data={dataRencanaAnggaran} />
                 )}
-                {innerTab === "Jadwal" && <DetailRincianKegiatan data={data} />}
-                {innerTab === "Berkas" && <DetailBerkas data={data} />}
+                {innerTab === "Jadwal" && (
+                  <DetailRincianKegiatan data={dataRincianKegiatan} />
+                )}
+                {innerTab === "Berkas" && (
+                  <DetailBerkas
+                    data={dataDokumenPendukung}
+                    statusLppm={data?.data?.status_lppm}
+                  />
+                )}
               </div>
             </>
           ) : (

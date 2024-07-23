@@ -1,7 +1,7 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import { useQueryDetailPenelitian } from "@/handlers/lppm/penelitian/query-get-detail-penelitian";
 import { useQueryGetRiwayatVerikasiLPPM } from "@/handlers/lppm/riwayat/query-get-verifikasi-proposal-lppm";
@@ -23,7 +23,7 @@ import { useQueryTargetCapaianProposal } from "@/handlers/proposal/target-capaia
 import { useQueryRencanaAnggaran } from "@/handlers/proposal/rencana-anggaran/query-rencana-anggaran";
 import { useQueryRincianKegiatanProposal } from "@/handlers/proposal/rincian-kegiatan/query-rincian-kegiatan";
 import { useQueryGetDokumenPendukungProposal } from "@/handlers/proposal/dokumen-pendukung/query-get-dokumen-pendukung";
-import { useQueryGetFile } from "@/handlers/file-storage/query-get-file";
+import { useQueryAnggotaMahasiswaProposal } from "@/handlers/proposal/anggota/query-anggota-mahasiswa";
 
 export default function DetailPenelitianLPPMPage() {
   const [tabActive] = useState("dokumen");
@@ -36,9 +36,10 @@ export default function DetailPenelitianLPPMPage() {
   const { data: dataTrackDosenLPPM, isLoading: isLoadingTrackDosenLPPM } =
     useQueryGetRiwayatVerikasiLPPM();
 
-  console.log(data, "<<<<");
+  const { data: dataAnggotaDosenProposal } = useQueryAnggotaDosenProposal();
 
-  const { data: dataAnggotaProposal } = useQueryAnggotaDosenProposal();
+  const { data: dataAnggotaMahasiswaProposal } =
+    useQueryAnggotaMahasiswaProposal();
 
   const { data: dataTargetCapaianProposal } = useQueryTargetCapaianProposal();
 
@@ -47,18 +48,6 @@ export default function DetailPenelitianLPPMPage() {
   const { data: dataRincianKegiatan } = useQueryRincianKegiatanProposal();
 
   const { data: dataDokumenPendukung } = useQueryGetDokumenPendukungProposal();
-
-  // const [pdfString, setPdfString] = useState("");
-  // const { fetchFile } = useQueryGetFile();
-
-  // useEffect(() => {
-  //   const getFile = async () => {
-  //     const res = await fetchFile(dataDokumenPendukung?.data[0]?.path);
-  //     console.log(res);
-  //     setPdfString(res);
-  //   };
-  //   getFile();
-  // }, [dataDokumenPendukung]);
 
   return (
     <ContainerPage>
@@ -75,7 +64,10 @@ export default function DetailPenelitianLPPMPage() {
                   <DetailIdentitasUsulanPenelitian data={data} />
                 )}
                 {innerTab === "anggota" && (
-                  <DetailAnggota data={dataAnggotaProposal} />
+                  <DetailAnggota
+                    dataDosen={dataAnggotaDosenProposal}
+                    dataMahasiswa={dataAnggotaMahasiswaProposal}
+                  />
                 )}
                 {innerTab === "Luaran dan Target Capaian" && (
                   <DetailTargetCapaian data={dataTargetCapaianProposal} />
