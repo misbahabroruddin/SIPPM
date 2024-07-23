@@ -32,11 +32,7 @@ export const useVerifikasiProposalReviewer = (reset, router) => {
       if (form.status === "Diterima") {
         router.push(`/proposal/${path[2]}/detail/reviewer/${id}/penilaian`);
         toast.success("Proposal berhasil diupdate");
-      } else {
-        router.push("/proposal");
-        toast.error("Proposal tidak dapat diubah status");
       }
-
       reset();
 
       return data;
