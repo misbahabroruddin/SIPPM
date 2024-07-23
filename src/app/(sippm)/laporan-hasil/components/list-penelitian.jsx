@@ -91,7 +91,7 @@ const ListItemPenelitian = ({ data }) => {
           <Link href={`/laporan-hasil/edit/penelitian/${data?.id}`}>
             <ButtonUpdate
               className="bg-primary disabled:bg-gray-600"
-              text="Perbarui"
+              text={data?.is_done ? "Selesai" : "Perbarui"}
               onClick={handleStep}
               disabled={data?.is_done}
             />
