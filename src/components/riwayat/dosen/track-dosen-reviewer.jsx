@@ -151,7 +151,11 @@ export const TrackDosenReviewer = ({ data, isLoading }) => {
             </div>
             <Link
               href={`/proposal/${path[2]}/edit/${id}`}
-              className={updatedData?.status === "Revisi" ? "" : "hidden"}
+              className={
+                updatedData?.proposal?.status_reviewer === "Revisi"
+                  ? ""
+                  : "hidden"
+              }
             >
               <ButtonUpdate
                 text="Perbarui"
