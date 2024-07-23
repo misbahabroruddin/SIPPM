@@ -32,6 +32,8 @@ export const TrackDosenReviewer = ({ data, isLoading }) => {
 
   const updatedData = data ? data[0] : null;
 
+  console.log(updatedData, "<<<<<<<");
+
   if (isLoading) {
     return <SkeletonRiwayat />;
   }
@@ -149,11 +151,7 @@ export const TrackDosenReviewer = ({ data, isLoading }) => {
             </div>
             <Link
               href={`/proposal/${path[2]}/edit/${id}`}
-              className={
-                updatedData?.proposal?.status_reviewer === "Revisi"
-                  ? ""
-                  : "hidden"
-              }
+              className={updatedData?.status === "Revisi" ? "" : "hidden"}
             >
               <ButtonUpdate
                 text="Perbarui"
