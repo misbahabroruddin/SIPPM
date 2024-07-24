@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 
 import { ButtonSave } from "@/components/button/button-save";
@@ -8,24 +8,45 @@ import { TextArea } from "@/components/input/text-area";
 import { useQueryLaporanHasilReviewer } from "@/handlers/reviewer/laporan-hasil/query-get-laporan-hasil";
 import { useUpdatePenilaian } from "@/handlers/reviewer/laporan-hasil/update-nilai";
 import { useUpdateCatatanReviewer } from "@/handlers/reviewer/laporan-hasil/update-catatan";
+import { useQueryCatatanReviewer } from "@/handlers/reviewer/laporan-hasil/query-get-catatan";
 
 export const FormCatatanReviewer = () => {
+  const [id, setId] = useState();
+  const [errorMessage, setErrorMessage] = useState(false);
+
   const {
     register,
     handleSubmit,
     formState: { errors },
     setError,
+    setValue,
   } = useForm();
 
-  const { data: dataLaporanHasil } = useQueryLaporanHasilReviewer();
+  const { data: dataLaporanHasil, refetch } = useQueryLaporanHasilReviewer();
+
+  const { data: dataCatatan, refetch: refetchCatatanReviewer } =
+    useQueryCatatanReviewer();
 
   const { handleUpdateNilai, isLoading: isLoadingUpdateNilai } =
     useUpdatePenilaian();
 
   const { mutateAsync: onSubmitCatatan } = useUpdateCatatanReviewer();
 
-  const [id, setId] = useState();
-  const [errorMessage, setErrorMessage] = useState(false);
+  useEffect(() => {
+    refetch();
+    refetchCatatanReviewer();
+  }, []);
+
+  useEffect(() => {
+    dataLaporanHasil?.data?.forEach((item, index) => {
+      setValue(`skor${index}`, parseInt(item?.skor)),
+        setValue(`nilai${index}`, parseInt(item?.nilai));
+    });
+  }, [dataLaporanHasil]);
+
+  useEffect(() => {
+    setValue("catatan", dataCatatan?.data?.catatan_reviewer);
+  }, [dataCatatan]);
 
   return (
     <div className="flex flex-col gap-2 overflow-hidden rounded-lg">
@@ -89,7 +110,7 @@ export const FormCatatanReviewer = () => {
                       onFocus={() => setId(item.id)}
                       min={1}
                       max={7}
-                      defaultValue={item?.skor}
+                      defaultValue={item?.skor ? parseInt(item.skor) : ""}
                       tabIndex={1}
                       disabled={isLoadingUpdateNilai}
                     />
@@ -100,8 +121,8 @@ export const FormCatatanReviewer = () => {
                       className="mx-auto w-28 cursor-default rounded-lg border px-2 py-1 focus:outline-none focus:ring-0"
                       placeholder="Nilai"
                       readOnly
-                      value={item.nilai ? item.nilai : ""}
-                      // {...register("nilai")}
+                      {...register("nilai" + index)}
+                      defaultValue={item.nilai ? parseInt(item.nilai) : ""}
                     />
                   </div>
                 </div>
@@ -126,14 +147,11 @@ export const FormCatatanReviewer = () => {
             </div>
             <div className="flex basis-40 justify-center"></div>
             <div className="flex basis-40 justify-center">
-              <input
-                type="number"
-                className="mx-auto w-28 cursor-default border-none px-2 py-1 focus:outline-none focus:ring-0"
-                readOnly
-                value={dataLaporanHasil?.data.reduce((total, item) => {
-                  return total + parseInt(item.nilai);
-                }, 0)}
-              />
+              <p className="mx-auto w-28 cursor-default border-none px-2 py-1 focus:outline-none focus:ring-0">
+                {dataLaporanHasil?.data.reduce((total, item) => {
+                  return parseInt(total) + parseInt(item.nilai);
+                }, 0) || ""}
+              </p>
             </div>
           </div>
         </div>
@@ -146,10 +164,13 @@ export const FormCatatanReviewer = () => {
           <p className="mb-2">Catatan :</p>
           <TextArea
             labelClass="hidden"
-            register={register("catatan")}
-            errors={errors.ringkasan}
+            register={register("catatan", {
+              required: "Harus diisi",
+            })}
+            errors={errors.catatan}
             required
             spanEmptyClass="hidden"
+            defaultValue={dataCatatan?.data?.catatan_reviewer}
             placeholder="Masukkan catatan"
           />
           <ButtonSave className="mx-auto mt-3" />
