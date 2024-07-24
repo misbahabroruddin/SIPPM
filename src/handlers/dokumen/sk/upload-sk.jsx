@@ -19,7 +19,13 @@ export const useUploadSK = (proposalId) => {
 
       const response = await axios.post("/dokumen/sks/upload", formData);
 
-      queryClient.invalidateQueries({ queryKey: ["dokumen-sk-lppm"] });
+      queryClient.invalidateQueries({
+        queryKey: ["dokumen-sk-lppm", "penelitian"],
+      });
+
+      queryClient.invalidateQueries({
+        queryKey: ["dokumen-sk-lppm", "pengabdian"],
+      });
 
       queryClient.invalidateQueries({ queryKey: ["dokumen-kontrak-lppm"] });
 
