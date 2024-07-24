@@ -1,15 +1,17 @@
 "use client";
 
+import { useSearchParams } from "next/navigation";
+import { useState } from "react";
+import { useDebouncedCallback } from "use-debounce";
+
 import { BasePageTitle } from "@/components/base-page-title";
 import { ContainerPage } from "@/components/container-page";
 import { TabPenelitianPengabdian } from "@/components/tabs/tab-penelitian-pengabdian";
 import { useQueryGetListLaporanHasilPenelitian } from "@/handlers/dosen/laporan-hasil/penelitian/query-get-list-laporan-hasil-penelitian";
 import { useQueryGetListLaporanHasilPengabdian } from "@/handlers/dosen/laporan-hasil/pengabdian/query-get-list-laporan-hasil-pengabdian";
-import { useSearchParams } from "next/navigation";
-import { useState } from "react";
-import { useDebouncedCallback } from "use-debounce";
 import { ListPenelitian } from "./components/list-penelitian";
 import { ListPengabdian } from "./components/list-pengabdian";
+import { SearchInput } from "@/components/input/search-input";
 
 export default function PenilaianPage() {
   const [tabActive] = useState("penelitian");
@@ -48,6 +50,16 @@ export default function PenilaianPage() {
         <BasePageTitle iconSrc="/icons/search-black.svg" title="Penilaian" />
         <div className="flex items-center gap-2 lg:gap-4">
           <TabPenelitianPengabdian tabActive={currentTab || tabActive} />
+          <SearchInput
+            onChange={(e) => {
+              currentTab === "pengabdian"
+                ? debouncedSearchPengabdian(e.target.value)
+                : debouncedSearchPenelitian(e.target.value);
+            }}
+            defaultValue={
+              currentTab === "pengabdian" ? searchPengabdian : searchPenelitian
+            }
+          />
         </div>
         {currentTab === "penelitian" || !currentTab ? (
           <ListPenelitian
