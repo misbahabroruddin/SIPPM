@@ -211,4 +211,9 @@ export const MENU_SIDEBAR_REVIEWER = [
     icon: "/icons/document.svg",
     link: "/laporan/reviewer",
   },
+  {
+    label: "Penilaian",
+    icon: "/icons/penilaian.svg",
+    link: "/penilaian",
+  },
 ];

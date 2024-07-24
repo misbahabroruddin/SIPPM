@@ -25,6 +25,8 @@ export const Sidebar = () => {
       return setOpen("/document");
     } else if (pathname.includes("/anggota")) {
       return setOpen("/anggota");
+    } else if (pathname.includes("/laporan")) {
+      return setOpen("/laporan");
     }
 
     setOpen(null);
