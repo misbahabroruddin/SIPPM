@@ -9,7 +9,7 @@ export const useQueryGetListSKLppm = (jenisProposal) => {
   const axios = useAxios();
 
   const query = useQuery({
-    queryKey: ["dokumen-sk-lppm"],
+    queryKey: ["dokumen-sk-lppm", jenisProposal],
     queryFn: async () => {
       try {
         const { data } = await axios.get(

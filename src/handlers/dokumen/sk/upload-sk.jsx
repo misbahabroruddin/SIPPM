@@ -23,7 +23,13 @@ export const useUploadSK = (proposalId) => {
 
       queryClient.invalidateQueries({ queryKey: ["dokumen-kontrak-lppm"] });
 
-      queryClient.invalidateQueries({ queryKey: ["dokumen-sk-dosen"] });
+      queryClient.invalidateQueries({
+        queryKey: ["dokumen-sk-dosen", "penelitian"],
+      });
+
+      queryClient.invalidateQueries({
+        queryKey: ["dokumen-sk-dosen", "pengabdian"],
+      });
 
       queryClient.invalidateQueries({
         queryKey: ["dokumen-kontrak-dosen"],

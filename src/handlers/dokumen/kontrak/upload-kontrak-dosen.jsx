@@ -22,7 +22,13 @@ export const useUploadKontrakDosen = (proposalId) => {
         formData,
       );
 
-      queryClient.invalidateQueries({ queryKey: ["dokumen-sk-dosen"] });
+      queryClient.invalidateQueries({
+        queryKey: ["dokumen-sk-dosen", "penelitian"],
+      });
+
+      queryClient.invalidateQueries({
+        queryKey: ["dokumen-sk-dosen", "pengabdian"],
+      });
 
       queryClient.invalidateQueries({
         queryKey: ["dokumen-kontrak-dosen"],

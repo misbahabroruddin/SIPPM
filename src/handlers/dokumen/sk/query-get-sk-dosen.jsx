@@ -9,7 +9,7 @@ export const useQueryGetListSKDosen = (jenisProposal) => {
   const axios = useAxios();
 
   const query = useQuery({
-    queryKey: ["dokumen-sk-dosen"],
+    queryKey: ["dokumen-sk-dosen", jenisProposal],
     queryFn: async () => {
       try {
         const { data } = await axios.get(
