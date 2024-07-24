@@ -30,7 +30,7 @@ export const useVerifikasiProposalReviewer = (reset, router) => {
       );
 
       if (form.status === "Diterima") {
-        router.push(`/proposal/${path[2]}/detail/reviewer/${id}/penilaian`);
+        router.push(`/penilaian/${path[2]}/${id}/penilaian-reviewer`);
         toast.success("Proposal berhasil diupdate");
       } else {
         router.push("/proposal");
@@ -91,6 +91,8 @@ export const useVerifikasiProposalReviewer = (reset, router) => {
         queryKey: ["detailPengabdianReviewer", id],
       });
       queryClient.resetQueries({ queryKey: ["trackDosenReviewer", id] });
+      queryClient.resetQueries({ queryKey: ["listLaporanHasilPenelitian"] });
+      queryClient.resetQueries({ queryKey: ["listLaporanHasilPengabdian"] });
     },
   });
 

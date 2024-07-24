@@ -39,7 +39,17 @@ export const useUpdateCatatanReviewer = () => {
         queryKey: ["listingPengabdianReviewer"],
       });
 
-      router.push("/proposal");
+      queryClient.invalidateQueries({
+        queryKey: ["listLaporanHasilPenelitian"],
+      });
+
+      queryClient.invalidateQueries({
+        queryKey: ["listLaporanHasilPengabdian"],
+      });
+
+      router.push("/penilaian");
+
+      toast.success("Penilaian berhasil");
 
       return data;
     } catch (error) {
