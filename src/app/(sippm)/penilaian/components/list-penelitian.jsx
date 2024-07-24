@@ -7,6 +7,8 @@ import { convertDate } from "@/lib/utils/convertDate";
 import { EmptyState } from "@/components/empty-state";
 import Link from "next/link";
 import { ButtonUpdate } from "@/components/button/button-update";
+import { useSession } from "next-auth/react";
+import { REVIEWER } from "@/lib/constants/role";
 
 export const ListPenelitian = ({ penelitian, isLoading, handlePageChange }) => {
   if (isLoading) return <SkeletonListingProposal />;
@@ -35,6 +37,14 @@ export const ListPenelitian = ({ penelitian, isLoading, handlePageChange }) => {
 };
 
 const ListItemPenelitian = ({ data }) => {
+  const session = useSession();
+  const role = session.data.user.roles[0].name;
+
+  const path =
+    role === REVIEWER
+      ? `/penilaian/penelitian/${data?.id}/penilaian-reviewer`
+      : `/penilaian/penelitian/${data?.id}`;
+
   return (
     <div className="rounded-lg px-6 py-4 shadow-custom" key={data?.id}>
       <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between">
@@ -79,7 +89,7 @@ const ListItemPenelitian = ({ data }) => {
             <p>Total Nilai</p>
             <p className="text-xl font-[500]">{data?.total_skor}</p>
           </div>
-          <Link href={`/penilaian/penelitian/${data?.id}`}>
+          <Link href={path}>
             <ButtonUpdate
               className="bg-primary disabled:bg-gray-600"
               text="Detail"

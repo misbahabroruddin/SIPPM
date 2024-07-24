@@ -1,13 +1,14 @@
 "use client";
 import Image from "next/image";
 
-import { ButtonStatus } from "@/components/button/button-status";
 import { Pagination } from "@/components/pagination";
 import { SkeletonListingProposal } from "@/components/skeleton/skeleton-listing-proposal";
 import { convertDate } from "@/lib/utils/convertDate";
 import { EmptyState } from "@/components/empty-state";
 import Link from "next/link";
 import { ButtonUpdate } from "@/components/button/button-update";
+import { useSession } from "next-auth/react";
+import { REVIEWER } from "@/lib/constants/role";
 
 export const ListPengabdian = ({ pengabdian, isLoading, handlePageChange }) => {
   if (isLoading) return <SkeletonListingProposal />;
@@ -36,6 +37,14 @@ export const ListPengabdian = ({ pengabdian, isLoading, handlePageChange }) => {
 };
 
 const ListItemPengabdian = ({ data }) => {
+  const session = useSession();
+  const role = session.data.user.roles[0].name;
+
+  const path =
+    role === REVIEWER
+      ? `/penilaian/pengabdian/${data?.id}/penilaian-reviewer`
+      : `/penilaian/pengabdian/${data?.id}`;
+
   return (
     <div className="rounded-lg px-6 py-4 shadow-custom" key={data?.id}>
       <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between">
@@ -81,7 +90,7 @@ const ListItemPengabdian = ({ data }) => {
               <p>Total Nilai</p>
               <p className="text-xl font-[500]">{data?.total_skor}</p>
             </div>
-            <Link href={`/penilaian/pengabdian/${data?.id}`}>
+            <Link href={path}>
               <ButtonUpdate
                 className="bg-primary disabled:bg-gray-600"
                 text="Detail"
