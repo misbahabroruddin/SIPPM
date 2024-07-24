@@ -84,7 +84,7 @@ const ListItemPengabdian = ({ data }) => {
             <p>Status Proposal</p>
             <ButtonStatus status={data?.status_reviewer} />
           </div>
-          <Link href={`/proposal/penelitian/detail/${role}/${data.id}`}>
+          <Link href={`/proposal/pengabdian/detail/${role}/${data.id}`}>
             <ButtonUpdate
               className="bg-primary disabled:bg-gray-600"
               text="Detail"
