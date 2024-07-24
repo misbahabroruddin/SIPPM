@@ -93,16 +93,16 @@ const ListItemSK = ({ data }) => {
             />
           ) : (
             <>
-              <ModalUploadSkPengabdian
-                pengabdianId={data?.id}
-                buttonClassName="justify-center w-full lg:w-fit order-2 lg:order-none"
-              />
               <div className="order-1 flex flex-col items-center gap-2 font-[500] lg:order-none lg:mr-10">
                 <p className="text-sm">SK</p>
                 <p className="rounded-lg bg-[#D5FACC] px-2 py-1 text-[#23B900]">
                   Terkirim
                 </p>
               </div>
+              <ModalUploadSkPengabdian
+                pengabdianId={data?.id}
+                buttonClassName="justify-center w-full lg:w-fit order-2 lg:order-none"
+              />
             </>
           )}
         </div>
