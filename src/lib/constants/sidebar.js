@@ -101,11 +101,11 @@ export const MENU_SIDEBAR_DOSEN = [
     icon: "/icons/proposal.svg",
     link: "/proposal",
   },
-  // {
-  //   label: "Penilaian",
-  //   icon: "/icons/penilaian.svg",
-  //   link: "/penilaian",
-  // },
+  {
+    label: "Penilaian",
+    icon: "/icons/penilaian.svg",
+    link: "/penilaian",
+  },
   // {
   //   label: "Monev",
   //   icon: "/icons/monev.svg",
@@ -178,11 +178,11 @@ export const MENU_SIDEBAR_LPPM = [
       },
     ],
   },
-  // {
-  //   label: "Laporan",
-  //   icon: "/icons/document.svg",
-  //   link: "/laporan",
-  // },
+  {
+    label: "Laporan",
+    icon: "/icons/document.svg",
+    link: "/laporan/lppm",
+  },
 ];
 
 export const MENU_SIDEBAR_REVIEWER = [
@@ -206,9 +206,9 @@ export const MENU_SIDEBAR_REVIEWER = [
   //   icon: "/icons/document.svg",
   //   link: "/document",
   // },
-  // {
-  //   label: "Laporan",
-  //   icon: "/icons/document.svg",
-  //   link: "/laporan",
-  // },
+  {
+    label: "Laporan",
+    icon: "/icons/document.svg",
+    link: "/laporan/reviewer",
+  },
 ];
