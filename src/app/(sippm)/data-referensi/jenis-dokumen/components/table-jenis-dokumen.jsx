@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import FileSaver from "file-saver";
 
 import DataTable from "@/components/data-table/table";
@@ -21,20 +21,22 @@ export const TableJenisDokumen = () => {
     pageIndex: 0,
     pageSize: 10,
   });
+
+  const inputFile = useRef(null);
+
   const columns = useColumnTableJenisDokumen();
-  const { mutateAsync: onImportFile } = useImportJenisDokumen();
+  const { mutateAsync: onImportFile, isSuccess: isSuccessImport } =
+    useImportJenisDokumen();
 
   const {
     data: dataJenisDokumen,
     refetch,
     isLoading: isLoadingJenisDokumen,
+    isSuccess: isSuccessExport,
   } = useExportJenisDokumen();
 
   const handleExport = async () => {
     await refetch();
-    if (dataJenisDokumen) {
-      FileSaver.saveAs(dataJenisDokumen, "jenis-dokumen.xlsx");
-    }
   };
 
   const handleImport = async (e) => {
@@ -55,6 +57,19 @@ export const TableJenisDokumen = () => {
     pagination.pageIndex + 1,
   );
 
+  useEffect(() => {
+    if (isSuccessExport) {
+      FileSaver.saveAs(dataJenisDokumen, "jenis-dokumen.xlsx");
+    }
+  }, [dataJenisDokumen]);
+
+  useEffect(() => {
+    if (isSuccessImport && inputFile.current) {
+      inputFile.current.value = "";
+      inputFile.current.type = "file";
+    }
+  }, [isSuccessImport]);
+
   if (isLoading) return <SkeletonTableDataRefensi />;
 
   return (
@@ -68,7 +83,7 @@ export const TableJenisDokumen = () => {
         </div>
         <div className="flex gap-2">
           <ModalTrashJenisDokumen />
-          <InputFileImport onChange={handleImport} />
+          <InputFileImport onChange={handleImport} ref={inputFile} />
           <ButtonExport
             onClick={handleExport}
             isLoading={isLoadingJenisDokumen}

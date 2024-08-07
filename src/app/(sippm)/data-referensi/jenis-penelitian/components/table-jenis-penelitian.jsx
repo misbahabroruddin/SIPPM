@@ -1,7 +1,8 @@
 "use client";
 import { useDebouncedCallback } from "use-debounce";
 import FileSaver from "file-saver";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { useQueryClient } from "@tanstack/react-query";
 
 import DataTable from "@/components/data-table/table";
 import { SearchInput } from "@/components/input/search-input";
@@ -21,18 +22,24 @@ export const TableJenisPenelitian = () => {
     pageIndex: 0,
     pageSize: 10,
   });
+
+  const queryClient = useQueryClient();
+
+  const inputFile = useRef(null);
+
   const columns = useColumnTableJenisPenelitian();
-  const { mutateAsync: onImportFile } = useImportJenisPenelitian();
+  const { mutateAsync: onImportFile, isSuccess: isSuccessImport } =
+    useImportJenisPenelitian();
 
   const {
     data: dataJenisPenelitian,
     refetch,
     isLoading: isLoadingJenisPenelitian,
+    isSuccess: isSuccessExport,
   } = useExportJenisPenelitian();
 
   const handleExport = async () => {
     await refetch();
-    FileSaver.saveAs(dataJenisPenelitian, "jabatan-fungsional.xlsx");
   };
 
   const handleImport = async (e) => {
@@ -53,6 +60,22 @@ export const TableJenisPenelitian = () => {
     pagination.pageIndex + 1,
   );
 
+  useEffect(() => {
+    if (isSuccessExport) {
+      FileSaver.saveAs(dataJenisPenelitian, "jenis-penelitian.xlsx");
+      queryClient.removeQueries({
+        queryKey: ["exportJenisPenelitian"],
+      });
+    }
+  }, [isSuccessExport]);
+
+  useEffect(() => {
+    if (isSuccessImport && inputFile.current) {
+      inputFile.current.value = "";
+      inputFile.current.type = "file";
+    }
+  }, [isSuccessImport]);
+
   if (isLoading) return <SkeletonTableDataRefensi />;
 
   return (
@@ -66,7 +89,7 @@ export const TableJenisPenelitian = () => {
         </div>
         <div className="flex gap-2">
           <ModalTrashJenisPenelitian />
-          <InputFileImport onChange={handleImport} />
+          <InputFileImport onChange={handleImport} ref={inputFile} />
           <ButtonExport
             onClick={handleExport}
             isLoading={isLoadingJenisPenelitian}

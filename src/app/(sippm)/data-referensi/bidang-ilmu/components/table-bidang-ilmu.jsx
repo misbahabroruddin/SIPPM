@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useDebouncedCallback } from "use-debounce";
 import FileSaver from "file-saver";
 
@@ -21,18 +21,20 @@ export const TableBidangIlmu = () => {
     pageIndex: 0,
     pageSize: 10,
   });
+  const inputFile = useRef(null);
+
   const columns = useColumnTableBidangIlmu();
-  const { mutateAsync: onImportFile } = useImportBidangIlmu();
+  const { mutateAsync: onImportFile, isSuccess } = useImportBidangIlmu();
 
   const {
     data: dataBidangIlmu,
-    refetch,
     isLoading: isLoadingBidangIlmu,
+    isSuccess: isSuccessExport,
+    refetch,
   } = useExportBidangIlmu();
 
   const handleExport = async () => {
     await refetch();
-    FileSaver.saveAs(dataBidangIlmu, "bidang-ilmu.xlsx");
   };
 
   const handleImport = async (e) => {
@@ -53,6 +55,19 @@ export const TableBidangIlmu = () => {
     pagination.pageIndex + 1,
   );
 
+  useEffect(() => {
+    if (isSuccessExport) {
+      FileSaver.saveAs(dataBidangIlmu, "bidang-ilmu.xlsx");
+    }
+  }, [dataBidangIlmu]);
+
+  useEffect(() => {
+    if (isSuccess && inputFile.current) {
+      inputFile.current.value = "";
+      inputFile.current.type = "file";
+    }
+  }, [isSuccess]);
+
   if (isLoading) return <SkeletonTableDataRefensi />;
 
   return (
@@ -66,7 +81,7 @@ export const TableBidangIlmu = () => {
         </div>
         <div className="flex gap-2">
           <ModalTrashBidangIlmu />
-          <InputFileImport onChange={handleImport} />
+          <InputFileImport onChange={handleImport} ref={inputFile} />
           <ButtonExport
             onClick={handleExport}
             isLoading={isLoadingBidangIlmu}

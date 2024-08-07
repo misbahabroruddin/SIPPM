@@ -1,7 +1,8 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import FileSaver from "file-saver";
 import { useDebouncedCallback } from "use-debounce";
+import { useQueryClient } from "@tanstack/react-query";
 
 import DataTable from "@/components/data-table/table";
 import { useQueryListingJabatanFungsional } from "@/handlers/data-referensi/jabatan-fungsional/administrator/query-get-all-jabatan-fungsional";
@@ -21,18 +22,24 @@ export const TableJabatanFungsional = () => {
     pageIndex: 0,
     pageSize: 10,
   });
+
+  const queryClient = useQueryClient();
+
+  const inputFile = useRef(null);
+
   const columns = useColumnTableJabatanFungsional();
-  const { mutateAsync: onImportFile } = useImportJabatanFungsional();
+  const { mutateAsync: onImportFile, isSuccess: isSuccessImport } =
+    useImportJabatanFungsional();
 
   const {
     data: dataJabatanFungsional,
     refetch,
     isLoading: isLoadingJabatanFungsional,
+    isSuccess: isSuccessExport,
   } = useExportJabatanFungsional();
 
   const handleExport = async () => {
     await refetch();
-    FileSaver.saveAs(dataJabatanFungsional, "jabatan-fungsional.xlsx");
   };
 
   const handleImport = async (e) => {
@@ -53,6 +60,22 @@ export const TableJabatanFungsional = () => {
     pagination.pageIndex + 1,
   );
 
+  useEffect(() => {
+    if (isSuccessExport) {
+      FileSaver.saveAs(dataJabatanFungsional, "jabatan-fungsional.xlsx");
+      queryClient.removeQueries({
+        queryKey: ["exportJabatanFungsional"],
+      });
+    }
+  }, [dataJabatanFungsional]);
+
+  useEffect(() => {
+    if (isSuccessImport && inputFile.current) {
+      inputFile.current.value = "";
+      inputFile.current.type = "file";
+    }
+  }, [isSuccessImport]);
+
   if (isLoading) return <SkeletonTableDataRefensi />;
 
   return (
@@ -66,7 +89,7 @@ export const TableJabatanFungsional = () => {
         </div>
         <div className="flex gap-2">
           <ModalTrashJabatanFungsional />
-          <InputFileImport onChange={handleImport} />
+          <InputFileImport onChange={handleImport} ref={inputFile} />
           <ButtonExport
             onClick={handleExport}
             isLoading={isLoadingJabatanFungsional}
