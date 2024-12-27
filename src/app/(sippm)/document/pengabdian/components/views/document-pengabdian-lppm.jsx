@@ -11,15 +11,29 @@ import { useQueryGetListKontrakPengabdianLPPM } from "@/handlers/lppm/dokumen/pe
 
 export default function DocumentPengabdianLppm() {
   const [tabActive] = useState("SK");
+  const [pageSK, setPageSK] = useState(1);
+  const [pageKontrak, setPageKontrak] = useState(1);
+  const [searchSK] = useState(null);
+  const [searchKontrak] = useState(null);
   const tabParams = useSearchParams();
   const currentTab = tabParams.get("tab");
   const id = useId();
 
-  const { data: dataSK, isLoading: isLoadingSK } =
-    useQueryGetListSKPengabdianLPPM();
+  const handlePageChangeSK = (event) => {
+    setPageSK(event.selected + 1);
+  };
+  const handlePageChangeKontrak = (event) => {
+    setPageKontrak(event.selected + 1);
+  };
+
+  const { data: dataSK, isLoading: isLoadingSK } = useQueryGetListSKLppm(
+    "pengabdian",
+    searchSK,
+    pageSK,
+  );
 
   const { data: dataKontrak, isLoading: isLoadingKontrak } =
-    useQueryGetListKontrakPengabdianLPPM();
+    useQueryGetListKontrakLppm("pengabdian", searchKontrak, pageKontrak);
 
   return (
     <div className="flex flex-col gap-4">
@@ -43,11 +57,13 @@ export default function DocumentPengabdianLppm() {
           pengabdian={dataSK?.data}
           isLoading={isLoadingSK}
           key={id}
+          handlePageChange={handlePageChangeSK}
         />
       ) : (
         <ListPengabdianKontrakLppm
           pengabdian={dataKontrak?.data}
           isLoading={isLoadingKontrak}
+          handlePageChange={handlePageChangeKontrak}
           key={id}
         />
       )}

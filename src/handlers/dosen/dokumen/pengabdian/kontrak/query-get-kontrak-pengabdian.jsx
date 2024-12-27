@@ -5,14 +5,31 @@ import { signOut } from "next-auth/react";
 
 import { useAxios } from "@/lib/hooks/useAxios";
 
-export const useQueryGetListKontrakPengabdianDosen = () => {
+export const useQueryGetListKontrakDosen = (jenisProposal, search, page) => {
   const axios = useAxios();
 
   const query = useQuery({
-    queryKey: ["getKontrakPengabdianDosen"],
+    queryKey: ["dokumen-kontrak-dosen", search, page],
     queryFn: async () => {
+      let params;
+      if (search) {
+        params = {
+          judul: search,
+        };
+      }
+      if (page) {
+        params = {
+          ...params,
+          page: page,
+        };
+      }
       try {
-        const { data } = await axios.get("/dokumens/dosens/pkms/kontraks");
+        const { data } = await axios.get(
+          `/dokumen/kontraks/role/dosen?proposal=${jenisProposal}`,
+          {
+            params,
+          },
+        );
         return data;
       } catch (error) {
         if (error.response.status === 401) {

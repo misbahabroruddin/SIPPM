@@ -11,14 +11,28 @@ import { useQueryGetListKontrakPengabdianDosen } from "@/handlers/dosen/dokumen/
 
 export default function DocumentPengabdianDosen() {
   const [tabActive] = useState("SK");
+  const [pageSK, setPageSK] = useState(1);
+  const [pageKontrak, setPageKontrak] = useState(1);
+  const [searchSK] = useState(null);
+  const [searchKontrak] = useState(null);
   const tabParams = useSearchParams();
   const currentTab = tabParams.get("tab");
 
-  const { data: dataSK, isLoading: isLoadingSK } =
-    useQueryGetListSKPengabdianDosen();
+  const handlePageChangeSK = (event) => {
+    setPageSK(event.selected + 1);
+  };
+  const handlePageChangeKontrak = (event) => {
+    setPageKontrak(event.selected + 1);
+  };
+
+  const { data: dataSK, isLoading: isLoadingSK } = useQueryGetListSKDosen(
+    "pengabdian",
+    searchSK,
+    pageSK,
+  );
 
   const { data: dataKontrak, isLoading: isLoadingKontrak } =
-    useQueryGetListKontrakPengabdianDosen();
+    useQueryGetListKontrakDosen("pengabdian", searchKontrak, pageKontrak);
 
   return (
     <div className="flex flex-col gap-4">
@@ -41,11 +55,13 @@ export default function DocumentPengabdianDosen() {
         <ListPengabdianSKDosen
           pengabdian={dataSK?.data}
           isLoading={isLoadingSK}
+          handlePageChange={handlePageChangeSK}
         />
       ) : (
         <ListPengabdianKontrakDosen
           pengabdian={dataKontrak?.data}
           isLoading={isLoadingKontrak}
+          handlePageChange={handlePageChangeKontrak}
         />
       )}
     </div>

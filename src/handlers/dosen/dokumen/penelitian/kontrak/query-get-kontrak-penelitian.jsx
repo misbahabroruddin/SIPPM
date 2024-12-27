@@ -5,15 +5,30 @@ import { toast } from "react-toastify";
 
 import { useAxios } from "@/lib/hooks/useAxios";
 
-export const useQueryGetListKontrakPenelitianDosen = () => {
+export const useQueryGetListKontrakLppm = (jenisProposal, search, page) => {
   const axios = useAxios();
 
   const query = useQuery({
-    queryKey: ["getKontrakPenelitianDosen"],
+    queryKey: ["dokumen-kontrak-lppm", search, page],
     queryFn: async () => {
+      let params;
+      if (search) {
+        params = {
+          judul: search,
+        };
+      }
+      if (page) {
+        params = {
+          ...params,
+          page: page,
+        };
+      }
       try {
         const { data } = await axios.get(
-          "/dokumens/dosens/penelitians/kontraks",
+          `/dokumen/kontraks/role/lppm?proposal=${jenisProposal}`,
+          {
+            params,
+          },
         );
         return data;
       } catch (error) {
