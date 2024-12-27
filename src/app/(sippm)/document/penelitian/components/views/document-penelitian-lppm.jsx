@@ -11,15 +11,29 @@ import { useQueryGetListSKLppm } from "@/handlers/dokumen/sk/query-get-sk-lppm";
 
 export default function DocumentPenelitianLppm() {
   const [tabActive] = useState("SK");
+  const [pageSK, setPageSK] = useState(1);
+  const [pageKontrak, setPageKontrak] = useState(1);
+  const [searchSK] = useState(null);
+  const [searchKontrak] = useState(null);
   const tabParams = useSearchParams();
   const currentTab = tabParams.get("tab");
   const id = useId();
 
-  const { data: dataSK, isLoading: isLoadingSK } =
-    useQueryGetListSKLppm("penelitian");
+  const handlePageChangeSK = (event) => {
+    setPageSK(event.selected + 1);
+  };
+  const handlePageChangeKontrak = (event) => {
+    setPageKontrak(event.selected + 1);
+  };
+
+  const { data: dataSK, isLoading: isLoadingSK } = useQueryGetListSKLppm(
+    "penelitian",
+    searchSK,
+    pageSK,
+  );
 
   const { data: dataKontrak, isLoading: isLoadingKontrak } =
-    useQueryGetListKontrakLppm("penelitian");
+    useQueryGetListKontrakLppm("penelitian", searchKontrak, pageKontrak);
 
   return (
     <div className="flex flex-col gap-4">
@@ -42,12 +56,14 @@ export default function DocumentPenelitianLppm() {
         <ListPenelitianSKLppm
           penelitian={dataSK?.data}
           isLoading={isLoadingSK}
+          handlePageChange={handlePageChangeSK}
           key={id}
         />
       ) : (
         <ListPenelitianKontrakLppm
           penelitian={dataKontrak?.data}
           isLoading={isLoadingKontrak}
+          handlePageChange={handlePageChangeKontrak}
           key={id}
         />
       )}

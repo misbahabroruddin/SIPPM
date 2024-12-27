@@ -11,14 +11,28 @@ import { useQueryGetListSKDosen } from "@/handlers/dokumen/sk/query-get-sk-dosen
 
 export default function DocumentPenelitianDosen() {
   const [tabActive] = useState("SK");
+  const [pageSK, setPageSK] = useState(1);
+  const [pageKontrak, setPageKontrak] = useState(1);
+  const [searchSK] = useState(null);
+  const [searchKontrak] = useState(null);
   const tabParams = useSearchParams();
   const currentTab = tabParams.get("tab");
 
-  const { data: dataSK, isLoading: isLoadingSK } =
-    useQueryGetListSKDosen("penelitian");
+  const handlePageChangeSK = (event) => {
+    setPageSK(event.selected + 1);
+  };
+  const handlePageChangeKontrak = (event) => {
+    setPageKontrak(event.selected + 1);
+  };
+
+  const { data: dataSK, isLoading: isLoadingSK } = useQueryGetListSKDosen(
+    "penelitian",
+    searchSK,
+    pageSK,
+  );
 
   const { data: dataKontrak, isLoading: isLoadingKontrak } =
-    useQueryGetListKontrakDosen("penelitian");
+    useQueryGetListKontrakDosen("penelitian", searchKontrak, pageKontrak);
 
   return (
     <div className="flex flex-col gap-4">
@@ -41,11 +55,13 @@ export default function DocumentPenelitianDosen() {
         <ListPenelitianSKDosen
           penelitian={dataSK?.data}
           isLoading={isLoadingSK}
+          handlePageChange={handlePageChangeSK}
         />
       ) : (
         <ListPenelitianKontrakDosen
           penelitian={dataKontrak?.data}
           isLoading={isLoadingKontrak}
+          handlePageChange={handlePageChangeKontrak}
         />
       )}
     </div>
