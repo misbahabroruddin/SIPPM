@@ -2,21 +2,21 @@
 
 import { useState } from "react";
 import { useSearchParams } from "next/navigation";
-import { useDebouncedCallback } from "use-debounce";
+// import { useDebouncedCallback } from "use-debounce";
 
 import { Tabs } from "../tabs";
 import { ListPengabdianSKDosen } from "../dosen/list-document-sk-dosen";
 import { ListPengabdianKontrakDosen } from "../dosen/list-document-kontrak-dosen";
 import { useQueryGetListSKPengabdianDosen } from "@/handlers/dosen/dokumen/pengabdian/sk/query-get-sk-pengabdian";
 import { useQueryGetListKontrakPengabdianDosen } from "@/handlers/dosen/dokumen/pengabdian/kontrak/query-get-kontrak-pengabdian";
-import { SearchInput } from "@/components/input/search-input";
+// import { SearchInput } from "@/components/input/search-input";
 
 export default function DocumentPengabdianDosen() {
   const [tabActive] = useState("SK");
   const [pageSKPengabdian, setPageSKPengabdian] = useState(1);
   const [pageKontrakPengabdian, setPageKontrakPengabdian] = useState(1);
-  const [searchSKPengabdian, setSKPengabdian] = useState("");
-  const [searchKontrakPengabdian, setKontrakPengabdian] = useState("");
+  const [searchSKPengabdian] = useState("");
+  const [searchKontrakPengabdian] = useState("");
   const tabParams = useSearchParams();
   const currentTab = tabParams.get("tab");
 
@@ -27,15 +27,15 @@ export default function DocumentPengabdianDosen() {
     setPageKontrakPengabdian(event.selected + 1);
   };
 
-  const handleSearchSKPengabdian = useDebouncedCallback((value) => {
-    setSKPengabdian(value);
-    setPageSKPengabdian(1);
-  }, 1000);
+  // const handleSearchSKPengabdian = useDebouncedCallback((value) => {
+  //   setSKPengabdian(value);
+  //   setPageSKPengabdian(1);
+  // }, 1000);
 
-  const handleSearchKontrakPengabdian = useDebouncedCallback((value) => {
-    setKontrakPengabdian(value);
-    setPageKontrakPengabdian(1);
-  }, 1000);
+  // const handleSearchKontrakPengabdian = useDebouncedCallback((value) => {
+  //   setKontrakPengabdian(value);
+  //   setPageKontrakPengabdian(1);
+  // }, 1000);
 
   const { data: dataSK, isLoading: isLoadingSK } =
     useQueryGetListSKPengabdianDosen(searchSKPengabdian, pageSKPengabdian);
@@ -51,7 +51,7 @@ export default function DocumentPengabdianDosen() {
       <div className="flex justify-between">
         <div className="flex items-center gap-2 lg:gap-4">
           <Tabs tabActive={currentTab || tabActive} />
-          <SearchInput
+          {/* <SearchInput
             onChange={(e) => {
               currentTab === "SK"
                 ? handleSearchSKPengabdian(e.target.value)
@@ -60,7 +60,7 @@ export default function DocumentPengabdianDosen() {
             defaultValue={
               currentTab === "SK" ? searchSKPengabdian : searchKontrakPengabdian
             }
-          />
+          /> */}
         </div>
       </div>
       {currentTab === "SK" || !currentTab ? (
