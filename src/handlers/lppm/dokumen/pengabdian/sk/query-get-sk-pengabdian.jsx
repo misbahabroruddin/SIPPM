@@ -5,14 +5,29 @@ import { signOut } from "next-auth/react";
 
 import { useAxios } from "@/lib/hooks/useAxios";
 
-export const useQueryGetListSKPengabdianLPPM = () => {
+export const useQueryGetListSKPengabdianLPPM = (search, page) => {
   const axios = useAxios();
 
   const query = useQuery({
-    queryKey: ["getSKPengabdianLPPM"],
+    queryKey: ["getSKPengabdianLPPM", search, page],
     queryFn: async () => {
+      let params;
+      if (search) {
+        params = {
+          judul: search,
+        };
+      }
+
+      if (page) {
+        params = {
+          ...params,
+          page: page,
+        };
+      }
       try {
-        const { data } = await axios.get("/dokumens/lppms/pkms/sks");
+        const { data } = await axios.get("/dokumens/lppms/pkms/sks", {
+          params,
+        });
         return data;
       } catch (error) {
         if (error.response.status === 401) {
