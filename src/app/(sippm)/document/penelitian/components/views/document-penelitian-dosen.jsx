@@ -8,6 +8,7 @@ import { useQueryGetListSKPenelitianDosen } from "@/handlers/dosen/dokumen/penel
 import { useQueryGetListKontrakPenelitianDosen } from "@/handlers/dosen/dokumen/penelitian/kontrak/query-get-kontrak-penelitian";
 import { ListPenelitianSKDosen } from "../dosen/list-document-sk-dosen";
 import { ListPenelitianKontrakDosen } from "../dosen/list-document-kontrak-dosen";
+import { SearchInput } from "@/components/input/search-input";
 
 export default function DocumentPenelitianDosen() {
   const [tabActive] = useState("SK");

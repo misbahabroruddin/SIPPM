@@ -8,6 +8,7 @@ import { ListPengabdianSKDosen } from "../dosen/list-document-sk-dosen";
 import { ListPengabdianKontrakDosen } from "../dosen/list-document-kontrak-dosen";
 import { useQueryGetListSKPengabdianDosen } from "@/handlers/dosen/dokumen/pengabdian/sk/query-get-sk-pengabdian";
 import { useQueryGetListKontrakPengabdianDosen } from "@/handlers/dosen/dokumen/pengabdian/kontrak/query-get-kontrak-pengabdian";
+import { SearchInput } from "@/components/input/search-input";
 
 export default function DocumentPengabdianDosen() {
   const [tabActive] = useState("SK");

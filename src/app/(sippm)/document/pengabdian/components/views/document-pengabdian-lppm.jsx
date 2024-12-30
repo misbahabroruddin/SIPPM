@@ -8,6 +8,7 @@ import { ListPengabdianKontrakLppm } from "../lppm/list-document-kontrak-lppm";
 import { ListPengabdianSKLppm } from "../lppm/list-document-sk-lppm";
 import { useQueryGetListSKPengabdianLPPM } from "@/handlers/lppm/dokumen/pengabdian/sk/query-get-sk-pengabdian";
 import { useQueryGetListKontrakPengabdianLPPM } from "@/handlers/lppm/dokumen/pengabdian/kontrak/query-get-kontrak-pengabdian";
+import { SearchInput } from "@/components/input/search-input";
 
 export default function DocumentPengabdianLppm() {
   const [tabActive] = useState("SK");

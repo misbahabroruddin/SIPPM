@@ -8,6 +8,7 @@ import { ListPenelitianKontrakLppm } from "../lppm/list-document-kontrak-lppm";
 import { ListPenelitianSKLppm } from "../lppm/list-document-sk-lppm";
 import { useQueryGetListSKPenelitianLPPM } from "@/handlers/lppm/dokumen/penelitian/sk/query-get-sk-penelitian";
 import { useQueryGetListKontrakPenelitianLPPM } from "@/handlers/lppm/dokumen/penelitian/kontrak/query-get-kontrak-penelitian";
+import { SearchInput } from "@/components/input/search-input";
 
 export default function DocumentPenelitianLppm() {
   const [tabActive] = useState("SK");
