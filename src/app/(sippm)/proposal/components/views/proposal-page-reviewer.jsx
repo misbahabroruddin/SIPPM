@@ -26,17 +26,17 @@ export default function ProposalPageReviewer() {
 
   const handlePageChangePenelitian = (event) => {
     setPagePenelitian(event.selected + 1);
-    setPagePenelitian(1);
   };
   const handlePageChangePengabdian = (event) => {
     setPagePengabdian(event.selected + 1);
-    setPagePengabdian(1);
   };
   const handleSearchPenelitian = useDebouncedCallback((value) => {
     setSearchPenelitian(value);
+    setPagePenelitian(1);
   }, 1000);
   const handleSearchPengabdian = useDebouncedCallback((value) => {
     setSearchPengabdian(value);
+    setPagePengabdian(1);
   }, 1000);
 
   const { data: penelitian, isLoading: isLoadingPenelitian } =
