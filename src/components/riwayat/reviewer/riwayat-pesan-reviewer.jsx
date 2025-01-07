@@ -66,7 +66,7 @@ export const RiwayatPesanReviewer = ({ riwayatId, status, catatan, index }) => {
               </p>
             </div>
             <div
-              className={`h-16 w-full rounded ${
+              className={`w-full rounded ${
                 riwayat?.user_id === session?.user?.id
                   ? "bg-green-09 text-end"
                   : "bg-sky text-start"
