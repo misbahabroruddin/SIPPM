@@ -74,8 +74,8 @@ export const TimelineHeader = ({ status = "null" }) => {
 
 export const TimelineItem = ({ date = "3 November 2021", children }) => {
   return (
-    <div className="flex flex-col gap-2 lg:flex-row lg:flex-wrap">
-      <div className="flex w-[150px] flex-col ">
+    <div className="flex flex-col gap-2 lg:flex-row">
+      <div className="flex min-w-[150px] flex-col ">
         <p className="text-dark-09">{date || "Not Yet"}</p>
         <span className="grow"></span>
       </div>
