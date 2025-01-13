@@ -32,7 +32,7 @@ export const FormRincianKegiatanPKM = ({ onClose, id }) => {
     id,
   );
 
-  const { addEditRincianKegiatan, isPending } =
+  const { addEditRincianKegiatan, isPending: isLoadingSubmit } =
     useAddEditRincianKegiatanLaporanHasilPKM(
       setStartDate,
       setEndDate,
