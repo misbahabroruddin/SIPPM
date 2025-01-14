@@ -85,7 +85,7 @@ const ListItemPengabdian = ({ data }) => {
           <Link href={`/laporan-hasil/edit/pengabdian/${data?.id}`}>
             <ButtonUpdate
               className="bg-primary"
-              text="Perbarui"
+              text={data?.file_laporan_hasil ? "Laporan terkirim" : "Perbarui"}
               onClick={() => {
                 setCurrentStep(1);
                 localStorage.removeItem("step");
