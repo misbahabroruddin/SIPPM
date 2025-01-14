@@ -86,7 +86,13 @@ const ListItemPenelitian = ({ data }) => {
             <ButtonUpdate
               className="bg-primary"
               text="Perbarui"
-              onClick={() => setCurrentStep(1)}
+              onClick={() => {
+                setCurrentStep(1);
+                localStorage.removeItem("step");
+                localStorage.removeItem("isEdit");
+                localStorage.removeItem("penelitianId");
+              }}
+              disabled={data?.file_laporan_hasil}
             />
           </Link>
         </div>

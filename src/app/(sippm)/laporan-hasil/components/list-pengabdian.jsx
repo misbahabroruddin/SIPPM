@@ -92,6 +92,7 @@ const ListItemPengabdian = ({ data }) => {
                 localStorage.removeItem("isEdit");
                 localStorage.removeItem("pengabdianId");
               }}
+              disabled={data?.file_laporan_hasil}
             />
           </Link>
         </div>
