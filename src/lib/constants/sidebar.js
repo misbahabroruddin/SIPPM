@@ -163,11 +163,11 @@ export const MENU_SIDEBAR_LPPM = [
       },
     ],
   },
-  // {
-  //   label: "Laporan",
-  //   icon: "/icons/document.svg",
-  //   link: "/laporan",
-  // },
+  {
+    label: "Laporan Hasil",
+    icon: "/icons/laporan-hasil.svg",
+    link: "/laporan-hasil",
+  },
 ];
 
 export const MENU_SIDEBAR_REVIEWER = [
