@@ -16,8 +16,6 @@ export default async function LaporanHasilPage() {
   const { user } = await getServerSession(authOptions);
   const role = user.roles[0].name;
 
-  if (!role.includes(LPPM || DOSEN)) redirect("/dashboard");
-
   return (
     <>
       {role === DOSEN && <LaporanHasilPageDosen />}
