@@ -82,19 +82,41 @@ const ListItemPengabdian = ({ data }) => {
             <p>Status Pengabdian</p>
             <ButtonStatus status="Diterima" />
           </div>
-          <Link href={`/laporan-hasil/edit/pengabdian/${data?.id}`}>
-            <ButtonUpdate
-              className="bg-primary"
-              text={data?.file_laporan_hasil ? "Laporan terkirim" : "Perbarui"}
-              onClick={() => {
-                setCurrentStep(1);
-                localStorage.removeItem("step");
-                localStorage.removeItem("isEdit");
-                localStorage.removeItem("pengabdianId");
-              }}
-              disabled={data?.file_laporan_hasil}
-            />
-          </Link>
+          {data?.file_laporan_hasil ? (
+            <>
+              <button
+                className="rounded-lg bg-[#D5FACC] px-4 py-1 text-[#23B900]"
+                disabled
+              >
+                Laporan terkirim
+              </button>
+              <Link href={`/laporan-hasil/edit/pengabdian/${data?.id}`}>
+                <ButtonUpdate
+                  className="bg-primary"
+                  text={"Perbarui"}
+                  onClick={() => {
+                    setCurrentStep(1);
+                    localStorage.removeItem("step");
+                    localStorage.removeItem("isEdit");
+                    localStorage.removeItem("pengabdianId");
+                  }}
+                />
+              </Link>
+            </>
+          ) : (
+            <Link href={`/laporan-hasil/edit/pengabdian/${data?.id}`}>
+              <ButtonUpdate
+                className="bg-primary"
+                text={"Perbarui"}
+                onClick={() => {
+                  setCurrentStep(1);
+                  localStorage.removeItem("step");
+                  localStorage.removeItem("isEdit");
+                  localStorage.removeItem("pengabdianId");
+                }}
+              />
+            </Link>
+          )}
         </div>
       </div>
     </div>
