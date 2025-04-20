@@ -115,7 +115,7 @@ export const Navbar = () => {
             <button
               onClick={() =>
                 signOut({ redirect: false }).then(() => {
-                  window.location.href = "https://sso.unsia.ac.id/home";
+                  window.location.href = `${process.env.NEXT_PUBLIC_SSO_BASE_URL}/home`;
                 })
               }
               className="flex items-center  gap-2 rounded-lg border border-primary px-2 py-1 "

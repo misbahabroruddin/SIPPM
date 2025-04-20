@@ -59,13 +59,13 @@ export const authOptions = {
       protection: "state",
       params: { grant_type: "authorization_code" },
       authorization: {
-        url: `${process.env.NEXT_PUBLIC_SSO_BASE_URL}/oauth/authorize`,
+        url: `${process.env.NEXT_PUBLIC_SSO_BASE_URL}/backend/oauth/authorize`,
         params: { scope: "" },
       },
       token: {
-        url: `${process.env.NEXT_PUBLIC_SSO_BASE_URL}/oauth/token`,
+        url: `${process.env.NEXT_PUBLIC_SSO_BASE_URL}/backend/oauth/token`,
       },
-      userinfo: `${process.env.NEXT_PUBLIC_SSO_BASE_URL}/api/users/profile`,
+      userinfo: `${process.env.NEXT_PUBLIC_SSO_BASE_URL}/backend/api/users/profile`,
       clientId: process.env.NEXT_PUBLIC_SSO_CLIENT_ID,
       clientSecret: process.env.NEXT_PUBLIC_SSO_CLIENT_SECRET,
       checks: ["state"],
